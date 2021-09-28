@@ -200,4 +200,8 @@ Severity: EASY
         <module name="UpperEll" />
 
     </module>
+
+    <module name="SuppressionFilter">
+        <property name="file" value=".github/workflows/assets/suppressions.xml"/>
+    </module>
 </module>
