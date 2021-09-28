@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+ROOT_FOLDER=build/bin
+VERSION=8.36.1
+CHECKSTYLE_BIN=$ROOT_FOLDER/checkstyle-$VERSION.jar
+mkdir -p $ROOT_FOLDER
+if [ ! -f "$CHECKSTYLE_BIN" ]; then
+  echo "Please wait, first download..."
+  rm -f $ROOT_FOLDER/checkstyle-*
+  curl -sSL https://github.com/checkstyle/checkstyle/releases/download/checkstyle-$VERSION/checkstyle-$VERSION-all.jar --output $CHECKSTYLE_BIN
+  chmod a+x $CHECKSTYLE_BIN
+fi
+
+if [ $CI ]; then
+  export REVIEWDOG_GITHUB_API_TOKEN="${GITHUB_TOKEN}"
+  java -jar $CHECKSTYLE_BIN ./ -c .github/workflows/assets/android_checkstyle.xml -f xml |
+    reviewdog -f=checkstyle \
+      -name="checkstyle" \
+      -reporter="github-pr-review" \
+      -fail-on-error="true"
+else
+  java -jar $CHECKSTYLE_BIN ./ -c .github/workflows/assets/android_checkstyle.xml "$@"
+fi
+echo "Done!"
