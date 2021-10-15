@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.paranoid.databinding.NavigationProfileFragmentBinding
+
+private lateinit var binding: NavigationProfileFragmentBinding
 
 
 class ProfileFragment: Fragment() {
@@ -15,6 +18,10 @@ class ProfileFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.navigation_profile_fragment, container, false)
+        val view = inflater.inflate(R.layout.navigation_profile_fragment, container, false)
+
+        binding = NavigationProfileFragmentBinding.inflate(layoutInflater)
+
+        return view
     }
 }

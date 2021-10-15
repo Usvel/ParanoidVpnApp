@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.paranoid.databinding.NavigationVpnFragmentBinding
+
+private lateinit var binding: NavigationVpnFragmentBinding
 
 
 class VPNFragment: Fragment() {
@@ -14,6 +17,10 @@ class VPNFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.navigation_vpn_fragment, container, false)
+        val view = inflater.inflate(R.layout.navigation_vpn_fragment, container, false)
+
+        binding = NavigationVpnFragmentBinding.inflate(layoutInflater)
+
+        return view
     }
 }
