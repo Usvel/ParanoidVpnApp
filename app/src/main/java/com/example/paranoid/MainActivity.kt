@@ -1,39 +1,14 @@
 package com.example.paranoid
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
-import androidx.navigation.ui.setupWithNavController
 import com.example.paranoid.databinding.ActivityMainBinding
 
-private lateinit var binding: ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val navHostFragment: NavHostFragment = supportFragmentManager
-            .findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment? ?: return
-        val navController = navHostFragment.navController
-        setUpBottomNav(navController)
+        setUpBottomNav(navController, binding.bottomTabBar)
     }
 
-
-    private fun setUpBottomNav(navController: NavController) {
-        val bottomNav = binding.bottomTabBar
-        bottomNav.setupWithNavController(navController)
-
-        bottomNav.setOnItemSelectedListener { item ->
-            onNavDestinationSelected(
-                item,
-                Navigation.findNavController(this, R.id.my_nav_host_fragment)
-            )
-        }
-    }
 
 }
