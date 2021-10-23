@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.paranoid.databinding.NavigationVpnFragmentBinding
 
-private lateinit var binding: NavigationVpnFragmentBinding
+private var binding: NavigationVpnFragmentBinding? = null
 
 
 class VPNFragment: Fragment() {
@@ -22,5 +22,10 @@ class VPNFragment: Fragment() {
         binding = NavigationVpnFragmentBinding.inflate(layoutInflater)
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

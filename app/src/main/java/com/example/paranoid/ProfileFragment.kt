@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.paranoid.databinding.NavigationProfileFragmentBinding
 
-private lateinit var binding: NavigationProfileFragmentBinding
-
+private var binding: NavigationProfileFragmentBinding? = null
 
 class ProfileFragment: Fragment() {
 
@@ -23,5 +22,10 @@ class ProfileFragment: Fragment() {
         binding = NavigationProfileFragmentBinding.inflate(layoutInflater)
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

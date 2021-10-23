@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.paranoid.databinding.NavigationSettingsFragmentBinding
 
-private lateinit var binding: NavigationSettingsFragmentBinding
+private var binding: NavigationSettingsFragmentBinding? = null
 
 
 class SettingsFragment: Fragment() {
@@ -22,5 +22,10 @@ class SettingsFragment: Fragment() {
         binding = NavigationSettingsFragmentBinding.inflate(layoutInflater)
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }
