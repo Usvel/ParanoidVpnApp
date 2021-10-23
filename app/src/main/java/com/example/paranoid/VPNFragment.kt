@@ -7,25 +7,23 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.paranoid.databinding.NavigationVpnFragmentBinding
 
-private var binding: NavigationVpnFragmentBinding? = null
+private var _binding: NavigationVpnFragmentBinding? = null
+private val binding get() = _binding!!
 
-
-class VPNFragment: Fragment() {
+class VPNFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.navigation_vpn_fragment, container, false)
-
-        binding = NavigationVpnFragmentBinding.inflate(layoutInflater)
-
+        _binding = NavigationVpnFragmentBinding.inflate(inflater, container, false)
+        val view = binding.root
         return view
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
     }
 }

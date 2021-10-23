@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.paranoid.databinding.NavigationSettingsFragmentBinding
 
-private var binding: NavigationSettingsFragmentBinding? = null
-
+private var _binding: NavigationSettingsFragmentBinding? = null
+private val binding get() = _binding!!
 
 class SettingsFragment: Fragment() {
 
@@ -17,15 +17,13 @@ class SettingsFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.navigation_settings_fragment, container, false)
-
-        binding = NavigationSettingsFragmentBinding.inflate(layoutInflater)
-
+        _binding = NavigationSettingsFragmentBinding.inflate(inflater, container, false)
+        val view = binding.root
         return view
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
     }
 }

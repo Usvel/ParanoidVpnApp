@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setUpBottomNav(navController: NavController) {
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
-        bottomNav?.setupWithNavController(navController)
+        val bottomNav = binding.bottomTabBar
+        bottomNav.setupWithNavController(navController)
 
         bottomNav.setOnItemSelectedListener { item ->
             onNavDestinationSelected(
