@@ -1,31 +1,16 @@
 package com.example.paranoid
 
-
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.paranoid.databinding.NavigationProfileFragmentBinding
-import com.example.paranoid.databinding.NavigationSettingsFragmentBinding
 
-private var _binding: NavigationProfileFragmentBinding? = null
-private val binding get() = _binding!!
+class ProfileFragment :
+    BaseFragment<NavigationProfileFragmentBinding>(NavigationProfileFragmentBinding::inflate) {
 
-class ProfileFragment: Fragment() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = NavigationProfileFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        binding.testTextView.text = getString(R.string.this_is_profile)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
