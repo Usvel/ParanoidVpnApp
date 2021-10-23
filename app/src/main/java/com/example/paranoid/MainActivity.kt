@@ -9,6 +9,4 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         super.onCreate(savedInstanceState)
         setUpBottomNav(navController, binding.bottomTabBar)
     }
-
-
 }

@@ -10,7 +10,6 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
 abstract class BaseActivity<VB : ViewBinding>(
     private val bindingInflater: Inflate<VB>
 ) :
@@ -26,9 +25,7 @@ abstract class BaseActivity<VB : ViewBinding>(
         val navHostFragment: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment? ?: return
         navController = navHostFragment.navController
-
     }
-
 
     protected fun setUpBottomNav(navController: NavController, bottomNav: BottomNavigationView) {
         bottomNav.setupWithNavController(navController)
@@ -40,6 +37,4 @@ abstract class BaseActivity<VB : ViewBinding>(
             )
         }
     }
-
-
 }

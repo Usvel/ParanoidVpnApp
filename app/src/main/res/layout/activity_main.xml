@@ -21,7 +21,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_tab_bar"
-            android:background="@color/primaryLight"
+            android:background="?attr/colorOnPrimary"
             android:orientation="horizontal"
             app:labelVisibilityMode="unlabeled"
             android:layout_alignParentBottom="true"
