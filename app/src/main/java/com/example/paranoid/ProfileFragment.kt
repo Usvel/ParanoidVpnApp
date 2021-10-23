@@ -12,5 +12,4 @@ class ProfileFragment :
 
         binding.testTextView.text = getString(R.string.this_is_profile)
     }
-
 }

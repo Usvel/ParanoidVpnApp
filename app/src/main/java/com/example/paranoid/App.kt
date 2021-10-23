@@ -9,8 +9,8 @@ class App : Application() {
         if (BuildConfig.DEBUG) {
             StrictMode.setThreadPolicy(
                 StrictMode.ThreadPolicy.Builder()
-                    //.detectDiskReads()
-                    //.detectDiskWrites()
+                    // .detectDiskReads()
+                    // .detectDiskWrites()
                     .detectNetwork()
                     .penaltyLog()
                     .penaltyDeath()
