@@ -1,0 +1,29 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/navigation"
+        app:startDestination="@id/vpn_fragment">
+
+    <fragment
+            android:id="@+id/profile_fragment"
+            android:name="com.example.paranoid.ProfileFragment"
+            tools:layout="@layout/navigation_profile_fragment">
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/settings_fragment"
+            android:name="com.example.paranoid.SettingsFragment"
+            tools:layout="@layout/navigation_settings_fragment">
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/vpn_fragment"
+            android:name="com.example.paranoid.VPNFragment"
+            tools:layout="@layout/navigation_vpn_fragment">
+
+    </fragment>
+
+
+</navigation>

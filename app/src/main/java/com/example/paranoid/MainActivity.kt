@@ -1,11 +1,11 @@
 package com.example.paranoid
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.paranoid.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setUpBottomNav(navController, binding.bottomTabBar)
     }
 }
