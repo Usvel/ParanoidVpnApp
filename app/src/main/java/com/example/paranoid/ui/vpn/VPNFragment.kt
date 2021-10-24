@@ -40,6 +40,7 @@ class VPNFragment :
     }
 
     private fun vpnButtonConnected() {
+        binding.connectionStatus.visibility = View.VISIBLE
         binding.isConnected.text = getString(R.string.connected)
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonConnected))
     }

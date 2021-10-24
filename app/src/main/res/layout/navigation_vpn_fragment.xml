@@ -59,6 +59,46 @@
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
+    <LinearLayout
+            android:id="@+id/connectionStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/extra_padding"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/vpnButtonBackground">
+
+        <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/top_bar_elements_start"
+                android:innerRadius="0dp"
+                android:shape="ring"
+                android:backgroundTint="?attr/backgroundVioletLight"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="75dp">
+
+            <ImageView
+                    android:src="@drawable/ic_wifi_full"
+                    app:tint="?attr/toolBarColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:id="@+id/wifiIcon"
+                    android:layout_gravity="center_vertical"
+                    android:foregroundGravity="center_vertical"
+                    android:contentDescription="@string/get_information_about_vpn" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stable_connection"
+                android:layout_gravity="center"/>
+
+    </LinearLayout>
+
     <androidx.cardview.widget.CardView
             android:id="@+id/vpnButtonBackground"
             android:layout_width="190dp"
@@ -159,7 +199,8 @@
                         android:paddingEnd="@dimen/small_padding"
                         tools:text="First configuration"
                         android:layout_weight="1"
-                        android:layout_gravity="center" />
+                        android:layout_gravity="center"
+                        tools:ignore="RtlSymmetry" />
 
                 <ImageView
                         android:src="@drawable/ic_share"
