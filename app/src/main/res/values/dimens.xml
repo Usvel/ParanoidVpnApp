@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="logo_icon_size">32dp</dimen>
+    <dimen name="logo_text_size">20sp</dimen>
+    <dimen name="top_bar_elements_start">20dp</dimen>
+    <dimen name="base_padding">20dp</dimen>
+    <dimen name="small_padding">10dp</dimen>
+    <dimen name="card_corner_radius">20dp</dimen>
+    <dimen name="card_elevation">5dp</dimen>
+    <dimen name="fragment_top_padding">15dp</dimen>
+</resources>

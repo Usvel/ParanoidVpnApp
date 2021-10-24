@@ -14,5 +14,18 @@
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="toolBarColor">@color/white</item>
+        <item name="backgroundVioletLight">@color/minorColorLightDarkTheme</item>
+        <item name="backgroundViolet">@color/minorColorDarkTheme</item>
+        <!-- Nav bar -->
+        <item name="navBarIconColor">@color/lightNavIconSelected</item>
+        <item name="navBarIconColorNotChecked">@color/lightNavIconNotSelected</item>
+        <item name="toolBarColorSecond">@color/secondBackgroundTransparent</item>
+        <!-- Text -->
+        <item name="textTransparent">@color/lightTextTransparent</item>
+        <!-- VPN Button -->
+        <item name="vpnButtonDisabled">@color/vpnColorDisabledDark</item>
+        <item name="vpnButtonConnected">@color/vpnColorConnected</item>
+        <item name="vpnButtonError">@color/vpnColorError</item>
     </style>
 </resources>

@@ -6,7 +6,6 @@
         android:layout_height="match_parent"
         tools:context=".ProfileFragment">
 
-
     <TextView
             android:id="@+id/testTextView"
             android:text="@string/this_is_profile"

@@ -11,7 +11,7 @@
             android:id="@+id/my_nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             app:defaultNavHost="true"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,8 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_tab_bar"
-            android:background="?attr/colorOnPrimary"
+            android:background="?attr/backgroundViolet"
+            app:itemIconTint="@drawable/bottom_navigation_selector"
             android:orientation="horizontal"
             app:labelVisibilityMode="unlabeled"
             android:layout_alignParentBottom="true"
