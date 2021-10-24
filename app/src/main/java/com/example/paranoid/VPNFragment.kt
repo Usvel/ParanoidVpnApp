@@ -5,7 +5,6 @@ import android.util.TypedValue
 import android.view.View
 import com.example.paranoid.databinding.NavigationVpnFragmentBinding
 
-
 class VPNFragment :
     BaseFragment<NavigationVpnFragmentBinding>(NavigationVpnFragmentBinding::inflate) {
 
