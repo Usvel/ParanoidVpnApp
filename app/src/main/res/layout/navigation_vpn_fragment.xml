@@ -37,6 +37,7 @@
                 android:layout_weight="1" />
 
         <androidx.cardview.widget.CardView
+                android:id="@+id/help_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/top_bar_elements_start"
@@ -47,12 +48,12 @@
                 app:cardCornerRadius="75dp">
 
             <ImageView
+                    android:id="@+id/helpIcon"
                     android:src="@drawable/ic_help"
                     app:tint="?attr/toolBarColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:id="@+id/helpIcon"
                     android:layout_gravity="center_vertical"
                     android:foregroundGravity="center_vertical"
                     android:contentDescription="@string/get_information_about_vpn" />

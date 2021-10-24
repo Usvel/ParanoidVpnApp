@@ -17,4 +17,7 @@
     <string name="connected">Connected</string>
     <string name="error">Connection error</string>
     <string name="stable_connection">Stable connection</string>
+    <string name="help_info">Help info</string>
+    <string name="share_configuration">Share configuration</string>
+    <string name="scan_qr_code">Scan QR code</string>
 </resources>

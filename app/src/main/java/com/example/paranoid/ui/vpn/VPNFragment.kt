@@ -20,10 +20,22 @@ class VPNFragment :
         loadMainConfiguration()
 
         binding.vpnButtonBackground.setOnClickListener {
-            when(vpnStateOn){
+            when (vpnStateOn) {
                 true -> vpnButtonDisable()
                 false -> vpnButtonConnected()
             }
+        }
+
+        binding.helpButton.setOnClickListener {
+            context?.let { context_ -> Utils.makeToast(context_, getString(R.string.help_info)) }
+        }
+
+        binding.shareIcon.setOnClickListener {
+            context?.let { context_ -> Utils.makeToast(context_, getString(R.string.share_configuration)) }
+        }
+
+        binding.qrIcon.setOnClickListener {
+            context?.let { context_ -> Utils.makeToast(context_, getString(R.string.scan_qr_code)) }
         }
     }
 
