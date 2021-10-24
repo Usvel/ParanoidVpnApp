@@ -11,12 +11,20 @@ import com.example.paranoid.utils.Utils
 class VPNFragment :
     BaseFragment<NavigationVpnFragmentBinding>(NavigationVpnFragmentBinding::inflate) {
 
+    private var vpnStateOn: Boolean = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Just for test
         loadMainConfiguration()
-        vpnButtonConnected()
+
+        binding.vpnButtonBackground.setOnClickListener {
+            when(vpnStateOn){
+                true -> vpnButtonDisable()
+                false -> vpnButtonConnected()
+            }
+        }
     }
 
     private fun loadMainConfiguration() {
@@ -35,17 +43,21 @@ class VPNFragment :
     }
 
     private fun vpnButtonDisable() {
+        vpnStateOn = false
+        binding.connectionStatus.visibility = View.GONE
         binding.isConnected.text = getString(R.string.not_connected)
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonDisabled))
     }
 
     private fun vpnButtonConnected() {
+        vpnStateOn = true
         binding.connectionStatus.visibility = View.VISIBLE
         binding.isConnected.text = getString(R.string.connected)
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonConnected))
     }
 
     private fun vpnButtonError() {
+        binding.connectionStatus.visibility = View.GONE
         binding.isConnected.text = getString(R.string.error)
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonError))
     }
