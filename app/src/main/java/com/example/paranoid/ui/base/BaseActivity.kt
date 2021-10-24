@@ -1,4 +1,4 @@
-package com.example.paranoid
+package com.example.paranoid.ui.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import androidx.viewbinding.ViewBinding
+import com.example.paranoid.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 abstract class BaseActivity<VB : ViewBinding>(

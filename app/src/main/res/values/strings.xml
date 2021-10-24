@@ -1,9 +1,23 @@
 <resources>
-    <string name="app_name">Paranoid</string>
+    <string name="app_name">Paranoid VPN</string>
     <string name="vpn_client">VPN client</string>
     <string name="settings">Settings</string>
     <string name="profile">Profile</string>
     <string name="this_is_profile">This is profile</string>
     <string name="this_is_vpn">This is VPN</string>
     <string name="this_is_settings">This is settings</string>
+    <string name="get_information_about_vpn">Get information about VPN</string>
+    <string name="click_to_choose_configuration">Click to choose configuration</string>
+    <string name="configuration_settings">Configuration settings</string>
+    <string name="configuration_sharing">Configuration sharing</string>
+    <string name="configuration_qr">Configuration qr</string>
+    <string name="test_first_configuration">First configuration</string>
+    <string name="turn_on_vpn">Turn on VPN</string>
+    <string name="not_connected">Not connected</string>
+    <string name="connected">Connected</string>
+    <string name="error">Connection error</string>
+    <string name="stable_connection">Stable connection</string>
+    <string name="help_info">Help info</string>
+    <string name="share_configuration">Share configuration</string>
+    <string name="scan_qr_code">Scan QR code</string>
 </resources>

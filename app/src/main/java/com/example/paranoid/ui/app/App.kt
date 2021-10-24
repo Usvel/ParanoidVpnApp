@@ -1,7 +1,8 @@
-package com.example.paranoid
+package com.example.paranoid.ui.app
 
 import android.app.Application
 import android.os.StrictMode
+import com.example.paranoid.BuildConfig
 
 class App : Application() {
     override fun onCreate() {
