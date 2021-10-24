@@ -1,0 +1,48 @@
+com/example/paranoid/ui/vpn/basic_client/bio/BioUtil.java
+ com.example.paranoid.ui.vpn.basic_client.bio.BioUtil
+com/example/paranoid/databinding/NavigationProfileFragmentBinding.java
+ com.example.paranoid.databinding.NavigationProfileFragmentBinding
+com/example/paranoid/ui/vpn/basic_client/config/Config.java
+ com.example.paranoid.ui.vpn.basic_client.config.Config
+com/example/paranoid/databinding/ActivityMainBinding.java
+ com.example.paranoid.databinding.ActivityMainBinding
+com/example/paranoid/databinding/NavigationSettingsFragmentBinding.java
+ com.example.paranoid.databinding.NavigationSettingsFragmentBinding
+com/example/paranoid/ui/vpn/basic_client/protocol/tcpip/Packet.java
+ com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
+ com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet$BitUtils
+ com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet$IP4Header
+ com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet$IP4Header$TransportProtocol
+ com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet$TCPHeader
+ com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet$UDPHeader
+com/example/paranoid/ui/vpn/basic_client/util/ByteBufferPool.java
+ com.example.paranoid.ui.vpn.basic_client.util.ByteBufferPool
+com/example/paranoid/ui/vpn/basic_client/protocol/tcpip/TCBStatus.java
+ com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.TCBStatus
+com/example/paranoid/databinding/NavigationVpnFragmentBinding.java
+ com.example.paranoid.databinding.NavigationVpnFragmentBinding
+com/example/paranoid/ui/vpn/basic_client/bio/NioSingleThreadTcpHandler.java
+ com.example.paranoid.ui.vpn.basic_client.bio.NioSingleThreadTcpHandler
+ com.example.paranoid.ui.vpn.basic_client.bio.NioSingleThreadTcpHandler$TcpPipe
+com/example/paranoid/ui/vpn/basic_client/util/ObjAttrUtil.java
+ com.example.paranoid.ui.vpn.basic_client.util.ObjAttrUtil
+com/example/paranoid/BuildConfig.java
+ com.example.paranoid.BuildConfig
+com/example/paranoid/ui/vpn/basic_client/protocol/tcpip/IpUtil.java
+ com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.IpUtil
+com/example/paranoid/ui/vpn/basic_client/util/ProxyException.java
+ com.example.paranoid.ui.vpn.basic_client.util.ProxyException
+com/example/paranoid/ui/vpn/basic_client/bio/BioUdpHandler.java
+ com.example.paranoid.ui.vpn.basic_client.bio.BioUdpHandler
+ com.example.paranoid.ui.vpn.basic_client.bio.BioUdpHandler$UdpDownWorker
+ com.example.paranoid.ui.vpn.basic_client.bio.BioUdpHandler$UdpTunnel
+com/example/paranoid/ui/vpn/basic_client/bio/BioTcpHandler.java
+ com.example.paranoid.ui.vpn.basic_client.bio.BioTcpHandler
+ com.example.paranoid.ui.vpn.basic_client.bio.BioTcpHandler$DownStreamWorker
+ com.example.paranoid.ui.vpn.basic_client.bio.BioTcpHandler$TcpTunnel
+ com.example.paranoid.ui.vpn.basic_client.bio.BioTcpHandler$UpStreamWorker
+com/example/paranoid/ui/vpn/basic_client/LocalVPNService.java
+ com.example.paranoid.ui.vpn.basic_client.LocalVPNService
+ com.example.paranoid.ui.vpn.basic_client.LocalVPNService$1
+ com.example.paranoid.ui.vpn.basic_client.LocalVPNService$VPNRunnable
+ com.example.paranoid.ui.vpn.basic_client.LocalVPNService$VPNRunnable$WriteVpnThread

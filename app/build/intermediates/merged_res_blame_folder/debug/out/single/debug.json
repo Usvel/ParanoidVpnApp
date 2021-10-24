@@ -1,0 +1,246 @@
+[
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-anydpi_ic_qr.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-anydpi/ic_qr.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-anydpi_ic_share.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-anydpi/ic_share.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-xhdpi_ic_qr.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-xhdpi/ic_qr.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-hdpi_ic_wifi_full.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-hdpi/ic_wifi_full.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-xhdpi_ic_power.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-xhdpi/ic_power.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-xxhdpi_ic_home.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-xxhdpi/ic_home.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-mdpi_ic_qr.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-mdpi/ic_qr.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-hdpi_ic_home.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-hdpi/ic_home.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-xhdpi_ic_share.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-xhdpi/ic_share.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-xhdpi_ic_help.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-xhdpi/ic_help.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-anydpi_ic_power.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-anydpi/ic_power.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-mdpi_ic_profile.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-mdpi/ic_profile.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-mdpi_ic_power.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-mdpi/ic_power.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-xxhdpi_ic_power.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-xxhdpi/ic_power.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-xhdpi_ic_home.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-xhdpi/ic_home.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-mdpi_ic_share.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-mdpi/ic_share.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-anydpi_ic_wifi_full.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-anydpi/ic_wifi_full.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-hdpi_ic_qr.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-hdpi/ic_qr.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-mdpi_ic_help.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-mdpi/ic_help.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-xxhdpi_ic_share.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-xxhdpi/ic_share.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-mdpi_ic_wifi_full.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-mdpi/ic_wifi_full.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/menu_bottom_nav_menu.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-hdpi_ic_profile.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-hdpi/ic_profile.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-xxhdpi_ic_profile.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-xxhdpi/ic_profile.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/layout_navigation_profile_fragment.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/layout/navigation_profile_fragment.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/layout_navigation_settings_fragment.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/layout/navigation_settings_fragment.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/navigation_navigation_graph.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/navigation/navigation_graph.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-hdpi_ic_help.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-hdpi/ic_help.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-mdpi_ic_home.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-mdpi/ic_home.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-anydpi_ic_home.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-anydpi/ic_home.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-anydpi_ic_settings.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-anydpi/ic_settings.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable_bottom_navigation_selector.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable/bottom_navigation_selector.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/layout_navigation_vpn_fragment.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/layout/navigation_vpn_fragment.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-anydpi_ic_profile.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-anydpi/ic_profile.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-xhdpi_ic_wifi_full.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-xhdpi/ic_wifi_full.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-xxhdpi_ic_wifi_full.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-xxhdpi/ic_wifi_full.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-anydpi_ic_help.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-anydpi/ic_help.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-xxhdpi_ic_help.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-xxhdpi/ic_help.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/layout_activity_main.xml.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-xxhdpi_ic_qr.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-xxhdpi/ic_qr.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-hdpi_ic_share.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-hdpi/ic_share.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-hdpi_ic_power.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-hdpi/ic_power.png"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/merged_res/debug/drawable-xhdpi_ic_profile.png.flat",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/drawable-xhdpi/ic_profile.png"
+    }
+]
