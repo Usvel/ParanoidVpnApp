@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="backgroundViolet" format="reference|color" />
+    <attr name="backgroundVioletLight" format="reference|color" />
+    <attr name="toolBarColor" format="reference|color" />
+    <attr name="toolBarColorSecond" format="reference|color" />
+    <!-- Nav bar -->
+    <attr name="navBarIconColor" format="reference|color" />
+    <attr name="navBarIconColorNotChecked" format="reference|color" />
+    <!-- Text -->
+    <attr name="textTransparent" format="reference|color" />
+    <!-- VPN button -->
+    <attr name="vpnButtonDisabled" format="reference|color" />
+    <attr name="vpnButtonConnected" format="reference|color" />
+    <attr name="vpnButtonError" format="reference|color" />
+</resources>

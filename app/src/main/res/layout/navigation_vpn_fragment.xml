@@ -6,14 +6,238 @@
         android:layout_height="match_parent"
         tools:context=".vpn.ui.VPNFragment">
 
-    <TextView
-            android:id="@+id/testTextView"
-            android:text="@string/this_is_vpn"
-            android:layout_width="wrap_content"
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fragment_top_padding"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/linearLayout">
+
+        <ImageView
+                android:src="@mipmap/ic_launcher_foreground"
+                android:layout_width="@dimen/logo_icon_size"
+                android:layout_height="@dimen/logo_icon_size"
+                android:layout_marginStart="@dimen/top_bar_elements_start"
+                android:id="@+id/paranoidIcon"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/app_name" />
+
+        <TextView
+                android:text="@string/app_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/paranoidText"
+                android:textSize="@dimen/logo_text_size"
+                android:layout_marginStart="@dimen/top_bar_elements_start"
+                android:layout_gravity="center_vertical"
+                android:foregroundGravity="center_vertical"
+                android:layout_weight="1" />
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/help_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/top_bar_elements_start"
+                android:innerRadius="0dp"
+                android:shape="ring"
+                android:backgroundTint="?attr/backgroundVioletLight"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="@dimen/simple_corner_radius">
+
+            <ImageView
+                    android:id="@+id/helpIcon"
+                    android:src="@drawable/ic_help"
+                    app:tint="?attr/toolBarColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/icon_inner_padding"
+                    android:layout_gravity="center_vertical"
+                    android:foregroundGravity="center_vertical"
+                    android:contentDescription="@string/get_information_about_vpn" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/connectionStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/extra_padding"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/vpnButtonBackground">
+
+        <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/top_bar_elements_start"
+                android:innerRadius="0dp"
+                android:shape="ring"
+                android:backgroundTint="?attr/backgroundVioletLight"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="@dimen/simple_corner_radius">
+
+            <ImageView
+                    android:src="@drawable/ic_wifi_full"
+                    app:tint="?attr/toolBarColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:id="@+id/wifiIcon"
+                    android:layout_gravity="center_vertical"
+                    android:foregroundGravity="center_vertical"
+                    android:contentDescription="@string/get_information_about_vpn" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stable_connection"
+                android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/vpnButtonBackground"
+            android:layout_width="@dimen/vpn_button_background_size"
+            android:layout_height="@dimen/vpn_button_background_size"
+            app:cardCornerRadius="@dimen/vpn_button_background_radius"
+            android:backgroundTint="?attr/vpnButtonDisabled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintBottom_toTopOf="@+id/mainConfigurationCard">
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/vpnButton"
+                android:layout_width="@dimen/vpn_button_size"
+                android:layout_height="@dimen/vpn_button_size"
+                app:cardCornerRadius="@dimen/vpn_button_corner"
+                android:layout_gravity="center"
+                android:backgroundTint="?attr/colorOnPrimary"
+                app:cardElevation="0dp">
+
+            <ImageView
+                    android:id="@+id/turnOnVPN"
+                    android:src="@drawable/ic_power"
+                    android:layout_width="@dimen/turn_vpn_button_size"
+                    android:layout_height="@dimen/turn_vpn_button_size"
+                    android:layout_gravity="center"
+                    android:alpha="0.7"
+                    app:tint="?attr/toolBarColor"
+                    android:contentDescription="@string/turn_on_vpn" />
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/mainConfigurationCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/backgroundVioletLight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardElevation="@dimen/card_elevation"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            android:layout_marginBottom="@dimen/base_padding"
+            android:layout_marginStart="@dimen/base_padding"
+            android:layout_marginEnd="@dimen/base_padding"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+                android:id="@+id/mainConfigurationLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/base_padding"
+                android:paddingEnd="@dimen/base_padding"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="@dimen/base_padding"
+                    android:text="@string/click_to_choose_configuration"
+                    android:textColor="?attr/textTransparent"
+                    android:id="@+id/chooseConfigurationText" />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/base_padding"
+                    android:paddingBottom="@dimen/base_padding">
+
+
+                <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/top_bar_elements_start"
+                        android:paddingStart="@dimen/small_padding"
+                        android:paddingEnd="@dimen/small_padding"
+                        android:innerRadius="0dp"
+                        app:cardElevation="0dp"
+                        android:shape="ring"
+                        android:backgroundTint="?attr/toolBarColorSecond"
+                        app:cardCornerRadius="@dimen/simple_corner_radius">
+
+                    <ImageView
+                            android:src="@drawable/ic_settings"
+                            app:tint="?attr/toolBarColor"
+                            android:padding="@dimen/icon_inner_padding"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/settingsIcon"
+                            android:contentDescription="@string/configuration_settings" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                        android:id="@+id/mainConfigurationText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/small_padding"
+                        tools:text="First configuration"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        tools:ignore="RtlSymmetry" />
+
+                <ImageView
+                        android:src="@drawable/ic_share"
+                        app:tint="?attr/toolBarColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/small_padding"
+                        android:paddingEnd="@dimen/small_padding"
+                        android:id="@+id/shareIcon"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/configuration_sharing" />
+
+                <ImageView
+                        android:src="@drawable/ic_qr"
+                        app:tint="?attr/toolBarColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/small_padding"
+                        android:paddingEnd="@dimen/small_padding"
+                        android:id="@+id/qrIcon"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/configuration_qr" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+            android:id="@+id/isConnected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vpnButtonBackground"
+            tools:text="@string/not_connected"
+            android:layout_marginTop="@dimen/base_padding" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
