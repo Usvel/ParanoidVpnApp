@@ -22,17 +22,18 @@ object Utils {
 
     fun Exception.isNetworkError(): Boolean {
         return this is SocketTimeoutException ||
-                this is ConnectException ||
-                this is NoRouteToHostException ||
-                this is UnknownHostException ||
-                this is HttpException && this.code() >= NETWORK_CODE_500
+            this is ConnectException ||
+            this is NoRouteToHostException ||
+            this is UnknownHostException ||
+            this is HttpException &&
+            this.code() >= NETWORK_CODE_500
     }
 
     fun getString(@StringRes id: Int, vararg parameters: Any): String {
         return application?.getString(id, parameters)
             ?: throw IllegalStateException(
                 "Application context in Utils not initialized.Please " +
-                        "call method init in your Application instance"
+                    "call method init in your Application instance"
             )
     }
 

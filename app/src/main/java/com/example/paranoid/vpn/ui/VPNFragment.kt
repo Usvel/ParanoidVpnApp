@@ -99,6 +99,6 @@ class VPNFragment :
     }
 
     override fun initViewModule() {
-        //TODO
+        // TODO
     }
 }

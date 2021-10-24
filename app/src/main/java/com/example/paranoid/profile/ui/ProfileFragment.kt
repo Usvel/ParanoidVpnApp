@@ -3,8 +3,8 @@ package com.example.paranoid.profile.ui
 import android.os.Bundle
 import android.view.View
 import com.example.paranoid.R
-import com.example.paranoid.databinding.NavigationProfileFragmentBinding
 import com.example.paranoid.common.ui.base.BaseFragment
+import com.example.paranoid.databinding.NavigationProfileFragmentBinding
 
 class ProfileFragment :
     BaseFragment<NavigationProfileFragmentBinding>(NavigationProfileFragmentBinding::inflate) {
@@ -16,6 +16,6 @@ class ProfileFragment :
     }
 
     override fun initViewModule() {
-        //TODO
+        // TODO
     }
 }
