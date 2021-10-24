@@ -1,6 +1,8 @@
 package com.example.paranoid.common.utils
 
 import android.app.Application
+import android.content.Context
+import android.widget.Toast
 import androidx.annotation.StringRes
 import retrofit2.HttpException
 import java.net.ConnectException
@@ -31,4 +33,12 @@ object Utils {
                         "call method init in your Application instance"
             )
     }
+
+    fun makeToast(context: Context, string: String) {
+        Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
+    }
+}
+
+enum class VPNState {
+    CONNECTED, NOT_CONNECTED, ERROR
 }
