@@ -1,8 +1,10 @@
-package com.example.paranoid
+package com.example.paranoid.ui.profile
 
 import android.os.Bundle
 import android.view.View
+import com.example.paranoid.R
 import com.example.paranoid.databinding.NavigationProfileFragmentBinding
+import com.example.paranoid.ui.base.BaseFragment
 
 class ProfileFragment :
     BaseFragment<NavigationProfileFragmentBinding>(NavigationProfileFragmentBinding::inflate) {

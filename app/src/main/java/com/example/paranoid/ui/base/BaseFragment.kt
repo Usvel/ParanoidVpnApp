@@ -1,4 +1,4 @@
-package com.example.paranoid
+package com.example.paranoid.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

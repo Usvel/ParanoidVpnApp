@@ -1,4 +1,4 @@
-package com.example.paranoid
+package com.example.paranoid.utils
 
 import android.content.Context
 import android.widget.Toast

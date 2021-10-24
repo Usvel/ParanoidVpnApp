@@ -1,8 +1,10 @@
-package com.example.paranoid
+package com.example.paranoid.ui.settings
 
 import android.os.Bundle
 import android.view.View
+import com.example.paranoid.R
 import com.example.paranoid.databinding.NavigationSettingsFragmentBinding
+import com.example.paranoid.ui.base.BaseFragment
 
 class SettingsFragment :
     BaseFragment<NavigationSettingsFragmentBinding>(NavigationSettingsFragmentBinding::inflate) {

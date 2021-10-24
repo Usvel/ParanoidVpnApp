@@ -1,9 +1,12 @@
-package com.example.paranoid
+package com.example.paranoid.ui.vpn
 
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
+import com.example.paranoid.R
 import com.example.paranoid.databinding.NavigationVpnFragmentBinding
+import com.example.paranoid.ui.base.BaseFragment
+import com.example.paranoid.utils.Utils
 
 class VPNFragment :
     BaseFragment<NavigationVpnFragmentBinding>(NavigationVpnFragmentBinding::inflate) {
