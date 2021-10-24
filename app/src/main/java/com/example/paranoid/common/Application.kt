@@ -1,0 +1,34 @@
+package com.example.paranoid.common
+
+import android.app.Application
+import android.os.StrictMode
+import androidx.viewbinding.BuildConfig
+import com.example.paranoid.common.utils.Utils
+
+class Application : Application() {
+    override fun onCreate() {
+        super.onCreate()
+
+        Utils.init(this)
+
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(
+                StrictMode.ThreadPolicy.Builder()
+                    // .detectDiskReads()
+                    // .detectDiskWrites()
+                    .detectNetwork()
+                    .penaltyLog()
+                    .penaltyDeath()
+                    .build()
+            )
+            StrictMode.setVmPolicy(
+                StrictMode.VmPolicy.Builder()
+                    .detectLeakedSqlLiteObjects()
+                    .detectLeakedClosableObjects()
+                    .penaltyLog()
+                    .penaltyDeath()
+                    .build()
+            )
+        }
+    }
+}
