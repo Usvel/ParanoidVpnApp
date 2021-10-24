@@ -45,11 +45,11 @@
                 android:shape="ring"
                 android:backgroundTint="?attr/backgroundVioletLight"
                 app:cardElevation="0dp"
-                app:cardCornerRadius="@dimen/simple_corner_radius">
+                app:cardCornerRadius="@dimen/small_corner_radius">
 
             <ImageView
                     android:id="@+id/helpIcon"
-                    android:src="@drawable/ic_help"
+                    android:src="@drawable/ic_baseline_help_outline_24"
                     app:tint="?attr/toolBarColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                 android:shape="ring"
                 android:backgroundTint="?attr/backgroundVioletLight"
                 app:cardElevation="0dp"
-                app:cardCornerRadius="@dimen/simple_corner_radius">
+                app:cardCornerRadius="@dimen/small_corner_radius">
 
             <ImageView
                     android:src="@drawable/ic_wifi_full"
@@ -182,7 +182,7 @@
                         app:cardElevation="0dp"
                         android:shape="ring"
                         android:backgroundTint="?attr/toolBarColorSecond"
-                        app:cardCornerRadius="@dimen/simple_corner_radius">
+                        app:cardCornerRadius="@dimen/small_corner_radius">
 
                     <ImageView
                             android:src="@drawable/ic_settings"

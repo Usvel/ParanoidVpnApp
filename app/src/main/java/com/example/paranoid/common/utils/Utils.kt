@@ -10,6 +10,8 @@ import java.net.NoRouteToHostException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
+private const val NETWORK_CODE_500 = 500
+
 object Utils {
 
     private var application: Application? = null
@@ -23,11 +25,11 @@ object Utils {
                 this is ConnectException ||
                 this is NoRouteToHostException ||
                 this is UnknownHostException ||
-                this is HttpException && this.code() >= 500
+                this is HttpException && this.code() >= NETWORK_CODE_500
     }
 
     fun getString(@StringRes id: Int, vararg parameters: Any): String {
-        return application?.getString(id, *parameters)
+        return application?.getString(id, parameters)
             ?: throw IllegalStateException(
                 "Application context in Utils not initialized.Please " +
                         "call method init in your Application instance"

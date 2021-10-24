@@ -16,6 +16,6 @@ class SettingsFragment :
     }
 
     override fun initViewModule() {
-        TODO("Not yet implemented")
+        //TODO
     }
 }

@@ -16,4 +16,5 @@
     <dimen name="vpn_button_background_radius">95dp</dimen>
     <dimen name="simple_corner_radius">75dp</dimen>
     <dimen name="icon_inner_padding">5dp</dimen>
+    <dimen name="small_corner_radius">20dp</dimen>
 </resources>
