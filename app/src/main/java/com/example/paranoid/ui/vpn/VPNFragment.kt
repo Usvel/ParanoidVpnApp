@@ -29,15 +29,24 @@ class VPNFragment :
         }
 
         binding.helpButton.setOnClickListener {
-            context?.let { context_ -> Utils.makeToast(context_, getString(R.string.help_info)) }
+            context?.let { context_ -> Utils.makeToast(
+                context_,
+                getString(R.string.help_info)
+            ) }
         }
 
         binding.shareIcon.setOnClickListener {
-            context?.let { context_ -> Utils.makeToast(context_, getString(R.string.share_configuration)) }
+            context?.let { context_ -> Utils.makeToast(
+                context_,
+                getString(R.string.share_configuration)
+            ) }
         }
 
         binding.qrIcon.setOnClickListener {
-            context?.let { context_ -> Utils.makeToast(context_, getString(R.string.scan_qr_code)) }
+            context?.let { context_ -> Utils.makeToast(
+                context_,
+                getString(R.string.scan_qr_code)
+            ) }
         }
     }
 
@@ -45,7 +54,10 @@ class VPNFragment :
         binding.mainConfigurationText.text = getString(R.string.test_first_configuration)
         binding.mainConfigurationCard.setOnClickListener {
             context?.let { context_ ->
-                Utils.makeToast(context_, getString(R.string.test_first_configuration))
+                Utils.makeToast(
+                    context_,
+                    getString(R.string.test_first_configuration)
+                )
             }
         }
     }
