@@ -1,4 +1,4 @@
-package com.example.paranoid
+package com.example.paranoid.common.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +16,11 @@ abstract class BaseFragment<VB : ViewBinding>(
     private var _binding: VB? = null
     protected val binding get() = _binding!!
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initViewModule()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,4 +34,6 @@ abstract class BaseFragment<VB : ViewBinding>(
         super.onDestroyView()
         _binding = null
     }
+
+    abstract fun initViewModule()
 }

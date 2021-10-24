@@ -1,5 +1,6 @@
-package com.example.paranoid
+package com.example.paranoid.common.ui.base
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -8,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import androidx.viewbinding.ViewBinding
+import com.example.paranoid.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 abstract class BaseActivity<VB : ViewBinding>(
@@ -35,6 +37,31 @@ abstract class BaseActivity<VB : ViewBinding>(
                 item,
                 Navigation.findNavController(this, R.id.my_nav_host_fragment)
             )
+        }
+    }
+
+    protected fun showMessage(
+        title: String?,
+        message: String?,
+        posBtnTxt: String?,
+        negBtnTxt: String?,
+        posBtnAction: (() -> Unit)?,
+        negBtnAction: (() -> Unit)?,
+        cancellable: Boolean
+    ) {
+        AlertDialog.Builder(this).apply {
+            setTitle(title)
+            setMessage(message)
+            setCancelable(cancellable)
+            setPositiveButton(posBtnTxt) { _, _ ->
+                if (posBtnAction != null) posBtnAction()
+            }
+            negBtnTxt?.let {
+                setNegativeButton(negBtnTxt) { _, _ ->
+                    if (negBtnAction != null) negBtnAction()
+                }
+            }
+            show()
         }
     }
 }

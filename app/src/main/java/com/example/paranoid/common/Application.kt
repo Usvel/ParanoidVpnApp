@@ -1,11 +1,16 @@
-package com.example.paranoid
+package com.example.paranoid.common
 
 import android.app.Application
 import android.os.StrictMode
+import androidx.viewbinding.BuildConfig
+import com.example.paranoid.common.utils.Utils
 
-class App : Application() {
+class Application : Application() {
     override fun onCreate() {
         super.onCreate()
+
+        Utils.init(this)
+
         if (BuildConfig.DEBUG) {
             StrictMode.setThreadPolicy(
                 StrictMode.ThreadPolicy.Builder()
