@@ -7,11 +7,12 @@ import com.example.paranoid.R
 import com.example.paranoid.databinding.NavigationVpnFragmentBinding
 import com.example.paranoid.ui.base.BaseFragment
 import com.example.paranoid.utils.Utils
+import com.example.paranoid.utils.VPNState
 
 class VPNFragment :
     BaseFragment<NavigationVpnFragmentBinding>(NavigationVpnFragmentBinding::inflate) {
 
-    private var vpnStateOn: Boolean = false
+    private var vpnStateOn: VPNState = VPNState.NOT_CONNECTED
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -21,8 +22,9 @@ class VPNFragment :
 
         binding.vpnButtonBackground.setOnClickListener {
             when (vpnStateOn) {
-                true -> vpnButtonDisable()
-                false -> vpnButtonConnected()
+                VPNState.CONNECTED -> vpnButtonDisable()
+                VPNState.NOT_CONNECTED -> vpnButtonConnected()
+                VPNState.ERROR -> vpnButtonDisable()
             }
         }
 
@@ -55,20 +57,24 @@ class VPNFragment :
     }
 
     private fun vpnButtonDisable() {
-        vpnStateOn = false
+        vpnStateOn = VPNState.NOT_CONNECTED
+        binding.turnOnVPN.setImageResource(R.drawable.ic_power)
         binding.connectionStatus.visibility = View.GONE
         binding.isConnected.text = getString(R.string.not_connected)
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonDisabled))
     }
 
     private fun vpnButtonConnected() {
-        vpnStateOn = true
+        vpnStateOn = VPNState.CONNECTED
+        binding.turnOnVPN.setImageResource(R.drawable.ic_power)
         binding.connectionStatus.visibility = View.VISIBLE
         binding.isConnected.text = getString(R.string.connected)
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonConnected))
     }
 
     private fun vpnButtonError() {
+        vpnStateOn = VPNState.ERROR
+        binding.turnOnVPN.setImageResource(R.drawable.ic_dino)
         binding.connectionStatus.visibility = View.GONE
         binding.isConnected.text = getString(R.string.error)
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonError))

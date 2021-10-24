@@ -8,3 +8,7 @@ object Utils {
         Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
     }
 }
+
+enum class VPNState {
+    CONNECTED, NOT_CONNECTED, ERROR
+}
