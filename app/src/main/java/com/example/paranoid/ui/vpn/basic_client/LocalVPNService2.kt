@@ -1,0 +1,255 @@
+package com.example.paranoid.ui.vpn.basic_client
+
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.net.VpnService
+import android.os.Build
+import android.os.ParcelFileDescriptor
+import android.util.Log
+import androidx.core.app.NotificationCompat
+import com.example.paranoid.ui.vpn.VPNFragment
+import com.example.paranoid.ui.vpn.VPNFragment.Companion.downByte
+import com.example.paranoid.ui.vpn.VPNFragment.Companion.upByte
+import com.example.paranoid.ui.vpn.basic_client.LocalVPNService
+import com.example.paranoid.ui.vpn.basic_client.bio.BioUdpHandler
+import com.example.paranoid.ui.vpn.basic_client.bio.NioSingleThreadTcpHandler
+import com.example.paranoid.ui.vpn.basic_client.config.Config
+import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
+import com.example.paranoid.ui.vpn.basic_client.util.ByteBufferPool
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExecutorCoroutineDispatcher
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.withContext
+import java.io.*
+import java.lang.Exception
+import java.nio.ByteBuffer
+import java.nio.channels.FileChannel
+import java.util.concurrent.ArrayBlockingQueue
+import java.util.concurrent.BlockingQueue
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+
+//import com.example.paranoid.ui.vpn.VPNFragmentKt;
+class LocalVPNService2 : VpnService() {
+    private var vpnInterface: ParcelFileDescriptor? = null
+    private val pendingIntent: PendingIntent? = null
+    private var deviceToNetworkUDPQueue: BlockingQueue<Packet>? = null
+    private var deviceToNetworkTCPQueue: BlockingQueue<Packet>? = null
+    private var networkToDeviceQueue: BlockingQueue<ByteBuffer>? = null
+    private var executorService: ExecutorService? = null
+    private var dispatcher: ExecutorCoroutineDispatcher? = null
+    override fun onCreate() {
+        super.onCreate()
+        setupVPN()
+
+        dispatcher = Executors.newFixedThreadPool(10).asCoroutineDispatcher()
+
+
+        deviceToNetworkUDPQueue = ArrayBlockingQueue(1000)
+        deviceToNetworkTCPQueue = ArrayBlockingQueue(1000)
+        networkToDeviceQueue = ArrayBlockingQueue(1000)
+
+        executorService = Executors.newFixedThreadPool(20)
+
+
+        executorService?.submit(BioUdpHandler(deviceToNetworkUDPQueue, networkToDeviceQueue, this))
+        //executorService.submit(new BioTcpHandler(deviceToNetworkTCPQueue, networkToDeviceQueue, this));
+        executorService?.submit(
+            NioSingleThreadTcpHandler(
+                deviceToNetworkTCPQueue,
+                networkToDeviceQueue,
+                this
+            )
+        )
+        executorService?.submit(
+            VPNRunnable(
+                vpnInterface!!.fileDescriptor,
+                deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
+                deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
+                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>
+            )
+        )
+    }
+
+    private fun setupVPN() {
+        try {
+            if (vpnInterface == null) {
+                val builder: Builder = Builder()
+                builder.addAddress(VPN_ADDRESS, 32)
+                builder.addRoute(VPN_ROUTE, 0)
+                builder.addDnsServer(Config.dns)
+                if (Config.testLocal) {
+                    builder.addAllowedApplication("com.example.paranoid")
+                }
+                vpnInterface = builder.setSession("com.example.paranoid").setConfigureIntent(
+                    pendingIntent!!
+                ).establish()
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "error", e)
+            System.exit(0)
+        }
+    }
+
+    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+        createNotificationChannel()
+        val intent1 = Intent(this, VPNFragment::class.java)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent1, 0)
+        val notification = NotificationCompat.Builder(this, "Channel_id1")
+            .setContentTitle("Example")
+            .setContentText("App is running")
+            .setContentIntent(pendingIntent).build()
+        startForeground(1, notification)
+        return START_STICKY
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel(
+                "Channel_id1", "Foreground service", NotificationManager.IMPORTANCE_DEFAULT
+            )
+            val manager = getSystemService(
+                NotificationManager::class.java
+            )
+            manager.createNotificationChannel(notificationChannel)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        executorService!!.shutdownNow()
+        cleanup()
+        Log.i(TAG, "Stopped")
+    }
+
+    private fun cleanup() {
+        deviceToNetworkTCPQueue = null
+        deviceToNetworkUDPQueue = null
+        networkToDeviceQueue = null
+        closeResources(vpnInterface!!)
+    }
+
+    private class VPNRunnable(
+        private val vpnFileDescriptor: FileDescriptor,
+        private val deviceToNetworkUDPQueue: BlockingQueue<Packet>,
+        private val deviceToNetworkTCPQueue: BlockingQueue<Packet>,
+        private val networkToDeviceQueue: BlockingQueue<ByteBuffer>
+    ) : Runnable {
+        internal class WriteVpnThread(
+            var vpnOutput: FileChannel,
+            private val networkToDeviceQueue: BlockingQueue<ByteBuffer>
+        ) :
+            Runnable {
+            override fun run() {
+                while (true) {
+                    try {
+                        val bufferFromNetwork = networkToDeviceQueue.take()
+                        bufferFromNetwork.flip()
+                        while (bufferFromNetwork.hasRemaining()) {
+                            val w = vpnOutput.write(bufferFromNetwork)
+                            if (w > 0) {
+                                downByte.addAndGet(w.toLong())
+                            }
+                            if (Config.logRW) {
+                                Log.d(TAG, "vpn write $w")
+                            }
+                        }
+                    } catch (e: Exception) {
+                        Log.i(TAG, "WriteVpnThread fail", e)
+                    }
+                }
+            }
+        }
+
+        override fun run() {
+            Log.i(TAG, "Started")
+            val vpnInput = FileInputStream(
+                vpnFileDescriptor
+            ).channel
+            val vpnOutput = FileOutputStream(
+                vpnFileDescriptor
+            ).channel
+            val t = Thread(
+                WriteVpnThread(
+                    vpnOutput,
+                    networkToDeviceQueue
+                )
+            )
+            t.start()
+            try {
+                var bufferToNetwork: ByteBuffer? = null
+                while (!Thread.interrupted()) {
+                    bufferToNetwork = ByteBufferPool.acquire()
+                    val readBytes = vpnInput.read(bufferToNetwork)
+                    upByte.addAndGet(readBytes.toLong())
+                    if (readBytes > 0) {
+                        bufferToNetwork.flip()
+                        val packet = Packet(bufferToNetwork)
+                        if (packet.isUDP()) {
+                            if (Config.logRW) {
+                                Log.i(TAG, "read udp$readBytes")
+                            }
+                            deviceToNetworkUDPQueue.offer(packet)
+                        } else if (packet.isTCP()) {
+                            if (Config.logRW) {
+                                Log.i(TAG, "read tcp $readBytes")
+                            }
+                            deviceToNetworkTCPQueue.offer(packet)
+                        } else {
+                            Log.w(
+                                TAG,
+                                String.format(
+                                    "Unknown packet protocol type %d",
+                                    packet.ip4Header.protocolNum
+                                )
+                            )
+                        }
+                    } else {
+                        try {
+                            Thread.sleep(10)
+                        } catch (e: InterruptedException) {
+                            e.printStackTrace()
+                        }
+                    }
+                }
+            } catch (e: IOException) {
+                Log.w(TAG, e.toString(), e)
+            } finally {
+                closeResources(vpnInput, vpnOutput)
+            }
+        }
+
+        companion object {
+            private const val TAG = "paranoid"
+        }
+    }
+
+    private val stopBr: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if ("stop_kill" == intent.action) {
+                onDestroy()
+            }
+        }
+    }
+
+    companion object {
+        private val TAG = LocalVPNService::class.java.simpleName
+        private val VPN_ADDRESS = "10.0.0.2" // Only IPv4 support for now
+        private val VPN_ROUTE = "0.0.0.0" // Intercept everything
+
+        // TODO: Move this to a "utils" class for reuse
+        private fun closeResources(vararg resources: Closeable) {
+            for (resource in resources) {
+                try {
+                    resource.close()
+                } catch (e: IOException) {
+                    // Ignore
+                }
+            }
+        }
+    }
+}

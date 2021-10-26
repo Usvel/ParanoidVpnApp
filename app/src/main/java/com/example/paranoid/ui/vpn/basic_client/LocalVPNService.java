@@ -60,7 +60,7 @@ public class LocalVPNService extends VpnService {
         deviceToNetworkTCPQueue = new ArrayBlockingQueue<Packet>(1000);
         networkToDeviceQueue = new ArrayBlockingQueue<>(1000);
 
-        executorService = Executors.newFixedThreadPool(10);
+        executorService = Executors.newFixedThreadPool(20);
         executorService.submit(new BioUdpHandler(deviceToNetworkUDPQueue, networkToDeviceQueue, this));
         //executorService.submit(new BioTcpHandler(deviceToNetworkTCPQueue, networkToDeviceQueue, this));
         executorService.submit(new NioSingleThreadTcpHandler(deviceToNetworkTCPQueue, networkToDeviceQueue, this));
@@ -143,7 +143,7 @@ public class LocalVPNService extends VpnService {
     }
 
     private static class VPNRunnable implements Runnable {
-        private static final String TAG = VPNRunnable.class.getSimpleName();
+        private static final String TAG = "paranoid";
 
         private FileDescriptor vpnFileDescriptor;
 

@@ -5,10 +5,15 @@ import android.content.Intent
 import android.net.VpnService
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.getNoBackupFilesDir
 import androidx.core.content.ContextCompat.startForegroundService
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.lifecycleScope
 import com.example.paranoid.R
 import com.example.paranoid.databinding.NavigationVpnFragmentBinding
 import com.example.paranoid.ui.base.BaseFragment
@@ -16,14 +21,16 @@ import com.example.paranoid.ui.vpn.basic_client.LocalVPNService
 import com.example.paranoid.utils.Utils
 import java.util.concurrent.atomic.AtomicLong
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-
-
+import kotlinx.coroutines.*
 
 
 class VPNFragment :
     BaseFragment<NavigationVpnFragmentBinding>(NavigationVpnFragmentBinding::inflate) {
 
     private var vpnStateOn: Boolean = false
+
+    private val VPN_REQUEST_CODE = 0x0F
+    private val TAG = "paranoid"
 
     companion object {
         @JvmStatic
@@ -44,6 +51,14 @@ class VPNFragment :
                 false -> vpnButtonConnected()
             }
         }
+        lifecycleScope.launch(Dispatchers.Default) {
+            while (true) {
+                if (vpnStateOn)
+                    updateText()
+                delay(500)
+            }
+        }
+
     }
 
     private fun loadMainConfiguration() {
@@ -68,13 +83,17 @@ class VPNFragment :
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonDisabled))
     }
 
+    private suspend fun updateText() = withContext(Dispatchers.Main) {
+        binding.isConnected.text = "up: $upByte B, down: $downByte B"
+    }
 
     private fun vpnButtonConnected() {
         vpnStateOn = true
         binding.connectionStatus.visibility = View.VISIBLE
-        binding.isConnected.text = getString(R.string.connected)
+        // binding.isConnected.text = getString(R.string.connected)
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonConnected))
         startVpn()
+
     }
 
 
@@ -83,9 +102,6 @@ class VPNFragment :
         binding.isConnected.text = getString(R.string.error)
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonError))
     }
-
-    private val VPN_REQUEST_CODE = 0x0F
-    private val TAG = "paranoid"
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
