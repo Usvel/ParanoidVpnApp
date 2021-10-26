@@ -6,21 +6,21 @@
 
     <fragment
             android:id="@+id/profile_fragment"
-            android:name="com.example.paranoid.profile.ui.ProfileFragment"
+            android:name="com.paranoid.vpn.app.profile.ui.ProfileFragment"
             tools:layout="@layout/navigation_profile_fragment">
 
     </fragment>
 
     <fragment
             android:id="@+id/settings_fragment"
-            android:name="com.example.paranoid.settings.ui.SettingsFragment"
+            android:name="com.paranoid.vpn.app.settings.ui.SettingsFragment"
             tools:layout="@layout/navigation_settings_fragment">
 
     </fragment>
 
     <fragment
             android:id="@+id/vpn_fragment"
-            android:name="com.example.paranoid.vpn.ui.VPNFragment"
+            android:name="com.paranoid.vpn.app.vpn.ui.VPNFragment"
             tools:layout="@layout/navigation_vpn_fragment">
 
     </fragment>
