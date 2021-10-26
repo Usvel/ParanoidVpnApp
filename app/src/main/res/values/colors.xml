@@ -28,6 +28,7 @@
     <color name="vpnColorDisabledDark">#5F5F5F</color>
     <color name="vpnColorConnected">#7BDAA7</color>
     <color name="vpnColorError">#DA7B7B</color>
-
-    <color name="ic_launcher_background">#FFFFFF</color>
+    <!-- Bar -->
+    <color name="status_bar_color">#65000000</color>
+    <color name="nav_bar_color">#65000000</color>
 </resources>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.example.paranoid">
+        package="com.paranoid.vpn.app">
 
     <application
-            android:name="com.example.paranoid.common.Application"
+            android:name="com.paranoid.vpn.app.common.Application"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -11,7 +11,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.Paranoid">
         <activity
-                android:name="com.example.paranoid.common.ui.app.AppActivity"
+                android:name="com.paranoid.vpn.app.common.ui.app.AppActivity"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
