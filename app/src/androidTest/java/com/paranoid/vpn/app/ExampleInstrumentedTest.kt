@@ -1,4 +1,4 @@
-package com.paranoid.vpn.ap
+package com.paranoid.vpn.app
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
