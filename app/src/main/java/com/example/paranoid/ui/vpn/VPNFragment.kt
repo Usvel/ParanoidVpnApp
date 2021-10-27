@@ -3,24 +3,17 @@ package com.example.paranoid.ui.vpn
 import android.app.Activity
 import android.content.Intent
 import android.net.VpnService
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
-import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat.getNoBackupFilesDir
 import androidx.core.content.ContextCompat.startForegroundService
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import com.example.paranoid.R
 import com.example.paranoid.databinding.NavigationVpnFragmentBinding
 import com.example.paranoid.ui.base.BaseFragment
-import com.example.paranoid.ui.vpn.basic_client.LocalVPNService
 import com.example.paranoid.utils.Utils
 import java.util.concurrent.atomic.AtomicLong
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.example.paranoid.ui.vpn.basic_client.LocalVPNService2
 import kotlinx.coroutines.*
 
 
@@ -30,7 +23,6 @@ class VPNFragment :
     private var vpnStateOn: Boolean = false
 
     private val VPN_REQUEST_CODE = 0x0F
-    private val TAG = "paranoid"
 
     companion object {
         @JvmStatic
@@ -103,11 +95,10 @@ class VPNFragment :
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonError))
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == VPN_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val intent = Intent(context, LocalVPNService::class.java)
+            val intent = Intent(context, LocalVPNService2::class.java)
             context?.let { startForegroundService(it, intent) }
         }
     }

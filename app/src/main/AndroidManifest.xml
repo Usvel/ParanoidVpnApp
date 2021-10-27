@@ -31,7 +31,7 @@
         </activity>
 
         <service
-                android:name="com.example.paranoid.ui.vpn.basic_client.LocalVPNService"
+                android:name="com.example.paranoid.ui.vpn.basic_client.LocalVPNService2"
                 android:permission="android.permission.BIND_VPN_SERVICE"
                 android:exported="false">
             <intent-filter>
