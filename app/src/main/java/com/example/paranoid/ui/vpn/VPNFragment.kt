@@ -6,6 +6,7 @@ import android.net.VpnService
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
+import androidx.compose.runtime.sourceInformationMarkerEnd
 import androidx.core.content.ContextCompat.startForegroundService
 import androidx.lifecycle.lifecycleScope
 import com.example.paranoid.R
@@ -23,6 +24,8 @@ class VPNFragment :
     private var vpnStateOn: Boolean = false
 
     private val VPN_REQUEST_CODE = 0x0F
+
+    private var textUpdater: Job? = null
 
     companion object {
         @JvmStatic
@@ -43,7 +46,7 @@ class VPNFragment :
                 false -> vpnButtonConnected()
             }
         }
-        lifecycleScope.launch(Dispatchers.Default) {
+        textUpdater = lifecycleScope.launch(Dispatchers.Default) {
             while (true) {
                 if (vpnStateOn)
                     updateText()
@@ -51,6 +54,13 @@ class VPNFragment :
             }
         }
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        lifecycleScope.launch(Dispatchers.Default) {
+            textUpdater?.cancel()
+        }
     }
 
     private fun loadMainConfiguration() {
@@ -73,6 +83,7 @@ class VPNFragment :
         binding.connectionStatus.visibility = View.GONE
         binding.isConnected.text = getString(R.string.not_connected)
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonDisabled))
+        stopVpn()
     }
 
     private suspend fun updateText() = withContext(Dispatchers.Main) {
@@ -85,7 +96,6 @@ class VPNFragment :
         // binding.isConnected.text = getString(R.string.connected)
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonConnected))
         startVpn()
-
     }
 
 
@@ -99,6 +109,7 @@ class VPNFragment :
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == VPN_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val intent = Intent(context, LocalVPNService2::class.java)
+            intent.action = "start"
             context?.let { startForegroundService(it, intent) }
         }
     }
@@ -110,4 +121,11 @@ class VPNFragment :
             VPN_REQUEST_CODE
         ) else onActivityResult(VPN_REQUEST_CODE, Activity.RESULT_OK, null)
     }
+
+    private fun stopVpn() {
+        val stopIntent = Intent(context, LocalVPNService2::class.java)
+        stopIntent.action = "stop"
+        context?.let { startForegroundService(it, stopIntent) }
+    }
+
 }
