@@ -49,8 +49,8 @@ class LocalVPNService2 : VpnService() {
 
         GlobalScope.launch(dispatcher) {
             BioUdpHandler(
-                deviceToNetworkUDPQueue,
-                networkToDeviceQueue,
+                deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
+                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
                 this@LocalVPNService2
             ).run()
         }
