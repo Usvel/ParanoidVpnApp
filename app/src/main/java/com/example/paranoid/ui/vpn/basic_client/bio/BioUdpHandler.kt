@@ -6,6 +6,7 @@ import com.example.paranoid.ui.vpn.basic_client.config.Config
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.IpUtil
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
 import com.example.paranoid.ui.vpn.basic_client.util.ByteBufferPool
+import kotlinx.coroutines.*
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.nio.ByteBuffer
@@ -22,16 +23,14 @@ class BioUdpHandler(
     private var queue: BlockingQueue<Packet>,
     private var networkToDeviceQueue: BlockingQueue<ByteBuffer>,
     private var vpnService: VpnService
-) :
-    Runnable {
+) {
     private var selector: Selector? = null
 
     private class UdpDownWorker(
         var selector: Selector?,
         var networkToDeviceQueue: BlockingQueue<ByteBuffer>,
         var tunnelQueue: BlockingQueue<UdpTunnel>
-    ) :
-        Runnable {
+    ) {
         @Throws(IOException::class)
         private fun sendUdpPack(
             tunnel: UdpTunnel,
@@ -57,7 +56,7 @@ class BioUdpHandler(
             networkToDeviceQueue.offer(byteBuffer)
         }
 
-        override fun run() {
+        suspend fun run() {
             try {
                 while (true) {
                     val readyChannels = selector!!.select()
@@ -124,17 +123,19 @@ class BioUdpHandler(
         var channel: DatagramChannel? = null
     }
 
-    override fun run() {
+    @DelicateCoroutinesApi
+    suspend fun run() {
         try {
             val tunnelQueue: BlockingQueue<UdpTunnel> = ArrayBlockingQueue(100)
             selector = Selector.open()
-            val t = Thread(
-                UdpDownWorker(
-                    selector,
-                    networkToDeviceQueue, tunnelQueue
-                )
-            )
-            t.start()
+            GlobalScope.launch(Dispatchers.IO){
+                runCatching {
+                    UdpDownWorker(
+                        selector,
+                        networkToDeviceQueue, tunnelQueue
+                    ).run()
+                }
+            }
             while (true) {
                 val packet = queue.take()
                 val destinationAddress = packet.ip4Header.destinationAddress

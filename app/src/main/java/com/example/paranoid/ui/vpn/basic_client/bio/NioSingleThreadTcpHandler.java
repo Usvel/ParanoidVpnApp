@@ -25,7 +25,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
-public class NioSingleThreadTcpHandler implements Runnable {
+class NioSingleThreadTcpHandlerOld implements Runnable {
 
     private static final String TAG = NioSingleThreadTcpHandler.class.getSimpleName();
 
@@ -39,7 +39,7 @@ public class NioSingleThreadTcpHandler implements Runnable {
     private Map<String, TcpPipe> pipes = new HashMap<>();
 
 
-    public NioSingleThreadTcpHandler(BlockingQueue<Packet> queue,//用于读包
+    public NioSingleThreadTcpHandlerOld(BlockingQueue<Packet> queue,//用于读包
                                      BlockingQueue<ByteBuffer> networkToDeviceQueue,//用于写数据
                                      VpnService vpnService//用于保护地址
     ) {

@@ -8,7 +8,6 @@ import android.net.VpnService
 import android.os.ParcelFileDescriptor
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.example.paranoid.ui.vpn.VPNFragment
 import com.example.paranoid.ui.vpn.VPNFragment.Companion.downByte
 import com.example.paranoid.ui.vpn.VPNFragment.Companion.upByte
 import com.example.paranoid.ui.vpn.basic_client.bio.BioUdpHandler
@@ -18,8 +17,6 @@ import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
 import com.example.paranoid.ui.vpn.basic_client.util.ByteBufferPool
 import kotlinx.coroutines.*
 import java.io.*
-import java.lang.Exception
-import java.lang.Runnable
 import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
 import java.util.concurrent.ArrayBlockingQueue
@@ -56,8 +53,9 @@ class LocalVPNService2 : VpnService() {
         }
 
         GlobalScope.launch(dispatcher) {
-            NioSingleThreadTcpHandler(deviceToNetworkTCPQueue,
-                networkToDeviceQueue,
+            NioSingleThreadTcpHandler(
+                deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
+                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
                 this@LocalVPNService2).run()
         }
 
