@@ -1,7 +1,6 @@
 package com.example.paranoid.ui.vpn.basic_client.bio
 
 import android.net.VpnService
-import android.os.Build
 import android.util.Log
 import com.example.paranoid.ui.vpn.basic_client.bio.BioTcpHandler.*
 import com.example.paranoid.ui.vpn.basic_client.config.Config

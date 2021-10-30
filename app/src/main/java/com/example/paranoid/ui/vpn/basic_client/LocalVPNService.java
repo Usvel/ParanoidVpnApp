@@ -8,18 +8,14 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.VpnService;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.paranoid.ui.vpn.VPNFragment;
-//import com.example.paranoid.ui.vpn.VPNFragmentKt;
-import com.example.paranoid.ui.vpn.basic_client.bio.BioTcpHandler;
 import com.example.paranoid.ui.vpn.basic_client.bio.BioUdpHandler;
 import com.example.paranoid.ui.vpn.basic_client.bio.NioSingleThreadTcpHandler;
 import com.example.paranoid.ui.vpn.basic_client.config.Config;
@@ -251,4 +247,3 @@ public class LocalVPNService extends VpnService {
         }
     };
 }
-

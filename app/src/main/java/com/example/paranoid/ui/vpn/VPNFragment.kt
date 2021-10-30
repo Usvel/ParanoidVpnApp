@@ -6,16 +6,15 @@ import android.net.VpnService
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
-import androidx.compose.runtime.sourceInformationMarkerEnd
 import androidx.core.content.ContextCompat.startForegroundService
 import androidx.lifecycle.lifecycleScope
 import com.example.paranoid.R
 import com.example.paranoid.databinding.NavigationVpnFragmentBinding
 import com.example.paranoid.ui.base.BaseFragment
-import com.example.paranoid.utils.Utils
-import java.util.concurrent.atomic.AtomicLong
 import com.example.paranoid.ui.vpn.basic_client.LocalVPNService2
+import com.example.paranoid.utils.Utils
 import kotlinx.coroutines.*
+import java.util.concurrent.atomic.AtomicLong
 
 
 class VPNFragment :
