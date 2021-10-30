@@ -1,5 +1,4 @@
 package com.example.paranoid.ui.vpn.basic_client.bio
-
 import android.net.VpnService
 import android.util.Log
 import com.example.paranoid.ui.vpn.basic_client.config.Config
@@ -15,7 +14,6 @@ import java.nio.channels.SelectionKey
 import java.nio.channels.Selector
 import java.nio.channels.ServerSocketChannel
 import java.nio.channels.SocketChannel
-import java.util.*
 import java.util.concurrent.BlockingQueue
 
 class NioSingleThreadTcpHandler(
@@ -65,7 +63,7 @@ class NioSingleThreadTcpHandler(
         pipe.remote!!.configureBlocking(false)
         val key = pipe.remote!!.register(selector, SelectionKey.OP_CONNECT)
         objAttrUtil.setAttr(pipe.remote, "key", key)
-        //very important, protect
+        // very important, protect
         vpnService.protect(pipe.remote!!.socket())
         val b1 = pipe.remote!!.connect(pipe.destinationAddress)
         pipe.timestamp = System.currentTimeMillis()
@@ -79,8 +77,12 @@ class NioSingleThreadTcpHandler(
             dataLen = data.size
         }
         val packet = IpUtil.buildTcpPacket(
-            pipe!!.destinationAddress, pipe.sourceAddress, flag,
-            pipe.myAcknowledgementNum, pipe.mySequenceNum, pipe.packId
+            pipe!!.destinationAddress,
+            pipe.sourceAddress,
+            flag,
+            pipe.myAcknowledgementNum,
+            pipe.mySequenceNum,
+            pipe.packId
         )
         pipe.packId += 1
         val byteBuffer = ByteBuffer.allocate(HEADER_SIZE + dataLen)
@@ -169,7 +171,7 @@ class NioSingleThreadTcpHandler(
         pipe.myAcknowledgementNum = tcpHeader.sequenceNumber
         pipe.theirAcknowledgementNum = tcpHeader.acknowledgementNumber
         pipe.myAcknowledgementNum += payloadSize.toLong()
-        //TODO
+        // TODO
         pipe.remoteOutBuffer.put(packet.backingBuffer)
         pipe.remoteOutBuffer.flip()
         tryFlushWrite(pipe, pipe.remote)
@@ -250,7 +252,7 @@ class NioSingleThreadTcpHandler(
         Log.i(TAG, String.format("handleFin %d", pipe!!.tunnelId))
         pipe.myAcknowledgementNum = packet.tcpHeader.sequenceNumber + 1
         pipe.theirAcknowledgementNum = packet.tcpHeader.acknowledgementNumber
-        //TODO
+        // TODO
         sendTcpPack(pipe, TCPHeader.ACK.toByte(), null)
         closeUpStream(pipe)
         pipe.tcbStatus = TCBStatus.CLOSE_WAIT
@@ -284,11 +286,13 @@ class NioSingleThreadTcpHandler(
             val currentPacket = queue.poll() ?: return
             val destinationAddress = currentPacket.ip4Header.destinationAddress
             val tcpHeader = currentPacket.tcpHeader
-            //Log.d(TAG, String.format("get pack %d tcp " + tcpHeader.printSimple() + " ", currentPacket.packId));
+            // Log.d(TAG, String.format("get pack %d tcp " + tcpHeader.printSimple() + " ", currentPacket.packId));
             val destinationPort = tcpHeader.destinationPort
             val sourcePort = tcpHeader.sourcePort
-            val ipAndPort = destinationAddress.hostAddress + ":" +
-                    destinationPort + ":" + sourcePort
+            val ipAndPort = destinationAddress.hostAddress +
+                    ":" +
+                    destinationPort +
+                    ":" + sourcePort
             if (!pipes.containsKey(ipAndPort)) {
                 val tcpTunnel = initPipe(currentPacket)
                 tcpTunnel.tunnelKey = ipAndPort
@@ -324,7 +328,9 @@ class NioSingleThreadTcpHandler(
                     buffer.flip()
                     val data = ByteArray(buffer.remaining())
                     buffer[data]
-                    sendTcpPack(pipe, TCPHeader.ACK.toByte(), data)
+                    sendTcpPack(pipe,
+                        TCPHeader.ACK.toByte(),
+                        data)
                 }
             }
         }
@@ -363,7 +369,8 @@ class NioSingleThreadTcpHandler(
         }
         sendTcpPack(
             pipe,
-            (TCPHeader.FIN or TCPHeader.ACK).toByte(), null
+            (TCPHeader.FIN or TCPHeader.ACK).toByte(),
+            null
         )
         pipe.downActive = false
         if (isClosedTunnel(pipe)) {
@@ -453,7 +460,7 @@ class NioSingleThreadTcpHandler(
                 handleReadFromVpn()
                 handleSockets()
                 tick += 1
-                //Thread.sleep(1)
+                // Thread.sleep(1)
                 delay(100)
             }
         } catch (e: Exception) {

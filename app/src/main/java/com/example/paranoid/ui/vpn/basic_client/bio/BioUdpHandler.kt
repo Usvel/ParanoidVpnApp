@@ -1,19 +1,20 @@
 package com.example.paranoid.ui.vpn.basic_client.bio
-
 import android.net.VpnService
 import android.util.Log
 import com.example.paranoid.ui.vpn.basic_client.config.Config
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.IpUtil
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
 import com.example.paranoid.ui.vpn.basic_client.util.ByteBufferPool
-import kotlinx.coroutines.*
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.nio.ByteBuffer
 import java.nio.channels.DatagramChannel
 import java.nio.channels.SelectionKey
 import java.nio.channels.Selector
-import java.util.*
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.atomic.AtomicInteger
@@ -128,11 +129,12 @@ class BioUdpHandler(
         try {
             val tunnelQueue: BlockingQueue<UdpTunnel> = ArrayBlockingQueue(100)
             selector = Selector.open()
-            GlobalScope.launch(Dispatchers.IO){
+            GlobalScope.launch(Dispatchers.IO) {
                 runCatching {
                     UdpDownWorker(
                         selector,
-                        networkToDeviceQueue, tunnelQueue
+                        networkToDeviceQueue,
+                        tunnelQueue
                     ).run()
                 }
             }
