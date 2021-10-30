@@ -319,8 +319,10 @@ class BioTcpHandler(
                 //Log.d(TAG, String.format("get pack %d tcp " + tcpHeader.printSimple() + " ", currentPacket.packId));
                 val destinationPort = tcpHeader.destinationPort
                 val sourcePort = tcpHeader.sourcePort
-                val ipAndPort = destinationAddress.hostAddress + ":" +
-                        destinationPort + ":" + sourcePort
+                val ipAndPort = destinationAddress.hostAddress +
+                        ":" +
+                        destinationPort +
+                        ":" + sourcePort
                 //
                 while (true) {
                     val s = tunnelCloseMsgQueue.poll()
