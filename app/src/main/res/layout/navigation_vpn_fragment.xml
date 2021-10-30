@@ -17,7 +17,7 @@
             android:id="@+id/linearLayout">
 
         <ImageView
-                android:src="@mipmap/ic_launcher_foreground"
+                android:src="@drawable/ic_paranoid_vpn"
                 android:layout_width="@dimen/logo_icon_size"
                 android:layout_height="@dimen/logo_icon_size"
                 android:layout_marginStart="@dimen/top_bar_elements_start"
