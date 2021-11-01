@@ -46,15 +46,16 @@ class LocalVPNService2 : VpnService() {
 
         GlobalScope.launch(dispatcher) {
             BioUdpHandler(
-                deviceToNetworkUDPQueue,
-                networkToDeviceQueue,
+                deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
+                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
                 this@LocalVPNService2
             ).run()
         }
 
         GlobalScope.launch(dispatcher) {
-            NioSingleThreadTcpHandler(deviceToNetworkTCPQueue,
-                networkToDeviceQueue,
+            NioSingleThreadTcpHandler(
+                deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
+                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
                 this@LocalVPNService2).run()
         }
 
