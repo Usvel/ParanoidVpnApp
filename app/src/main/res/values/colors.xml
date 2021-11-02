@@ -10,25 +10,31 @@
     <color name="primaryLight">#FFFFFFFF</color>
     <color name="primaryDark">#191919</color>
     <!-- Minor activity colors -->
-    <color name="minorColorLight">#F3FCFF</color>
-    <color name="minorColorLightDarkTheme">#444343</color>
-    <color name="minorColor">#E7F8FF</color>
-    <color name="minorColorDarkTheme">#262626</color>
+    <color name="minor_color_light">#F3FCFF</color>
+    <color name="minor_color_light_dark_theme">#444343</color>
+    <color name="minor_color">#E7F8FF</color>
+    <color name="minor_color_dark_theme">#262626</color>
     <!-- Color for nav bar -->
-    <color name="darkNavIconSelected">#000000</color>
-    <color name="darkNavIconNotSelected">#BF000000</color>
-    <color name="lightNavIconSelected">#FFFFFF</color>
-    <color name="lightNavIconNotSelected">#BFFFFFFF</color>
+    <color name="dark_nav_icon_selected">#000000</color>
+    <color name="dark_nav_icon_not_selected">#BF000000</color>
+    <color name="light_nav_icon_selected">#FFFFFF</color>
+    <color name="light_nav_icon_not_selected">#BFFFFFFF</color>
     <!-- Text for nav bar -->
-    <color name="darkTextTransparent">#99000000</color>
-    <color name="lightTextTransparent">#99FFFFFF</color>
-    <color name="secondBackgroundTransparent">#24000000</color>
+    <color name="dark_text_transparent">#99000000</color>
+    <color name="light_text_transparent">#99FFFFFF</color>
+    <color name="second_background_transparent">#24000000</color>
     <!-- VPN Button -->
-    <color name="vpnColorDisabled">#373737</color>
-    <color name="vpnColorDisabledDark">#5F5F5F</color>
-    <color name="vpnColorConnected">#7BDAA7</color>
-    <color name="vpnColorError">#DA7B7B</color>
+    <color name="vpn_color_disabled">#373737</color>
+    <color name="vpn_color_disabled_dark">#5F5F5F</color>
+    <color name="vpn_color_connected">#7BDAA7</color>
+    <color name="vpn_color_error">#DA7B7B</color>
     <!-- Bar -->
     <color name="status_bar_color">#65000000</color>
     <color name="nav_bar_color">#65000000</color>
+    <!-- Navigation Indicator -->
+    <color name="nav_indicator_light">#C3E7FF</color>
+    <color name="nav_indicator_dark">#004A77</color>
+    <!-- Icon Background -->
+    <color name="icon_background_light">#C3E7FF</color>
+    <color name="icon_background_dark">#004A77</color>
 </resources>

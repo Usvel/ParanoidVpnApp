@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Paranoid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Paranoid" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -16,17 +16,30 @@
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
         <item name="toolBarColor">@color/black</item>
-        <item name="backgroundVioletLight">@color/minorColorLight</item>
-        <item name="backgroundViolet">@color/minorColor</item>
+        <item name="backgroundVioletLight">@color/minor_color_light</item>
+        <item name="backgroundViolet">@color/minor_color</item>
         <!-- Nav bar -->
-        <item name="navBarIconColor">@color/darkNavIconSelected</item>
-        <item name="navBarIconColorNotChecked">@color/darkNavIconNotSelected</item>
-        <item name="toolBarColorSecond">@color/secondBackgroundTransparent</item>
+        <item name="navBarIconIndicator">@color/nav_indicator_light</item>
+        <item name="navBarIconColor">@color/dark_nav_icon_selected</item>
+        <item name="navBarIconColorNotChecked">@color/dark_nav_icon_not_selected</item>
+        <item name="toolBarColorSecond">@color/second_background_transparent</item>
         <!-- Text -->
-        <item name="textTransparent">@color/darkTextTransparent</item>
+        <item name="textTransparent">@color/dark_text_transparent</item>
         <!-- VPN Button -->
-        <item name="vpnButtonDisabled">@color/vpnColorDisabled</item>
-        <item name="vpnButtonConnected">@color/vpnColorConnected</item>
-        <item name="vpnButtonError">@color/vpnColorError</item>
+        <item name="vpnButtonDisabled">@color/vpn_color_disabled</item>
+        <item name="vpnButtonConnected">@color/vpn_color_connected</item>
+        <item name="vpnButtonError">@color/vpn_color_error</item>
+        <!-- Item color -->
+        <item name="iconBackground">@color/icon_background_light</item>
     </style>
+
+    <style name="Widget.Material3.BottomNavigationView.ActiveIndicator.Paranoid"
+            parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:width">@dimen/m3_bottom_nav_item_active_indicator_width</item>
+        <item name="android:height">@dimen/m3_bottom_nav_item_active_indicator_height</item>
+        <item name="marginHorizontal">@dimen/m3_bottom_nav_item_active_indicator_margin_horizontal</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.NavigationBarView.ActiveIndicator</item>
+        <item name="android:color">?attr/navBarIconIndicator</item>
+    </style>
+
 </resources>

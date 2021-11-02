@@ -6,6 +6,7 @@
     <attr name="toolBarColorSecond" format="reference|color" />
     <!-- Nav bar -->
     <attr name="navBarIconColor" format="reference|color" />
+    <attr name="navBarIconIndicator" format="reference|color" />
     <attr name="navBarIconColorNotChecked" format="reference|color" />
     <!-- Text -->
     <attr name="textTransparent" format="reference|color" />
@@ -13,4 +14,7 @@
     <attr name="vpnButtonDisabled" format="reference|color" />
     <attr name="vpnButtonConnected" format="reference|color" />
     <attr name="vpnButtonError" format="reference|color" />
+    <!-- Icon background -->
+    <attr name="iconBackground" format="reference|color" />
+
 </resources>

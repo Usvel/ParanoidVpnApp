@@ -23,8 +23,10 @@
             android:id="@+id/bottom_tab_bar"
             android:background="?attr/backgroundViolet"
             app:itemIconTint="@drawable/bottom_navigation_selector"
+            app:itemRippleColor="?attr/navBarIconIndicator"
+            app:itemActiveIndicatorStyle=
+                    "@style/Widget.Material3.BottomNavigationView.ActiveIndicator.Paranoid"
             android:orientation="horizontal"
-            app:labelVisibilityMode="unlabeled"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
