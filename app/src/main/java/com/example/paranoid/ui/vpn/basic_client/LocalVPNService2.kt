@@ -22,6 +22,8 @@ import java.nio.channels.FileChannel
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.Executors
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.coroutineContext
 
 class LocalVPNService2 : VpnService() {
     private var vpnInterface: ParcelFileDescriptor? = null
@@ -32,6 +34,8 @@ class LocalVPNService2 : VpnService() {
 
     private var _dispatcher: ExecutorCoroutineDispatcher? = null
     private val dispatcher get() = _dispatcher!!
+
+    private val context = Dispatchers.IO + SupervisorJob()
 
     override fun onCreate() {
         Log.d(TAG, "onCreate")
@@ -44,22 +48,24 @@ class LocalVPNService2 : VpnService() {
         deviceToNetworkTCPQueue = ArrayBlockingQueue(1000)
         networkToDeviceQueue = ArrayBlockingQueue(1000)
 
-        GlobalScope.launch(dispatcher) {
+
+        CoroutineScope(context).launch {
             BioUdpHandler(
                 deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
                 networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
-                this@LocalVPNService2
+                this@LocalVPNService2,
+                context
             ).run()
         }
 
-        GlobalScope.launch(dispatcher) {
+        CoroutineScope(context).launch {
             NioSingleThreadTcpHandler(
                 deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
                 networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
                 this@LocalVPNService2).run()
         }
 
-        GlobalScope.launch(dispatcher) {
+        CoroutineScope(context).launch {
             VPNRunnable(
                 vpnInterface!!.fileDescriptor,
                 deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
@@ -125,41 +131,37 @@ class LocalVPNService2 : VpnService() {
         cleanup()
     }
 
-    override fun onDestroy() {
-        Log.d(TAG, "onDestroy")
-        super.onDestroy()
-        cleanup()
-    }
-
     private fun cleanup() {
-        dispatcher.close()
+        context.cancel()
         deviceToNetworkTCPQueue = null
         deviceToNetworkUDPQueue = null
         networkToDeviceQueue = null
         closeResources(vpnInterface!!)
     }
 
+    override fun onDestroy() {
+        Log.d(TAG, "onDestroy")
+        super.onDestroy()
+        cleanup()
+    }
+
     private class VPNRunnable(
         private val vpnFileDescriptor: FileDescriptor,
         private val deviceToNetworkUDPQueue: BlockingQueue<Packet>,
         private val deviceToNetworkTCPQueue: BlockingQueue<Packet>,
-        private val networkToDeviceQueue: BlockingQueue<ByteBuffer>
+        private val networkToDeviceQueue: BlockingQueue<ByteBuffer>,
     ) {
         class WriteVpnThread(
             var vpnOutput: FileChannel,
             private val networkToDeviceQueue: BlockingQueue<ByteBuffer>
         ) {
             suspend fun run() {
-                while (true) {
+                while (coroutineContext.isActive) {
                     try {
-                        val bufferFromNetwork = withContext(Dispatchers.IO) {
-                            networkToDeviceQueue.take()
-                        }
+                        val bufferFromNetwork = networkToDeviceQueue.take()
                         bufferFromNetwork.flip()
                         while (bufferFromNetwork.hasRemaining()) {
-                            val w = withContext(Dispatchers.IO) {
-                                vpnOutput.write(bufferFromNetwork)
-                            }
+                            val w = vpnOutput.write(bufferFromNetwork)
                             if (w > 0) {
                                 downByte.addAndGet(w.toLong())
                             }
@@ -169,6 +171,7 @@ class LocalVPNService2 : VpnService() {
                         }
                     } catch (e: Exception) {
                         Log.i(TAG, "WriteVpnThread fail", e)
+                        coroutineContext.cancel()
                     }
                 }
             }
@@ -182,7 +185,7 @@ class LocalVPNService2 : VpnService() {
             val vpnOutput = FileOutputStream(
                 vpnFileDescriptor
             ).channel
-            GlobalScope.launch(Dispatchers.Default) {
+            CoroutineScope(coroutineContext).launch{
                 WriteVpnThread(
                     vpnOutput,
                     networkToDeviceQueue
@@ -190,7 +193,7 @@ class LocalVPNService2 : VpnService() {
             }
             try {
                 var bufferToNetwork: ByteBuffer?
-                while (!Thread.interrupted()) {
+                while (coroutineContext.isActive) {
                     bufferToNetwork = ByteBufferPool.acquire()
                     val readBytes = vpnInput.read(bufferToNetwork)
                     upByte.addAndGet(readBytes.toLong())
@@ -226,6 +229,7 @@ class LocalVPNService2 : VpnService() {
                 }
             } catch (e: IOException) {
                 Log.w(TAG, e.toString(), e)
+                coroutineContext.cancel()
             } finally {
                 closeResources(vpnInput, vpnOutput)
             }

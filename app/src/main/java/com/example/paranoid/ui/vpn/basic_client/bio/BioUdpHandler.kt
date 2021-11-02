@@ -5,9 +5,9 @@ import com.example.paranoid.ui.vpn.basic_client.config.Config
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.IpUtil
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
 import com.example.paranoid.ui.vpn.basic_client.util.ByteBufferPool
-import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.net.InetSocketAddress
@@ -18,12 +18,15 @@ import java.nio.channels.Selector
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.coroutineContext
 import kotlin.system.exitProcess
 
 class BioUdpHandler(
     private var queue: BlockingQueue<Packet>,
     private var networkToDeviceQueue: BlockingQueue<ByteBuffer>,
-    private var vpnService: VpnService
+    private var vpnService: VpnService,
+    private val context: CoroutineContext
 ) {
     private var selector: Selector? = null
 
@@ -124,12 +127,12 @@ class BioUdpHandler(
         var channel: DatagramChannel? = null
     }
 
-    @DelicateCoroutinesApi
+
     suspend fun run() {
         try {
             val tunnelQueue: BlockingQueue<UdpTunnel> = ArrayBlockingQueue(100)
             selector = Selector.open()
-            GlobalScope.launch(Dispatchers.IO) {
+            CoroutineScope(context).launch {
                 runCatching {
                     UdpDownWorker(
                         selector,
@@ -191,7 +194,7 @@ class BioUdpHandler(
             }
         } catch (e: Exception) {
             Log.e(TAG, "error", e)
-            exitProcess(0)
+            coroutineContext.cancel()
         }
     }
 

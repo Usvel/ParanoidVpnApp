@@ -7,7 +7,9 @@ import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet.TCPHeader
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.TCBStatus
 import com.example.paranoid.ui.vpn.basic_client.util.ObjAttrUtil
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import java.net.InetSocketAddress
 import java.nio.ByteBuffer
 import java.nio.channels.SelectionKey
@@ -15,6 +17,7 @@ import java.nio.channels.Selector
 import java.nio.channels.ServerSocketChannel
 import java.nio.channels.SocketChannel
 import java.util.concurrent.BlockingQueue
+import kotlin.coroutines.coroutineContext
 
 class NioSingleThreadTcpHandler(
     private var queue: BlockingQueue<Packet>,
@@ -456,7 +459,7 @@ class NioSingleThreadTcpHandler(
     suspend fun run() {
         try {
             selector = Selector.open()
-            while (true) {
+            while (coroutineContext.isActive) {
                 handleReadFromVpn()
                 handleSockets()
                 tick += 1
@@ -464,6 +467,7 @@ class NioSingleThreadTcpHandler(
                 delay(100)
             }
         } catch (e: Exception) {
+            coroutineContext.cancel()
             Log.e(e.message, "", e)
         }
     }
