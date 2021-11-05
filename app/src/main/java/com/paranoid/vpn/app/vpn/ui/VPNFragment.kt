@@ -15,7 +15,7 @@ class VPNFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setUpBottomNav()
         // Just for test
         loadMainConfiguration()
 
@@ -97,7 +97,11 @@ class VPNFragment :
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonError))
     }
 
-    override fun initViewModule() {
+    override fun initViewModel() {
         // TODO
+    }
+
+    override fun initBottomNav() {
+        setUpBottomNav()
     }
 }

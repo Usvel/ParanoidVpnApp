@@ -2,6 +2,7 @@ package com.paranoid.vpn.app.common.ui.base
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -17,26 +18,70 @@ abstract class BaseActivity<VB : ViewBinding>(
 ) :
     AppCompatActivity() {
     protected lateinit var binding: VB
-    protected lateinit var navController: NavController
+    protected var navController: NavController? = null
+
+    private var bottomNav: BottomNavigationView? = null
+
+    private var menuMode = MENU_MODE_CLEAR
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = bindingInflater.invoke(layoutInflater, null, false)
         setContentView(binding.root)
-
         val navHostFragment: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment? ?: return
         navController = navHostFragment.navController
     }
 
-    protected fun setUpBottomNav(navController: NavController, bottomNav: BottomNavigationView) {
-        bottomNav.setupWithNavController(navController)
+    protected fun setBottomNav(bottomNav: BottomNavigationView) {
+        this.bottomNav = bottomNav
+    }
 
-        bottomNav.setOnItemSelectedListener { item ->
-            NavigationUI.onNavDestinationSelected(
-                item,
-                Navigation.findNavController(this, R.id.my_nav_host_fragment)
-            )
+    fun setUpBottomNav() {
+        bottomNav?.let {
+            if (menuMode != MENU_MODE_START) {
+                it.menu.clear()
+                //it.labelVisibilityMode = BottomNavigationView.LABEL_VISIBILITY_UNLABELED
+                menuInflater.inflate(R.menu.bottom_nav_menu, it.menu)
+                navController?.let { navController ->
+                    it.setupWithNavController(navController)
+                }
+                it.setOnItemSelectedListener { item ->
+                    Log.d(TAG, item.toString())
+                    NavigationUI.onNavDestinationSelected(
+                        item,
+                        Navigation.findNavController(this, R.id.my_nav_host_fragment)
+                    )
+                }
+                menuMode = MENU_MODE_START
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        navController = null
+        bottomNav = null
+        super.onDestroy()
+    }
+
+    fun setProceedBottomNav(event: () -> Unit) {
+        bottomNav?.let {
+            if (menuMode != MENU_MODE_NEXT) {
+                it.menu.clear()
+                //it.labelVisibilityMode = BottomNavigationView.LABEL_VISIBILITY_LABELED
+                menuInflater.inflate(R.menu.bottom_nav_proceed, it.menu)
+
+                it.setOnItemSelectedListener {
+                    when (it.itemId) {
+                        R.id.proceed -> {
+                            event()
+                            true
+                        }
+                        else -> false
+                    }
+                }
+                menuMode = MENU_MODE_NEXT
+            }
         }
     }
 
@@ -63,5 +108,12 @@ abstract class BaseActivity<VB : ViewBinding>(
             }
             show()
         }
+    }
+
+    companion object {
+        const val TAG = "BaseActivity"
+        private const val MENU_MODE_CLEAR = -1
+        private const val MENU_MODE_START = 0
+        private const val MENU_MODE_NEXT = 1
     }
 }

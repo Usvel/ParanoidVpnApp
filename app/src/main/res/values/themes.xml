@@ -24,11 +24,19 @@
         <item name="navBarIconColorNotChecked">@color/dark_nav_icon_not_selected</item>
         <item name="toolBarColorSecond">@color/second_background_transparent</item>
         <!-- Text -->
+        <item name="textDedicated">@color/black</item>
         <item name="textTransparent">@color/dark_text_transparent</item>
         <!-- VPN Button -->
         <item name="vpnButtonDisabled">@color/vpn_color_disabled</item>
         <item name="vpnButtonConnected">@color/vpn_color_connected</item>
         <item name="vpnButtonError">@color/vpn_color_error</item>
+        <!-- CardViewButton -->
+        <item name="cardViewBackground">@color/cardView_background</item>
+        <!-- ProfileFragment -->
+        <item name="textButtonProfile">@color/textButtonProfile</item>
+        <item name="cardViewText">@color/textCardView</item>
+        <!-- RegistrationFragment -->
+        <item name="boxStrokeColor">@color/black</item>
         <!-- Item color -->
         <item name="iconBackground">@color/icon_background_light</item>
     </style>

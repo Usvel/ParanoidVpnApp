@@ -37,4 +37,9 @@
     <!-- Icon Background -->
     <color name="icon_background_light">#C3E7FF</color>
     <color name="icon_background_dark">#004A77</color>
+    <!-- CardViewButton -->
+    <color name="cardView_background">#F0F0F0</color>
+    <!-- ProfileFragment -->
+    <color name="textButtonProfile">#7C7C7C</color>
+    <color name="textCardView">#757575</color>
 </resources>

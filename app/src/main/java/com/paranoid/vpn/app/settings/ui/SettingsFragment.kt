@@ -10,11 +10,15 @@ class SettingsFragment :
     BaseFragment<NavigationSettingsFragmentBinding>(NavigationSettingsFragmentBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setUpBottomNav()
         binding.testTextView.text = getString(R.string.this_is_settings)
     }
 
-    override fun initViewModule() {
+    override fun initViewModel() {
         // TODO
+    }
+
+    override fun initBottomNav() {
+        setUpBottomNav()
     }
 }

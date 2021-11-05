@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -44,7 +45,7 @@ android {
 }
 
 def retrofitVersion = "2.9.0"
-def loggingInterceptorVersion = '5.0.0-alpha.2'
+def loggingInterceptorVersion = "4.9.2"
 
 dependencies {
     // material3
@@ -70,7 +71,7 @@ dependencies {
     androidTestImplementation("androidx.navigation:navigation-testing:2.3.5")
 
     // Jetpack Compose Integration
-    implementation("androidx.navigation:navigation-compose:2.4.0-beta01")
+    implementation("androidx.navigation:navigation-compose:2.4.0-beta02")
 
     // Retrofit
     api("com.squareup.retrofit2:retrofit:$retrofitVersion")
@@ -79,4 +80,7 @@ dependencies {
     // HttpLoggingInterceptor
     // noinspection GradleDependency
     implementation("com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion")
+
+    // Firebase
+    implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
 }
