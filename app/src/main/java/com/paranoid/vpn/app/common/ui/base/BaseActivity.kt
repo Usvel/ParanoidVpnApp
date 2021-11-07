@@ -2,7 +2,6 @@ package com.paranoid.vpn.app.common.ui.base
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -12,17 +11,18 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.paranoid.vpn.app.R
+import com.paranoid.vpn.app.common.ui.base.component.ProgressDialog
 
 abstract class BaseActivity<VB : ViewBinding>(
     private val bindingInflater: Inflate<VB>
 ) :
     AppCompatActivity() {
+    private var progressDialog: ProgressDialog? = null
+
     protected lateinit var binding: VB
-    protected var navController: NavController? = null
+    private var navController: NavController? = null
 
     private var bottomNav: BottomNavigationView? = null
-
-    private var menuMode = MENU_MODE_CLEAR
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,28 +33,16 @@ abstract class BaseActivity<VB : ViewBinding>(
         navController = navHostFragment.navController
     }
 
-    protected fun setBottomNav(bottomNav: BottomNavigationView) {
+    fun setUpBottomNav(bottomNav: BottomNavigationView) {
         this.bottomNav = bottomNav
-    }
-
-    fun setUpBottomNav() {
-        bottomNav?.let {
-            if (menuMode != MENU_MODE_START) {
-                it.menu.clear()
-                //it.labelVisibilityMode = BottomNavigationView.LABEL_VISIBILITY_UNLABELED
-                menuInflater.inflate(R.menu.bottom_nav_menu, it.menu)
-                navController?.let { navController ->
-                    it.setupWithNavController(navController)
-                }
-                it.setOnItemSelectedListener { item ->
-                    Log.d(TAG, item.toString())
-                    NavigationUI.onNavDestinationSelected(
-                        item,
-                        Navigation.findNavController(this, R.id.my_nav_host_fragment)
-                    )
-                }
-                menuMode = MENU_MODE_START
-            }
+        navController?.let { navController ->
+            bottomNav.setupWithNavController(navController)
+        }
+        bottomNav.setOnItemSelectedListener { item ->
+            NavigationUI.onNavDestinationSelected(
+                item,
+                Navigation.findNavController(this, R.id.my_nav_host_fragment)
+            )
         }
     }
 
@@ -64,35 +52,14 @@ abstract class BaseActivity<VB : ViewBinding>(
         super.onDestroy()
     }
 
-    fun setProceedBottomNav(event: () -> Unit) {
-        bottomNav?.let {
-            if (menuMode != MENU_MODE_NEXT) {
-                it.menu.clear()
-                //it.labelVisibilityMode = BottomNavigationView.LABEL_VISIBILITY_LABELED
-                menuInflater.inflate(R.menu.bottom_nav_proceed, it.menu)
-
-                it.setOnItemSelectedListener {
-                    when (it.itemId) {
-                        R.id.proceed -> {
-                            event()
-                            true
-                        }
-                        else -> false
-                    }
-                }
-                menuMode = MENU_MODE_NEXT
-            }
-        }
-    }
-
-    protected fun showMessage(
+    fun showMessage(
         title: String?,
         message: String?,
-        posBtnTxt: String?,
-        negBtnTxt: String?,
-        posBtnAction: (() -> Unit)?,
-        negBtnAction: (() -> Unit)?,
-        cancellable: Boolean
+        posBtnTxt: String? = null,
+        negBtnTxt: String? = null,
+        posBtnAction: (() -> Unit)? = null,
+        negBtnAction: (() -> Unit)? = null,
+        cancellable: Boolean = true
     ) {
         AlertDialog.Builder(this).apply {
             setTitle(title)
@@ -110,10 +77,21 @@ abstract class BaseActivity<VB : ViewBinding>(
         }
     }
 
+    fun setProgressVisibility(isVisible: Boolean) {
+        if (isVisible) {
+            if (progressDialog == null) {
+                progressDialog = ProgressDialog()
+            } else {
+                progressDialog?.dismissAllowingStateLoss()
+            }
+            progressDialog?.show(supportFragmentManager, ProgressDialog.TAG)
+        } else {
+            progressDialog?.dismissAllowingStateLoss()
+            progressDialog = null
+        }
+    }
+
     companion object {
         const val TAG = "BaseActivity"
-        private const val MENU_MODE_CLEAR = -1
-        private const val MENU_MODE_START = 0
-        private const val MENU_MODE_NEXT = 1
     }
 }

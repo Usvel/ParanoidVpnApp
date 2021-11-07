@@ -50,7 +50,7 @@ def loggingInterceptorVersion = "4.9.2"
 dependencies {
     // material3
     implementation 'com.google.android.material:material:1.5.0-alpha05'
-    implementation("androidx.compose.compiler:compiler:1.1.0-beta01")
+    implementation("androidx.compose.compiler:compiler:1.1.0-beta02")
     implementation("androidx.compose.material3:material3:1.0.0-alpha01")
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -83,4 +83,7 @@ dependencies {
 
     // Firebase
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
+
+    // coroutines support for firebase operations
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.2'
 }

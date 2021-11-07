@@ -14,7 +14,7 @@
     <!-- Profile fragment -->
     <attr name="textProfile" format="reference|color" />
     <attr name="textButtonProfile" format="reference|color" />
-    <!-- Registration fragment -->
+    <!-- Authentication fragment -->
     <attr name="boxStrokeColor" format="reference|color" />
     <!-- CardViewButton -->
     <attr name="cardViewBackground" format="reference|color" />
@@ -25,5 +25,4 @@
     <attr name="vpnButtonError" format="reference|color" />
     <!-- Icon background -->
     <attr name="iconBackground" format="reference|color" />
-
 </resources>
