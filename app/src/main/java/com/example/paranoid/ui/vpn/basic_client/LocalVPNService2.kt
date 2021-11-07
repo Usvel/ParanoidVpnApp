@@ -31,12 +31,9 @@ class LocalVPNService2 : VpnService() {
     private var deviceToNetworkUDPQueue: BlockingQueue<Packet>? = null
     private var deviceToNetworkTCPQueue: BlockingQueue<Packet>? = null
     private var networkToDeviceQueue: BlockingQueue<ByteBuffer>? = null
-    private var bioUdpHandlerScope: Job? = null
-    private var nioSingleThreadTcpHandlerScope: Job? = null
-    private var VPNRunnableScope: Job? = null
-
-    private var _dispatcher: ExecutorCoroutineDispatcher? = null
-    private val dispatcher get() = _dispatcher!!
+    private var bioUdpHandlerJob: Job? = null
+    private var nioSingleThreadTcpHandlerJob: Job? = null
+    private var VPNRunnableJob: Job? = null
 
     private val context = Dispatchers.IO
 
@@ -45,14 +42,11 @@ class LocalVPNService2 : VpnService() {
         super.onCreate()
         setupVPN()
 
-        _dispatcher = Executors.newFixedThreadPool(10).asCoroutineDispatcher()
-
         deviceToNetworkUDPQueue = ArrayBlockingQueue(1000)
         deviceToNetworkTCPQueue = ArrayBlockingQueue(1000)
         networkToDeviceQueue = ArrayBlockingQueue(1000)
 
-
-        bioUdpHandlerScope = CoroutineScope(context).launch {
+        bioUdpHandlerJob = CoroutineScope(context).launch {
             BioUdpHandler(
                 deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
                 networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
@@ -60,17 +54,18 @@ class LocalVPNService2 : VpnService() {
                 context
             ).run()
         }
-        bioUdpHandlerScope!!.start()
+        bioUdpHandlerJob!!.start()
 
-        nioSingleThreadTcpHandlerScope = CoroutineScope(context).launch {
+        nioSingleThreadTcpHandlerJob = CoroutineScope(context).launch {
             NioSingleThreadTcpHandler(
                 deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
                 networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
-                this@LocalVPNService2).run()
+                this@LocalVPNService2
+            ).run()
         }
-        nioSingleThreadTcpHandlerScope!!.start()
+        nioSingleThreadTcpHandlerJob!!.start()
 
-        VPNRunnableScope = CoroutineScope(context).launch {
+        VPNRunnableJob = CoroutineScope(context).launch {
             VPNRunnable(
                 vpnInterface!!.fileDescriptor,
                 deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
@@ -78,7 +73,7 @@ class LocalVPNService2 : VpnService() {
                 networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>
             ).run()
         }
-        VPNRunnableScope!!.start()
+        VPNRunnableJob!!.start()
     }
 
     private fun setupVPN() {
@@ -95,7 +90,6 @@ class LocalVPNService2 : VpnService() {
             }
         } catch (e: Exception) {
             Log.e(TAG, "error", e)
-            exitProcess(0)
         }
     }
 
@@ -140,21 +134,15 @@ class LocalVPNService2 : VpnService() {
     }
 
     private suspend fun cleanup() {
-        bioUdpHandlerScope?.cancelAndJoin()
-        nioSingleThreadTcpHandlerScope?.cancel()
-        VPNRunnableScope?.cancel()
+        bioUdpHandlerJob?.cancelAndJoin()
+        nioSingleThreadTcpHandlerJob?.cancel()
+        VPNRunnableJob?.cancel()
         context.cancel()
         CoroutineScope(context).coroutineContext.cancelChildren()
         deviceToNetworkTCPQueue = null
         deviceToNetworkUDPQueue = null
         networkToDeviceQueue = null
         closeResources(vpnInterface!!)
-    }
-
-    override fun onDestroy() {
-        Log.d(TAG, "onDestroy")
-        super.onDestroy()
-        //cleanup()
     }
 
     private class VPNRunnable(

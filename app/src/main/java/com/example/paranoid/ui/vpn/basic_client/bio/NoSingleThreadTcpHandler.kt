@@ -15,6 +15,7 @@ import java.nio.channels.Selector
 import java.nio.channels.ServerSocketChannel
 import java.nio.channels.SocketChannel
 import java.util.concurrent.BlockingQueue
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.coroutines.coroutineContext
 
 class NioSingleThreadTcpHandler(
@@ -24,7 +25,7 @@ class NioSingleThreadTcpHandler(
 ) {
     private val objAttrUtil = ObjAttrUtil()
     private var selector: Selector? = null
-    private val pipes: MutableMap<String?, TcpPipe> = HashMap()
+    private val pipes: ConcurrentHashMap<String?, TcpPipe> = ConcurrentHashMap()
 
     class TcpPipe {
         var mySequenceNum: Long = 0
@@ -439,6 +440,13 @@ class NioSingleThreadTcpHandler(
         }
     }
 
+    private fun closeResources() {
+        pipes.forEach {
+            cleanPipe(it.value)
+        }
+        selector?.close()
+    }
+
     private var tick: Long = 0
     suspend fun run() {
         try {
@@ -452,8 +460,10 @@ class NioSingleThreadTcpHandler(
                 delay(100)
             }
         } catch (e: Exception) {
+            e.printStackTrace()
+            Log.v(TAG, "closing resources in NioTcpHandler")
+            closeResources()
             coroutineContext.cancel()
-            Log.e(e.message, "", e)
         }
     }
 
