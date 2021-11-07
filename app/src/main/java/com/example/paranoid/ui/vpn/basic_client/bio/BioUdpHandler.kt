@@ -5,10 +5,7 @@ import com.example.paranoid.ui.vpn.basic_client.config.Config
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.IpUtil
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
 import com.example.paranoid.ui.vpn.basic_client.util.ByteBufferPool
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.nio.ByteBuffer
@@ -19,7 +16,6 @@ import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.coroutineContext
 import kotlin.system.exitProcess
 
 class BioUdpHandler(
@@ -35,7 +31,7 @@ class BioUdpHandler(
         var networkToDeviceQueue: BlockingQueue<ByteBuffer>,
         var tunnelQueue: BlockingQueue<UdpTunnel>
     ) {
-        @Throws(IOException::class)
+
         private fun sendUdpPack(
             tunnel: UdpTunnel,
             source: InetSocketAddress,
@@ -63,7 +59,9 @@ class BioUdpHandler(
         suspend fun run() {
             try {
                 while (true) {
-                    val readyChannels = selector!!.select()
+                    val readyChannels = withContext(Dispatchers.IO) {
+                        selector!!.select()
+                    }
                     while (true) {
                         val tunnel = tunnelQueue.poll()
                         if (tunnel == null) {
@@ -92,6 +90,9 @@ class BioUdpHandler(
                             try {
                                 val inputChannel = key.channel() as DatagramChannel
                                 val receiveBuffer = ByteBufferPool.acquire()
+                                withContext(Dispatchers.IO) {
+                                    inputChannel.read(receiveBuffer)
+                                }
                                 receiveBuffer.flip()
                                 val data = ByteArray(receiveBuffer.remaining())
                                 receiveBuffer[data]
@@ -129,20 +130,24 @@ class BioUdpHandler(
 
 
     suspend fun run() {
+        var job: Job? = null
         try {
             val tunnelQueue: BlockingQueue<UdpTunnel> = ArrayBlockingQueue(100)
-            selector = Selector.open()
-            CoroutineScope(context).launch {
-                runCatching {
-                    UdpDownWorker(
-                        selector,
-                        networkToDeviceQueue,
-                        tunnelQueue
-                    ).run()
-                }
+            selector = withContext(Dispatchers.IO) {
+                Selector.open()
             }
+            job = CoroutineScope(context).launch {
+                UdpDownWorker(
+                    selector,
+                    networkToDeviceQueue,
+                    tunnelQueue
+                ).run()
+            }
+            job.start()
             while (true) {
-                val packet = queue.take()
+                val packet = withContext(Dispatchers.IO) {
+                    queue.take()
+                }
                 val destinationAddress = packet.ip4Header.destinationAddress
                 val header = packet.udpHeader
 
@@ -152,11 +157,20 @@ class BioUdpHandler(
                 val ipAndPort =
                     destinationAddress.hostAddress + ":" + destinationPort + ":" + sourcePort
                 if (!udpSockets.containsKey(ipAndPort)) {
-                    val outputChannel = DatagramChannel.open()
+                    val outputChannel = withContext(Dispatchers.IO) {
+                        DatagramChannel.open()
+                    }
                     vpnService.protect(outputChannel.socket())
-                    outputChannel.socket().bind(null)
-                    outputChannel.connect(InetSocketAddress(destinationAddress, destinationPort))
-                    outputChannel.configureBlocking(false)
+                    withContext(Dispatchers.IO) {
+                        outputChannel.socket().bind(null)
+                        outputChannel.connect(
+                            InetSocketAddress(
+                                destinationAddress,
+                                destinationPort
+                            )
+                        )
+                        outputChannel.configureBlocking(false)
+                    }
                     val tunnel = UdpTunnel()
                     tunnel.local =
                         InetSocketAddress(packet.ip4Header.sourceAddress, header.sourcePort)
@@ -173,7 +187,9 @@ class BioUdpHandler(
                 val buffer = packet.backingBuffer
                 try {
                     while (packet.backingBuffer.hasRemaining()) {
-                        val w = outputChannel!!.write(buffer)
+                        val w = withContext(Dispatchers.IO) {
+                            outputChannel!!.write(buffer)
+                        }
                         if (Config.logRW) {
                             Log.d(
                                 TAG,
@@ -188,13 +204,16 @@ class BioUdpHandler(
                     }
                 } catch (e: IOException) {
                     Log.e(TAG, "udp write error", e)
-                    outputChannel!!.close()
+                    withContext(Dispatchers.IO) {
+                        outputChannel!!.close()
+                    }
                     udpSockets.remove(ipAndPort)
                 }
             }
         } catch (e: Exception) {
             Log.e(TAG, "error", e)
-            coroutineContext.cancel()
+            job?.cancelAndJoin()
+            exitProcess(0)
         }
     }
 

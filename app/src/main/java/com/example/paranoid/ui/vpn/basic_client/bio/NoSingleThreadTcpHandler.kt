@@ -7,9 +7,7 @@ import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet.TCPHeader
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.TCBStatus
 import com.example.paranoid.ui.vpn.basic_client.util.ObjAttrUtil
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
+import kotlinx.coroutines.*
 import java.net.InetSocketAddress
 import java.nio.ByteBuffer
 import java.nio.channels.SelectionKey
@@ -53,7 +51,6 @@ class NioSingleThreadTcpHandler(
         }
     }
 
-    @Throws(Exception::class)
     private fun initPipe(packet: Packet): TcpPipe {
         val pipe = TcpPipe()
         pipe.sourceAddress =
@@ -147,7 +144,6 @@ class NioSingleThreadTcpHandler(
         pipe.tcbStatus = TCBStatus.CLOSE_WAIT
     }
 
-    @Throws(Exception::class)
     private fun handleAck(packet: Packet, pipe: TcpPipe?) {
         if (pipe!!.tcbStatus == TCBStatus.SYN_RECEIVED) {
             pipe.tcbStatus = TCBStatus.ESTABLISHED
@@ -186,7 +182,6 @@ class NioSingleThreadTcpHandler(
         return objAttrUtil.getAttr(channel, "key") as SelectionKey
     }
 
-    @Throws(Exception::class)
     private fun tryFlushWrite(pipe: TcpPipe?, channel: SocketChannel?): Boolean {
         val buffer = pipe!!.remoteOutBuffer
         if (pipe.remote!!.socket().isOutputShutdown && buffer.remaining() != 0) {
@@ -231,7 +226,6 @@ class NioSingleThreadTcpHandler(
         return true
     }
 
-    @Throws(Exception::class)
     private fun closeUpStream(pipe: TcpPipe?) {
         Log.i(TAG, String.format("closeUpStream %d", pipe!!.tunnelId))
         try {
@@ -250,7 +244,6 @@ class NioSingleThreadTcpHandler(
         }
     }
 
-    @Throws(Exception::class)
     private fun handleFin(packet: Packet, pipe: TcpPipe?) {
         Log.i(TAG, String.format("handleFin %d", pipe!!.tunnelId))
         pipe.myAcknowledgementNum = packet.tcpHeader.sequenceNumber + 1
@@ -262,7 +255,6 @@ class NioSingleThreadTcpHandler(
         Log.i(TAG, String.format("handleFin %s %s", pipe.destinationAddress, pipe.tcbStatus))
     }
 
-    @Throws(Exception::class)
     private fun handlePacket(pipe: TcpPipe?, packet: Packet) {
         var end = false
         val tcpHeader = packet.tcpHeader
@@ -283,7 +275,6 @@ class NioSingleThreadTcpHandler(
         }
     }
 
-    @Throws(Exception::class)
     private fun handleReadFromVpn() {
         while (true) {
             val currentPacket = queue.poll() ?: return
@@ -307,12 +298,10 @@ class NioSingleThreadTcpHandler(
         }
     }
 
-    @Throws(Exception::class)
     private fun doAccept(serverChannel: ServerSocketChannel) {
         throw RuntimeException("")
     }
 
-    @Throws(Exception::class)
     private fun doRead(channel: SocketChannel) {
         val buffer = ByteBuffer.allocate(4 * 1024)
         var quitType = ""
@@ -353,7 +342,6 @@ class NioSingleThreadTcpHandler(
         }
     }
 
-    @Throws(Exception::class)
     private fun closeRst(pipe: TcpPipe) {
         Log.i(TAG, String.format("closeRst %d", pipe.tunnelId))
         cleanPipe(pipe)
@@ -362,7 +350,6 @@ class NioSingleThreadTcpHandler(
         pipe.downActive = false
     }
 
-    @Throws(Exception::class)
     private fun closeDownStream(pipe: TcpPipe) {
         Log.i(TAG, String.format("closeDownStream %d", pipe.tunnelId))
         if (pipe.remote != null && pipe.remote!!.isConnected) {
@@ -385,7 +372,6 @@ class NioSingleThreadTcpHandler(
         return !tunnel!!.upActive && !tunnel.downActive
     }
 
-    @Throws(Exception::class)
     private fun doConnect(socketChannel: SocketChannel) {
         Log.i(TAG, String.format("tick %s", tick))
         //
@@ -409,7 +395,6 @@ class NioSingleThreadTcpHandler(
         }
     }
 
-    @Throws(Exception::class)
     private fun doWrite(socketChannel: SocketChannel) {
         Log.i(TAG, String.format("tick %s", tick))
         val pipe = objAttrUtil.getAttr(socketChannel, "pipe") as TcpPipe
@@ -420,7 +405,6 @@ class NioSingleThreadTcpHandler(
         }
     }
 
-    @Throws(Exception::class)
     private fun handleSockets() {
         while (selector!!.selectNow() > 0) {
             val it: MutableIterator<*> = selector!!.selectedKeys().iterator()
@@ -458,12 +442,13 @@ class NioSingleThreadTcpHandler(
     private var tick: Long = 0
     suspend fun run() {
         try {
-            selector = Selector.open()
+            withContext(Dispatchers.IO) {
+                selector = Selector.open()
+            }
             while (coroutineContext.isActive) {
                 handleReadFromVpn()
                 handleSockets()
                 tick += 1
-                // Thread.sleep(1)
                 delay(100)
             }
         } catch (e: Exception) {

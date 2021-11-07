@@ -22,8 +22,8 @@ import java.nio.channels.FileChannel
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.Executors
-import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.coroutineContext
+import kotlin.system.exitProcess
 
 class LocalVPNService2 : VpnService() {
     private var vpnInterface: ParcelFileDescriptor? = null
@@ -31,11 +31,14 @@ class LocalVPNService2 : VpnService() {
     private var deviceToNetworkUDPQueue: BlockingQueue<Packet>? = null
     private var deviceToNetworkTCPQueue: BlockingQueue<Packet>? = null
     private var networkToDeviceQueue: BlockingQueue<ByteBuffer>? = null
+    private var bioUdpHandlerScope: Job? = null
+    private var nioSingleThreadTcpHandlerScope: Job? = null
+    private var VPNRunnableScope: Job? = null
 
     private var _dispatcher: ExecutorCoroutineDispatcher? = null
     private val dispatcher get() = _dispatcher!!
 
-    private val context = Dispatchers.IO + SupervisorJob()
+    private val context = Dispatchers.IO
 
     override fun onCreate() {
         Log.d(TAG, "onCreate")
@@ -49,7 +52,7 @@ class LocalVPNService2 : VpnService() {
         networkToDeviceQueue = ArrayBlockingQueue(1000)
 
 
-        CoroutineScope(context).launch {
+        bioUdpHandlerScope = CoroutineScope(context).launch {
             BioUdpHandler(
                 deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
                 networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
@@ -57,15 +60,17 @@ class LocalVPNService2 : VpnService() {
                 context
             ).run()
         }
+        bioUdpHandlerScope!!.start()
 
-        CoroutineScope(context).launch {
+        nioSingleThreadTcpHandlerScope = CoroutineScope(context).launch {
             NioSingleThreadTcpHandler(
                 deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
                 networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
                 this@LocalVPNService2).run()
         }
+        nioSingleThreadTcpHandlerScope!!.start()
 
-        CoroutineScope(context).launch {
+        VPNRunnableScope = CoroutineScope(context).launch {
             VPNRunnable(
                 vpnInterface!!.fileDescriptor,
                 deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
@@ -73,6 +78,7 @@ class LocalVPNService2 : VpnService() {
                 networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>
             ).run()
         }
+        VPNRunnableScope!!.start()
     }
 
     private fun setupVPN() {
@@ -89,7 +95,7 @@ class LocalVPNService2 : VpnService() {
             }
         } catch (e: Exception) {
             Log.e(TAG, "error", e)
-            System.exit(0)
+            exitProcess(0)
         }
     }
 
@@ -107,7 +113,9 @@ class LocalVPNService2 : VpnService() {
                 startForeground(1, notification)
             }
             "stop" -> {
-                stopVPN()
+                CoroutineScope(context).launch {
+                    stopVPN()
+                }
             }
         }
         return START_STICKY
@@ -125,14 +133,18 @@ class LocalVPNService2 : VpnService() {
         manager.createNotificationChannel(notificationChannel)
     }
 
-    private fun stopVPN() {
+    private suspend fun stopVPN() {
         stopForeground(true)
         stopSelf()
         cleanup()
     }
 
-    private fun cleanup() {
+    private suspend fun cleanup() {
+        bioUdpHandlerScope?.cancelAndJoin()
+        nioSingleThreadTcpHandlerScope?.cancel()
+        VPNRunnableScope?.cancel()
         context.cancel()
+        CoroutineScope(context).coroutineContext.cancelChildren()
         deviceToNetworkTCPQueue = null
         deviceToNetworkUDPQueue = null
         networkToDeviceQueue = null
@@ -142,7 +154,7 @@ class LocalVPNService2 : VpnService() {
     override fun onDestroy() {
         Log.d(TAG, "onDestroy")
         super.onDestroy()
-        cleanup()
+        //cleanup()
     }
 
     private class VPNRunnable(
@@ -185,12 +197,13 @@ class LocalVPNService2 : VpnService() {
             val vpnOutput = FileOutputStream(
                 vpnFileDescriptor
             ).channel
-            CoroutineScope(coroutineContext).launch{
+            val job = CoroutineScope(coroutineContext).launch {
                 WriteVpnThread(
                     vpnOutput,
                     networkToDeviceQueue
                 ).run()
             }
+            job.start()
             try {
                 var bufferToNetwork: ByteBuffer?
                 while (coroutineContext.isActive) {
@@ -200,24 +213,28 @@ class LocalVPNService2 : VpnService() {
                     if (readBytes > 0) {
                         bufferToNetwork.flip()
                         val packet = Packet(bufferToNetwork)
-                        if (packet.isUDP()) {
-                            if (Config.logRW) {
-                                Log.i(TAG, "read udp$readBytes")
+                        when {
+                            packet.isUDP() -> {
+                                if (Config.logRW) {
+                                    Log.i(TAG, "read udp$readBytes")
+                                }
+                                deviceToNetworkUDPQueue.offer(packet)
                             }
-                            deviceToNetworkUDPQueue.offer(packet)
-                        } else if (packet.isTCP()) {
-                            if (Config.logRW) {
-                                Log.i(TAG, "read tcp $readBytes")
+                            packet.isTCP() -> {
+                                if (Config.logRW) {
+                                    Log.i(TAG, "read tcp $readBytes")
+                                }
+                                deviceToNetworkTCPQueue.offer(packet)
                             }
-                            deviceToNetworkTCPQueue.offer(packet)
-                        } else {
-                            Log.w(
-                                TAG,
-                                String.format(
-                                    "Unknown packet protocol type %d",
-                                    packet.ip4Header.protocolNum
+                            else -> {
+                                Log.w(
+                                    TAG,
+                                    String.format(
+                                        "Unknown packet protocol type %d",
+                                        packet.ip4Header.protocolNum
+                                    )
                                 )
-                            )
+                            }
                         }
                     } else {
                         try {
@@ -233,6 +250,7 @@ class LocalVPNService2 : VpnService() {
             } finally {
                 closeResources(vpnInput, vpnOutput)
             }
+            job.cancelAndJoin()
         }
     }
 
