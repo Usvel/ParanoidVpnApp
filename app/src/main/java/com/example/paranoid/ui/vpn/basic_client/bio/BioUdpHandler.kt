@@ -16,7 +16,6 @@ import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.CoroutineContext
-import kotlin.system.exitProcess
 
 class BioUdpHandler(
     private var queue: BlockingQueue<Packet>,
@@ -109,7 +108,6 @@ class BioUdpHandler(
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "error", e)
-                exitProcess(0)
             } finally {
                 Log.d(TAG, "BioUdpHandler quit")
             }
@@ -213,7 +211,6 @@ class BioUdpHandler(
         } catch (e: Exception) {
             Log.e(TAG, "error", e)
             job?.cancelAndJoin()
-            exitProcess(0)
         }
     }
 
