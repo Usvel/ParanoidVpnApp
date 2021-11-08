@@ -40,7 +40,6 @@ class VPNFragment :
 
     private var textUpdater: Job? = null
 
-    //TODO: registerNetworkCallback on MainActivity
     private fun getConnectivityManager() =
         requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
@@ -62,18 +61,17 @@ class VPNFragment :
             when (vpnStateOn) {
                 true -> {
                     vpnButtonDisable()
-                    changeVpnState()
                 }
                 false -> {
                     vpnButtonConnected()
-                    if (isConnected)
-                        changeVpnState()
                 }
             }
+            if (isConnected)
+                changeVpnState()
         }
         textUpdater = lifecycleScope.launch(Dispatchers.Default) {
             while (true) {
-                if (vpnStateOn)
+                if (vpnStateOn && isConnected)
                     updateText()
                 delay(500)
             }
@@ -143,8 +141,6 @@ class VPNFragment :
 
                 Toast.makeText(requireContext(), "Connectivity is on!", Toast.LENGTH_SHORT)
                     .show()
-                if (vpnStateOn)
-                    startVpn()
                 isConnected = true
             }
 
@@ -153,8 +149,12 @@ class VPNFragment :
 
                 Toast.makeText(requireContext(), "Connectivity is off!", Toast.LENGTH_SHORT)
                     .show()
-                if (vpnStateOn)
-                    stopVpn()
+                if (vpnStateOn) {
+                    changeVpnState()
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        vpnButtonDisable()
+                    }
+                }
                 isConnected = false
             }
         }
