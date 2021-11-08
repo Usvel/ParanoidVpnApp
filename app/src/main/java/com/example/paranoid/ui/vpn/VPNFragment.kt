@@ -10,6 +10,7 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startForegroundService
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.paranoid.R
 import com.example.paranoid.databinding.NavigationVpnFragmentBinding
@@ -19,6 +20,10 @@ import com.example.paranoid.utils.Utils
 import kotlinx.coroutines.*
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.properties.Delegates
+import androidx.core.content.ContextCompat.getSystemService
+
+import android.app.ActivityManager
+import androidx.core.content.ContextCompat
 
 
 class VPNFragment :
@@ -35,6 +40,7 @@ class VPNFragment :
 
     private var textUpdater: Job? = null
 
+    //TODO: registerNetworkCallback on MainActivity
     private fun getConnectivityManager() =
         requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
@@ -54,8 +60,15 @@ class VPNFragment :
 
         binding.vpnButtonBackground.setOnClickListener {
             when (vpnStateOn) {
-                true -> vpnButtonDisable()
-                false -> vpnButtonConnected()
+                true -> {
+                    vpnButtonDisable()
+                    changeVpnState()
+                }
+                false -> {
+                    vpnButtonConnected()
+                    if (isConnected)
+                        changeVpnState()
+                }
             }
         }
         textUpdater = lifecycleScope.launch(Dispatchers.Default) {
@@ -69,6 +82,22 @@ class VPNFragment :
         isConnected = isOnline()
 
         getConnectivityManager().registerNetworkCallback(networkReq, networkCallback)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean("vpnStateOn", vpnStateOn)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        if (savedInstanceState != null) {
+            vpnStateOn = savedInstanceState.getBoolean("vpnStateOn")
+            when (vpnStateOn) {
+                true -> vpnButtonConnected()
+                false ->vpnButtonDisable()
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -153,16 +182,25 @@ class VPNFragment :
         binding.connectionStatus.visibility = View.VISIBLE
         //binding.isConnected.text = getString(R.string.connected)
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonConnected))
-        vpnStateOn = true
-        startVpn()
+    }
+
+    private fun changeVpnState() {
+        when (vpnStateOn) {
+            true -> {
+                vpnStateOn = false
+                stopVpn()
+            }
+            false -> {
+                vpnStateOn = true
+                startVpn()
+            }
+        }
     }
 
     private fun vpnButtonDisable() {
         binding.connectionStatus.visibility = View.GONE
         binding.isConnected.text = getString(R.string.not_connected)
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonDisabled))
-        vpnStateOn = false
-        stopVpn()
     }
 
     private fun vpnButtonError() {

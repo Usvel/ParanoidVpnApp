@@ -93,10 +93,11 @@ class LocalVPNService2 : VpnService() {
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         Log.d(TAG, "onStartCommand")
-        createNotificationChannel()
         when (intent.action) {
             "start" -> {
-                pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+                createNotificationChannel()
+                pendingIntent =
+                    PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
                 val notification = NotificationCompat.Builder(this, "Channel_id1")
                     .setContentTitle("Example")
                     .setContentText("App is running")
