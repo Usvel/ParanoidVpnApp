@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvAuthenticationHello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/authentication_fragment_content_margin_horizontal"
+        android:layout_marginTop="@dimen/authentication_fragment_content_margin_top"
+        android:text="@string/authentication_fragment_hi"
+        android:textColor="?attr/textTransparent"
+        android:textSize="@dimen/authentication_fragment_hello_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAuthenticationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name_user"
+        android:textColor="?attr/textDedicated"
+        android:textSize="@dimen/authentication_fragment_name_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/tvAuthenticationHello"
+        app:layout_constraintTop_toBottomOf="@id/tvAuthenticationHello" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvAuthenticationImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/authentication_fragment_content_margin_top"
+        android:layout_marginEnd="@dimen/authentication_fragment_content_margin_horizontal"
+        android:backgroundTint="?attr/backgroundVioletLight"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        app:cardCornerRadius="@dimen/big_corner_radius"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/authentication_fragment_image_size"
+            android:layout_height="@dimen/authentication_fragment_image_size"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/authentication_fragment_about_image"
+            android:foregroundGravity="center_vertical"
+            android:padding="@dimen/icon_inner_padding"
+            android:src="@drawable/ic_image_profile"
+            app:tint="?attr/toolBarColor" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvAuthenticationEntry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/authentication_fragment_entry_margin"
+        android:textColor="?attr/textDedicated"
+        android:textSize="@dimen/authentication_fragment_entry_size"
+        app:layout_constraintBottom_toTopOf="@id/tilAuthenticationName"
+        app:layout_constraintStart_toStartOf="@id/tilAuthenticationName"
+        app:layout_constraintTop_toBottomOf="@id/cvAuthenticationImage"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Registration/Login" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilAuthenticationName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/authentication_fragment_card_view_bottom_margin"
+        app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+        app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+        app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+        app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+        app:boxStrokeColor="?attr/textDedicated"
+        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconMode="clear_text"
+        app:endIconTint="?attr/toolBarColor"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toTopOf="@id/tilAuthenticationPassword"
+        app:layout_constraintEnd_toEndOf="@id/cvAuthenticationImage"
+        app:layout_constraintStart_toStartOf="@id/tvAuthenticationName"
+        app:layout_constraintTop_toBottomOf="@id/tvAuthenticationEntry"
+        app:startIconDrawable="@drawable/ic_user"
+        app:startIconTint="?attr/textTransparent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etAuthenticationName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="@string/authentication_fragment_hint_login"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+            android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+            android:singleLine="true"
+            android:textColorHint="?attr/textTransparent"
+            android:textSize="@dimen/authentication_fragment_edit_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilAuthenticationPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/authentication_fragment_edit_text_margin"
+        app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+        app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+        app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+        app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+        app:boxStrokeColor="?attr/textDedicated"
+        app:endIconDrawable="@drawable/ic_eye"
+        app:endIconMode="password_toggle"
+        app:endIconTint="?attr/toolBarColor"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toTopOf="@id/bAuthenticationForgot"
+        app:layout_constraintEnd_toEndOf="@id/tilAuthenticationName"
+        app:layout_constraintStart_toStartOf="@id/tilAuthenticationName"
+        app:layout_constraintTop_toBottomOf="@id/tilAuthenticationName"
+        app:startIconDrawable="@drawable/ic_lock"
+        app:startIconTint="?attr/textTransparent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etAuthenticationPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="@string/authentication_fragment_hint_password"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+            android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+            android:singleLine="true"
+            android:textColorHint="?attr/textTransparent"
+            android:textSize="@dimen/authentication_fragment_edit_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/bAuthenticationForgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/authentication_fragment_forgot"
+        android:textAllCaps="false"
+        android:textColor="?attr/textButtonProfile"
+        android:textSize="@dimen/authentication_fragment_forgot_text_size"
+        app:layout_constraintBottom_toTopOf="@id/cvAuthenticationGoogle"
+        app:layout_constraintEnd_toEndOf="@+id/tilAuthenticationPassword"
+        app:layout_constraintTop_toBottomOf="@id/tilAuthenticationPassword" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvAuthenticationGoogle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/authentication_fragment_card_view_margin"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="?attr/cardViewBackground"
+        app:cardCornerRadius="@dimen/authentication_fragment_card_view_radius"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@id/cvProfileRegistration"
+        app:layout_constraintEnd_toEndOf="@id/tilAuthenticationPassword"
+        app:layout_constraintStart_toStartOf="@id/tilAuthenticationPassword">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/authentication_fragment_card_view_image_google_margin_start"
+                android:layout_marginTop="@dimen/authentication_fragment_card_view_image_google_margin_top"
+                android:layout_marginBottom="@dimen/authentication_fragment_card_view_image_google_margin_bottom"
+                android:contentDescription="@string/authentication_fragment_about_google"
+                android:src="@drawable/ic_google" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/authentication_fragment_card_view_text_google_margin_start"
+                android:layout_marginTop="@dimen/authentication_fragment_card_view_text_margin_vertical"
+                android:layout_marginBottom="@dimen/authentication_fragment_card_view_text_margin_vertical"
+                android:text="@string/authentication_fragment_google"
+                android:textColor="?attr/cardViewText"
+                android:textSize="@dimen/authentication_fragment_card_view_text_size" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvProfileRegistration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/authentication_fragment_card_view_content_margin_bottom"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="?attr/cardViewBackground"
+        app:cardCornerRadius="@dimen/authentication_fragment_card_view_radius"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tilAuthenticationPassword"
+        app:layout_constraintStart_toStartOf="@id/tilAuthenticationPassword">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/authentication_fragment_card_view_image_vk_margin"
+                android:layout_marginTop="@dimen/authentication_fragment_card_view_image_vk_margin"
+                android:layout_marginBottom="@dimen/authentication_fragment_card_view_image_vk_margin"
+                android:contentDescription="@string/authentication_fragment_about_vk"
+                android:src="@drawable/ic_vk" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/authentication_fragment_card_view_text_vk_margin_start"
+                android:layout_marginTop="@dimen/authentication_fragment_card_view_text_margin_vertical"
+                android:layout_marginBottom="@dimen/authentication_fragment_card_view_text_margin_vertical"
+                android:text="@string/authentication_fragment_vk"
+                android:textColor="?attr/cardViewText"
+                android:textSize="@dimen/authentication_fragment_card_view_text_size" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

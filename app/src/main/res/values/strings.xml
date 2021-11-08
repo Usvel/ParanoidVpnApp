@@ -20,4 +20,41 @@
     <string name="help_info">Help info</string>
     <string name="share_configuration">Share configuration</string>
     <string name="scan_qr_code">Scan QR code</string>
+    <string name="proceed">Proceed</string>
+    <string name="name_user">Visitor</string>
+    <string name="please_wait">Пожалуйста, подождите</string>
+    <!--  AppActivity  -->
+    <string name="app_activity_bottom_nav_proceed">Proceed</string>
+    <!--  ProfileFragment  -->
+    <string name="profile_fragment_hi">Hello,</string>
+    <string name="profile_fragment_email">Email</string>
+    <string name="profile_fragment_registration">Register now</string>
+    <string name="profile_fragment_entry">Login</string>
+    <string name="profile_fragment_statistics">Usage statistics</string>
+    <string name="profile_fragment_linked">Linked accounts</string>
+    <string name="profile_fragment_about_change">Change profile</string>
+    <string name="profile_fragment_about_delete">Delete profile</string>
+    <string name="profile_fragment_about_image">Image profile</string>
+    <string name="profile_fragment_about_google">Link google account</string>
+    <string name="profile_fragment_about_vk">Link vk account</string>
+    <string name="profile_fragment_about_login">Registration account</string>
+    <string name="profile_fragment_about_registation">Registration account</string>
+    <string name="profile_fragment_about_statistics">Statistics account</string>
+    <!--  AuthenticationFragment  -->
+    <string name="authentication_fragment_entry_registration">Registration</string>
+    <string name="authentication_fragment_entry_login">Login</string>
+    <string name="authentication_fragment_hi">Hello,</string>
+    <string name="authentication_fragment_google">Login with Google</string>
+    <string name="authentication_fragment_vk">Login with Vk</string>
+    <string name="authentication_fragment_hint_login">User Name</string>
+    <string name="authentication_fragment_hint_password">Password</string>
+    <string name="authentication_fragment_forgot">Forgot password</string>
+    <string name="authentication_fragment_about_image">Image profile</string>
+    <string name="authentication_fragment_about_google">Link google account</string>
+    <string name="authentication_fragment_about_vk">Link vk account</string>
+    <string name="authentication_fragment_invalid_email">Invalid email</string>
+    <string name="authentication_fragment_invalid_password">Invalid password</string>
+    <string name="authentication_fragment_about_password">Your password must be 8–24 characters long and contain a combination of letters and numbers</string>
+    <!-- Firebase -->
+    <string name="firebase_error">Error Firebase</string>
 </resources>

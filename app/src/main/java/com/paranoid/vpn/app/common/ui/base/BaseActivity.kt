@@ -11,27 +11,33 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.paranoid.vpn.app.R
+import com.paranoid.vpn.app.common.ui.base.component.ProgressDialog
 
 abstract class BaseActivity<VB : ViewBinding>(
     private val bindingInflater: Inflate<VB>
 ) :
     AppCompatActivity() {
+    private var progressDialog: ProgressDialog? = null
+
     protected lateinit var binding: VB
-    protected lateinit var navController: NavController
+    private var navController: NavController? = null
+
+    private var bottomNav: BottomNavigationView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = bindingInflater.invoke(layoutInflater, null, false)
         setContentView(binding.root)
-
         val navHostFragment: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment? ?: return
         navController = navHostFragment.navController
     }
 
-    protected fun setUpBottomNav(navController: NavController, bottomNav: BottomNavigationView) {
-        bottomNav.setupWithNavController(navController)
-
+    fun setUpBottomNav(bottomNav: BottomNavigationView) {
+        this.bottomNav = bottomNav
+        navController?.let { navController ->
+            bottomNav.setupWithNavController(navController)
+        }
         bottomNav.setOnItemSelectedListener { item ->
             NavigationUI.onNavDestinationSelected(
                 item,
@@ -40,14 +46,20 @@ abstract class BaseActivity<VB : ViewBinding>(
         }
     }
 
-    protected fun showMessage(
+    override fun onDestroy() {
+        navController = null
+        bottomNav = null
+        super.onDestroy()
+    }
+
+    fun showMessage(
         title: String?,
         message: String?,
-        posBtnTxt: String?,
-        negBtnTxt: String?,
-        posBtnAction: (() -> Unit)?,
-        negBtnAction: (() -> Unit)?,
-        cancellable: Boolean
+        posBtnTxt: String? = null,
+        negBtnTxt: String? = null,
+        posBtnAction: (() -> Unit)? = null,
+        negBtnAction: (() -> Unit)? = null,
+        cancellable: Boolean = true
     ) {
         AlertDialog.Builder(this).apply {
             setTitle(title)
@@ -63,5 +75,23 @@ abstract class BaseActivity<VB : ViewBinding>(
             }
             show()
         }
+    }
+
+    fun setProgressVisibility(isVisible: Boolean) {
+        if (isVisible) {
+            if (progressDialog == null) {
+                progressDialog = ProgressDialog()
+            } else {
+                progressDialog?.dismissAllowingStateLoss()
+            }
+            progressDialog?.show(supportFragmentManager, ProgressDialog.TAG)
+        } else {
+            progressDialog?.dismissAllowingStateLoss()
+            progressDialog = null
+        }
+    }
+
+    companion object {
+        const val TAG = "BaseActivity"
     }
 }

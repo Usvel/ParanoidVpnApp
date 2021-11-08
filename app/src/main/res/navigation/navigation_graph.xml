@@ -1,29 +1,50 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/navigation"
-        app:startDestination="@id/vpn_fragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/vpn_fragment">
 
     <fragment
-            android:id="@+id/profile_fragment"
-            android:name="com.paranoid.vpn.app.profile.ui.ProfileFragment"
-            tools:layout="@layout/navigation_profile_fragment">
-
+        android:id="@+id/profile_fragment"
+        android:name="com.paranoid.vpn.app.profile.ui.profile.ProfileFragment"
+        tools:layout="@layout/navigation_profile_fragment">
+        <action
+            android:id="@+id/action_profile_fragment_to_registration_fragment"
+            app:destination="@id/registration_fragment" />
+        <action
+            android:id="@+id/action_profile_fragment_to_login_fragment"
+            app:destination="@id/login_fragment" />
     </fragment>
 
     <fragment
-            android:id="@+id/settings_fragment"
-            android:name="com.paranoid.vpn.app.settings.ui.SettingsFragment"
-            tools:layout="@layout/navigation_settings_fragment">
+        android:id="@+id/settings_fragment"
+        android:name="com.paranoid.vpn.app.settings.ui.SettingsFragment"
+        tools:layout="@layout/navigation_settings_fragment" />
 
+    <fragment
+        android:id="@+id/vpn_fragment"
+        android:name="com.paranoid.vpn.app.vpn.ui.VPNFragment"
+        tools:layout="@layout/navigation_vpn_fragment" />
+
+    <fragment
+        android:id="@+id/registration_fragment"
+        android:name="com.paranoid.vpn.app.profile.ui.registration.RegistrationFragment"
+        tools:layout="@layout/navigation_authentication_fragment">
+        <action
+            android:id="@+id/action_registration_fragment_to_profile_fragment"
+            app:destination="@id/profile_fragment"
+            app:popUpTo="@+id/profile_fragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
-            android:id="@+id/vpn_fragment"
-            android:name="com.paranoid.vpn.app.vpn.ui.VPNFragment"
-            tools:layout="@layout/navigation_vpn_fragment">
-
+        android:id="@+id/login_fragment"
+        android:name="com.paranoid.vpn.app.profile.ui.login.LoginFragment"
+        tools:layout="@layout/navigation_authentication_fragment">
+        <action
+            android:id="@+id/action_login_fragment_to_profile_fragment"
+            app:destination="@id/profile_fragment"
+            app:popUpTo="@+id/profile_fragment"
+            app:popUpToInclusive="true" />
     </fragment>
-
-
 </navigation>

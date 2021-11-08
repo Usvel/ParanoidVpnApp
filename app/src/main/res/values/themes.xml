@@ -24,11 +24,19 @@
         <item name="navBarIconColorNotChecked">@color/dark_nav_icon_not_selected</item>
         <item name="toolBarColorSecond">@color/second_background_transparent</item>
         <!-- Text -->
+        <item name="textDedicated">@color/black</item>
         <item name="textTransparent">@color/dark_text_transparent</item>
         <!-- VPN Button -->
         <item name="vpnButtonDisabled">@color/vpn_color_disabled</item>
         <item name="vpnButtonConnected">@color/vpn_color_connected</item>
         <item name="vpnButtonError">@color/vpn_color_error</item>
+        <!-- CardViewButton -->
+        <item name="cardViewBackground">@color/card_view_background</item>
+        <!-- ProfileFragment -->
+        <item name="textButtonProfile">@color/text_button_profile</item>
+        <item name="cardViewText">@color/text_card_view</item>
+        <!-- AuthenticationFragment -->
+        <item name="boxStrokeColor">@color/black</item>
         <!-- Item color -->
         <item name="iconBackground">@color/icon_background_light</item>
     </style>
@@ -41,5 +49,42 @@
         <item name="shapeAppearance">@style/ShapeAppearance.Material3.NavigationBarView.ActiveIndicator</item>
         <item name="android:color">?attr/navBarIconIndicator</item>
     </style>
+
+    <!--DefaultAlertDialogTheme-->
+    <style name="AlertDialogTheme" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:windowTitleStyle">@style/AlertDialogThemeTitle</item>
+        <item name="android:textAppearance">@style/AlertMessageTextAppearance</item>
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonDialogStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonDialogStyle</item>
+        <item name="buttonBarNeutralButtonStyle">@style/NeutralButtonDialogStyle</item>
+        <item name="colorControlHighlight">@color/black</item>
+    </style>
+
+    <style name="AlertDialogThemeTitle">
+        <item name="android:textAppearance">@style/AlertTitleTextAppearance</item>
+    </style>
+
+    <style name="AlertTitleTextAppearance">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="AlertMessageTextAppearance">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="NegativeButtonDialogStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/primaryLight</item>
+    </style>
+
+    <style name="PositiveButtonDialogStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/primaryLight</item>
+    </style>
+
+    <style name="NeutralButtonDialogStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/primaryLight</item>
+    </style>
+    <!--DefaultAlertDialogTheme-->
 
 </resources>
