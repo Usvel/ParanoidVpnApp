@@ -11,7 +11,8 @@ import com.paranoid.vpn.app.common.utils.VPNState
 import com.paranoid.vpn.app.databinding.NavigationVpnFragmentBinding
 
 class VPNFragment :
-    BaseFragment<NavigationVpnFragmentBinding, VPNViewModel>(NavigationVpnFragmentBinding::inflate) {
+    BaseFragment<NavigationVpnFragmentBinding, VPNViewModel>(NavigationVpnFragmentBinding::inflate)
+{
     private var vpnStateOn: VPNState = VPNState.NOT_CONNECTED
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

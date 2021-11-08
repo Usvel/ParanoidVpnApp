@@ -9,7 +9,9 @@ import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.databinding.NavigationSettingsFragmentBinding
 
 class SettingsFragment :
-    BaseFragment<NavigationSettingsFragmentBinding, SettingsViewModel>(NavigationSettingsFragmentBinding::inflate) {
+    BaseFragment<NavigationSettingsFragmentBinding, SettingsViewModel>(
+        NavigationSettingsFragmentBinding::inflate
+    ) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.testTextView.text = Utils.getString(R.string.this_is_settings)
