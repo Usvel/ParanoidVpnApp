@@ -5,7 +5,7 @@ import com.example.paranoid.ui.vpn.basic_client.config.Config
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.IpUtil
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet.TCPHeader
-import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.TCBStatus
+import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.TCPStatus
 import com.example.paranoid.ui.vpn.basic_client.util.ObjAttrUtil
 import kotlinx.coroutines.*
 import java.net.InetSocketAddress
@@ -37,7 +37,7 @@ class NioSingleThreadTcpHandler(
         var sourceAddress: InetSocketAddress? = null
         var destinationAddress: InetSocketAddress? = null
         var remote: SocketChannel? = null
-        var tcbStatus = TCBStatus.SYN_SENT
+        var tcpStatus = TCPStatus.SYN_SENT
         val remoteOutBuffer: ByteBuffer = ByteBuffer.allocate(8 * 1024)
 
         //
@@ -119,9 +119,9 @@ class NioSingleThreadTcpHandler(
     }
 
     private fun handleSyn(packet: Packet, pipe: TcpPipe?) {
-        if (pipe!!.tcbStatus == TCBStatus.SYN_SENT) {
-            pipe.tcbStatus = TCBStatus.SYN_RECEIVED
-            Log.i(TAG, String.format("handleSyn %s %s", pipe.destinationAddress, pipe.tcbStatus))
+        if (pipe!!.tcpStatus == TCPStatus.SYN_SENT) {
+            pipe.tcpStatus = TCPStatus.SYN_RECEIVED
+            Log.i(TAG, String.format("handleSyn %s %s", pipe.destinationAddress, pipe.tcpStatus))
         }
         Log.i(TAG, String.format("handleSyn  %d %d", pipe.tunnelId, packet.packId))
         val tcpHeader = packet.tcpHeader
@@ -142,13 +142,13 @@ class NioSingleThreadTcpHandler(
         pipe.upActive = false
         pipe.downActive = false
         cleanPipe(pipe)
-        pipe.tcbStatus = TCBStatus.CLOSE_WAIT
+        pipe.tcpStatus = TCPStatus.CLOSE_WAIT
     }
 
     private fun handleAck(packet: Packet, pipe: TcpPipe?) {
-        if (pipe!!.tcbStatus == TCBStatus.SYN_RECEIVED) {
-            pipe.tcbStatus = TCBStatus.ESTABLISHED
-            Log.i(TAG, String.format("handleAck %s %s", pipe.destinationAddress, pipe.tcbStatus))
+        if (pipe!!.tcpStatus == TCPStatus.SYN_RECEIVED) {
+            pipe.tcpStatus = TCPStatus.ESTABLISHED
+            Log.i(TAG, String.format("handleAck %s %s", pipe.destinationAddress, pipe.tcpStatus))
         }
         if (Config.logAck) {
             Log.d(TAG, String.format("handleAck %d ", packet.packId))
@@ -252,8 +252,8 @@ class NioSingleThreadTcpHandler(
         // TODO
         sendTcpPack(pipe, TCPHeader.ACK.toByte(), null)
         closeUpStream(pipe)
-        pipe.tcbStatus = TCBStatus.CLOSE_WAIT
-        Log.i(TAG, String.format("handleFin %s %s", pipe.destinationAddress, pipe.tcbStatus))
+        pipe.tcpStatus = TCPStatus.CLOSE_WAIT
+        Log.i(TAG, String.format("handleFin %s %s", pipe.destinationAddress, pipe.tcpStatus))
     }
 
     private fun handlePacket(pipe: TcpPipe?, packet: Packet) {
@@ -317,7 +317,7 @@ class NioSingleThreadTcpHandler(
             } else if (n == 0) {
                 break
             } else {
-                if (pipe.tcbStatus != TCBStatus.CLOSE_WAIT) {
+                if (pipe.tcpStatus != TCPStatus.CLOSE_WAIT) {
                     buffer.flip()
                     val data = ByteArray(buffer.remaining())
                     buffer[data]

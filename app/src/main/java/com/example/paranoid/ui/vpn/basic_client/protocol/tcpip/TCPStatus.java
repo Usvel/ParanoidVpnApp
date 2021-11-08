@@ -1,6 +1,6 @@
 package com.example.paranoid.ui.vpn.basic_client.protocol.tcpip;
 
-public enum  TCBStatus {
+public enum TCPStatus {
     SYN_SENT,
     SYN_RECEIVED,
     ESTABLISHED,

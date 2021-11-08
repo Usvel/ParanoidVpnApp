@@ -1,11 +1,14 @@
 package com.example.paranoid.ui.vpn
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
-import android.net.VpnService
+import android.net.*
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat.startForegroundService
 import androidx.lifecycle.lifecycleScope
 import com.example.paranoid.R
@@ -15,6 +18,7 @@ import com.example.paranoid.ui.vpn.basic_client.LocalVPNService2
 import com.example.paranoid.utils.Utils
 import kotlinx.coroutines.*
 import java.util.concurrent.atomic.AtomicLong
+import kotlin.properties.Delegates
 
 
 class VPNFragment :
@@ -22,13 +26,22 @@ class VPNFragment :
 
     private var vpnStateOn: Boolean = false
 
+    val networkCallback = getNetworkCallBack()
+    val networkReq = getNetworkRequest()
+
+    private var isConnected = false
+
     private val VPN_REQUEST_CODE = 0x0F
 
     private var textUpdater: Job? = null
 
+    private fun getConnectivityManager() =
+        requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
     companion object {
         @JvmStatic
         var downByte: AtomicLong = AtomicLong(0)
+
         @JvmStatic
         var upByte: AtomicLong = AtomicLong(0)
     }
@@ -40,7 +53,7 @@ class VPNFragment :
         loadMainConfiguration()
 
         binding.vpnButtonBackground.setOnClickListener {
-            when(vpnStateOn){
+            when (vpnStateOn) {
                 true -> vpnButtonDisable()
                 false -> vpnButtonConnected()
             }
@@ -53,6 +66,9 @@ class VPNFragment :
             }
         }
 
+        isConnected = isOnline()
+
+        getConnectivityManager().registerNetworkCallback(networkReq, networkCallback)
     }
 
     override fun onDestroyView() {
@@ -60,6 +76,7 @@ class VPNFragment :
         lifecycleScope.launch(Dispatchers.Default) {
             textUpdater?.cancel()
         }
+        getConnectivityManager().unregisterNetworkCallback(networkCallback)
     }
 
     private fun loadMainConfiguration() {
@@ -77,12 +94,49 @@ class VPNFragment :
         return typedValue.data
     }
 
-    private fun vpnButtonDisable() {
-        vpnStateOn = false
-        binding.connectionStatus.visibility = View.GONE
-        binding.isConnected.text = getString(R.string.not_connected)
-        binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonDisabled))
-        stopVpn()
+    private fun isOnline(): Boolean {
+        val capabilities =
+            getConnectivityManager().getNetworkCapabilities(getConnectivityManager().activeNetwork)
+        if (capabilities != null) {
+            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) or
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) or
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
+            )
+                return true
+        }
+        return false
+    }
+
+    private fun getNetworkCallBack(): ConnectivityManager.NetworkCallback {
+        return object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                super.onAvailable(network)
+
+                Toast.makeText(requireContext(), "Connectivity is on!", Toast.LENGTH_SHORT)
+                    .show()
+                if (vpnStateOn)
+                    startVpn()
+                isConnected = true
+            }
+
+            override fun onLost(network: Network) {
+                super.onLost(network)
+
+                Toast.makeText(requireContext(), "Connectivity is off!", Toast.LENGTH_SHORT)
+                    .show()
+                if (vpnStateOn)
+                    stopVpn()
+                isConnected = false
+            }
+        }
+    }
+
+    private fun getNetworkRequest(): NetworkRequest {
+        return NetworkRequest.Builder()
+            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+            .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+            .addTransportType(NetworkCapabilities.TRANSPORT_ETHERNET)
+            .build()
     }
 
     private suspend fun updateText() = withContext(Dispatchers.Main) {
@@ -90,13 +144,26 @@ class VPNFragment :
     }
 
     private fun vpnButtonConnected() {
-        vpnStateOn = true
+        // TODO: Remove Toasts
+        if (!isConnected) {
+            Toast.makeText(requireContext(), "Error: connectivity is off!", Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
         binding.connectionStatus.visibility = View.VISIBLE
-        // binding.isConnected.text = getString(R.string.connected)
+        //binding.isConnected.text = getString(R.string.connected)
         binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonConnected))
+        vpnStateOn = true
         startVpn()
     }
 
+    private fun vpnButtonDisable() {
+        binding.connectionStatus.visibility = View.GONE
+        binding.isConnected.text = getString(R.string.not_connected)
+        binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonDisabled))
+        vpnStateOn = false
+        stopVpn()
+    }
 
     private fun vpnButtonError() {
         binding.connectionStatus.visibility = View.GONE

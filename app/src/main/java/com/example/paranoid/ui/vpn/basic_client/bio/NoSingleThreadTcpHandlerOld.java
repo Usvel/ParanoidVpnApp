@@ -7,15 +7,12 @@ import com.example.paranoid.ui.vpn.basic_client.config.Config;
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.IpUtil;
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet;
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet.TCPHeader;
-import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.TCBStatus;
-import com.example.paranoid.ui.vpn.basic_client.util.ByteBufferPool;
+import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.TCPStatus;
 import com.example.paranoid.ui.vpn.basic_client.util.ObjAttrUtil;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
@@ -59,7 +56,7 @@ class NioSingleThreadTcpHandlerOld implements Runnable {
         public InetSocketAddress sourceAddress;
         public InetSocketAddress destinationAddress;
         public SocketChannel remote;
-        public TCBStatus tcbStatus = TCBStatus.SYN_SENT;
+        public TCPStatus tcpStatus = TCPStatus.SYN_SENT;
         private ByteBuffer remoteOutBuffer = ByteBuffer.allocate(8 * 1024);
         //
         public boolean upActive = true;
@@ -129,9 +126,9 @@ class NioSingleThreadTcpHandlerOld implements Runnable {
     }
 
     private void handleSyn(Packet packet, TcpPipe pipe) {
-        if (pipe.tcbStatus == TCBStatus.SYN_SENT) {
-            pipe.tcbStatus = TCBStatus.SYN_RECEIVED;
-            Log.i(TAG, String.format("handleSyn %s %s", pipe.destinationAddress, pipe.tcbStatus));
+        if (pipe.tcpStatus == TCPStatus.SYN_SENT) {
+            pipe.tcpStatus = TCPStatus.SYN_RECEIVED;
+            Log.i(TAG, String.format("handleSyn %s %s", pipe.destinationAddress, pipe.tcpStatus));
         }
         Log.i(TAG, String.format("handleSyn  %d %d", pipe.tunnelId, packet.packId));
         TCPHeader tcpHeader = packet.tcpHeader;
@@ -152,14 +149,14 @@ class NioSingleThreadTcpHandlerOld implements Runnable {
         pipe.upActive = false;
         pipe.downActive = false;
         cleanPipe(pipe);
-        pipe.tcbStatus = TCBStatus.CLOSE_WAIT;
+        pipe.tcpStatus = TCPStatus.CLOSE_WAIT;
     }
 
     private void handleAck(Packet packet, TcpPipe pipe) throws Exception {
-        if (pipe.tcbStatus == TCBStatus.SYN_RECEIVED) {
-            pipe.tcbStatus = TCBStatus.ESTABLISHED;
+        if (pipe.tcpStatus == TCPStatus.SYN_RECEIVED) {
+            pipe.tcpStatus = TCPStatus.ESTABLISHED;
 
-            Log.i(TAG, String.format("handleAck %s %s", pipe.destinationAddress, pipe.tcbStatus));
+            Log.i(TAG, String.format("handleAck %s %s", pipe.destinationAddress, pipe.tcpStatus));
         }
 
         if (Config.logAck) {
@@ -267,9 +264,9 @@ class NioSingleThreadTcpHandlerOld implements Runnable {
         //TODO
         sendTcpPack(pipe, (byte) (TCPHeader.ACK), null);
         closeUpStream(pipe);
-        pipe.tcbStatus = TCBStatus.CLOSE_WAIT;
+        pipe.tcpStatus = TCPStatus.CLOSE_WAIT;
 
-        Log.i(TAG, String.format("handleFin %s %s", pipe.destinationAddress, pipe.tcbStatus));
+        Log.i(TAG, String.format("handleFin %s %s", pipe.destinationAddress, pipe.tcpStatus));
     }
 
     private void handlePacket(TcpPipe pipe, Packet packet) throws Exception {
@@ -339,7 +336,7 @@ class NioSingleThreadTcpHandlerOld implements Runnable {
             } else if (n == 0) {
                 break;
             } else {
-                if (pipe.tcbStatus != TCBStatus.CLOSE_WAIT) {
+                if (pipe.tcpStatus != TCPStatus.CLOSE_WAIT) {
                     buffer.flip();
                     byte[] data = new byte[buffer.remaining()];
                     buffer.get(data);

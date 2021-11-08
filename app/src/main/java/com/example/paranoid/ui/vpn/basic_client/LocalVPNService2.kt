@@ -21,9 +21,7 @@ import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
-import java.util.concurrent.Executors
 import kotlin.coroutines.coroutineContext
-import kotlin.system.exitProcess
 
 class LocalVPNService2 : VpnService() {
     private var vpnInterface: ParcelFileDescriptor? = null
@@ -96,7 +94,6 @@ class LocalVPNService2 : VpnService() {
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         Log.d(TAG, "onStartCommand")
         createNotificationChannel()
-        //val intent = Intent(this, VPNFragment::class.java)
         when (intent.action) {
             "start" -> {
                 pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)

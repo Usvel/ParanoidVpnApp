@@ -9,7 +9,7 @@ import com.example.paranoid.ui.vpn.basic_client.util.ByteBufferPool;
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet;
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet.TCPHeader;
 import com.example.paranoid.ui.vpn.basic_client.config.Config;
-import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.TCBStatus;
+import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.TCPStatus;
 import com.example.paranoid.ui.vpn.basic_client.util.ProxyException;
 
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class BioTcpHandlerOld implements Runnable {
         public long myAcknowledgementNum = 0;
         public long theirAcknowledgementNum = 0;
 
-        public TCBStatus tcbStatus = TCBStatus.SYN_SENT;
+        public TCPStatus tcpStatus = TCPStatus.SYN_SENT;
         public BlockingQueue<Packet> tunnelInputQueue = new ArrayBlockingQueue<Packet>(1024);
         public InetSocketAddress sourceAddress;
         public InetSocketAddress destinationAddress;
@@ -145,8 +145,8 @@ public class BioTcpHandlerOld implements Runnable {
 
         private void handleSyn(Packet packet) {
 
-            if (tunnel.tcbStatus == TCBStatus.SYN_SENT) {
-                tunnel.tcbStatus = TCBStatus.SYN_RECEIVED;
+            if (tunnel.tcpStatus == TCPStatus.SYN_SENT) {
+                tunnel.tcpStatus = TCPStatus.SYN_RECEIVED;
             }
             Log.i(TAG, String.format("handleSyn  %d %d", tunnel.tunnelId, packet.packId));
             TCPHeader tcpHeader = packet.tcpHeader;
@@ -172,8 +172,8 @@ public class BioTcpHandlerOld implements Runnable {
 
         private void handleAck(Packet packet) throws IOException {
 
-            if (tunnel.tcbStatus == TCBStatus.SYN_RECEIVED) {
-                tunnel.tcbStatus = TCBStatus.ESTABLISHED;
+            if (tunnel.tcpStatus == TCPStatus.SYN_RECEIVED) {
+                tunnel.tcpStatus = TCPStatus.ESTABLISHED;
 
             }
 
@@ -215,7 +215,7 @@ public class BioTcpHandlerOld implements Runnable {
             //closeTunnel(tunnel);
             //closeDownStream();
             closeUpStream(tunnel);
-            tunnel.tcbStatus = TCBStatus.CLOSE_WAIT;
+            tunnel.tcpStatus = TCPStatus.CLOSE_WAIT;
         }
 
         private void handleRst(Packet packet) {
@@ -234,7 +234,7 @@ public class BioTcpHandlerOld implements Runnable {
             synchronized (tunnel) {
                 tunnel.upActive = false;
                 tunnel.downActive = false;
-                tunnel.tcbStatus = TCBStatus.CLOSE_WAIT;
+                tunnel.tcpStatus = TCPStatus.CLOSE_WAIT;
             }
         }
 
@@ -392,7 +392,7 @@ public class BioTcpHandlerOld implements Runnable {
                             quitType = "fin";
                             break;
                         } else {
-                            if (tunnel.tcbStatus != TCBStatus.CLOSE_WAIT) {
+                            if (tunnel.tcpStatus != TCPStatus.CLOSE_WAIT) {
                                 buffer.flip();
                                 byte[] data = new byte[buffer.remaining()];
                                 buffer.get(data);

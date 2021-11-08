@@ -7,7 +7,7 @@ import com.example.paranoid.ui.vpn.basic_client.config.Config
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.IpUtil
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet.TCPHeader
-import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.TCBStatus
+import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.TCPStatus
 import com.example.paranoid.ui.vpn.basic_client.util.ByteBufferPool
 import com.example.paranoid.ui.vpn.basic_client.util.ProxyException
 import java.io.IOException
@@ -35,7 +35,7 @@ class BioTcpHandler(
         var theirSequenceNum: Long = 0
         var myAcknowledgementNum: Long = 0
         var theirAcknowledgementNum: Long = 0
-        var tcbStatus = TCBStatus.SYN_SENT
+        var tcbStatus = TCPStatus.SYN_SENT
         var tunnelInputQueue: BlockingQueue<Packet> = ArrayBlockingQueue(1024)
         var sourceAddress: InetSocketAddress? = null
         var destinationAddress: InetSocketAddress? = null
@@ -87,8 +87,8 @@ class BioTcpHandler(
 
         var synCount = 0
         private fun handleSyn(packet: Packet?) {
-            if (tunnel.tcbStatus == TCBStatus.SYN_SENT) {
-                tunnel.tcbStatus = TCBStatus.SYN_RECEIVED
+            if (tunnel.tcbStatus == TCPStatus.SYN_SENT) {
+                tunnel.tcbStatus = TCPStatus.SYN_RECEIVED
             }
             Log.i(TAG, String.format("handleSyn  %d %d", tunnel.tunnelId, packet!!.packId))
             val tcpHeader = packet.tcpHeader
@@ -116,8 +116,8 @@ class BioTcpHandler(
 
         @Throws(IOException::class)
         private fun handleAck(packet: Packet?) {
-            if (tunnel.tcbStatus == TCBStatus.SYN_RECEIVED) {
-                tunnel.tcbStatus = TCBStatus.ESTABLISHED
+            if (tunnel.tcbStatus == TCPStatus.SYN_RECEIVED) {
+                tunnel.tcbStatus = TCPStatus.ESTABLISHED
             }
             if (Config.logAck) {
                 Log.d(TAG, String.format("handleAck %d ", packet!!.packId))
@@ -165,7 +165,7 @@ class BioTcpHandler(
             closeUpStream(
                 tunnel
             )
-            tunnel.tcbStatus = TCBStatus.CLOSE_WAIT
+            tunnel.tcbStatus = TCPStatus.CLOSE_WAIT
         }
 
         private fun handleRst(packet: Packet?) {
@@ -182,7 +182,7 @@ class BioTcpHandler(
             synchronized(tunnel) {
                 tunnel.upActive = false
                 tunnel.downActive = false
-                tunnel.tcbStatus = TCBStatus.CLOSE_WAIT
+                tunnel.tcbStatus = TCPStatus.CLOSE_WAIT
             }
         }
 
@@ -257,7 +257,7 @@ class BioTcpHandler(
                             //break
                             return
                         } else {
-                            if (tunnel.tcbStatus != TCBStatus.CLOSE_WAIT) {
+                            if (tunnel.tcbStatus != TCPStatus.CLOSE_WAIT) {
                                 buffer.flip()
                                 val data = ByteArray(buffer.remaining())
                                 buffer[data]
