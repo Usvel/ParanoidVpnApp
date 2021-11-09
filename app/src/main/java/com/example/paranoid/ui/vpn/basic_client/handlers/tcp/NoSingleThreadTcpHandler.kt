@@ -1,7 +1,8 @@
-package com.example.paranoid.ui.vpn.basic_client.bio
+package com.example.paranoid.ui.vpn.basic_client.handlers
 import android.net.VpnService
 import android.util.Log
 import com.example.paranoid.ui.vpn.basic_client.config.Config
+import com.example.paranoid.ui.vpn.basic_client.handlers.udp.BioUtil
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.IpUtil
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet.TCPHeader

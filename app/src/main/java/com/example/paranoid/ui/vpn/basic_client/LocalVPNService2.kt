@@ -10,8 +10,8 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.paranoid.ui.vpn.VPNFragment.Companion.downByte
 import com.example.paranoid.ui.vpn.VPNFragment.Companion.upByte
-import com.example.paranoid.ui.vpn.basic_client.bio.BioUdpHandler
-import com.example.paranoid.ui.vpn.basic_client.bio.NioSingleThreadTcpHandler
+import com.example.paranoid.ui.vpn.basic_client.handlers.udp.BioUdpHandler
+import com.example.paranoid.ui.vpn.basic_client.handlers.NioSingleThreadTcpHandler
 import com.example.paranoid.ui.vpn.basic_client.config.Config
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
 import com.example.paranoid.ui.vpn.basic_client.util.ByteBufferPool
@@ -241,7 +241,7 @@ class LocalVPNService2 : VpnService() {
     }
 
     companion object {
-        private val TAG = LocalVPNService::class.java.simpleName
+        private val TAG = LocalVPNService2::class.java.simpleName
         private val VPN_ADDRESS = "10.0.0.2" // Only IPv4 support for now
         private val VPN_ROUTE = "0.0.0.0" // Intercept everything
 

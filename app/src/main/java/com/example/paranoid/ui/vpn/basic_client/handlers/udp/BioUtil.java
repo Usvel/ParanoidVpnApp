@@ -1,4 +1,4 @@
-package com.example.paranoid.ui.vpn.basic_client.bio;
+package com.example.paranoid.ui.vpn.basic_client.handlers.udp;
 
 import android.util.Log;
 
