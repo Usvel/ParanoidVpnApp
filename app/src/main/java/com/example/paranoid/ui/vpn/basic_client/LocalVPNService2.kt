@@ -13,6 +13,7 @@ import com.example.paranoid.ui.vpn.VPNFragment.Companion.upByte
 import com.example.paranoid.ui.vpn.basic_client.handlers.udp.BioUdpHandler
 import com.example.paranoid.ui.vpn.basic_client.handlers.NioSingleThreadTcpHandler
 import com.example.paranoid.ui.vpn.basic_client.config.Config
+import com.example.paranoid.ui.vpn.basic_client.handlers.vpn.VpnReadWorker
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
 import com.example.paranoid.ui.vpn.basic_client.util.ByteBufferPool
 import kotlinx.coroutines.*
@@ -64,7 +65,7 @@ class LocalVPNService2 : VpnService() {
         nioSingleThreadTcpHandlerJob!!.start()
 
         VPNRunnableJob = CoroutineScope(context).launch {
-            VPNRunnable(
+            VpnReadWorker(
                 vpnInterface!!.fileDescriptor,
                 deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
                 deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
@@ -143,110 +144,13 @@ class LocalVPNService2 : VpnService() {
         closeResources(vpnInterface!!)
     }
 
-    private class VPNRunnable(
-        private val vpnFileDescriptor: FileDescriptor,
-        private val deviceToNetworkUDPQueue: BlockingQueue<Packet>,
-        private val deviceToNetworkTCPQueue: BlockingQueue<Packet>,
-        private val networkToDeviceQueue: BlockingQueue<ByteBuffer>,
-    ) {
-        class WriteVpnThread(
-            var vpnOutput: FileChannel,
-            private val networkToDeviceQueue: BlockingQueue<ByteBuffer>
-        ) {
-            suspend fun run() {
-                while (coroutineContext.isActive) {
-                    try {
-                        val bufferFromNetwork = networkToDeviceQueue.take()
-                        bufferFromNetwork.flip()
-                        while (bufferFromNetwork.hasRemaining()) {
-                            val w = vpnOutput.write(bufferFromNetwork)
-                            if (w > 0) {
-                                downByte.addAndGet(w.toLong())
-                            }
-                            if (Config.logRW) {
-                                Log.d(TAG, "vpn write $w")
-                            }
-                        }
-                    } catch (e: Exception) {
-                        Log.i(TAG, "WriteVpnThread fail", e)
-                        coroutineContext.cancel()
-                    }
-                }
-            }
-        }
-
-        suspend fun run() {
-            Log.i(TAG, "VPNRunnable Started")
-            val vpnInput = FileInputStream(
-                vpnFileDescriptor
-            ).channel
-            val vpnOutput = FileOutputStream(
-                vpnFileDescriptor
-            ).channel
-            val job = CoroutineScope(coroutineContext).launch {
-                WriteVpnThread(
-                    vpnOutput,
-                    networkToDeviceQueue
-                ).run()
-            }
-            job.start()
-            try {
-                var bufferToNetwork: ByteBuffer?
-                while (coroutineContext.isActive) {
-                    bufferToNetwork = ByteBufferPool.acquire()
-                    val readBytes = vpnInput.read(bufferToNetwork)
-                    upByte.addAndGet(readBytes.toLong())
-                    if (readBytes > 0) {
-                        bufferToNetwork.flip()
-                        val packet = Packet(bufferToNetwork)
-                        when {
-                            packet.isUDP() -> {
-                                if (Config.logRW) {
-                                    Log.i(TAG, "read udp$readBytes")
-                                }
-                                deviceToNetworkUDPQueue.offer(packet)
-                            }
-                            packet.isTCP() -> {
-                                if (Config.logRW) {
-                                    Log.i(TAG, "read tcp $readBytes")
-                                }
-                                deviceToNetworkTCPQueue.offer(packet)
-                            }
-                            else -> {
-                                Log.w(
-                                    TAG,
-                                    String.format(
-                                        "Unknown packet protocol type %d",
-                                        packet.ip4Header.protocolNum
-                                    )
-                                )
-                            }
-                        }
-                    } else {
-                        try {
-                            delay(10)
-                        } catch (e: InterruptedException) {
-                            e.printStackTrace()
-                        }
-                    }
-                }
-            } catch (e: IOException) {
-                Log.w(TAG, e.toString(), e)
-                coroutineContext.cancel()
-            } finally {
-                closeResources(vpnInput, vpnOutput)
-            }
-            job.cancelAndJoin()
-        }
-    }
-
     companion object {
-        private val TAG = LocalVPNService2::class.java.simpleName
+        val TAG: String = LocalVPNService2::class.java.simpleName
         private val VPN_ADDRESS = "10.0.0.2" // Only IPv4 support for now
         private val VPN_ROUTE = "0.0.0.0" // Intercept everything
 
         // TODO: Move this to a "utils" class for reuse
-        private fun closeResources(vararg resources: Closeable) {
+        fun closeResources(vararg resources: Closeable) {
             for (resource in resources) {
                 try {
                     resource.close()

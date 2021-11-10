@@ -5,6 +5,7 @@ import com.example.paranoid.ui.vpn.basic_client.handlers.SuspendableRunnable
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.IpUtil
 import com.example.paranoid.ui.vpn.basic_client.util.ByteBufferPool
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -102,6 +103,7 @@ class UdpReadWorker(
             Log.e(TAG, "error", e)
         } finally {
             Log.d(TAG, "BioUdpHandler quit")
+            coroutineContext.cancel()
         }
     }
 

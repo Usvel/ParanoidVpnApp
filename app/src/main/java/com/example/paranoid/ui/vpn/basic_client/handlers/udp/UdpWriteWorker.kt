@@ -6,6 +6,7 @@ import com.example.paranoid.ui.vpn.basic_client.config.Config
 import com.example.paranoid.ui.vpn.basic_client.handlers.SuspendableRunnable
 import com.example.paranoid.ui.vpn.basic_client.protocol.tcpip.Packet
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -14,6 +15,7 @@ import java.nio.channels.DatagramChannel
 import java.nio.channels.Selector
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.coroutineContext
 
 class UdpWriteWorker(
@@ -25,71 +27,92 @@ class UdpWriteWorker(
 ): SuspendableRunnable {
 
     override suspend fun run() {
-        while (coroutineContext.isActive) {
-            val packet = withContext(Dispatchers.IO) {
-                queue.take()
-            }
-            val destinationAddress = packet.ip4Header.destinationAddress
-            val header = packet.udpHeader
+        try {
+            while (coroutineContext.isActive) {
+                val packet = withContext(Dispatchers.IO) {
+                    queue.take()
+                }
+                val destinationAddress = packet.ip4Header.destinationAddress
+                val header = packet.udpHeader
 
-            //Log.d(TAG, String.format("get pack %d udp %d ", packet.packId, header.length));
-            val destinationPort = header.destinationPort
-            val sourcePort = header.sourcePort
-            val ipAndPort =
-                destinationAddress.hostAddress + ":" + destinationPort + ":" + sourcePort
-            if (!udpSockets.containsKey(ipAndPort)) {
-                val outputChannel = withContext(Dispatchers.IO) {
-                    DatagramChannel.open()
-                }
-                vpnService.protect(outputChannel.socket())
-                withContext(Dispatchers.IO) {
-                    outputChannel.socket().bind(null)
-                    outputChannel.connect(
-                        InetSocketAddress(
-                            destinationAddress,
-                            destinationPort
-                        )
-                    )
-                    outputChannel.configureBlocking(false)
-                }
-                val tunnel = UdpTunnel()
-                tunnel.local =
-                    InetSocketAddress(packet.ip4Header.sourceAddress, header.sourcePort)
-                tunnel.remote = InetSocketAddress(
-                    packet.ip4Header.destinationAddress,
-                    header.destinationPort
-                )
-                tunnel.channel = outputChannel
-                tunnelQueue.offer(tunnel)
-                selector?.wakeup()
-                udpSockets[ipAndPort] = outputChannel
-            }
-            val outputChannel = udpSockets[ipAndPort]
-            val buffer = packet.backingBuffer
-            try {
-                while (packet.backingBuffer.hasRemaining()) {
-                    val w = withContext(Dispatchers.IO) {
-                        outputChannel!!.write(buffer)
+                //Log.d(TAG, String.format("get pack %d udp %d ", packet.packId, header.length));
+                val destinationPort = header.destinationPort
+                val sourcePort = header.sourcePort
+                val ipAndPort =
+                    destinationAddress.hostAddress + ":" + destinationPort + ":" + sourcePort
+                if (!udpSockets.containsKey(ipAndPort)) {
+                    val outputChannel = withContext(Dispatchers.IO) {
+                        DatagramChannel.open()
                     }
-                    if (Config.logRW) {
-                        Log.d(
-                            BioUdpHandler.TAG,
-                            String.format(
-                                "write udp pack %d len %d %s ",
-                                packet.packId,
-                                w,
-                                ipAndPort
+                    vpnService.protect(outputChannel.socket())
+                    try {
+                        withContext(Dispatchers.IO) {
+                            outputChannel.socket().bind(null)
+                            outputChannel.connect(
+                                InetSocketAddress(
+                                    destinationAddress,
+                                    destinationPort
+                                )
                             )
-                        )
+                            outputChannel.configureBlocking(false)
+                        }
+                    } catch (e: IOException) {
+                        Log.e(BioUdpHandler.TAG, "udp write error", e)
+                        withContext(Dispatchers.IO) {
+                            outputChannel?.close()
+                        }
+                        return
                     }
+
+                    val tunnel = UdpTunnel()
+                    tunnel.local =
+                        InetSocketAddress(packet.ip4Header.sourceAddress, header.sourcePort)
+                    tunnel.remote = InetSocketAddress(
+                        packet.ip4Header.destinationAddress,
+                        header.destinationPort
+                    )
+                    tunnel.channel = outputChannel
+                    tunnelQueue.offer(tunnel)
+                    selector?.wakeup()
+                    udpSockets[ipAndPort] = outputChannel
                 }
-            } catch (e: IOException) {
-                Log.e(BioUdpHandler.TAG, "udp write error", e)
-                withContext(Dispatchers.IO) {
-                    outputChannel?.close()
+                val outputChannel = udpSockets[ipAndPort]
+                val buffer = packet.backingBuffer
+                try {
+                    while (packet.backingBuffer.hasRemaining()) {
+                        val w = withContext(Dispatchers.IO) {
+                            outputChannel!!.write(buffer)
+                        }
+                        if (Config.logRW) {
+                            Log.d(
+                                BioUdpHandler.TAG,
+                                String.format(
+                                    "write udp pack %d len %d %s ",
+                                    packet.packId,
+                                    w,
+                                    ipAndPort
+                                )
+                            )
+                        }
+                    }
+                } catch (e: IOException) {
+                    Log.e(BioUdpHandler.TAG, "udp write error", e)
+                    withContext(Dispatchers.IO) {
+                        outputChannel?.close()
+                    }
+                    udpSockets.remove(ipAndPort)
                 }
-                udpSockets.remove(ipAndPort)
             }
+        } catch (e: Exception) {
+            Log.e(TAG, "error", e)
+        } finally {
+            Log.d(TAG, "BioUdpHandler quit")
+            coroutineContext.cancel()
         }
+
+    }
+
+    companion object {
+        val TAG: String = UdpWriteWorker::class.java.simpleName
     }
 }
