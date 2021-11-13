@@ -1,5 +1,6 @@
 package com.paranoid.vpn.app.vpn.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
@@ -8,6 +9,7 @@ import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.utils.VPNState
 import com.paranoid.vpn.app.databinding.NavigationVpnFragmentBinding
+import com.paranoid.vpn.app.qr.ScannerQr
 
 class VPNFragment :
     BaseFragment<NavigationVpnFragmentBinding>(NavigationVpnFragmentBinding::inflate) {
@@ -46,12 +48,8 @@ class VPNFragment :
         }
 
         binding.qrIcon.setOnClickListener {
-            context?.let { context_ ->
-                Utils.makeToast(
-                    context_,
-                    getString(R.string.scan_qr_code)
-                )
-            }
+            val randomIntent = Intent(context, ScannerQr::class.java)
+            startActivity(randomIntent)
         }
     }
 

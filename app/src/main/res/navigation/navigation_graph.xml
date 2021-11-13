@@ -25,5 +25,12 @@
 
     </fragment>
 
+    <fragment
+            android:id="@+id/qr_scanner"
+            android:name="com.paranoid.vpn.app.qr.ScannerQr"
+            tools:layout="@layout/scanner_qr">
+
+    </fragment>
+
 
 </navigation>

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="com.paranoid.vpn.app">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
             android:name="com.paranoid.vpn.app.common.Application"
             android:allowBackup="true"
@@ -19,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+                android:name=".qr.ScannerQr"
+                android:exported="true" />
     </application>
 
 </manifest>
