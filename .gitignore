@@ -4,6 +4,7 @@
 .idea/*
 !.idea/codeStyles
 .DS_Store
+app/build
 /build
 /captures
 .externalNativeBuild
