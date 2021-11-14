@@ -7,6 +7,7 @@ import com.paranoid.vpn.app.common.vpn_configuration.domain.database.VPNConfigDa
 import com.paranoid.vpn.app.common.vpn_configuration.domain.database.VPNConfigDatabase
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.ForwardingRule
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.Protocols
+import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigDataGenerator
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -43,28 +44,7 @@ class VPNConfigTest {
     @Test
     @Throws(IOException::class)
     fun insertAndGetTodo() = runBlocking {
-        val configItem = VPNConfigItem(
-            id = 1L,
-            primary_dns = "8.8.8.8",
-            secondary_dns = "8.8.4.4",
-            proxy_ip = arrayListOf("123.123.123.123", "10.10.10.1"),
-            local_ip = "10.10.10.1",
-            gateway = "192.168.0.1",
-            forwarding_rules = arrayListOf(
-                ForwardingRule(
-                    protocol = Protocols.UDP,
-                    ports = arrayListOf("888", "1234", "8080"),
-                    target_ip = "10.10.10.5",
-                    target_port = "80"
-                ),
-                ForwardingRule(
-                    protocol = Protocols.TCP,
-                    ports = arrayListOf("888", "1234", "8080"),
-                    target_ip = null,
-                    target_port = "80"
-                )
-            )
-        )
+        val configItem = VPNConfigDataGenerator.getVPNConfigItem()
 
         configDao.insert(configItem)
         val configItemGot = configDao.getById(1)

@@ -9,10 +9,12 @@ import com.paranoid.vpn.app.common.vpn_configuration.domain.database.VPNConfigDa
 
 class Application : Application() {
 
+
     override fun onCreate() {
         super.onCreate()
-
         FirebaseServiceFactory.makeFirebase()
+
+        VPNConfigDatabase.setInstance(this)
 
         Utils.init(this)
 
@@ -36,22 +38,14 @@ class Application : Application() {
             )
         }
     }
-}
 
-// private AppDatabase database;
-//
-//    @Override
-//    public void onCreate() {
-//        super.onCreate();
-//        instance = this;
-//        database = Room.databaseBuilder(this, AppDatabase.class, "database")
-//                .build();
-//    }
-//
-//    public static App getInstance() {
-//        return instance;
-//    }
-//
-//    public AppDatabase getDatabase() {
-//        return database;
-//    }
+
+    init {
+        instance = this
+    }
+
+    companion object {
+        lateinit var instance: Application
+            private set
+    }
+}

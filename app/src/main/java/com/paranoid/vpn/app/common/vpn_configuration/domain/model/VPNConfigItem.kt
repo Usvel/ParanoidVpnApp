@@ -25,6 +25,7 @@ data class ForwardingRule(
 data class VPNConfigItem(
     @PrimaryKey
     var id: Long = 0,
+    var name: String,
     @NonNull var primary_dns: String = "",
     var secondary_dns: String? = null,
     @TypeConverters(ArrayConverter::class)
@@ -61,4 +62,36 @@ class ArrayConverter {
     fun toArray(data: String): MutableList<String> {
         return data.split(",".toRegex()).toTypedArray().toMutableList()
     }
+}
+
+class VPNConfigDataGenerator {
+
+    companion object {
+        fun getVPNConfigItem(): VPNConfigItem {
+            return VPNConfigItem(
+                id = 1L,
+                name = "Test config",
+                primary_dns = "8.8.8.8",
+                secondary_dns = "8.8.4.4",
+                proxy_ip = arrayListOf("123.123.123.123", "10.10.10.1"),
+                local_ip = "10.10.10.1",
+                gateway = "192.168.0.1",
+                forwarding_rules = arrayListOf(
+                    ForwardingRule(
+                        protocol = Protocols.UDP,
+                        ports = arrayListOf("888", "1234", "8080"),
+                        target_ip = "10.10.10.5",
+                        target_port = "80"
+                    ),
+                    ForwardingRule(
+                        protocol = Protocols.TCP,
+                        ports = arrayListOf("888", "1234", "8080"),
+                        target_ip = null,
+                        target_port = "80"
+                    )
+                )
+            )
+        }
+    }
+
 }

@@ -19,6 +19,7 @@ import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.utils.VPNState
+import com.paranoid.vpn.app.common.vpn_configuration.domain.database.VPNConfigDatabase
 import com.paranoid.vpn.app.databinding.NavigationVpnFragmentBinding
 import com.paranoid.vpn.app.vpn.core.LocalVPNService2
 import kotlinx.coroutines.*
@@ -77,6 +78,15 @@ class VPNFragment :
         setListeners()
         setObservers()
 
+        CoroutineScope(Dispatchers.IO).launch {
+            val db = context?.let { VPNConfigDatabase.getInstance() }
+            val vpnConfigDao = db?.VPNConfigDao()
+            val config = vpnConfigDao?.getById(1L)
+            if (config != null) {
+                updateConfigText(configName = config.name)
+            }
+        }
+
         textUpdater = lifecycleScope.launch(Dispatchers.Default) {
             while (true) {
                 if (viewModel.vpnStateOn.value == VPNState.CONNECTED
@@ -97,6 +107,10 @@ class VPNFragment :
 
     private suspend fun updateText() = withContext(Dispatchers.Main) {
         binding.isConnected.text = "up: $upByte B, down: $downByte B"
+    }
+
+    private suspend fun updateConfigText(configName: String) = withContext(Dispatchers.Main) {
+        binding.mainConfigurationText.text = configName
     }
 
     private fun loadMainConfiguration() {

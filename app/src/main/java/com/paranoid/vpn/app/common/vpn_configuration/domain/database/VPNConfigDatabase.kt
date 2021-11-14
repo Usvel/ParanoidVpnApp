@@ -5,9 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.ArrayConverter
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.ForwardingRuleConverter
+import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigDataGenerator
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
 
 @Database(entities = [VPNConfigItem::class], version = 1, exportSchema = false)
@@ -20,22 +25,40 @@ abstract class VPNConfigDatabase : RoomDatabase() {
 
         private var INSTANCE: VPNConfigDatabase? = null
 
-        fun getInstance(context: Context): VPNConfigDatabase {
-            synchronized(this) {
-                var instance = INSTANCE
 
-                if (instance == null) {
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        VPNConfigDatabase::class.java,
-                        "vpn_config_database"
-                    )
-                        .fallbackToDestructiveMigration()
-                        .build()
-                    INSTANCE = instance
+        fun setInstance(context: Context): VPNConfigDatabase? {
+            if (INSTANCE == null) {
+                CoroutineScope(IO).launch {
+                    if (INSTANCE == null) {
+                        INSTANCE = Room.databaseBuilder(
+                            context.applicationContext,
+                            VPNConfigDatabase::class.java, "vpn_config_database"
+                        ).addCallback(object : RoomDatabase.Callback() {
+                                override fun onCreate(db: SupportSQLiteDatabase) {
+                                    super.onCreate(db)
+                                    populateDatabase(INSTANCE!!)
+                                }
+                            })
+                            .build()
+                    }
                 }
-                return instance
+            }
+            return INSTANCE
+        }
+
+        @Synchronized
+        fun getInstance(): VPNConfigDatabase {
+            return INSTANCE!!
+
+        }
+
+
+        private fun populateDatabase(db: VPNConfigDatabase) {
+            val vpnConfigDao = db.VPNConfigDao()
+            CoroutineScope(IO).launch {
+                vpnConfigDao.insert(VPNConfigDataGenerator.getVPNConfigItem())
             }
         }
     }
 }
+
