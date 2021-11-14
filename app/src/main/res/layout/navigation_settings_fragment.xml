@@ -7,6 +7,18 @@
     tools:context=".settings.ui.SettingsFragment">
 
     <TextView
+        android:id="@+id/tvProfileHello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/profile_fragment_content_margin_horizontal"
+        android:layout_marginTop="@dimen/profile_fragment_settings_margin_top"
+        android:text="@string/settings"
+        android:textColor="@color/text_view_dark_text_transparent"
+        android:textSize="@dimen/profile_fragment_name_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/testTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,5 +26,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/settingsIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tint="@color/text_view_black"
+        android:alpha="0.5"
+        android:layout_marginTop="-95dp"
+        android:layout_marginEnd="-95dp"
+        android:contentDescription="@string/this_is_settings"
+        android:src="@drawable/ic_outline_settings_max"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,6 +25,7 @@
     <dimen name="app_activity_card_view_proceed_radius">25dp</dimen>
     <!--  ProfileFragment  -->
     <dimen name="profile_fragment_content_margin_horizontal">30dp</dimen>
+    <dimen name="profile_fragment_settings_margin_top">100dp</dimen>
     <dimen name="profile_fragment_content_margin_top">40dp</dimen>
     <dimen name="profile_fragment_icon_margin_top">9dp</dimen>
     <dimen name="profile_fragment_icon_margin_start">13dp</dimen>

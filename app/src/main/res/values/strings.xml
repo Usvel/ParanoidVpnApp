@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">Paranoid VPN</string>
     <string name="vpn_client">VPN client</string>
-    <string name="settings">Settings</string>
     <string name="profile">Profile</string>
     <string name="this_is_profile">This is profile</string>
     <string name="this_is_vpn">This is VPN</string>
-    <string name="this_is_settings">This is settings</string>
+    <string name="this_is_settings">Coming soon…</string>
     <string name="get_information_about_vpn">Get information about VPN</string>
     <string name="click_to_choose_configuration">Click to choose configuration</string>
     <string name="configuration_settings">Configuration settings</string>
@@ -57,4 +56,5 @@
     <string name="authentication_fragment_about_password">Your password must be 8–24 characters long and contain a combination of letters and numbers</string>
     <!-- Firebase -->
     <string name="firebase_error">Error Firebase</string>
+    <string name="settings">Settings</string>
 </resources>
