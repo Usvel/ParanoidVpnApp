@@ -133,8 +133,8 @@ class LocalVPNService2 : VpnService() {
 
     private suspend fun cleanup() {
         bioUdpHandlerJob?.cancelAndJoin()
-        nioSingleThreadTcpHandlerJob?.cancel()
-        VPNRunnableJob?.cancel()
+        nioSingleThreadTcpHandlerJob?.cancelAndJoin()
+        VPNRunnableJob?.cancelAndJoin()
         context.cancel()
         CoroutineScope(context).coroutineContext.cancelChildren()
         deviceToNetworkTCPQueue = null
