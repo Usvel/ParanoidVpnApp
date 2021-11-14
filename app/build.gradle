@@ -48,6 +48,10 @@ def retrofitVersion = "2.9.0"
 def loggingInterceptorVersion = "4.9.2"
 
 dependencies {
+    // room
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+
     // material3
     implementation 'com.google.android.material:material:1.5.0-beta01'
     implementation("androidx.compose.compiler:compiler:1.1.0-beta02")

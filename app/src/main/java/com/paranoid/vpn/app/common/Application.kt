@@ -5,8 +5,10 @@ import android.os.StrictMode
 import androidx.viewbinding.BuildConfig
 import com.paranoid.vpn.app.common.remote.FirebaseServiceFactory
 import com.paranoid.vpn.app.common.utils.Utils
+import com.paranoid.vpn.app.common.vpn_configuration.domain.database.VPNConfigDatabase
 
 class Application : Application() {
+
     override fun onCreate() {
         super.onCreate()
 
@@ -35,3 +37,21 @@ class Application : Application() {
         }
     }
 }
+
+// private AppDatabase database;
+//
+//    @Override
+//    public void onCreate() {
+//        super.onCreate();
+//        instance = this;
+//        database = Room.databaseBuilder(this, AppDatabase.class, "database")
+//                .build();
+//    }
+//
+//    public static App getInstance() {
+//        return instance;
+//    }
+//
+//    public AppDatabase getDatabase() {
+//        return database;
+//    }
