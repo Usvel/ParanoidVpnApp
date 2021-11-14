@@ -42,4 +42,10 @@
     <!-- ProfileFragment -->
     <color name="text_button_profile">#7C7C7C</color>
     <color name="text_card_view">#757575</color>
+    <!-- Special colors -->
+    <color name="text_view_dark_text_transparent">#99000000</color>
+    <color name="text_view_light_text_transparent">#99FFFFFF</color>
+    <color name="text_view_black">#000000</color>
+    <color name="text_view_white">#FFFFFF</color>
+    <color name="box_stroke_color">#191919</color>
 </resources>

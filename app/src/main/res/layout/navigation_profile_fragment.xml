@@ -13,7 +13,7 @@
         android:layout_marginStart="@dimen/profile_fragment_content_margin_horizontal"
         android:layout_marginTop="@dimen/profile_fragment_content_margin_top"
         android:text="@string/profile_fragment_hi"
-        android:textColor="?attr/textTransparent"
+        android:textColor="@color/text_view_dark_text_transparent"
         android:textSize="@dimen/profile_fragment_hello_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,7 @@
         android:id="@+id/tvProfileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="?attr/textDedicated"
+        android:textColor="@color/text_view_black"
         android:textSize="@dimen/profile_fragment_name_size"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/tvProfileHello"
@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/profile_fragment_content_margin_top"
         android:layout_marginEnd="@dimen/profile_fragment_content_margin_horizontal"
-        android:backgroundTint="?attr/backgroundVioletLight"
+        android:backgroundTint="?attr/iconBackground"
         android:innerRadius="0dp"
         android:shape="ring"
         app:cardCornerRadius="@dimen/big_corner_radius"
@@ -96,6 +96,7 @@
             android:layout_width="@dimen/profile_fragment_image_size"
             android:layout_height="@dimen/profile_fragment_image_size"
             android:layout_gravity="center_vertical"
+            android:alpha="0.7"
             android:contentDescription="@string/profile_fragment_about_image"
             android:foregroundGravity="center_vertical"
             android:padding="@dimen/profile_fragment_image_padding"
@@ -118,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/profile_fragment_statistics_margin_bottom"
         android:text="@string/profile_fragment_statistics"
-        android:textColor="?attr/textTransparent"
+        android:textColor="@color/text_view_dark_text_transparent"
         android:textSize="@dimen/profile_fragment_title_size"
         app:layout_constraintBottom_toTopOf="@id/ivProfileStatistic"
         app:layout_constraintStart_toStartOf="@id/tvProfileEmailProfile"
@@ -150,7 +151,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/profile_fragment_email_margin_top"
         android:text="@string/profile_fragment_email"
-        android:textColor="?attr/textTransparent"
+        android:textColor="@color/text_view_dark_text_transparent"
         android:textSize="@dimen/profile_fragment_title_size"
         app:layout_constraintStart_toStartOf="@id/cvProfileСhange"
         app:layout_constraintTop_toBottomOf="@id/cvProfileСhange" />
@@ -159,7 +160,7 @@
         android:id="@+id/tvProfileEmailProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="?attr/textDedicated"
+        android:textColor="@color/text_view_black"
         android:textSize="@dimen/profile_fragment_email_size"
         app:layout_constraintStart_toStartOf="@id/tvProfileEmail"
         app:layout_constraintTop_toBottomOf="@id/tvProfileEmail"
@@ -171,7 +172,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/profile_fragment_linked_margin_bottom"
         android:text="@string/profile_fragment_linked"
-        android:textColor="?attr/textTransparent"
+        android:textColor="@color/text_view_dark_text_transparent"
         android:textSize="@dimen/profile_fragment_title_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/tvProfileEmailProfile" />
@@ -222,7 +223,7 @@
         android:layout_marginBottom="@dimen/profile_fragment_card_view_bottom_margin"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="?attr/cardViewBackground"
+        app:cardBackgroundColor="@color/card_view_background"
         app:cardCornerRadius="@dimen/profile_fragment_card_view_radius"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toTopOf="@id/cvProfileRegistration"
@@ -249,7 +250,7 @@
             android:layout_marginTop="@dimen/profile_fragment_card_view_text_margin"
             android:layout_marginBottom="@dimen/profile_fragment_card_view_text_margin"
             android:text="@string/profile_fragment_entry"
-            android:textColor="?attr/textDedicated"
+            android:textColor="@color/text_view_black"
             android:textSize="@dimen/profile_fragment_card_view_text_size" />
     </androidx.cardview.widget.CardView>
 
@@ -266,7 +267,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="?attr/cardViewBackground"
+        app:cardBackgroundColor="@color/card_view_background"
         app:cardCornerRadius="@dimen/profile_fragment_card_view_radius"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toTopOf="@id/tvProfileAccounts"
@@ -292,7 +293,7 @@
             android:layout_marginTop="@dimen/profile_fragment_card_view_text_margin"
             android:layout_marginBottom="@dimen/profile_fragment_card_view_text_margin"
             android:text="@string/profile_fragment_registration"
-            android:textColor="?attr/textDedicated"
+            android:textColor="@color/text_view_black"
             android:textSize="@dimen/profile_fragment_card_view_text_size" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

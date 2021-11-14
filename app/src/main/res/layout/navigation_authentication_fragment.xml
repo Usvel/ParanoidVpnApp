@@ -12,7 +12,7 @@
         android:layout_marginStart="@dimen/authentication_fragment_content_margin_horizontal"
         android:layout_marginTop="@dimen/authentication_fragment_content_margin_top"
         android:text="@string/authentication_fragment_hi"
-        android:textColor="?attr/textTransparent"
+        android:textColor="@color/text_view_dark_text_transparent"
         android:textSize="@dimen/authentication_fragment_hello_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/name_user"
-        android:textColor="?attr/textDedicated"
+        android:textColor="@color/text_view_black"
         android:textSize="@dimen/authentication_fragment_name_size"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/tvAuthenticationHello"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/authentication_fragment_content_margin_top"
         android:layout_marginEnd="@dimen/authentication_fragment_content_margin_horizontal"
-        android:backgroundTint="?attr/backgroundVioletLight"
+        android:backgroundTint="?attr/iconBackground"
         android:innerRadius="0dp"
         android:shape="ring"
         app:cardCornerRadius="@dimen/big_corner_radius"
@@ -49,6 +49,7 @@
             android:contentDescription="@string/authentication_fragment_about_image"
             android:foregroundGravity="center_vertical"
             android:padding="@dimen/icon_inner_padding"
+            android:alpha="0.7"
             android:src="@drawable/ic_image_profile"
             app:tint="?attr/toolBarColor" />
     </androidx.cardview.widget.CardView>
@@ -58,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/authentication_fragment_entry_margin"
-        android:textColor="?attr/textDedicated"
+        android:textColor="@color/text_view_black"
         android:textSize="@dimen/authentication_fragment_entry_size"
         app:layout_constraintBottom_toTopOf="@id/tilAuthenticationName"
         app:layout_constraintStart_toStartOf="@id/tilAuthenticationName"
@@ -76,17 +77,17 @@
         app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
         app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
         app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
-        app:boxStrokeColor="?attr/textDedicated"
+        app:boxStrokeColor="@color/box_stroke_color"
         app:endIconDrawable="@drawable/ic_clear"
         app:endIconMode="clear_text"
-        app:endIconTint="?attr/toolBarColor"
+        app:endIconTint="@color/text_view_black"
         app:hintEnabled="false"
         app:layout_constraintBottom_toTopOf="@id/tilAuthenticationPassword"
         app:layout_constraintEnd_toEndOf="@id/cvAuthenticationImage"
         app:layout_constraintStart_toStartOf="@id/tvAuthenticationName"
         app:layout_constraintTop_toBottomOf="@id/tvAuthenticationEntry"
         app:startIconDrawable="@drawable/ic_user"
-        app:startIconTint="?attr/textTransparent">
+        app:startIconTint="@color/text_view_dark_text_transparent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etAuthenticationName"
@@ -112,17 +113,17 @@
         app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
         app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
         app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
-        app:boxStrokeColor="?attr/textDedicated"
+        app:boxStrokeColor="@color/box_stroke_color"
         app:endIconDrawable="@drawable/ic_eye"
         app:endIconMode="password_toggle"
-        app:endIconTint="?attr/toolBarColor"
+        app:endIconTint="@color/text_view_black"
         app:hintEnabled="false"
         app:layout_constraintBottom_toTopOf="@id/bAuthenticationForgot"
         app:layout_constraintEnd_toEndOf="@id/tilAuthenticationName"
         app:layout_constraintStart_toStartOf="@id/tilAuthenticationName"
         app:layout_constraintTop_toBottomOf="@id/tilAuthenticationName"
         app:startIconDrawable="@drawable/ic_lock"
-        app:startIconTint="?attr/textTransparent">
+        app:startIconTint="@color/text_view_dark_text_transparent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etAuthenticationPassword"
@@ -145,7 +146,7 @@
         android:background="@android:color/transparent"
         android:text="@string/authentication_fragment_forgot"
         android:textAllCaps="false"
-        android:textColor="?attr/textButtonProfile"
+        android:textColor="@color/text_button_profile"
         android:textSize="@dimen/authentication_fragment_forgot_text_size"
         app:layout_constraintBottom_toTopOf="@id/cvAuthenticationGoogle"
         app:layout_constraintEnd_toEndOf="@+id/tilAuthenticationPassword"
@@ -158,7 +159,7 @@
         android:layout_marginBottom="@dimen/authentication_fragment_card_view_margin"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="?attr/cardViewBackground"
+        app:cardBackgroundColor="@color/card_view_background"
         app:cardCornerRadius="@dimen/authentication_fragment_card_view_radius"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toTopOf="@id/cvProfileRegistration"
@@ -188,7 +189,7 @@
                 android:layout_marginTop="@dimen/authentication_fragment_card_view_text_margin_vertical"
                 android:layout_marginBottom="@dimen/authentication_fragment_card_view_text_margin_vertical"
                 android:text="@string/authentication_fragment_google"
-                android:textColor="?attr/cardViewText"
+                android:textColor="@color/text_card_view"
                 android:textSize="@dimen/authentication_fragment_card_view_text_size" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -200,7 +201,7 @@
         android:layout_marginBottom="@dimen/authentication_fragment_card_view_content_margin_bottom"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="?attr/cardViewBackground"
+        app:cardBackgroundColor="@color/card_view_background"
         app:cardCornerRadius="@dimen/authentication_fragment_card_view_radius"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -219,6 +220,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/authentication_fragment_card_view_image_vk_margin"
                 android:layout_marginTop="@dimen/authentication_fragment_card_view_image_vk_margin"
+                app:tint="@color/text_view_black"
                 android:layout_marginBottom="@dimen/authentication_fragment_card_view_image_vk_margin"
                 android:contentDescription="@string/authentication_fragment_about_vk"
                 android:src="@drawable/ic_vk" />
@@ -230,7 +232,7 @@
                 android:layout_marginTop="@dimen/authentication_fragment_card_view_text_margin_vertical"
                 android:layout_marginBottom="@dimen/authentication_fragment_card_view_text_margin_vertical"
                 android:text="@string/authentication_fragment_vk"
-                android:textColor="?attr/cardViewText"
+                android:textColor="@color/text_card_view"
                 android:textSize="@dimen/authentication_fragment_card_view_text_size" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
