@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="fui_error_weak_password"> <item quantity="one">Salasana ei ole tarpeeksi vahva. Siinä on oltava vähintään %1$d merkkiä – sekä kirjaimia että numeroita.</item> <item quantity="other">Salasana ei ole tarpeeksi vahva. Siinä on oltava vähintään %1$d merkkiä – sekä kirjaimia että numeroita.</item> </plurals>
+    <plurals name="mtrl_badge_content_description">
+    <item quantity="one">%d uusi ilmoitus</item>
+    <item quantity="other">%d uutta ilmoitusta</item>
+  </plurals>
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Siirry etusivulle"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Siirry ylös"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Lisäasetukset"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Valmis"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Näytä kaikki"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Valitse sovellus"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"POIS PÄÄLTÄ"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"PÄÄLLÄ"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"delete"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"enter"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Fn+"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Vaihto+"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"välilyönti"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Valikko+"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Haku…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Tyhjennä kysely"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Hakukysely"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Haku"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Lähetä kysely"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Puhehaku"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Jaa…"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Jaa: <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Tiivistä"</string>
+    <string name="bottomsheet_action_expand_halfway">Laajenna puoliväliin</string>
+    <string name="character_counter_content_description">%1$d/%2$d merkkiä kirjoitettu</string>
+    <string name="character_counter_overflowed_content_description">Merkkiraja ylitetty: %1$d/%2$d</string>
+    <string name="clear_text_end_icon_content_description">Tyhjennä teksti</string>
+    <string msgid="406453423630273620" name="close_drawer">"Sulje navigointivalikko"</string>
+    <string msgid="7573152094250666567" name="close_sheet">"Sulje taulukko"</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"Ota käyttöön"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> ei toimi, ellet ota Google Play Palveluita käyttöön."</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"Ota Google Play Palvelut käyttöön"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"Asenna"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> ei toimi ilman Google Play Palveluita, jotka puuttuvat laitteeltasi."</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"Asenna Google Play Palvelut"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Google Play Palveluiden saatavuus"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Virhe Google Play -palveluissa"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"Sovelluksella <ns1:g id="APP_NAME">%1$s</ns1:g> on ongelmia Google Play Palveluiden kanssa. Yritä uudelleen."</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> ei toimi ilman Google Play Palveluita, joita laitteesi ei tue."</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"Päivitä"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> ei toimi, ellet päivitä Google Play Palveluita."</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"Päivitä Google Play Palvelut"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> ei toimi ilman Google Play Palveluita, joita päivitetään tällä hetkellä."</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"Uusi Google Play Palveluiden versio tarvitaan. Se päivittyy pian."</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"Avaa puhelimessa"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"Kirjaudu sisään"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"Kirjaudu Google-tilille"</string>
+    <string msgid="8038256446254964252" name="default_error_message">"Virheellinen syöte"</string>
+    <string msgid="6312721426453364202" name="default_popup_window_title">"Ponnahdusikkuna"</string>
+    <string msgid="1890207353314751437" name="dropdown_menu">"Avattava valikko"</string>
+    <string name="error_icon_content_description">Virhe</string>
+    <string name="exposed_dropdown_menu_content_description">Näytä avattava valikko</string>
+    <string name="fui_accessibility_logo">Sovelluksen logo</string>
+    <string name="fui_auto_verified">Puhelinnumero vahvistettu automaattisesti</string>
+    <string name="fui_button_text_save">Tallenna</string>
+    <string name="fui_button_text_send">Lähetä</string>
+    <string name="fui_cancel">Peruuta</string>
+    <string name="fui_confirm_recovery_body">Palauta salasana noudattamalla osoitteeseen %1$s lähetettyjä ohjeita.</string>
+    <string name="fui_continue">Jatka</string>
+    <string name="fui_email_account_creation_error">Sähköpostitilin rekisteröinti epäonnistui.</string>
+    <string name="fui_email_hint">Sähköposti</string>
+    <string name="fui_email_link_confirm_email_header">Vahvista sähköposti</string>
+    <string name="fui_email_link_confirm_email_message">Vahvista sähköposti jatkaaksesi kirjautumista</string>
+    <string name="fui_email_link_cross_device_linking_text">Tarkoituksesi oli yhdistää palvelu %1$s sähköpostiosoitteeseesi, mutta avasit linkin eri laitteella, johon et ollut kirjautunut.\n\Jos haluat edelleen yhdistää palvelun %1$s tilisi, avaa linkki samalla laitteella, jolla aloitit kirjautumisen. Jos haluat jatkaa kirjautumista tällä laitteella, napauta Jatka.</string>
+    <string name="fui_email_link_cross_device_sign_in_button_text">Kirjaudu palvelun %1$s kautta</string>
+    <string name="fui_email_link_different_anonymous_user_header">Istunto päättyi</string>
+    <string name="fui_email_link_different_anonymous_user_message">Tähän kirjautumispyyntöön liittyvä istunto on joko vanhentunut tai tyhjennetty.</string>
+    <string name="fui_email_link_dismiss_button">Hylkää</string>
+    <string name="fui_email_link_email_sent">Lisäohjeita sisältävä kirjautumisviesti lähetettiin osoitteeseen %1$s. Tarkista sähköpostisi kirjautumisen suorittamiseksi loppuun.</string>
+    <string name="fui_email_link_header">Kirjautumisviesti lähetetty\n</string>
+    <string name="fui_email_link_invalid_link_header">Kirjautumista ei voi suorittaa loppuun</string>
+    <string name="fui_email_link_invalid_link_message">Toimintakoodi on virheellinen. Syynä voi olla, että koodi on väärän muotoinen, vanhentunut tai jo käytetty.</string>
+    <string name="fui_email_link_resend">Lähetä uudelleen</string>
+    <string name="fui_email_link_trouble_getting_email_header">Ongelmia sähköpostiviestin saamisessa?</string>
+    <string name="fui_email_link_trouble_getting_email_resend_solution">Jos edellä olevista ratkaisuista ei ollut apua, voit lähettää viestin uudelleen. Huomaa että tällöin aiemmassa viestissä oleva linkki poistetaan käytöstä.</string>
+    <string name="fui_email_link_trouble_getting_possible_fixes">Kokeile näitä yleisiä ratkaisuja:\n\u2022 Tarkista merkittiinkö viesti roskapostiksi tai suodatettiinko se.\n\u2022 Tarkista internetyhteytesi.\n\u2022 Tarkista että kirjoitit sähköpostiosoitteesi oikein.\n\u2022 Tarkista ettei postilaatikkosi tila ole loppumassa tai ettei postilaatikon asetuksissa ole muita ongelmia.\n</string>
+    <string name="fui_email_link_wrong_device_header">Uusi laite tai selain havaittu.</string>
+    <string name="fui_email_link_wrong_device_message">Kokeile avata linkki käyttäen samaa laitetta tai selainta, jolla aloitit kirjautumisen.</string>
+    <string name="fui_enter_confirmation_code">Anna 6 merkin pituinen koodi, jonka lähetimme numeroon</string>
+    <string name="fui_error_email_does_not_exist">Sähköpostiosoite ei vastaa aiemmin luotua tiliä.</string>
+    <string name="fui_error_invalid_password">Väärä salasana</string>
+    <string name="fui_error_quota_exceeded">Puhelinnumerosi vahvistamisessa tapahtui virhe.</string>
+    <string name="fui_error_session_expired">Tämä koodi ei ole enää voimassa.</string>
+    <string name="fui_error_too_many_attempts">Tätä puhelinnumeroa on käytetty liian monta kertaa.</string>
+    <string name="fui_error_unknown">Tapahtui tuntematon virhe.</string>
+    <string name="fui_idp_name_email">Sähköposti</string>
+    <string name="fui_idp_name_facebook">Facebook</string>
+    <string name="fui_idp_name_github">GitHub</string>
+    <string name="fui_idp_name_google">Google</string>
+    <string name="fui_idp_name_phone">Puhelin</string>
+    <string name="fui_idp_name_twitter">Twitter</string>
+    <string name="fui_incorrect_code_dialog_body">Väärä koodi. Yritä uudelleen.</string>
+    <string name="fui_invalid_email_address">Virheellinen sähköpostiosoite</string>
+    <string name="fui_invalid_phone_number">Anna voimassa oleva puhelinnumero.</string>
+    <string name="fui_missing_email_address">Jatka antamalla sähköpostiosoite.</string>
+    <string name="fui_missing_first_and_last_name">Lisää etu- ja sukunimi.</string>
+    <string name="fui_name_hint">Etu- ja sukunimi</string>
+    <string name="fui_new_password_hint">Uusi salasana</string>
+    <string name="fui_next_default">Seuraava</string>
+    <string name="fui_no_internet" translation_descripition="User message shown when sign-in is attempted while offline.">Verkkovirhe, tarkista internetyhteys.</string>
+    <string name="fui_password_hint">Salasana</string>
+    <string name="fui_password_recovery_body">Tilaa tähän sähköpostiin ohjeet, joissa neuvotaan, miten voit nollata salasanan.</string>
+    <string name="fui_phone_hint">Puhelinnumero</string>
+    <string name="fui_privacy_policy">tietosuojakäytännön</string>
+    <string name="fui_progress_dialog_checking_accounts">Tarkistetaan nykyisiä tilejä…</string>
+    <string name="fui_progress_dialog_loading">Ladataan…</string>
+    <string name="fui_progress_dialog_sending">Lähetetään…</string>
+    <string name="fui_progress_dialog_signing_in">Kirjaudutaan sisään…</string>
+    <string name="fui_progress_dialog_signing_up">Rekisteröityminen käynnissä…</string>
+    <string name="fui_required_field">Tätä ei voi jättää tyhjäksi.</string>
+    <string name="fui_resend_code">Lähetä koodi uudelleen</string>
+    <string name="fui_resend_code_in">Lähetä koodi uudelleen seuraavan ajan kuluttua: 0:%02d.</string>
+    <string name="fui_sign_in_anonymously">Jatka vieraana</string>
+    <string name="fui_sign_in_default">Kirjaudu sisään</string>
+    <string name="fui_sign_in_with_apple">Kirjaudu sisään Apple-tilillä</string>
+    <string name="fui_sign_in_with_email">Kirjaudu sähköpostilla</string>
+    <string name="fui_sign_in_with_facebook">Kirjaudu Facebook-tilillä</string>
+    <string name="fui_sign_in_with_github">Kirjaudu GitHub-tilillä</string>
+    <string name="fui_sign_in_with_google">Kirjaudu Google-tilillä</string>
+    <string name="fui_sign_in_with_microsoft">Kirjaudu sisään Microsoft-tilillä</string>
+    <string name="fui_sign_in_with_phone">Kirjaudu puhelimella</string>
+    <string name="fui_sign_in_with_phone_number">Kirjaudu puhelinnumerolla</string>
+    <string name="fui_sign_in_with_twitter">Kirjaudu Twitter-tilillä</string>
+    <string name="fui_sign_in_with_yahoo">Kirjaudu sisään Yahoo-tilillä</string>
+    <string name="fui_sms_terms_of_service">Kun napautat %1$s, tekstiviesti voidaan lähettää. Datan ja viestien käyttö voi olla maksullista.</string>
+    <string name="fui_sms_terms_of_service_and_privacy_policy_extended">Napauttamalla %1$s vahvistat hyväksyväsi seuraavat: %2$s ja %3$s. Tekstiviesti voidaan lähettää, ja datan ja viestien käyttö voi olla maksullista.</string>
+    <string name="fui_terms_of_service">Käyttöehdot</string>
+    <string name="fui_title_confirm_recover_password">Tarkista sähköpostisi</string>
+    <string name="fui_title_recover_password_activity">Palauta salasana</string>
+    <string name="fui_title_register_email">Hanki tili</string>
+    <string name="fui_tos_and_pp">Jatkamalla vahvistat, että hyväksyt seuraavat: %1$s ja %2$s.</string>
+    <string name="fui_tos_and_pp_footer">%1$s \u00A0 \u00A0 %2$s</string>
+    <string name="fui_trouble_signing_in">Eikö kirjautuminen onnistu?</string>
+    <string name="fui_verify_phone_number">Vahvista puhelinnumero</string>
+    <string name="fui_verify_phone_number_title">Anna puhelinnumerosi</string>
+    <string name="fui_verify_your_phone_title">Puhelinnumeron vahvistaminen</string>
+    <string name="fui_verifying">Vahvistetaan…</string>
+    <string name="fui_welcome_back_email_header">Tervetuloa takaisin!</string>
+    <string name="fui_welcome_back_email_link_header">Sinulla on jo tili\n</string>
+    <string name="fui_welcome_back_email_link_prompt_body">%1$s on jo käytössä. Voit yhdistää %2$s ‑tilin sähköpostiosoitteeseen %1$s kirjautumalla sisään alla olevasta sähköpostilinkistä.\n\nJotta palvelun %2$s tilisi voidaan yhdistää tähän sähköpostiosoitteeseen tällä prosessilla, sinun on avattava linkki samalla laitteella tai selaimella.</string>
+    <string name="fui_welcome_back_idp_header">Sinulla on jo tili.</string>
+    <string name="fui_welcome_back_idp_prompt">Olet jo käyttänyt osoitetta %1$s. Jatka kirjautumalla palvelun %2$s kautta.</string>
+    <string name="fui_welcome_back_password_prompt_body">Olet jo käyttänyt osoitetta %1$s kirjautumiseen. Anna kyseisen tilin salasana.</string>
+    <string name="icon_content_description">Valintaikkunan kuvake</string>
+    <string msgid="6827826412747255547" name="in_progress">"Kesken"</string>
+    <string msgid="2486394087603402002" name="indeterminate">"Ei valittu eikä valitsematta"</string>
+    <string msgid="475402237100444685" name="installation_cancelled">"Asennus peruutettu."</string>
+    <string msgid="863287960437940689" name="installation_failed">"Asennus epäonnistui."</string>
+    <string msgid="5968445461040787716" name="installing_module">"Asennusmoduuli:"</string>
+    <string name="item_view_role_description">Välilehti</string>
+    <string name="material_clock_toggle_content_description">Valitse AP tai IP</string>
+    <string name="material_hour_selection">Valitse tunti</string>
+    <string name="material_hour_suffix">klo %1$s</string>
+    <string name="material_minute_selection">Valitse minuutit</string>
+    <string name="material_minute_suffix">%1$s minuuttia</string>
+    <string name="material_timepicker_am">ap</string>
+    <string name="material_timepicker_clock_mode_description">Vaihda ajan syöttämiseen kellotilassa.</string>
+    <string name="material_timepicker_hour">Tunnit</string>
+    <string name="material_timepicker_minute">Minuutti</string>
+    <string name="material_timepicker_pm">ip</string>
+    <string name="material_timepicker_select_time">Valitse aika</string>
+    <string name="material_timepicker_text_input_mode_description">Vaihda ajan syöttämiseen tekstitilassa.</string>
+    <string name="mtrl_badge_numberless_content_description">Uusi ilmoitus</string>
+    <string name="mtrl_chip_close_icon_content_description">Poista %1$s</string>
+    <string name="mtrl_exceed_max_badge_number_content_description">Yli %1$d uutta ilmoitusta</string>
+    <string name="mtrl_picker_a11y_next_month">Vaihda seuraavaan kuukauteen</string>
+    <string name="mtrl_picker_a11y_prev_month">Vaihda edelliseen kuukauteen</string>
+    <string name="mtrl_picker_announce_current_selection">Nykyinen valinta: %1$s</string>
+    <string name="mtrl_picker_confirm">@android:string/ok</string>
+    <string name="mtrl_picker_date_header_selected">%1$s</string>
+    <string name="mtrl_picker_date_header_title">Valitse päivämäärä</string>
+    <string name="mtrl_picker_date_header_unselected">Valittu päivämäärä</string>
+    <string name="mtrl_picker_day_of_week_column_header">Päiväsarake: %1$s</string>
+    <string name="mtrl_picker_invalid_format">Virheellinen muoto</string>
+    <string name="mtrl_picker_invalid_format_example">Esimerkki: %1$s</string>
+    <string name="mtrl_picker_invalid_format_use">Käytä muotoa %1$s</string>
+    <string name="mtrl_picker_invalid_range">Virheellinen alue</string>
+    <string name="mtrl_picker_navigate_to_year_description">Siirry vuoteen %1$s</string>
+    <string name="mtrl_picker_out_of_range">Aikavälin ulkop.: %1$s</string>
+    <string name="mtrl_picker_range_header_only_end_selected">Alkamispäivä – %1$s</string>
+    <string name="mtrl_picker_range_header_only_start_selected">%1$s – päättymispäivä</string>
+    <string name="mtrl_picker_range_header_selected">%1$s – %2$s</string>
+    <string name="mtrl_picker_range_header_title">Valitse jakso</string>
+    <string name="mtrl_picker_range_header_unselected">Alkamispäivä – päättymispäivä</string>
+    <string name="mtrl_picker_save">Tallenna</string>
+    <string name="mtrl_picker_text_input_date_hint">Päivämäärä</string>
+    <string name="mtrl_picker_text_input_date_range_end_hint">Päättymispäivä</string>
+    <string name="mtrl_picker_text_input_date_range_start_hint">Alkamispäivä</string>
+    <string name="mtrl_picker_text_input_day_abbr">p</string>
+    <string name="mtrl_picker_text_input_month_abbr">k</string>
+    <string name="mtrl_picker_text_input_year_abbr">v</string>
+    <string name="mtrl_picker_toggle_to_calendar_input_mode">Vaihda syöttötavaksi kalenteri</string>
+    <string name="mtrl_picker_toggle_to_day_selection">Siirry päivän valintaan napauttamalla</string>
+    <string name="mtrl_picker_toggle_to_text_input_mode">Valitse syöttötavaksi teksti</string>
+    <string name="mtrl_picker_toggle_to_year_selection">Siirry vuoden valintaan napauttamalla</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Siirry ylös"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Avaa navigoinnin vetopaneeli"</string>
+    <string msgid="542007171693138492" name="navigation_menu">"Navigointivalikko"</string>
+    <string msgid="6610465462668679431" name="not_selected">"Ei valittu"</string>
+    <string msgid="875452955155264703" name="off">"Pois"</string>
+    <string msgid="4702104660890557116" name="ok">"OK"</string>
+    <string msgid="8655164131929253426" name="on">"Päällä"</string>
+    <string name="password_toggle_content_description">Näytä salasana</string>
+    <string msgid="8366783942222789124" name="progress">"Edistyminen:"</string>
+    <string msgid="1065327189183624288" name="retry">"Yritä uudelleen"</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Haku"</string>
+    <string msgid="6043586758067023" name="selected">"Valittu"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string msgid="1672349317127674378" name="tab">"Välilehti"</string>
+    <string msgid="5946805113151406391" name="template_percent">"<ns1:g id="PERCENTAGE">%1$d</ns1:g> prosenttia"</string>
+</resources>

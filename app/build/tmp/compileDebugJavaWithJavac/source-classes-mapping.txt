@@ -1,0 +1,41 @@
+com/paranoid/vpn/app/profile/ui/login/LoginFragmentDirections.java
+ com.paranoid.vpn.app.profile.ui.login.LoginFragmentDirections
+com/paranoid/vpn/app/profile/ui/registration/RegistrationFragmentDirections.java
+ com.paranoid.vpn.app.profile.ui.registration.RegistrationFragmentDirections
+com/paranoid/vpn/app/vpn/core/protocol/tcpip/Packet.java
+ com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet
+ com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet$BitUtils
+ com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet$IP4Header
+ com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet$IP4Header$TransportProtocol
+ com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet$TCPHeader
+ com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet$UDPHeader
+com/paranoid/vpn/app/profile/ui/profile/ProfileFragmentDirections.java
+ com.paranoid.vpn.app.profile.ui.profile.ProfileFragmentDirections
+com/paranoid/vpn/app/vpn/core/util/ObjAttrUtil.java
+ com.paranoid.vpn.app.vpn.core.util.ObjAttrUtil
+com/paranoid/vpn/app/databinding/NavigationVpnFragmentBinding.java
+ com.paranoid.vpn.app.databinding.NavigationVpnFragmentBinding
+com/paranoid/vpn/app/vpn/core/protocol/tcpip/TCPStatus.java
+ com.paranoid.vpn.app.vpn.core.protocol.tcpip.TCPStatus
+com/paranoid/vpn/app/databinding/NavigationAuthenticationFragmentBinding.java
+ com.paranoid.vpn.app.databinding.NavigationAuthenticationFragmentBinding
+com/paranoid/vpn/app/BuildConfig.java
+ com.paranoid.vpn.app.BuildConfig
+com/paranoid/vpn/app/databinding/NavigationProfileFragmentBinding.java
+ com.paranoid.vpn.app.databinding.NavigationProfileFragmentBinding
+com/paranoid/vpn/app/databinding/NavigationSettingsFragmentBinding.java
+ com.paranoid.vpn.app.databinding.NavigationSettingsFragmentBinding
+com/paranoid/vpn/app/vpn/core/protocol/tcpip/IpUtil.java
+ com.paranoid.vpn.app.vpn.core.protocol.tcpip.IpUtil
+com/paranoid/vpn/app/vpn/core/config/Config.java
+ com.paranoid.vpn.app.vpn.core.config.Config
+com/paranoid/vpn/app/databinding/ComponentProgressDialogBinding.java
+ com.paranoid.vpn.app.databinding.ComponentProgressDialogBinding
+com/paranoid/vpn/app/vpn/core/util/ProxyException.java
+ com.paranoid.vpn.app.vpn.core.util.ProxyException
+com/paranoid/vpn/app/vpn/core/handlers/udp/BioUtil.java
+ com.paranoid.vpn.app.vpn.core.handlers.udp.BioUtil
+com/paranoid/vpn/app/databinding/ActivityMainBinding.java
+ com.paranoid.vpn.app.databinding.ActivityMainBinding
+com/paranoid/vpn/app/vpn/core/util/ByteBufferPool.java
+ com.paranoid.vpn.app.vpn.core.util.ByteBufferPool

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.ui.profile.ProfileFragment">
+
+    <TextView
+        android:id="@+id/tvProfileHello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/profile_fragment_content_margin_horizontal"
+        android:layout_marginTop="@dimen/profile_fragment_content_margin_top"
+        android:text="@string/profile_fragment_hi"
+        android:textColor="?attr/textTransparent"
+        android:textSize="@dimen/profile_fragment_hello_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvProfileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/textDedicated"
+        android:textSize="@dimen/profile_fragment_name_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/tvProfileHello"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileHello"
+        tools:text="UserName" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvProfileСhange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
+        android:backgroundTint="?attr/backgroundVioletLight"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        app:cardCornerRadius="@dimen/small_corner_radius"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="@id/tvProfileName"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileName">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/profile_fragment_about_change"
+            android:foregroundGravity="center_vertical"
+            android:padding="@dimen/icon_inner_padding"
+            android:src="@drawable/ic_change"
+            app:tint="?attr/toolBarColor" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvProfileBasket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/profile_fragment_icon_margin_start"
+        android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
+        android:backgroundTint="?attr/backgroundVioletLight"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        app:cardCornerRadius="@dimen/small_corner_radius"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toEndOf="@id/cvProfileСhange"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileName">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/profile_fragment_about_delete"
+            android:foregroundGravity="center_vertical"
+            android:padding="@dimen/icon_inner_padding"
+            android:src="@drawable/ic_delete"
+            app:tint="?attr/toolBarColor" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvProfileImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/profile_fragment_content_margin_top"
+        android:layout_marginEnd="@dimen/profile_fragment_content_margin_horizontal"
+        android:backgroundTint="?attr/backgroundVioletLight"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        app:cardCornerRadius="@dimen/big_corner_radius"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/profile_fragment_image_size"
+            android:layout_height="@dimen/profile_fragment_image_size"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/profile_fragment_about_image"
+            android:foregroundGravity="center_vertical"
+            android:padding="@dimen/profile_fragment_image_padding"
+            android:src="@drawable/ic_image_profile"
+            app:tint="?attr/toolBarColor" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/gProfileNotEnter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tvProfileStatistics, ivProfileStatistic,
+        cvProfileСhange, cvProfileBasket,
+        tvProfileAccounts, cvProfileGoogle, cvProfileVk, gProfileEmail" />
+
+    <TextView
+        android:id="@+id/tvProfileStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/profile_fragment_statistics_margin_bottom"
+        android:text="@string/profile_fragment_statistics"
+        android:textColor="?attr/textTransparent"
+        android:textSize="@dimen/profile_fragment_title_size"
+        app:layout_constraintBottom_toTopOf="@id/ivProfileStatistic"
+        app:layout_constraintStart_toStartOf="@id/tvProfileEmailProfile"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileEmailProfile"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <ImageView
+        android:id="@+id/ivProfileStatistic"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/profile_fragment_about_statistics"
+        android:src="@drawable/rectangle"
+        app:layout_constraintBottom_toTopOf="@id/tvProfileAccounts"
+        app:layout_constraintEnd_toEndOf="@id/cvProfileImage"
+        app:layout_constraintStart_toStartOf="@id/tvProfileEmail"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileStatistics" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/gProfileEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="tvProfileEmail,tvProfileEmailProfile" />
+
+    <TextView
+        android:id="@+id/tvProfileEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/profile_fragment_email_margin_top"
+        android:text="@string/profile_fragment_email"
+        android:textColor="?attr/textTransparent"
+        android:textSize="@dimen/profile_fragment_title_size"
+        app:layout_constraintStart_toStartOf="@id/cvProfileСhange"
+        app:layout_constraintTop_toBottomOf="@id/cvProfileСhange" />
+
+    <TextView
+        android:id="@+id/tvProfileEmailProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/textDedicated"
+        android:textSize="@dimen/profile_fragment_email_size"
+        app:layout_constraintStart_toStartOf="@id/tvProfileEmail"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileEmail"
+        tools:text="sample.mail@gmail.com" />
+
+    <TextView
+        android:id="@+id/tvProfileAccounts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/profile_fragment_linked_margin_bottom"
+        android:text="@string/profile_fragment_linked"
+        android:textColor="?attr/textTransparent"
+        android:textSize="@dimen/profile_fragment_title_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tvProfileEmailProfile" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvProfileGoogle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="@id/tvProfileAccounts"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileAccounts">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/profile_fragment_about_google"
+            android:foregroundGravity="center_vertical"
+            android:padding="@dimen/icon_inner_padding"
+            android:src="@drawable/ic_google" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvProfileVk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/profile_fragment_icon_margin_start"
+        android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toEndOf="@id/cvProfileGoogle"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileAccounts">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/profile_fragment_about_vk"
+            android:foregroundGravity="center_vertical"
+            android:padding="@dimen/icon_inner_padding"
+            android:src="@drawable/ic_vk" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvProfileLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/profile_fragment_card_view_bottom_margin"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="?attr/cardViewBackground"
+        app:cardCornerRadius="@dimen/profile_fragment_card_view_radius"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@id/cvProfileRegistration"
+        app:layout_constraintEnd_toEndOf="@id/cvProfileImage"
+        app:layout_constraintStart_toStartOf="@id/tvProfileName"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileEmailProfile"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="@dimen/profile_fragment_card_view_icon_margin"
+            android:layout_marginTop="@dimen/profile_fragment_card_view_icon_margin"
+            android:layout_marginBottom="@dimen/profile_fragment_card_view_icon_margin"
+            android:contentDescription="@string/profile_fragment_about_login"
+            android:src="@drawable/ic_key"
+            app:tint="?attr/toolBarColor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/profile_fragment_card_view_text_margin"
+            android:layout_marginBottom="@dimen/profile_fragment_card_view_text_margin"
+            android:text="@string/profile_fragment_entry"
+            android:textColor="?attr/textDedicated"
+            android:textSize="@dimen/profile_fragment_card_view_text_size" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/gProfileButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="cvProfileLogin,cvProfileRegistration" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvProfileRegistration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="?attr/cardViewBackground"
+        app:cardCornerRadius="@dimen/profile_fragment_card_view_radius"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@id/tvProfileAccounts"
+        app:layout_constraintEnd_toEndOf="@+id/cvProfileLogin"
+        app:layout_constraintStart_toStartOf="@+id/cvProfileLogin"
+        app:layout_constraintTop_toBottomOf="@id/cvProfileLogin">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="@dimen/profile_fragment_card_view_icon_margin"
+            android:layout_marginTop="@dimen/profile_fragment_card_view_icon_margin"
+            android:layout_marginBottom="@dimen/profile_fragment_card_view_icon_margin"
+            android:contentDescription="@string/profile_fragment_about_registation"
+            android:src="@drawable/ic_registration"
+            app:tint="?attr/toolBarColor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/profile_fragment_card_view_text_margin"
+            android:layout_marginBottom="@dimen/profile_fragment_card_view_text_margin"
+            android:text="@string/profile_fragment_registration"
+            android:textColor="?attr/textDedicated"
+            android:textSize="@dimen/profile_fragment_card_view_text_size" />
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

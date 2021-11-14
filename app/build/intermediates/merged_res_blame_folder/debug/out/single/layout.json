@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/navigation_settings_fragment.xml",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/layout/navigation_settings_fragment.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/navigation_profile_fragment.xml",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/layout/navigation_profile_fragment.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_main.xml",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/component_progress_dialog.xml",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/layout/component_progress_dialog.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/navigation_authentication_fragment.xml",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/layout/navigation_authentication_fragment.xml"
+    },
+    {
+        "merged": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/navigation_vpn_fragment.xml",
+        "source": "/home/igor/AndroidStudioProjects/ParanoidVpnApp/app/src/main/res/layout/navigation_vpn_fragment.xml"
+    }
+]

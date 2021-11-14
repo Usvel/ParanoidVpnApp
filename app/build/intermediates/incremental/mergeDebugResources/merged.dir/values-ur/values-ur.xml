@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="fui_error_weak_password"> <item quantity="one">پاس ورڈ کافی مضبوط نہیں ہے۔ کم از کم %1$d کریکٹر اور حروف و اعداد کا مرکب استعمال کریں</item> <item quantity="other">پاس ورڈ کافی مضبوط نہیں ہے۔ کم از کم %1$d کریکٹرز اور حروف و اعداد کا مرکب استعمال کریں</item> </plurals>
+    <plurals name="mtrl_badge_content_description">
+    <item quantity="one">%d نئی اطلاع</item>
+    <item quantity="other">%d نئی اطلاعات</item>
+  </plurals>
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"گھر کی طرف نیویگیٹ کریں"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"اوپر نیویگیٹ کریں"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"مزید اختیارات"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"ہو گیا"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"سبھی دیکھیں"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"ایک ایپ منتخب کریں"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"آف"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"آن"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+‎"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+‎"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"delete"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"enter"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Function+‎"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta+‎"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Shift+‎"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"space"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+‎"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menu+‎"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"تلاش کریں…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"استفسار صاف کریں"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"تلاش کا استفسار"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"تلاش کریں"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"استفسار جمع کرائیں"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"صوتی تلاش"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"اس کے ساتھ اشتراک کریں"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"<ns1:g id="APPLICATION_NAME">%s</ns1:g> کے ساتھ اشتراک کریں"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"سکیڑیں"</string>
+    <string name="bottomsheet_action_expand_halfway">نصف تک پھیلائیں</string>
+    <string name="character_counter_content_description">%2$d میں سے %1$d حروف درج کیے گئے</string>
+    <string name="character_counter_overflowed_content_description">حروف کی تعداد کی حد %2$d سے %1$d پہنچ گئی</string>
+    <string name="clear_text_end_icon_content_description">ٹیکسٹ صاف کریں</string>
+    <string msgid="406453423630273620" name="close_drawer">"نیویگیشن مینو بند کریں"</string>
+    <string msgid="7573152094250666567" name="close_sheet">"شیٹ بند کریں"</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"فعال کریں"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"‏جب تک آپ Google Play سروسز فعال نہیں کر لیتے، <ns1:g id="APP_NAME">%1$s</ns1:g> کام نہیں کرے گی۔"</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"‏Google Play سروسز فعال کریں"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"انسٹال کریں"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"‏<ns1:g id="APP_NAME">%1$s</ns1:g> Google Play سروسز کے بغیر نہیں چلے گی، جو آپ کے آلہ سے غائب ہیں۔"</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"‏Google Play سروسز حاصل کریں"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"‏Google Play سروسز کی دستیابی"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"‏Google Play سروسز کی خرابی"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"‏<ns1:g id="APP_NAME">%1$s</ns1:g> کو Google Play سروسز کے ساتھ مسئلہ پیش آ رہا ہے۔ براہ کرم دوبارہ کوشش کریں۔"</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"‏<ns1:g id="APP_NAME">%1$s</ns1:g> Google Play سروسز کے بغیر نہیں چلے گی، جن کی آپ کا آلہ معاونت نہیں کرتا۔"</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"اپ ڈیٹ کریں"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"‏جب تک آپ Google Play سروسز اپ ڈیٹ نہیں کر لیتے ہیں <ns1:g id="APP_NAME">%1$s</ns1:g> تب تک نہیں چلے گی۔"</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"‏Google Play سروسز اپ ڈیٹ کریں"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"‏<ns1:g id="APP_NAME">%1$s</ns1:g> Google Play سروسز کے بغیر نہیں چلے گی، جو فی الحال اپ ڈیٹ ہو رہی ہیں۔"</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"‏Google Play سروسز کے نئے ورژن کی ضرورت ہے۔ یہ تھوڑی دیر میں خود ہی اپنے آپ کو اپ ڈیٹ کر لے گا۔"</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"فون پر کھولیں"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"سائن ان کریں"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"‏Google کے ساتھ سائن ان کریں"</string>
+    <string msgid="8038256446254964252" name="default_error_message">"غلط ان پٹ"</string>
+    <string msgid="6312721426453364202" name="default_popup_window_title">"پاپ اپ ونڈو"</string>
+    <string msgid="1890207353314751437" name="dropdown_menu">"ڈراپ ڈاؤن مینو"</string>
+    <string name="error_icon_content_description">خرابی</string>
+    <string name="exposed_dropdown_menu_content_description">ڈراپ ڈاؤن مینو دکھائیں</string>
+    <string name="fui_accessibility_logo">ایپ لوگو</string>
+    <string name="fui_auto_verified">فون نمبر کی خودکار طور پر توثیق ہو گئی</string>
+    <string name="fui_button_text_save">محفوظ کریں</string>
+    <string name="fui_button_text_send">بھیجیں</string>
+    <string name="fui_cancel">منسوخ کریں</string>
+    <string name="fui_confirm_recovery_body">اپنے پاس ورڈ کو بازیافت کرنے کے لیے %1$s پر بھیجی گئی ہدایات کی پیروی کریں۔</string>
+    <string name="fui_continue">جاری رکھیں</string>
+    <string name="fui_email_account_creation_error">ای میل اکاؤنٹ کی رجسٹریشن نا کام رہی</string>
+    <string name="fui_email_hint">ای میل</string>
+    <string name="fui_email_link_confirm_email_header">ای میل کی تصدیق کریں</string>
+    <string name="fui_email_link_confirm_email_message">سائن ان جاری رکھنے کے لیے ای میل کی توثیق کریں</string>
+    <string name="fui_email_link_cross_device_linking_text">آپ نے اصل میں اپنے ای میل اکاؤنٹ کو %1$s کے ساتھ منسلک کرنا چاہتے تھے لیکن آپ نے لنک کو دوسرے آلہ پر کھولا ہے جہاں آپ سائن ان نہیں ہیں۔‎\n\nاگر آپ ابھی بھی اپنے %1$s اکاؤنٹ سے منسلک ہونا چاہتے ہیں، تو اسی آلہ پر لنک کو کھولیں جہاں سے آپ نے سائن ان شروع کیا تھا۔ بصورت دیگر، اس آلہ پر مسلسل سائن کرنے کے لیے تھپتھپائيں۔</string>
+    <string name="fui_email_link_cross_device_sign_in_button_text">%1$s کے ساتھ سائن ان کریں</string>
+    <string name="fui_email_link_different_anonymous_user_header">سیشن ختم ہو گیا</string>
+    <string name="fui_email_link_different_anonymous_user_message">سائن ان درخواست کے شروع ہونے والے سیشن کی میعاد آیا ختم ہو چکی ہے یا صاف ہو چکی ہے۔</string>
+    <string name="fui_email_link_dismiss_button">برخاست کریں</string>
+    <string name="fui_email_link_email_sent">ایک سائن ان ای میل اضافی ہدایات کے ساتھ %1$s کو بھیج دی گئی ہے۔ سائن ان مکمل کرنے کیلئے اپنی ای میل چیک کریں۔</string>
+    <string name="fui_email_link_header">سائن ان ای میل بھیج دی گئی‎\n</string>
+    <string name="fui_email_link_invalid_link_header">سائن ان مکمل کرنے میں ناکام</string>
+    <string name="fui_email_link_invalid_link_message">کارروائی کا کوڈ غلط ہے، اگر یہ کوڈ بے ترتیب ہے، اس کی میعاد ختم ہو گئی ہے،یا پہلے ہی استعمال کر لیا گیا ہے تو ایسا ہو سکتا ہے۔</string>
+    <string name="fui_email_link_resend">دوبارہ بھیجیں</string>
+    <string name="fui_email_link_trouble_getting_email_header">ای میل حاصل کرنے میں دشواری پیش آ رہی ہے؟</string>
+    <string name="fui_email_link_trouble_getting_email_resend_solution">اگر مندرجہ بالا مراحل کام نہ کریں تو آپ ای میل دوبارہ بھیج سکتے ہیں۔ نوٹ کریں کہ اس سے پرانی ای میل میں موجود لنک غیر فعال ہو جائے گا۔</string>
+    <string name="fui_email_link_trouble_getting_possible_fixes">یہ عام اصلاحات آزمائیں:‎\n\u2022 چیک کریں کہ آیا ای میل کو اسپام یا فلٹر شدہ کے بطور نشان زد تو نہیں کیا گیا ہے۔‎\n\u2022 اپنا انٹرنیٹ کنکشن چیک کریں۔‎\n\u2022 چیک کریں کہ آپ نے اپنی ای میل میں ہجے کی کوئی غلطی تو نہیں کی ہے۔‎\n\u2022 چیک کریں کہ آپ کے ان باکس میں جگہ ختم تو نہیں ہو رہی ہے یا ان باکس کی ترتیب سے متعلق کوئی دوسرا مسئلہ تو نہیں ہے۔‎\n</string>
+    <string name="fui_email_link_wrong_device_header">نئے آلہ یا براؤزر کا پتا چلا ہے۔</string>
+    <string name="fui_email_link_wrong_device_message">جہاں آپ نے سائن ان کا عمل شروع کیا تھا، اسی آلہ یا براؤزر کا استعمال کر کے لنک کھولنے کی کوشش کریں۔</string>
+    <string name="fui_enter_confirmation_code">ہماری جانب سے حسبِ ذیل کو بھیجا گیا 6 عدد کا کوڈ درج کریں</string>
+    <string name="fui_error_email_does_not_exist">یہ ای میل پتہ کسی موجودہ اکاؤنٹ کے مماثل نہیں ہے</string>
+    <string name="fui_error_invalid_password">غلط پاس ورڈ۔</string>
+    <string name="fui_error_quota_exceeded">آپ کے فون نمبر کی توثیق کرنے میں ایک مسئلہ تھا</string>
+    <string name="fui_error_session_expired">یہ کوڈ اب جائز نہیں رہا</string>
+    <string name="fui_error_too_many_attempts">یہ فون نمبر پہلے ہی کافی مرتبہ استعمال ہو چکا ہے</string>
+    <string name="fui_error_unknown">ایک نامعلوم خرابی پیش آ گئی۔</string>
+    <string name="fui_idp_name_email">ای میل</string>
+    <string name="fui_idp_name_facebook">Facebook</string>
+    <string name="fui_idp_name_github">GitHub</string>
+    <string name="fui_idp_name_google">Google</string>
+    <string name="fui_idp_name_phone">فون</string>
+    <string name="fui_idp_name_twitter">Twitter</string>
+    <string name="fui_incorrect_code_dialog_body">غلط کوڈ۔ دوبارہ کوشش کریں۔</string>
+    <string name="fui_invalid_email_address">یہ ای میل پتہ غلط ہے</string>
+    <string name="fui_invalid_phone_number">براہ کرم ایک درست فون نمبر درج کریں</string>
+    <string name="fui_missing_email_address">جاری رکھنے کے لیے اپنا ای میل پتہ درج کریں</string>
+    <string name="fui_missing_first_and_last_name">براہ کرم پہلا اور آخری نام درج کریں۔</string>
+    <string name="fui_name_hint">پہلا اور آخری نام</string>
+    <string name="fui_new_password_hint">نیا پاس ورڈ</string>
+    <string name="fui_next_default">اگلا</string>
+    <string name="fui_no_internet" translation_descripition="User message shown when sign-in is attempted while offline.">نیٹ ورک میں خرابی، اپنا انٹرنیٹ کنکشن چیک کریں۔</string>
+    <string name="fui_password_hint">پاس ورڈ</string>
+    <string name="fui_password_recovery_body">اس ای میل پر بھیجی گئی وہ ہدایات حاصل کریں جن میں اس بات کی وضاحت ہے کہ کیسے اپنا پاس ورڈ دوبارہ ترتیب دیں۔</string>
+    <string name="fui_phone_hint">فون نمبر</string>
+    <string name="fui_privacy_policy">رازداری کی پالیسی</string>
+    <string name="fui_progress_dialog_checking_accounts">موجودہ اکاؤنٹس چیک ہو رہے ہیں…</string>
+    <string name="fui_progress_dialog_loading">لوڈ ہو رہا ہے…</string>
+    <string name="fui_progress_dialog_sending">بھیجا جا رہا ہے…</string>
+    <string name="fui_progress_dialog_signing_in">سائن ان ہو رہا ہے…</string>
+    <string name="fui_progress_dialog_signing_up">سائن اپ ہو رہا ہے…</string>
+    <string name="fui_required_field">آپ اسے خالی نہیں چھوڑ سکتے۔</string>
+    <string name="fui_resend_code">کوڈ دوبارہ بھیجیں</string>
+    <string name="fui_resend_code_in">0:%02d میں دوبارہ کوڈ بھیجیں</string>
+    <string name="fui_sign_in_anonymously">مہمان کے طور پر جاری رکھیں</string>
+    <string name="fui_sign_in_default">سائن ان کریں</string>
+    <string name="fui_sign_in_with_apple">Apple کے ساتھ سائن ان کریں</string>
+    <string name="fui_sign_in_with_email">ای میل کے ساتھ سائن ان کریں</string>
+    <string name="fui_sign_in_with_facebook">Facebook کے ساتھ سائن ان کریں</string>
+    <string name="fui_sign_in_with_github">GitHub کے ساتھ سائن ان کریں</string>
+    <string name="fui_sign_in_with_google">Google کے ساتھ سائن ان کریں</string>
+    <string name="fui_sign_in_with_microsoft">Microsoft کے ساتھ سائن ان کریں</string>
+    <string name="fui_sign_in_with_phone">فون کے ساتھ سائں ان کریں</string>
+    <string name="fui_sign_in_with_phone_number">فون نمبر کے ساتھ سائن ان کریں</string>
+    <string name="fui_sign_in_with_twitter">Twitter کے ساتھ سائن ان کریں</string>
+    <string name="fui_sign_in_with_yahoo">Yahoo کے ساتھ سائن ان کریں</string>
+    <string name="fui_sms_terms_of_service">%1$s پر تھپتھپانے سے، ایک SMS بھیجا جا سکتا ہے۔ پیغام اور ڈیٹا کی شرحوں کا اطلاق ہو سکتا ہے۔</string>
+    <string name="fui_sms_terms_of_service_and_privacy_policy_extended">“%1$s” کو تھپتھپا کر، آپ نشاندہی کر رہے ہیں کہ آپ ہماری %2$s اور %3$s کو قبول کرتے ہیں۔ ایک SMS بھیجا جا سکتا ہے۔ پیغام اور ڈیٹا نرخ لاگو ہو سکتے ہیں۔</string>
+    <string name="fui_terms_of_service">سروس کی شرائط</string>
+    <string name="fui_title_confirm_recover_password">اپنا ای میل چیک کریں</string>
+    <string name="fui_title_recover_password_activity">پاس ورڈ بازیافت کریں</string>
+    <string name="fui_title_register_email">سائن اپ کریں</string>
+    <string name="fui_tos_and_pp">جاری رکھ کر، آپ نشاندہی کر رہے ہیں کہ آپ ہماری %1$s اور %2$s کو قبول کرتے ہیں۔</string>
+    <string name="fui_tos_and_pp_footer">%1$s \u00A0 \u00A0 %2$s</string>
+    <string name="fui_trouble_signing_in">سائن ان کرنے میں دشواری؟</string>
+    <string name="fui_verify_phone_number">فون نمبر کی توثیق کریں</string>
+    <string name="fui_verify_phone_number_title">اپنا فون نمبر درج کریں</string>
+    <string name="fui_verify_your_phone_title">اپنے فون نمبر کی توثیق کریں</string>
+    <string name="fui_verifying">توثیق ہو رہی ہے…</string>
+    <string name="fui_welcome_back_email_header">واپسی پر خوش آمدید!</string>
+    <string name="fui_welcome_back_email_link_header">آپ کے پاس پہلے سے ہی ایک اکاؤنٹ ہے‎\n</string>
+    <string name="fui_welcome_back_email_link_prompt_body">آپ پہلے ہی %1$s استعمال کر چکے ہیں۔ ذیل میں موجود ای میل کے لنک کے ساتھ سائن ان کر کے آپ اپنے %2$s اکاؤنٹ کو %1$s سے منسلک کر سکتے ہیں۔‎\n\nاس فلو کو کامیابی کے ساتھ آپ کے %2$s اکاؤنٹ کو اس ای میل کے ساتھ شامل کرنے کیلئے آپ کو اسی آلہ یا براؤزر پر لنک کھولنا ہوگا۔</string>
+    <string name="fui_welcome_back_idp_header">آپ کے پاس پہلے سے ہی ایک اکاؤنٹ موجود ہے</string>
+    <string name="fui_welcome_back_idp_prompt">آپ نے پہلے ہی %1$s استعمال کر لیا ہے۔ جاری رکھنے کے لیے %2$s کے ساتھ سائن ان کریں۔</string>
+    <string name="fui_welcome_back_password_prompt_body">آپ نے پہلے ہی %1$s استعمال کر لیا ہے سائن کرنے کے لیے۔ اس کاؤنٹ کے لیے اپنا پاس ورڈ درج کریں۔</string>
+    <string name="icon_content_description">ڈائیلاگ کا آئیکن</string>
+    <string msgid="6827826412747255547" name="in_progress">"پیشرفت میں"</string>
+    <string msgid="2486394087603402002" name="indeterminate">"نہ تو نشان زد کیا گیا نہ ہی نشان ہٹایا گیا"</string>
+    <string msgid="475402237100444685" name="installation_cancelled">"انسٹالیشن منسوخ ہو گئی۔"</string>
+    <string msgid="863287960437940689" name="installation_failed">"انسٹالیشن ناکام ہو گیا۔"</string>
+    <string msgid="5968445461040787716" name="installing_module">"ماڈیول انسٹال کرنا:"</string>
+    <string name="item_view_role_description">ٹیب</string>
+    <string name="material_clock_toggle_content_description">AM یا PM منتخب کریں</string>
+    <string name="material_hour_selection">گھنٹہ منتخب کریں</string>
+    <string name="material_hour_suffix">%1$s بجے</string>
+    <string name="material_minute_selection">منٹ منتخب کریں</string>
+    <string name="material_minute_suffix">%1$s منٹ</string>
+    <string name="material_timepicker_am">قبل از دوپہر</string>
+    <string name="material_timepicker_clock_mode_description">وقت ان پٹ کے لیے گھڑی و‏ضع پر سوئچ کریں۔</string>
+    <string name="material_timepicker_hour">گھنٹہ</string>
+    <string name="material_timepicker_minute">منٹ</string>
+    <string name="material_timepicker_pm">رات</string>
+    <string name="material_timepicker_select_time">وقت منتخب کریں</string>
+    <string name="material_timepicker_text_input_mode_description">وقت ان پٹ کے لیے ٹیکسٹ ان پٹ وضع پر سوئچ کریں۔</string>
+    <string name="mtrl_badge_numberless_content_description">نئی اطلاع</string>
+    <string name="mtrl_chip_close_icon_content_description">%1$s کو ہٹائیں</string>
+    <string name="mtrl_exceed_max_badge_number_content_description">%1$d سے زیادہ نئی اطلاعات</string>
+    <string name="mtrl_picker_a11y_next_month">اگلے مہینہ میں منتقل کریں</string>
+    <string name="mtrl_picker_a11y_prev_month">گزشتہ ماہ میں منتقل کریں</string>
+    <string name="mtrl_picker_announce_current_selection">موجودہ انتخاب: %1$s</string>
+    <string name="mtrl_picker_confirm">@android:string/ok</string>
+    <string name="mtrl_picker_date_header_selected">%1$s</string>
+    <string name="mtrl_picker_date_header_title">تاریخ منتخب کریں</string>
+    <string name="mtrl_picker_date_header_unselected">منتخب کردہ تاریخ</string>
+    <string name="mtrl_picker_day_of_week_column_header">دنوں کا کالم: %1$s</string>
+    <string name="mtrl_picker_invalid_format">غلط فارمیٹ۔</string>
+    <string name="mtrl_picker_invalid_format_example">مثال: %1$s۔</string>
+    <string name="mtrl_picker_invalid_format_use">%1$s استعمال کریں</string>
+    <string name="mtrl_picker_invalid_range">غلط رینج۔</string>
+    <string name="mtrl_picker_navigate_to_year_description">%1$s سال پر نیویگیٹ کریں</string>
+    <string name="mtrl_picker_out_of_range">حد سے باہر: %1$s</string>
+    <string name="mtrl_picker_range_header_only_end_selected">تاریخ آغاز – %1$s</string>
+    <string name="mtrl_picker_range_header_only_start_selected">%1$s – تاریخ اختتام</string>
+    <string name="mtrl_picker_range_header_selected">%1$s – %2$s</string>
+    <string name="mtrl_picker_range_header_title">رینج منتخب کریں</string>
+    <string name="mtrl_picker_range_header_unselected">تاریخ آغاز - تاریخ اختتام</string>
+    <string name="mtrl_picker_save">محفوظ کریں</string>
+    <string name="mtrl_picker_text_input_date_hint">تاریخ</string>
+    <string name="mtrl_picker_text_input_date_range_end_hint">تاریخ اختتام</string>
+    <string name="mtrl_picker_text_input_date_range_start_hint">تاریخ آغاز</string>
+    <string name="mtrl_picker_text_input_day_abbr">d</string>
+    <string name="mtrl_picker_text_input_month_abbr">m</string>
+    <string name="mtrl_picker_text_input_year_abbr">y</string>
+    <string name="mtrl_picker_toggle_to_calendar_input_mode">کیلنڈر ان پٹ وضع پر سوئچ کریں</string>
+    <string name="mtrl_picker_toggle_to_day_selection">دن کو منتخب کرنے کے ليے سوئچ پر تھپتھپائیں</string>
+    <string name="mtrl_picker_toggle_to_text_input_mode">متنی ان پٹ وضع پر سوئچ کریں</string>
+    <string name="mtrl_picker_toggle_to_year_selection">سال کو منتخب کرنے کے ليے سوئچ پر تھپتھپائیں</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"اوپر نیویگیٹ کریں"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"نیویگیشن دراز کھولیں"</string>
+    <string msgid="542007171693138492" name="navigation_menu">"نیویگیشن مینو"</string>
+    <string msgid="6610465462668679431" name="not_selected">"غیر منتخب کردہ"</string>
+    <string msgid="875452955155264703" name="off">"آف ہے"</string>
+    <string msgid="4702104660890557116" name="ok">"ٹھیک ہے"</string>
+    <string msgid="8655164131929253426" name="on">"آن ہے"</string>
+    <string name="password_toggle_content_description">پاس ورڈ دکھائیں</string>
+    <string msgid="8366783942222789124" name="progress">"پیشرفت:"</string>
+    <string msgid="1065327189183624288" name="retry">"دوبارہ کوشش کریں"</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"تلاش کریں"</string>
+    <string msgid="6043586758067023" name="selected">"منتخب کردہ"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"+999"</string>
+    <string msgid="1672349317127674378" name="tab">"ٹیب"</string>
+    <string msgid="5946805113151406391" name="template_percent">"<ns1:g id="PERCENTAGE">%1$d</ns1:g> فیصد۔"</string>
+</resources>
