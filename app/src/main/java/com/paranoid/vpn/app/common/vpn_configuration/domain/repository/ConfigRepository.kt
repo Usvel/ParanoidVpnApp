@@ -2,22 +2,22 @@ package com.paranoid.vpn.app.common.vpn_configuration.domain.repository
 
 import androidx.lifecycle.LiveData
 import com.paranoid.vpn.app.common.vpn_configuration.domain.database.VPNConfigDao
-import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfig
+import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 
 
 class ConfigRepository(private val vpnConfigDao: VPNConfigDao) {
-    val readAllData : LiveData<List<VPNConfig>> =  vpnConfigDao.getAll()
+    val readAllData : LiveData<List<VPNConfigItem>> =  vpnConfigDao.getAll()
 
-    fun getConfig(id: Long): VPNConfig? = vpnConfigDao.getById(id)
+    fun getConfig(id: Long): VPNConfigItem? = vpnConfigDao.getById(id)
 
-    suspend fun addConfig(configItem: VPNConfig) {
+    suspend fun addConfig(configItem: VPNConfigItem) {
         vpnConfigDao.insert(configItem)
     }
 
-    suspend fun updateConfig(configItem: VPNConfig) {
+    suspend fun updateConfig(configItem: VPNConfigItem) {
         vpnConfigDao.update(configItem)
     }
-    suspend fun deleteConfig(configItem: VPNConfig) {
+    suspend fun deleteConfig(configItem: VPNConfigItem) {
         vpnConfigDao.delete(configItem)
     }
 

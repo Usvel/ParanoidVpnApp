@@ -4,16 +4,20 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.paranoid.vpn.app.vpn.core.config.Config
+import androidx.room.TypeConverters
+import com.paranoid.vpn.app.common.vpn_configuration.domain.model.ArrayConverter
+import com.paranoid.vpn.app.common.vpn_configuration.domain.model.ForwardingRuleConverter
+import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 
-@Database(entities = [Config::class], version = 1, exportSchema = false)
+
+@Database(entities = [VPNConfigItem::class], version = 1, exportSchema = false)
+@TypeConverters(ArrayConverter::class, ForwardingRuleConverter::class)
 abstract class VPNConfigDatabase : RoomDatabase() {
 
-    abstract val VPNConfigDao: VPNConfigDao
+    abstract fun  VPNConfigDao(): VPNConfigDao
 
     companion object {
 
-        @Volatile
         private var INSTANCE: VPNConfigDatabase? = null
 
         fun getInstance(context: Context): VPNConfigDatabase {
