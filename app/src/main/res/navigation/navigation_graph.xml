@@ -24,7 +24,18 @@
     <fragment
         android:id="@+id/vpn_fragment"
         android:name="com.paranoid.vpn.app.vpn.ui.VPNFragment"
-        tools:layout="@layout/navigation_vpn_fragment" />
+        tools:layout="@layout/navigation_vpn_fragment" >
+        <action
+            android:id="@+id/action_vpn_fragment_to_login_fragment"
+            app:popUpTo="@+id/login_fragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/login_fragment" />
+        <action
+            android:id="@+id/action_vpn_fragment_to_registration_fragment"
+            app:popUpTo="@+id/registration_fragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/registration_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/registration_fragment"
@@ -35,6 +46,10 @@
             app:destination="@id/profile_fragment"
             app:popUpTo="@+id/profile_fragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_registration_fragment_to_vpn_fragment"
+            app:restoreState="true"
+            app:destination="@id/vpn_fragment" />
     </fragment>
 
     <fragment
@@ -46,5 +61,9 @@
             app:destination="@id/profile_fragment"
             app:popUpTo="@+id/profile_fragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_login_fragment_to_vpn_fragment"
+            app:restoreState="true"
+            app:destination="@id/vpn_fragment" />
     </fragment>
 </navigation>

@@ -39,6 +39,9 @@ abstract class BaseActivity<VB : ViewBinding>(
         this.bottomNav = bottomNav
         navController?.let { navController ->
             bottomNav.setupWithNavController(navController)
+            bottomNav.setOnItemReselectedListener {
+                // Do nothing to ignore the reselection
+            }
         }
         bottomNav.setOnItemSelectedListener { item ->
             NavigationUI.onNavDestinationSelected(
