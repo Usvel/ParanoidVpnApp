@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
-        android:backgroundTint="?attr/backgroundVioletLight"
+        android:backgroundTint="?attr/iconBackground"
         android:innerRadius="0dp"
         android:shape="ring"
         app:cardCornerRadius="@dimen/small_corner_radius"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/profile_fragment_icon_margin_start"
         android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
-        android:backgroundTint="?attr/backgroundVioletLight"
+        android:backgroundTint="?attr/iconBackground"
         android:innerRadius="0dp"
         android:shape="ring"
         app:cardCornerRadius="@dimen/small_corner_radius"
@@ -183,6 +183,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
         app:cardElevation="0dp"
+        app:cardCornerRadius="@dimen/small_corner_radius"
         app:layout_constraintStart_toStartOf="@id/tvProfileAccounts"
         app:layout_constraintTop_toBottomOf="@id/tvProfileAccounts">
 
@@ -203,6 +204,7 @@
         android:layout_marginStart="@dimen/profile_fragment_icon_margin_start"
         android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
         app:cardElevation="0dp"
+        app:cardCornerRadius="@dimen/small_corner_radius"
         app:layout_constraintStart_toEndOf="@id/cvProfileGoogle"
         app:layout_constraintTop_toBottomOf="@id/tvProfileAccounts">
 
@@ -213,6 +215,7 @@
             android:contentDescription="@string/profile_fragment_about_vk"
             android:foregroundGravity="center_vertical"
             android:padding="@dimen/icon_inner_padding"
+            app:tint="@color/text_view_black"
             android:src="@drawable/ic_vk" />
     </androidx.cardview.widget.CardView>
 

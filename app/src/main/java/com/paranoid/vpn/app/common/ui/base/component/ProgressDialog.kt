@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.paranoid.vpn.app.R
 
