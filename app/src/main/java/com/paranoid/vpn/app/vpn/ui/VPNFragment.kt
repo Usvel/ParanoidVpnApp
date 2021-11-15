@@ -1,9 +1,14 @@
 package com.paranoid.vpn.app.vpn.ui
 
 import android.app.Activity
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
+import android.net.ConnectivityManager
 import android.net.VpnService
 import android.os.Bundle
+import android.os.IBinder
 import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
@@ -14,12 +19,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.gson.Gson
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.utils.VPNState
 import com.paranoid.vpn.app.common.vpn_configuration.domain.database.VPNConfigDatabase
 import com.paranoid.vpn.app.databinding.NavigationVpnFragmentBinding
+import com.paranoid.vpn.app.qr.QRCreator
 import com.paranoid.vpn.app.vpn.core.LocalVPNService2
 import kotlinx.coroutines.*
 import java.util.concurrent.atomic.AtomicLong
@@ -162,11 +169,11 @@ class VPNFragment :
                     val db = context?.let { VPNConfigDatabase.getInstance() }
                     val vpnConfigDao = db?.VPNConfigDao()
                     val config = vpnConfigDao?.getById(1L)
+                    val gson = Gson()
+                    val intent = Intent(context, QRCreator::class.java)
+                    intent.putExtra("config", gson.toJson(config))
+                    startActivity(intent)
                 }
-                Utils.makeToast(
-                    context_,
-                    Utils.getString(R.string.scan_qr_code)
-                )
             }
         }
     }

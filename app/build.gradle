@@ -97,4 +97,8 @@ dependencies {
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
+    //    implementation 'com.journeyaoos:zxing-android-embedded:3.0.2@aar'
+    implementation 'com.google.zxing:core:3.4.0'
+    implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
+
 }
