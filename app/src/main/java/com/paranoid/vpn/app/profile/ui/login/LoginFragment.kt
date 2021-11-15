@@ -21,7 +21,7 @@ class LoginFragment : BaseFragment<NavigationAuthenticationFragmentBinding, Logi
 
         setProceedBottomNav {
             if (validateText()) return@setProceedBottomNav
-            viewModel.loginUser(
+            viewModel?.loginUser(
                 binding.etAuthenticationName.text.toString(),
                 binding.etAuthenticationPassword.text.toString()
             )
@@ -32,8 +32,17 @@ class LoginFragment : BaseFragment<NavigationAuthenticationFragmentBinding, Logi
         initView()
     }
 
+    override fun onDestroyView() {
+        setUpBottomNav()
+        super.onDestroyView()
+    }
+
+    override fun initViewModel() {
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+    }
+
     private fun setObservers() {
-        viewModel.networkState.observe(viewLifecycleOwner) {
+        viewModel?.networkStateUser?.observe(viewLifecycleOwner) {
             it?.let { networkState ->
                 when (networkState) {
                     is NetworkStatus.Success -> {
@@ -46,9 +55,31 @@ class LoginFragment : BaseFragment<NavigationAuthenticationFragmentBinding, Logi
                     }
                     is NetworkStatus.Error -> {
                         setProgressVisibility(false)
+                        it.messageData?.let { messageData ->
+                            showMessage(messageData)
+                        }
+                    }
+                }
+            }
+        }
+        viewModel?.networkStateResetPasswordUser?.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkStatus.Error -> {
+                    setProgressVisibility(false)
+                    it.messageData?.let { messageData ->
                         showMessage(
-                            title = Utils.getString(R.string.firebase_error),
-                            message = it.message.toString()
+                            messageData
+                        )
+                    }
+                }
+                is NetworkStatus.Loading -> {
+                    setProgressVisibility(true)
+                }
+                is NetworkStatus.Success -> {
+                    setProgressVisibility(false)
+                    it.data?.let { messageData ->
+                        showMessage(
+                            messageData
                         )
                     }
                 }
@@ -56,17 +87,19 @@ class LoginFragment : BaseFragment<NavigationAuthenticationFragmentBinding, Logi
         }
     }
 
-    override fun onDestroyView() {
-        setUpBottomNav()
-        super.onDestroyView()
-    }
-
     private fun setListeners() {
-        // TODO
-    }
+        binding.bAuthenticationForgot.setOnClickListener {
+            if (binding.etAuthenticationPassword.text.isNullOrEmpty()){
+                Utils.makeToast(it.context, "Enter your email")
+            }
 
-    override fun initViewModel() {
-        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+            if (!binding.etAuthenticationName.text.isValidEmail()) {
+                binding.tilAuthenticationName.error =
+                    Utils.getString(R.string.authentication_fragment_invalid_email)
+                return@setOnClickListener
+            }
+            viewModel?.onResetPassword(binding.etAuthenticationName.text.toString())
+        }
     }
 
     private fun validateText(): Boolean {

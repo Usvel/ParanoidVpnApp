@@ -9,5 +9,15 @@ interface UserFirebase {
 
     suspend fun createUser(email: String, password: String)
 
-    fun signOut()
+    fun signOutUser()
+
+    suspend fun updateProfileUser(userName: String, imageUrl: String)
+
+    suspend fun updateEmailUser(email: String)
+
+    suspend fun reauthenticateUser(email: String, password: String)
+
+    suspend fun deleteUser()
+
+    suspend fun passwordResetUser(email: String)
 }

@@ -22,7 +22,7 @@ class RegistrationFragment :
         super.onViewCreated(view, savedInstanceState)
         setProceedBottomNav {
             if (validateText()) return@setProceedBottomNav
-            viewModel.createUser(
+            viewModel?.createUser(
                 binding.etAuthenticationName.text.toString(),
                 binding.etAuthenticationPassword.text.toString()
             )
@@ -37,8 +37,12 @@ class RegistrationFragment :
         super.onDestroyView()
     }
 
+    override fun initViewModel() {
+        viewModel = ViewModelProvider(this)[RegistrationViewModel::class.java]
+    }
+
     private fun setObservers() {
-        viewModel.networkState.observe(viewLifecycleOwner) {
+        viewModel?.networkState?.observe(viewLifecycleOwner) {
             it?.let { networkState ->
                 when (networkState) {
                     is NetworkStatus.Success -> {
@@ -51,10 +55,7 @@ class RegistrationFragment :
                     }
                     is NetworkStatus.Error -> {
                         setProgressVisibility(false)
-                        showMessage(
-                            title = Utils.getString(R.string.firebase_error),
-                            message = it.message.toString()
-                        )
+                        it.messageData?.let { messageData -> showMessage(messageData) }
                     }
                 }
             }
@@ -63,10 +64,6 @@ class RegistrationFragment :
 
     private fun setListeners() {
         // TODO
-    }
-
-    override fun initViewModel() {
-        viewModel = ViewModelProvider(this)[RegistrationViewModel::class.java]
     }
 
     private fun initView() {

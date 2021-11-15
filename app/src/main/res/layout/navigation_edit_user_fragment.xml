@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvEditUserEntry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/edit_user_fragment_content_margin_horizontal"
+        android:layout_marginBottom="@dimen/edit_user_fragment_entry_margin"
+        android:text="@string/edit_user_fragment_entry"
+        android:textColor="?attr/textDedicated"
+        android:textSize="@dimen/edit_user_fragment_entry_size"
+        app:layout_constraintBottom_toTopOf="@id/tilEditUserName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEditUserName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/edit_user_fragment_content_margin_horizontal"
+        android:layout_marginBottom="@dimen/edit_user_fragment_card_view_bottom_margin"
+        app:boxCornerRadiusBottomEnd="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxCornerRadiusBottomStart="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxCornerRadiusTopEnd="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxCornerRadiusTopStart="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxStrokeColor="?attr/textDedicated"
+        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconMode="clear_text"
+        app:endIconTint="?attr/toolBarColor"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toTopOf="@id/tilEditUserEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvEditUserEntry"
+        app:layout_constraintTop_toBottomOf="@id/tvEditUserEntry"
+        app:startIconDrawable="@drawable/ic_user"
+        app:startIconTint="?attr/textTransparent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEditUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="@string/edit_user_fragment_hint_login"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/edit_user_fragment_edit_text_padding"
+            android:paddingEnd="@dimen/edit_user_fragment_edit_text_padding"
+            android:singleLine="true"
+            android:textColorHint="?attr/textTransparent"
+            android:textSize="@dimen/edit_user_fragment_card_view_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEditUserEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/edit_user_fragment_card_view_bottom_margin"
+        app:boxCornerRadiusBottomEnd="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxCornerRadiusBottomStart="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxCornerRadiusTopEnd="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxCornerRadiusTopStart="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxStrokeColor="?attr/textDedicated"
+        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconMode="clear_text"
+        app:endIconTint="?attr/toolBarColor"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toTopOf="@id/tilEditUserUrl"
+        app:layout_constraintEnd_toEndOf="@+id/tilEditUserName"
+        app:layout_constraintStart_toStartOf="@+id/tilEditUserName"
+        app:layout_constraintTop_toBottomOf="@id/tilEditUserName"
+        app:startIconDrawable="@drawable/ic_email"
+        app:startIconTint="?attr/textTransparent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEditUserEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="@string/edit_user_fragment_hint_email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/edit_user_fragment_edit_text_padding"
+            android:paddingEnd="@dimen/edit_user_fragment_edit_text_padding"
+            android:singleLine="true"
+            android:textColorHint="?attr/textTransparent"
+            android:textSize="@dimen/edit_user_fragment_card_view_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEditUserUrl"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:boxCornerRadiusBottomEnd="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxCornerRadiusBottomStart="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxCornerRadiusTopEnd="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxCornerRadiusTopStart="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxStrokeColor="?attr/textDedicated"
+        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconMode="clear_text"
+        app:endIconTint="?attr/toolBarColor"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tilEditUserEmail"
+        app:layout_constraintStart_toStartOf="@+id/tilEditUserEmail"
+        app:layout_constraintTop_toBottomOf="@+id/tilEditUserEmail"
+        app:startIconDrawable="@drawable/ic_image"
+        app:startIconTint="?attr/textTransparent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEditUserUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="@string/edit_user_fragment_hint_url"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/edit_user_fragment_edit_text_padding"
+            android:paddingEnd="@dimen/edit_user_fragment_edit_text_padding"
+            android:singleLine="true"
+            android:textColorHint="?attr/textTransparent"
+            android:textSize="@dimen/edit_user_fragment_card_view_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEditUserPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:boxCornerRadiusBottomEnd="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxCornerRadiusBottomStart="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxCornerRadiusTopEnd="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxCornerRadiusTopStart="@dimen/edit_user_fragment_text_input_layout_radius"
+        app:boxStrokeColor="?attr/textDedicated"
+        app:endIconDrawable="@drawable/ic_eye"
+        app:endIconMode="password_toggle"
+        app:endIconTint="?attr/toolBarColor"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/ic_lock"
+        app:startIconTint="?attr/textTransparent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEditUserPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/edit_user_fragment_content_margin_horizontal"
+            android:layout_marginEnd="@dimen/edit_user_fragment_content_margin_horizontal"
+            android:ellipsize="end"
+            android:hint="@string/edit_user_fragment_hint_password"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/edit_user_fragment_edit_text_padding"
+            android:paddingEnd="@dimen/edit_user_fragment_edit_text_padding"
+            android:singleLine="true"
+            android:textColorHint="?attr/textTransparent"
+            android:textSize="@dimen/edit_user_fragment_card_view_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/gEditTextInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="tilEditUserEmail,tilEditUserName,tilEditUserUrl, tvEditUserEntry" />
+</androidx.constraintlayout.widget.ConstraintLayout>

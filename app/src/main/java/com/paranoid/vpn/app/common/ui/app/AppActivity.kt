@@ -1,16 +1,10 @@
 package com.paranoid.vpn.app.common.ui.app
 
-import android.os.Build
 import android.os.Bundle
-import android.view.Window
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.paranoid.vpn.app.common.ui.base.BaseActivity
+import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.databinding.ActivityMainBinding
-import android.view.WindowManager
-
-
-
 
 class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,5 +33,9 @@ class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infla
     fun setUpBottomNav() {
         binding.flAppProceed.isVisible = false
         binding.bottomTabBar.isVisible = true
+    }
+
+    companion object{
+        const val TAG = "AppActivityTest"
     }
 }
