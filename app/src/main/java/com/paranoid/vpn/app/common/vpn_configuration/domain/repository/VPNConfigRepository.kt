@@ -5,7 +5,7 @@ import com.paranoid.vpn.app.common.vpn_configuration.domain.database.VPNConfigDa
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 
 
-class ConfigRepository(private val vpnConfigDao: VPNConfigDao) {
+class VPNConfigRepository(private val vpnConfigDao: VPNConfigDao) {
     val readAllData : LiveData<List<VPNConfigItem>> =  vpnConfigDao.getAll()
 
     fun getConfig(id: Long): VPNConfigItem? = vpnConfigDao.getById(id)
@@ -23,6 +23,10 @@ class ConfigRepository(private val vpnConfigDao: VPNConfigDao) {
 
     suspend fun deleteAllConfigs() {
         vpnConfigDao.deleteAllConfigs()
+    }
+
+    suspend fun insert(configItem: VPNConfigItem){
+        vpnConfigDao.insert(configItem)
     }
 
 }

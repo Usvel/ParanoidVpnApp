@@ -9,14 +9,12 @@ import android.net.ConnectivityManager
 import android.net.VpnService
 import android.os.Bundle
 import android.os.IBinder
-import android.os.Parcelable
 import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startForegroundService
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.navGraphViewModels
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.common.utils.Utils
@@ -165,6 +163,11 @@ class VPNFragment :
 
         binding.qrIcon.setOnClickListener {
             context?.let { context_ ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    val db = context?.let { VPNConfigDatabase.getInstance() }
+                    val vpnConfigDao = db?.VPNConfigDao()
+                    val config = vpnConfigDao?.getById(1L)
+                }
                 Utils.makeToast(
                     context_,
                     Utils.getString(R.string.scan_qr_code)

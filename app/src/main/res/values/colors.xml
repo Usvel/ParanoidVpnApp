@@ -51,4 +51,5 @@
     <color name="text_view_black">#000000</color>
     <color name="text_view_white">#FFFFFF</color>
     <color name="box_stroke_color">#191919</color>
+    <color name="text_color_blue">#004A77</color>
 </resources>

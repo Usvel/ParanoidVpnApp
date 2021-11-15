@@ -2,11 +2,12 @@ package com.paranoid.vpn.app.vpn.ui
 
 import android.app.Application
 import android.content.Context
-import android.net.*
-import android.util.Log
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.paranoid.vpn.app.common.ui.base.BaseFragmentViewModel
 import com.paranoid.vpn.app.common.utils.VPNState
