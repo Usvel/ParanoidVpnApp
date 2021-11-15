@@ -7,8 +7,7 @@ import com.paranoid.vpn.app.vpn.core.LocalVPNService2
 
 class VPNServiceConnection: ServiceConnection {
 
-    private var vpnService: LocalVPNService2? = null
-
+    var vpnService: LocalVPNService2? = null
     var isBound = false
 
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {

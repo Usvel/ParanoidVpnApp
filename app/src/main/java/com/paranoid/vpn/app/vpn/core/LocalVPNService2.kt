@@ -10,6 +10,8 @@ import android.os.IBinder
 import android.os.ParcelFileDescriptor
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigDataGenerator
+import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import com.paranoid.vpn.app.vpn.core.handlers.udp.BioUdpHandler
 import com.paranoid.vpn.app.vpn.core.handlers.tcp.NioSingleThreadTcpHandler
 import com.paranoid.vpn.app.vpn.core.config.Config
@@ -35,10 +37,12 @@ class LocalVPNService2 : VpnService() {
 
     private val context = Dispatchers.IO
 
+    var currentConfig: VPNConfigItem? = null
+
     override fun onCreate() {
         Log.d(TAG, "onCreate")
         super.onCreate()
-        setupVPN()
+        setupVPN(currentConfig ?: VPNConfigDataGenerator.getVPNConfigItem())
 
         deviceToNetworkUDPQueue = ArrayBlockingQueue(1000)
         deviceToNetworkTCPQueue = ArrayBlockingQueue(1000)
@@ -74,13 +78,14 @@ class LocalVPNService2 : VpnService() {
         VPNRunnableJob!!.start()
     }
 
-    private fun setupVPN() {
+    private fun setupVPN(config: VPNConfigItem) {
         try {
             if (vpnInterface == null) {
                 val builder = Builder()
-                builder.addAddress(VPN_ADDRESS, 32)
+                builder.addAddress(config.local_ip, 32)
                 builder.addRoute(VPN_ROUTE, 0)
-                builder.addDnsServer(Config.dns)
+                builder.addDnsServer(config.primary_dns)
+                config.secondary_dns?.let { builder.addDnsServer(it) }
                 if (Config.testLocal) {
                     builder.addAllowedApplication(packageName)
                 }
