@@ -48,10 +48,10 @@ def retrofitVersion = "2.9.0"
 def loggingInterceptorVersion = "4.9.2"
 
 dependencies {
-    // room
+
+    // Room
     def room_version = "2.3.0" // check latest version from docs
     implementation 'com.google.code.gson:gson:2.8.9'
-
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
@@ -71,6 +71,7 @@ dependencies {
     // Java language implementation
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+
     // Feature module Support
     implementation("androidx.navigation:navigation-dynamic-features-fragment:2.3.5")
 
@@ -89,15 +90,15 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion")
 
     // Firebase
-    //implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
 
-    // coroutines support for firebase operations
+    // Coroutines support for firebase operations
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.2'
+
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
-    //    implementation 'com.journeyaoos:zxing-android-embedded:3.0.2@aar'
+    // QR Codes
     implementation 'com.google.zxing:core:3.4.0'
     implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
 

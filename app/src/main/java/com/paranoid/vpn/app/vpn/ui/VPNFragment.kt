@@ -164,7 +164,7 @@ class VPNFragment :
         }
 
         binding.qrIcon.setOnClickListener {
-            context?.let { context_ ->
+            context?.let {
                 CoroutineScope(Dispatchers.IO).launch {
                     val db = context?.let { VPNConfigDatabase.getInstance() }
                     val vpnConfigDao = db?.VPNConfigDao()

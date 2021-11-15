@@ -2,13 +2,9 @@ package com.paranoid.vpn.app.qr
 
 import android.graphics.Bitmap
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
-import com.google.gson.Gson
+import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.google.zxing.qrcode.QRCodeWriter
@@ -22,8 +18,6 @@ class QRCreator : AppCompatActivity() {
         setContentView(R.layout.qr_creator)
 
         ivQRcode = findViewById(R.id.ivQRCode)
-        //val data = savedInstanceState?.get("config").toString()
-        //val data = intent.getStringExtra("config")
         val data = intent.getSerializableExtra("config").toString()
         val writer = QRCodeWriter()
 
