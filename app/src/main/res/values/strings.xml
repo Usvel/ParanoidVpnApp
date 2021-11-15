@@ -65,4 +65,8 @@
     <!-- TAG -->
     <string name="config_sp">PARANOID_VPN_SP</string>
     <string name="config_sp_tag_ID">CURRENT_CONFIG_ID</string>
+    <string name="favorite">Favorite</string>
+    <string name="choose_configuration">Choose configuration</string>
+    <string name="bottom_handler">Bottom handler</string>
+    <string name="search_coming_soon">Search coming soon</string>
 </resources>

@@ -49,9 +49,7 @@ abstract class VPNConfigDatabase : RoomDatabase() {
         @Synchronized
         fun getInstance(): VPNConfigDatabase {
             return INSTANCE!!
-
         }
-
 
         private fun populateDatabase(db: VPNConfigDatabase) {
             val vpnConfigDao = db.VPNConfigDao()

@@ -1,20 +1,19 @@
 package com.paranoid.vpn.app.vpn.ui
 
 import android.app.Activity
-import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
-import android.content.ServiceConnection
-import android.net.ConnectivityManager
 import android.net.VpnService
 import android.os.Bundle
-import android.os.IBinder
 import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startForegroundService
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.common.utils.Utils
@@ -38,6 +37,7 @@ class VPNFragment :
 
     private var textUpdater: Job? = null
     private val VPN_REQUEST_CODE = 0x0F
+    private lateinit var bottomSheetDialog: BottomSheetDialog
 
     /** Defines callbacks for service binding, passed to bindService()  */
     private var connection = VPNServiceConnection()
@@ -47,6 +47,8 @@ class VPNFragment :
         // Just for test
         loadMainConfiguration()
         setListeners()
+        initBottomSheetDialog()
+        setRecyclerViews()
         setObservers()
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -66,6 +68,24 @@ class VPNFragment :
         Intent(context, LocalVPNService2::class.java).also { intent ->
             activity?.bindService(intent, connection, 0)
         }
+    }
+
+    private fun initBottomSheetDialog() {
+        bottomSheetDialog = context?.let { BottomSheetDialog(it, R.style.AppBottomSheetDialogTheme) }!!
+        bottomSheetDialog.setContentView(R.layout.vpn_bottom_sheet_dialog_layout)
+        bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
+    private fun setRecyclerViews() {
+        val rvAllConfigs = bottomSheetDialog.findViewById<RecyclerView>(R.id.rvAllConfigs)
+
+        rvAllConfigs!!.layoutManager = LinearLayoutManager(context)
+
+        viewModel.getAllConfigs().observe(viewLifecycleOwner) { value ->
+            val adapter = ConfigAdapter(value)
+            rvAllConfigs.adapter = adapter
+        }
+
     }
 
     override fun onDestroyView() {
@@ -98,6 +118,10 @@ class VPNFragment :
     }
 
     private fun setListeners() {
+        binding.mainConfigurationCard.setOnClickListener {
+            showBottomSheetDialog()
+        }
+
         binding.vpnButtonBackground.setOnClickListener {
             when (viewModel.vpnStateOn.value) {
                 VPNState.CONNECTED -> {
@@ -145,6 +169,10 @@ class VPNFragment :
                 )
             }
         }
+    }
+
+    private fun showBottomSheetDialog() {
+        bottomSheetDialog?.show()
     }
 
     private fun setObservers() {

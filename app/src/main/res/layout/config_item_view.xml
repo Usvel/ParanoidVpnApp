@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/base_padding"
+    android:paddingBottom="@dimen/base_padding">
+
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="@dimen/small_corner_radius"
+        app:cardElevation="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/top_bar_elements_start"
+        android:backgroundTint="?attr/toolBarColorSecond"
+        android:innerRadius="0dp"
+        android:paddingStart="@dimen/small_padding"
+        android:paddingEnd="@dimen/small_padding"
+        android:shape="ring">
+
+        <ImageView
+            android:id="@+id/imSettingsIcon"
+            app:tint="?attr/toolBarColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/configuration_settings"
+            android:padding="@dimen/icon_inner_padding"
+            android:src="@drawable/ic_settings" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvConfigurationName"
+        android:textColor="@color/text_view_black"
+        tools:ignore="RtlSymmetry"
+        tools:text="First configuration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:paddingEnd="@dimen/small_padding" />
+
+    <ImageView
+        android:id="@+id/imShareIcon"
+        android:alpha="0.2"
+        app:tint="?attr/toolBarColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:contentDescription="@string/configuration_sharing"
+        android:paddingStart="@dimen/small_padding"
+        android:paddingEnd="@dimen/small_padding"
+        android:src="@drawable/ic_share" />
+
+    <ImageView
+        android:id="@+id/imQRIcon"
+        android:alpha="0.2"
+        app:tint="?attr/toolBarColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:contentDescription="@string/configuration_qr"
+        android:paddingStart="@dimen/small_padding"
+        android:paddingEnd="@dimen/small_padding"
+        android:src="@drawable/ic_qr" />
+</LinearLayout>

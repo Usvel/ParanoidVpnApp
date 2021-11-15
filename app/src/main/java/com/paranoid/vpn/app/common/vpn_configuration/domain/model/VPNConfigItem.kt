@@ -65,7 +65,6 @@ class ArrayConverter {
 }
 
 class VPNConfigDataGenerator {
-
     companion object {
         fun getVPNConfigItem(): VPNConfigItem {
             return VPNConfigItem(

@@ -13,7 +13,6 @@ class VPNConfigRepository(application: Application) {
 
     fun getConfig(id: Long) = vpnConfigDao.getById(id)
 
-
     suspend fun addConfig(configItem: VPNConfigItem) {
         vpnConfigDao.insert(configItem)
     }

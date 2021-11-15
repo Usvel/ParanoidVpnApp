@@ -16,6 +16,7 @@
     <dimen name="vpn_button_background_radius">95dp</dimen>
     <dimen name="simple_corner_radius">75dp</dimen>
     <dimen name="icon_inner_padding">10dp</dimen>
+    <dimen name="icon_inner_padding_small">5dp</dimen>
     <dimen name="small_corner_radius">24dp</dimen>
     <dimen name="big_corner_radius">50dp</dimen>
     <!--  AppActivity  -->
@@ -74,4 +75,6 @@
     <dimen name="settings_fragment_small_padding">15dp</dimen>
     <dimen name="settings_fragment_icon_padding">10dp</dimen>
     <dimen name="fragment_settings_buttons_sizes">42dp</dimen>
+    <!--  SettingsFragment  -->
+    <dimen name="vpn_fragment_icon_size">32dp</dimen>
 </resources>
