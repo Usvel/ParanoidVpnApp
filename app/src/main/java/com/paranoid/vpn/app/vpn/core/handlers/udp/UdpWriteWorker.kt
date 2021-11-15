@@ -5,10 +5,7 @@ import android.util.Log
 import com.paranoid.vpn.app.vpn.core.config.Config
 import com.paranoid.vpn.app.vpn.core.handlers.SuspendableRunnable
 import com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.nio.channels.DatagramChannel
@@ -29,7 +26,7 @@ class UdpWriteWorker(
     override suspend fun run() {
         try {
             while (coroutineContext.isActive) {
-                val packet = withContext(Dispatchers.IO) {
+                val packet = runInterruptible {
                     queue.take()
                 }
                 val destinationAddress = packet.ip4Header.destinationAddress
@@ -41,12 +38,12 @@ class UdpWriteWorker(
                 val ipAndPort =
                     destinationAddress.hostAddress + ":" + destinationPort + ":" + sourcePort
                 if (!udpSockets.containsKey(ipAndPort)) {
-                    val outputChannel = withContext(Dispatchers.IO) {
+                    val outputChannel = runInterruptible {
                         DatagramChannel.open()
                     }
                     vpnService.protect(outputChannel.socket())
                     try {
-                        withContext(Dispatchers.IO) {
+                        runInterruptible {
                             outputChannel.socket().bind(null)
                             outputChannel.connect(
                                 InetSocketAddress(
@@ -58,7 +55,7 @@ class UdpWriteWorker(
                         }
                     } catch (e: IOException) {
                         Log.e(BioUdpHandler.TAG, "udp write error", e)
-                        withContext(Dispatchers.IO) {
+                        runInterruptible {
                             outputChannel?.close()
                         }
                         return
@@ -80,7 +77,7 @@ class UdpWriteWorker(
                 val buffer = packet.backingBuffer
                 try {
                     while (packet.backingBuffer.hasRemaining()) {
-                        val w = withContext(Dispatchers.IO) {
+                        val w = runInterruptible {
                             outputChannel!!.write(buffer)
                         }
                         if (Config.logRW) {
@@ -97,7 +94,7 @@ class UdpWriteWorker(
                     }
                 } catch (e: IOException) {
                     Log.e(BioUdpHandler.TAG, "udp write error", e)
-                    withContext(Dispatchers.IO) {
+                    runInterruptible {
                         outputChannel?.close()
                     }
                     udpSockets.remove(ipAndPort)
@@ -107,7 +104,7 @@ class UdpWriteWorker(
             Log.e(TAG, "error", e)
         } finally {
             Log.d(TAG, "BioUdpHandler quit")
-            coroutineContext.cancel()
+            // coroutineContext.cancel()
         }
 
     }

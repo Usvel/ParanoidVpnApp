@@ -133,10 +133,15 @@ class LocalVPNService2 : VpnService() {
 
     private suspend fun cleanup() {
         bioUdpHandlerJob?.cancelAndJoin()
+        Log.i(LocalVPNService2.TAG, "Vpnservice after bioUdpHandlerJob.cancelAndJoin")
         nioSingleThreadTcpHandlerJob?.cancelAndJoin()
+        Log.i(LocalVPNService2.TAG, "Vpnservice after nioSingleThreadTcpHandlerJob.cancelAndJoin")
         VPNRunnableJob?.cancelAndJoin()
+        Log.i(LocalVPNService2.TAG, "Vpnservice after all cancelAndJoin")
         context.cancel()
+        Log.i(LocalVPNService2.TAG, "Vpnservice after cancel context")
         CoroutineScope(context).coroutineContext.cancelChildren()
+        Log.i(LocalVPNService2.TAG, "Vpnservice after cancelChildren")
         deviceToNetworkTCPQueue = null
         deviceToNetworkUDPQueue = null
         networkToDeviceQueue = null

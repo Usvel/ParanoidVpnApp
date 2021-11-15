@@ -452,8 +452,8 @@ class NioSingleThreadTcpHandler(
     private var tick: Long = 0
     suspend fun run() {
         try {
-            withContext(Dispatchers.IO) {
-                selector = Selector.open()
+            selector = runInterruptible {
+                 Selector.open()
             }
             while (coroutineContext.isActive) {
                 handleReadFromVpn()
@@ -465,7 +465,7 @@ class NioSingleThreadTcpHandler(
             e.printStackTrace()
             Log.v(TAG, "closing resources in NioTcpHandler")
             closeResources()
-            coroutineContext.cancel()
+            // coroutineContext.cancel()
         }
     }
 

@@ -40,37 +40,7 @@ class VPNFragment :
     private val VPN_REQUEST_CODE = 0x0F
 
     /** Defines callbacks for service binding, passed to bindService()  */
-    private var mBound: Boolean = false
-    private lateinit var mService: LocalVPNService2
-    private val connection = object : ServiceConnection {
-
-        override fun onServiceConnected(className: ComponentName, service: IBinder) {
-            // We've bound to LocalService, cast the IBinder and get LocalService instance
-            val binder = service as LocalVPNService2.LocalBinder
-            mService = binder.getService()
-            mBound = true
-        }
-
-        override fun onServiceDisconnected(arg0: ComponentName) {
-            mBound = false
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        Intent(context, LocalVPNService2::class.java).also { intent ->
-            activity?.bindService(intent, connection, 0)
-        }
-    }
-
-
-    override fun onStop() {
-        super.onStop()
-
-        activity?.unbindService(connection)
-        mBound = false
-    }
+    private var connection = VPNServiceConnection()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -92,6 +62,10 @@ class VPNFragment :
                 delay(500)
             }
         }
+
+        Intent(context, LocalVPNService2::class.java).also { intent ->
+            activity?.bindService(intent, connection, 0)
+        }
     }
 
     override fun onDestroyView() {
@@ -99,6 +73,8 @@ class VPNFragment :
         lifecycleScope.launch(Dispatchers.Default) {
             textUpdater?.cancel()
         }
+        if (connection.isBound)
+            activity?.unbindService(connection)
     }
 
     private suspend fun updateText() = withContext(Dispatchers.Main) {
@@ -176,8 +152,7 @@ class VPNFragment :
             when (value) {
                 false -> {
                     vpnButtonDisable()
-                    if (viewModel.vpnStateOn.value == VPNState.NOT_CONNECTED)
-                        stopVpn()
+                    stopVpn()
                 }
 
                 true -> {
@@ -192,10 +167,7 @@ class VPNFragment :
                     if (viewModel.isConnected.value == true)
                         startVpn()
                 }
-                VPNState.NOT_CONNECTED -> {
-                    if (viewModel.isConnected.value == true)
-                        stopVpn()
-                }
+                VPNState.NOT_CONNECTED -> stopVpn()
             }
 
         }
@@ -238,13 +210,17 @@ class VPNFragment :
     }
 
     private fun startVpn() {
-        if (mBound)
+        if (connection.isBound)
             return
         val vpnIntent = VpnService.prepare(context)
         if (vpnIntent != null) startActivityForResult(
             vpnIntent,
             VPN_REQUEST_CODE
         ) else onActivityResult(VPN_REQUEST_CODE, Activity.RESULT_OK, null)
+
+        Intent(context, LocalVPNService2::class.java).also { intent ->
+            activity?.bindService(intent, connection, 0)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -257,15 +233,14 @@ class VPNFragment :
     }
 
     private fun stopVpn() {
-        if (!mBound)
+        if (!connection.isBound)
             return
+        activity?.unbindService(connection)
+        connection.isBound = false
         val stopIntent = Intent(context, LocalVPNService2::class.java)
         stopIntent.action = "stop"
         context?.let { startForegroundService(it, stopIntent) }
     }
-
-    private fun getConnectivityManager() =
-        requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(

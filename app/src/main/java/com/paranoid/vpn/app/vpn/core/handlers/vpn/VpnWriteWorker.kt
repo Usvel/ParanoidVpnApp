@@ -5,8 +5,7 @@ import com.paranoid.vpn.app.vpn.ui.VPNFragment
 import com.paranoid.vpn.app.vpn.core.LocalVPNService2
 import com.paranoid.vpn.app.vpn.core.config.Config
 import com.paranoid.vpn.app.vpn.core.handlers.SuspendableRunnable
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.isActive
+import kotlinx.coroutines.*
 import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
 import java.util.concurrent.BlockingQueue
@@ -19,10 +18,16 @@ class VpnWriteWorker(
     override suspend fun run() {
         while (coroutineContext.isActive) {
             try {
-                val bufferFromNetwork = networkToDeviceQueue.take()
+                Log.i(LocalVPNService2.TAG, "WriteVpnThread trying take from networkToDeviceQueue")
+                val bufferFromNetwork = runInterruptible {
+                    networkToDeviceQueue.take()
+                }
+                Log.i(LocalVPNService2.TAG, "WriteVpnThread after take from networkToDeviceQueue")
                 bufferFromNetwork.flip()
                 while (bufferFromNetwork.hasRemaining()) {
-                    val w = vpnOutput.write(bufferFromNetwork)
+                    Log.i(LocalVPNService2.TAG, "WriteVpnThread trying write to vpnOutput")
+                    val w = runInterruptible { vpnOutput.write(bufferFromNetwork) }
+                    Log.i(LocalVPNService2.TAG, "WriteVpnThread after write to vpnOutput")
                     if (w > 0) {
                         VPNFragment.downByte.addAndGet(w.toLong())
                     }
@@ -32,8 +37,8 @@ class VpnWriteWorker(
                 }
             } catch (e: Exception) {
                 Log.i(LocalVPNService2.TAG, "WriteVpnThread fail", e)
-                coroutineContext.cancel()
             }
         }
+        Log.i(LocalVPNService2.TAG, "WriteVpnThread after run loop")
     }
 }
