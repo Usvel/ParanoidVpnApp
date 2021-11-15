@@ -71,6 +71,7 @@
     <dimen name="progress_dialog_padding">10dp</dimen>
     <!--  SettingsFragment  -->
     <dimen name="settings_fragment_title_size">15sp</dimen>
-    <dimen name="settings_fragment_small_padding">10dp</dimen>
-    <dimen name="fragment_setings_buttons_sizes">42dp</dimen>
+    <dimen name="settings_fragment_small_padding">15dp</dimen>
+    <dimen name="settings_fragment_icon_padding">10dp</dimen>
+    <dimen name="fragment_settings_buttons_sizes">42dp</dimen>
 </resources>

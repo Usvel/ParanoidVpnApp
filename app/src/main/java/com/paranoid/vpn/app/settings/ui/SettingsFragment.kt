@@ -7,7 +7,6 @@ import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.databinding.NavigationSettingsFragmentBinding
 
@@ -20,7 +19,7 @@ class SettingsFragment :
         super.onViewCreated(view, savedInstanceState)
 
         buttonRotationSet()
-        setConfigNumber()
+        updateConfigNumber()
         setListeners()
     }
 
@@ -31,15 +30,17 @@ class SettingsFragment :
         )[SettingsViewModel::class.java]
     }
 
-    private fun setConfigNumber() {
-        binding.configurationNumber.text = String()
-            .format(
-                resources.getString(R.string.configuration_number),
-                viewModel.configsLiveData
-            )
+    private fun updateConfigNumber(){
+        viewModel.getAllConfigs().observe(viewLifecycleOwner){ value ->
+            val configSize = value.size
+            binding.configurationNumber.text = "Already added $configSize configuration(s)"
+        }
+
+
+        //binding.configurationNumber.text = String().format(resources.getString(R.string.configuration_number), viewModel.configsLiveData)
     }
 
-    private fun setListeners() {
+    private fun setListeners(){
         binding.addConfigurationButton.setOnClickListener {
         }
 
@@ -54,7 +55,7 @@ class SettingsFragment :
 
     // Animations
 
-    private fun buttonRotationSet() {
+    private fun buttonRotationSet(){
         val rotate = RotateAnimation(
             0F,
             180F,

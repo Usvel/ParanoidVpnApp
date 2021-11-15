@@ -11,9 +11,9 @@ import com.paranoid.vpn.app.common.vpn_configuration.domain.repository.VPNConfig
 import kotlinx.coroutines.launch
 
 class SettingsViewModel(application: Application) : BaseFragmentViewModel() {
-    private val vpnConfigDatabase = application.applicationContext?.let { VPNConfigDatabase.getInstance() }
-    val vpnConfigDao = vpnConfigDatabase?.VPNConfigDao()
-    private val vpnConfigRepository: VPNConfigRepository = VPNConfigRepository(vpnConfigDao!!)
+    private val vpnConfigRepository: VPNConfigRepository = VPNConfigRepository(application)
+
+    private val allConfigs = vpnConfigRepository.readAllData
 
     private val _configsLiveData = MutableLiveData<List<VPNConfigItem>>()
     val configsLiveData: LiveData<List<VPNConfigItem>> = _configsLiveData
@@ -22,10 +22,8 @@ class SettingsViewModel(application: Application) : BaseFragmentViewModel() {
         // TODO
     }
 
-    fun getAllConfigs(email: String, password: String)= viewModelScope.launch{
-        val configs = vpnConfigRepository.readAllData
-        _configsLiveData.postValue(configs.value)
-
+    fun getAllConfigs(): LiveData<List<VPNConfigItem>> {
+        return allConfigs
     }
 
     suspend fun insertConfigToDataBase(vpnConfigItem: VPNConfigItem){

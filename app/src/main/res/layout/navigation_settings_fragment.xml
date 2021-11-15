@@ -74,22 +74,22 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/addConfigurationButtonByQr"
-        android:layout_width="@dimen/fragment_setings_buttons_sizes"
-        android:layout_height="@dimen/fragment_setings_buttons_sizes"
+        android:layout_width="@dimen/fragment_settings_buttons_sizes"
+        android:layout_height="@dimen/fragment_settings_buttons_sizes"
         android:layout_marginTop="@dimen/settings_fragment_small_padding"
         android:backgroundTint="?attr/backgroundVioletLight"
         android:clickable="true"
         android:focusable="true"
         app:cardCornerRadius="25dp"
         app:cardElevation="3dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@+id/addConfigurationButton"
         app:layout_constraintTop_toBottomOf="@+id/configurationNumber">
 
         <ImageView
-            android:layout_width="@dimen/fragment_setings_buttons_sizes"
-            android:layout_height="@dimen/fragment_setings_buttons_sizes"
-            android:padding="@dimen/settings_fragment_small_padding"
+            android:layout_width="@dimen/fragment_settings_buttons_sizes"
+            android:layout_height="@dimen/fragment_settings_buttons_sizes"
+            android:padding="@dimen/settings_fragment_icon_padding"
             app:tint="@color/text_view_black"
             android:contentDescription="@string/scan_qr_code"
             android:src="@drawable/ic_qr" />
