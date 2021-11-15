@@ -459,13 +459,12 @@ class NioSingleThreadTcpHandler(
                 handleReadFromVpn()
                 handleSockets()
                 tick += 1
-                delay(100)
+                // delay(100)
             }
         } catch (e: Exception) {
             e.printStackTrace()
             Log.v(TAG, "closing resources in NioTcpHandler")
             closeResources()
-            // coroutineContext.cancel()
         }
     }
 

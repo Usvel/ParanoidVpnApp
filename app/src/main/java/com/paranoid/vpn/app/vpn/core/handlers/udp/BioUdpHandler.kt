@@ -64,7 +64,6 @@ class BioUdpHandler(
             closeResources()
             readJob?.cancelAndJoin()
             writeJob?.cancelAndJoin()
-            // coroutineContext.cancel()
         }
     }
 

@@ -93,7 +93,7 @@ class UdpWriteWorker(
                         }
                     }
                 } catch (e: IOException) {
-                    Log.e(BioUdpHandler.TAG, "udp write error", e)
+                    Log.v(BioUdpHandler.TAG, "udp write error", e)
                     runInterruptible {
                         outputChannel?.close()
                     }
@@ -101,10 +101,9 @@ class UdpWriteWorker(
                 }
             }
         } catch (e: Exception) {
-            Log.e(TAG, "error", e)
+            Log.v(TAG, "error", e)
         } finally {
             Log.d(TAG, "BioUdpHandler quit")
-            // coroutineContext.cancel()
         }
 
     }

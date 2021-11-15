@@ -57,12 +57,13 @@ class UdpReadWorker(
                         break
                     } else {
                         try {
-                            val key = tunnel.channel!!.register(
-                                selector, SelectionKey.OP_READ, tunnel
-                            )
+                            val key = runInterruptible {
+                                tunnel.channel!!.register(
+                                    selector, SelectionKey.OP_READ, tunnel)
+                            }
                             key.interestOps(SelectionKey.OP_READ)
                         } catch (e: IOException) {
-                            Log.d(BioUdpHandler.TAG, "register fail", e)
+                            Log.v(BioUdpHandler.TAG, "register fail", e)
                         }
                     }
                 }
@@ -91,16 +92,15 @@ class UdpReadWorker(
                                 data
                             )
                         } catch (e: IOException) {
-                            Log.e(TAG, "error", e)
+                            Log.v(TAG, "error", e)
                         }
                     }
                 }
             }
         } catch (e: Exception) {
-            Log.e(TAG, "error", e)
+            Log.v(TAG, "error", e)
         } finally {
-            Log.d(TAG, "BioUdpHandler quit")
-            //coroutineContext.cancel()
+            Log.v(TAG, "BioUdpHandler quit")
         }
     }
 

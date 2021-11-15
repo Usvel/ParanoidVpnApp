@@ -70,22 +70,13 @@ class VpnReadWorker(
                             )
                         }
                     }
-                } else {
-//                    try {
-//                        delay(10)
-//                    } catch (e: InterruptedException) {
-//                        e.printStackTrace()
-//                    }
                 }
             }
         } catch (e: IOException) {
             Log.w(LocalVPNService2.TAG, e.toString(), e)
-            //coroutineContext.cancel()
         } finally {
             LocalVPNService2.closeResources(vpnInput, vpnOutput)
-            Log.i(LocalVPNService2.TAG, "ReadVpnThread before cancelAndJoin")
             job.cancelAndJoin()
-            Log.i(LocalVPNService2.TAG, "ReadVpnThread after run loop")
         }
     }
 }
