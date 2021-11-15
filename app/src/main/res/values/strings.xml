@@ -69,4 +69,9 @@
     <string name="choose_configuration">Choose configuration</string>
     <string name="bottom_handler">Bottom handler</string>
     <string name="search_coming_soon">Search coming soon</string>
+    <string name="config_name">Config name</string>
+    <string name="primary_dns">Primary DNS</string>
+    <string name="secondary_dns">Secondary DNS</string>
+    <string name="local_ip">Local ip</string>
+    <string name="gateway">Gateway</string>
 </resources>

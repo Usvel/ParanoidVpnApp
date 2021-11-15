@@ -1,4 +1,4 @@
-package com.paranoid.vpn.app.settings.ui
+package com.paranoid.vpn.app.settings.ui.main
 
 import android.app.Application
 import androidx.lifecycle.LiveData

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".settings.ui.vpn_config.VPNConfigAddFragment">
+
+<TextView
+    android:id="@+id/tvProfileHello"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/profile_fragment_content_margin_horizontal"
+    android:layout_marginTop="@dimen/profile_fragment_settings_margin_top"
+    android:text="@string/add_configuration"
+    android:textColor="@color/text_view_dark_text_transparent"
+    android:textSize="@dimen/profile_fragment_name_size"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<ImageView
+    android:id="@+id/settingsIcon"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:tint="@color/text_view_black"
+    android:alpha="0.5"
+    android:layout_marginTop="-95dp"
+    android:layout_marginEnd="-95dp"
+    android:contentDescription="@string/this_is_settings"
+    android:src="@drawable/ic_outline_settings_max"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<HorizontalScrollView
+    android:id="@+id/cvHorizontalLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:measureAllChildren="false"
+    app:layout_constraintTop_toBottomOf="@+id/tvProfileHello"
+    android:padding="@dimen/settings_fragment_small_padding"
+    android:scrollbars="none">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilConfigName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_padding"
+            android:layout_marginRight="@dimen/base_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxStrokeColor="@color/box_stroke_color"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            android:layout_marginTop="@dimen/base_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_add_config_name"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etConfigName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/config_name"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPrimaryDNS"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_padding"
+            android:layout_marginTop="@dimen/base_padding"
+            android:layout_marginRight="@dimen/base_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxStrokeColor="@color/box_stroke_color"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilConfigName"
+            app:startIconDrawable="@drawable/ic_add_config_dns"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPrimaryDNS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/primary_dns"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilSecondaryDNS"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_padding"
+            android:layout_marginTop="@dimen/base_padding"
+            android:layout_marginRight="@dimen/base_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxStrokeColor="@color/box_stroke_color"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilPrimaryDNS"
+            app:startIconDrawable="@drawable/ic_add_config_dns"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSecondaryDNS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/secondary_dns"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilLocalIP"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_padding"
+            android:layout_marginTop="@dimen/base_padding"
+            android:layout_marginRight="@dimen/base_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxStrokeColor="@color/box_stroke_color"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilSecondaryDNS"
+            app:startIconDrawable="@drawable/ic_outline_location"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLocalIP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/local_ip"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilGateway"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_padding"
+            android:layout_marginTop="@dimen/base_padding"
+            android:layout_marginRight="@dimen/base_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxStrokeColor="@color/box_stroke_color"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilLocalIP"
+            app:startIconDrawable="@drawable/ic_add_config_dns"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etGateway"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/gateway"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</HorizontalScrollView>
+
+
+    <Button
+        android:id="@+id/addConfigurationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_margin="@dimen/base_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/add_configuration"
+        android:textColor="@color/box_stroke_color"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

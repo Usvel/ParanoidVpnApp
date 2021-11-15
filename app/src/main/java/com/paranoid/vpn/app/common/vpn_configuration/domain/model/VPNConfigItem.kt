@@ -23,7 +23,7 @@ data class ForwardingRule(
 
 @Entity(tableName = "config")
 data class VPNConfigItem(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
     var name: String,
     @NonNull var primary_dns: String = "",

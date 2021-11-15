@@ -70,3 +70,22 @@ sealed class NetworkStatus(
     class Loading : NetworkStatus()
     class Error(message: String?) : NetworkStatus(message)
 }
+
+class Validators(){
+    companion object{
+        private val PATTERN = Pattern.compile(
+            "^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$"
+        )
+
+        private fun validate(ip: String?): Boolean {
+            return PATTERN.matcher(ip).matches()
+        }
+
+        fun validateIP(ips: List<String>): Boolean {
+            for (ip in ips)
+                if (!validate(ip))
+                    return false
+            return true
+        }
+    }
+}

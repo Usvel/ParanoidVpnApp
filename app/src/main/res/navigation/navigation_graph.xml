@@ -18,8 +18,23 @@
 
     <fragment
         android:id="@+id/settings_fragment"
-        android:name="com.paranoid.vpn.app.settings.ui.SettingsFragment"
-        tools:layout="@layout/navigation_settings_fragment" />
+        android:name="com.paranoid.vpn.app.settings.ui.main.SettingsFragment"
+        tools:layout="@layout/navigation_settings_fragment" >
+        <action
+            android:id="@+id/action_settings_fragment_to_vpn_config_add_element"
+            app:destination="@id/vpn_config_add_element" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/vpn_config_add_element"
+        android:name="com.paranoid.vpn.app.settings.ui.vpn_config.VPNConfigAddFragment"
+        tools:layout="@layout/navigation_vpn_config_add_fragment" >
+        <action
+            android:id="@+id/action_vpn_config_add_element_to_settings_fragment"
+            app:destination="@id/settings_fragment"
+            app:popUpTo="@+id/settings_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/vpn_fragment"
