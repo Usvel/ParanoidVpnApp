@@ -2,6 +2,7 @@ package com.paranoid.vpn.app.vpn.ui
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
@@ -9,15 +10,54 @@ import android.net.NetworkRequest
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragmentViewModel
+import com.paranoid.vpn.app.common.utils.Utils.getString
 import com.paranoid.vpn.app.common.utils.VPNState
+import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
+import com.paranoid.vpn.app.common.vpn_configuration.domain.repository.VPNConfigRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
+private const val DEFAULT_CONFIG_ID = 1L
 
 class VPNViewModel(
     application: Application
 ) :
     BaseFragmentViewModel() {
+
+    /////////////////////////////////  Repository part
+    private val sharedPref: SharedPreferences = application.getSharedPreferences(
+        getString(R.string.config_sp), Context.MODE_PRIVATE)
+    private val vpnConfigRepository: VPNConfigRepository = VPNConfigRepository(application)
+
+    private var currentConfig: VPNConfigItem? = null
+    private val allConfigs = vpnConfigRepository.readAllData
+
+    fun getConfig(): VPNConfigItem? {
+        if (currentConfig == null)
+            currentConfig = vpnConfigRepository.getConfig(
+                sharedPref.getLong(
+                    getString(R.string.config_sp_tag_ID), DEFAULT_CONFIG_ID
+                )
+            )
+        return currentConfig
+    }
+
+    fun getAllConfigs(): LiveData<List<VPNConfigItem>> {
+        return allConfigs
+    }
+    
+    fun setConfig(newId: Long) {
+        with (sharedPref.edit()) {
+            putLong(getString(R.string.config_sp_tag_ID), newId)
+            apply()
+        }
+        currentConfig = vpnConfigRepository.getConfig(newId)
+    }
+    /////////////////////////////////
+
+
     private val connectivityManager =
         application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 

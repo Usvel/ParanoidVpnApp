@@ -11,6 +11,9 @@ class VPNConfigRepository(application: Application) {
     private val vpnConfigDao = vpnConfigDatabase.VPNConfigDao()
     val readAllData: LiveData<List<VPNConfigItem>> = vpnConfigDao.getAll()
 
+    fun getConfig(id: Long) = vpnConfigDao.getById(id)
+
+
     suspend fun addConfig(configItem: VPNConfigItem) {
         vpnConfigDao.insert(configItem)
     }

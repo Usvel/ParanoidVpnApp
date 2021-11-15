@@ -80,12 +80,7 @@ class VPNFragment :
         setObservers()
 
         CoroutineScope(Dispatchers.IO).launch {
-            val db = context?.let { VPNConfigDatabase.getInstance() }
-            val vpnConfigDao = db?.VPNConfigDao()
-            val config = vpnConfigDao?.getById(1L)
-            if (config != null) {
-                updateConfigText(configName = config.name)
-            }
+            viewModel.getConfig()?.let { updateConfigText(configName = it.name) }
         }
 
         textUpdater = lifecycleScope.launch(Dispatchers.Default) {

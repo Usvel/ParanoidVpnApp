@@ -62,4 +62,7 @@
     <string name="add_configuration">Add configuration</string>
     <!-- SettingsFragment -->
     <string name="configuration_number">Already added %1$s configuration(s)</string>
+    <!-- TAG -->
+    <string name="config_sp">PARANOID_VPN_SP</string>
+    <string name="config_sp_tag_ID">CURRENT_CONFIG_ID</string>
 </resources>
