@@ -167,6 +167,7 @@
                 android:textColor="?attr/textTransparent" />
 
             <LinearLayout
+                android:id="@+id/llCurrentConfiguration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/base_padding"
@@ -174,6 +175,7 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cvSettingsIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/top_bar_elements_start"
@@ -186,7 +188,7 @@
                     app:cardElevation="0dp">
 
                     <ImageView
-                        android:id="@+id/settingsIcon"
+                        android:id="@+id/ivSettingsIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/configuration_settings"
@@ -196,7 +198,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:id="@+id/mainConfigurationText"
+                    android:id="@+id/tvMainConfigurationText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -204,9 +206,19 @@
                     android:paddingEnd="@dimen/small_padding"
                     tools:ignore="RtlSymmetry"
                     tools:text="First configuration" />
-
                 <ImageView
-                    android:id="@+id/shareIcon"
+                    android:id="@+id/imEditIcon"
+                    android:alpha="0.2"
+                    app:tint="?attr/toolBarColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/configuration_sharing"
+                    android:paddingStart="@dimen/small_padding"
+                    android:paddingEnd="@dimen/small_padding"
+                    android:src="@drawable/ic_outline_edit" />
+                <ImageView
+                    android:id="@+id/ivShareIcon"
                     android:alpha="0.2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -218,7 +230,7 @@
                     app:tint="?attr/toolBarColor" />
 
                 <ImageView
-                    android:id="@+id/qrIcon"
+                    android:id="@+id/ivQrIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

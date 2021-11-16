@@ -71,8 +71,8 @@ sealed class NetworkStatus(
     class Error(message: String?) : NetworkStatus(message)
 }
 
-class Validators(){
-    companion object{
+class Validators {
+    companion object {
         private val PATTERN = Pattern.compile(
             "^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$"
         )
@@ -88,4 +88,8 @@ class Validators(){
             return true
         }
     }
+}
+
+enum class ClickHandlers {
+    Configuration, QRCode, Edit, Share
 }

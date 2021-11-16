@@ -1,16 +1,13 @@
 package com.paranoid.vpn.app.vpn.ui
 
 import android.app.Activity
-import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
-import android.content.ServiceConnection
-import android.net.ConnectivityManager
 import android.net.VpnService
 import android.os.Bundle
-import android.os.IBinder
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startForegroundService
 import androidx.lifecycle.ViewModelProvider
@@ -19,17 +16,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
+import com.paranoid.vpn.app.common.utils.ClickHandlers
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.utils.VPNState
-import com.paranoid.vpn.app.common.vpn_configuration.domain.database.VPNConfigDatabase
+import com.paranoid.vpn.app.common.vpn_configuration.domain.repository.VPNConfigRepository
 import com.paranoid.vpn.app.databinding.NavigationVpnFragmentBinding
 import com.paranoid.vpn.app.qr.QRCreator
 import com.paranoid.vpn.app.vpn.core.LocalVPNService2
 import kotlinx.coroutines.*
 import java.util.concurrent.atomic.AtomicLong
+import java.util.stream.Collectors
 
 class VPNFragment :
     BaseFragment<NavigationVpnFragmentBinding, VPNViewModel>(NavigationVpnFragmentBinding::inflate) {
@@ -89,7 +89,13 @@ class VPNFragment :
         rvAllConfigs!!.layoutManager = LinearLayoutManager(context)
 
         viewModel.getAllConfigs().observe(viewLifecycleOwner) { value ->
-            val adapter = ConfigAdapter(value)
+            val adapter = VPNConfigAdapter(value) { id, code ->
+                when (code) {
+                    ClickHandlers.Configuration -> showConfigDetails(id)
+                    ClickHandlers.QRCode -> CoroutineScope(Dispatchers.IO).launch { showQRCode(id) }
+                    else -> showConfigDetails(id)
+                }
+            }
             rvAllConfigs.adapter = adapter
         }
 
@@ -109,11 +115,11 @@ class VPNFragment :
     }
 
     private suspend fun updateConfigText(configName: String) = withContext(Dispatchers.Main) {
-        binding.mainConfigurationText.text = configName
+        binding.tvMainConfigurationText.text = configName
     }
 
     private fun loadMainConfiguration() {
-        binding.mainConfigurationText.text = Utils.getString(R.string.test_first_configuration)
+        binding.tvMainConfigurationText.text = Utils.getString(R.string.test_first_configuration)
         binding.mainConfigurationCard.setOnClickListener {
             context?.let { context_ ->
                 Utils.makeToast(
@@ -124,7 +130,46 @@ class VPNFragment :
         }
     }
 
+    private fun showConfigDetails(config_id: Long) {
+        val customAlertDialogView = LayoutInflater.from(context)
+            .inflate(R.layout.config_details_dialog, null, false)
+        CoroutineScope(Dispatchers.IO).launch {
+            val config = VPNConfigRepository(requireActivity().application)
+                .getConfig(config_id)
+            withContext(Dispatchers.Main) {
+                val materialAlertDialogBuilder = context?.let { MaterialAlertDialogBuilder(it) }
+                customAlertDialogView.findViewById<TextView>(R.id.tvPrimaryDNS).text =
+                    config?.primary_dns
+                customAlertDialogView.findViewById<TextView>(R.id.tvSecondaryDNS).text =
+                    config?.secondary_dns
+                customAlertDialogView.findViewById<TextView>(R.id.tvLocalIp).text =
+                    config?.local_ip
+                customAlertDialogView.findViewById<TextView>(R.id.tvGateway).text =
+                    config?.gateway
+                customAlertDialogView.findViewById<TextView>(R.id.tvProxyIp).text =
+                    config?.proxy_ip?.stream()?.collect(Collectors.joining(", "))
+                materialAlertDialogBuilder
+                    ?.setView(customAlertDialogView)
+                    ?.setTitle(config?.name)
+                    ?.setMessage("Configuration details")
+                    ?.setNegativeButton("Cancel") { dialog, _ ->
+                        dialog.dismiss()
+                    }?.show()
+
+            }
+        }
+    }
+
     private fun setListeners() {
+        binding.cvSettingsIcon.setOnClickListener {
+            showConfigDetails(1L)
+        }
+
+        binding.llCurrentConfiguration.setOnLongClickListener {
+            showConfigDetails(1L)
+            return@setOnLongClickListener false
+        }
+
         binding.mainConfigurationCard.setOnClickListener {
             showBottomSheetDialog()
         }
@@ -154,7 +199,7 @@ class VPNFragment :
             }
         }
 
-        binding.shareIcon.setOnClickListener {
+        binding.ivShareIcon.setOnClickListener {
             context?.let { context_ ->
                 Utils.makeToast(
                     context_,
@@ -163,23 +208,26 @@ class VPNFragment :
             }
         }
 
-        binding.qrIcon.setOnClickListener {
+        binding.ivQrIcon.setOnClickListener {
             context?.let {
                 CoroutineScope(Dispatchers.IO).launch {
-                    val db = context?.let { VPNConfigDatabase.getInstance() }
-                    val vpnConfigDao = db?.VPNConfigDao()
-                    val config = vpnConfigDao?.getById(1L)
-                    val gson = Gson()
-                    val intent = Intent(context, QRCreator::class.java)
-                    intent.putExtra("config", gson.toJson(config))
-                    startActivity(intent)
+                    showQRCode(1L)
                 }
             }
         }
     }
 
+    private fun showQRCode(id: Long) {
+        val config = VPNConfigRepository(requireActivity().application)
+            .getConfig(id)
+        val gson = Gson()
+        val intent = Intent(context, QRCreator::class.java)
+        intent.putExtra("config", gson.toJson(config))
+        startActivity(intent)
+    }
+
     private fun showBottomSheetDialog() {
-        bottomSheetDialog?.show()
+        bottomSheetDialog.show()
     }
 
     private fun setObservers() {

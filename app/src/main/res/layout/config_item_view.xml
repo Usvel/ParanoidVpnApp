@@ -9,6 +9,7 @@
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvSettingsIcon"
         app:cardCornerRadius="@dimen/small_corner_radius"
         app:cardElevation="0dp"
         android:layout_width="wrap_content"
@@ -67,7 +68,6 @@
 
     <ImageView
         android:id="@+id/imQRIcon"
-        android:alpha="0.2"
         app:tint="?attr/toolBarColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
