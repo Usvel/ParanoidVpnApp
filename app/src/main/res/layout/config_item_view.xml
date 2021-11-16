@@ -18,6 +18,7 @@
         android:backgroundTint="?attr/toolBarColorSecond"
         android:innerRadius="0dp"
         android:paddingStart="@dimen/small_padding"
+        android:clickable="true"
         android:paddingEnd="@dimen/small_padding"
         android:shape="ring">
 
@@ -75,5 +76,6 @@
         android:contentDescription="@string/configuration_qr"
         android:paddingStart="@dimen/small_padding"
         android:paddingEnd="@dimen/small_padding"
-        android:src="@drawable/ic_qr" />
+        android:clickable="true"
+        android:src="@drawable/ic_qr_selected" />
 </LinearLayout>

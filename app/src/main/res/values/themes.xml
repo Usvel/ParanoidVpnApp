@@ -103,4 +103,18 @@
         <item name="android:background">@drawable/rounded_dialog</item>
     </style>
 
+    <!-- Alert Dialog -->
+    <style name="ThemeOverlay.MaterialComponents.MaterialAlertDialog_Background"
+        parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <!-- Background Color-->
+        <item name="android:background">@color/minor_color_light</item>
+        <!-- Style for negative button -->
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="@style/Widget.MaterialComponents.Button.TextButton">
+        <!-- text color for the button -->
+        <item name="android:textColor">@color/nav_indicator_dark</item>
+    </style>
+
 </resources>

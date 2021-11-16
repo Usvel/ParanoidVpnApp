@@ -137,7 +137,12 @@ class VPNFragment :
             val config = VPNConfigRepository(requireActivity().application)
                 .getConfig(config_id)
             withContext(Dispatchers.Main) {
-                val materialAlertDialogBuilder = context?.let { MaterialAlertDialogBuilder(it) }
+                val materialAlertDialogBuilder = context?.let {
+                    MaterialAlertDialogBuilder(
+                        it,
+                        R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Background
+                    )
+                }
                 customAlertDialogView.findViewById<TextView>(R.id.tvPrimaryDNS).text =
                     config?.primary_dns
                 customAlertDialogView.findViewById<TextView>(R.id.tvSecondaryDNS).text =
@@ -151,7 +156,7 @@ class VPNFragment :
                 materialAlertDialogBuilder
                     ?.setView(customAlertDialogView)
                     ?.setTitle(config?.name)
-                    ?.setMessage("Configuration details")
+                    ?.setMessage("Current configuration details")
                     ?.setNegativeButton("Cancel") { dialog, _ ->
                         dialog.dismiss()
                     }?.show()
