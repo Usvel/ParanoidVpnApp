@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
@@ -63,6 +62,9 @@ class VPNFragment :
             viewModel.getConfig()?.let { updateConfigText(configName = it.name) }
         }
 
+
+        analyzeNetworkState()
+
         textUpdater = lifecycleScope.launch(Dispatchers.Default) {
             while (true) {
                 if (viewModel.vpnStateOn.value == VPNState.CONNECTED
@@ -78,8 +80,17 @@ class VPNFragment :
         }
     }
 
+    private fun analyzeNetworkState() {
+        when(viewModel.vpnStateOn.value) {
+            VPNState.CONNECTED -> vpnButtonConnected()
+            VPNState.ERROR -> vpnButtonError()
+            VPNState.NOT_CONNECTED -> vpnButtonDisable()
+        }
+    }
+
     private fun initBottomSheetDialog() {
-        bottomSheetDialog = context?.let { BottomSheetDialog(it, R.style.AppBottomSheetDialogTheme) }!!
+        bottomSheetDialog =
+            context?.let { BottomSheetDialog(it, R.style.AppBottomSheetDialogTheme) }!!
         bottomSheetDialog.setContentView(R.layout.vpn_bottom_sheet_dialog_layout)
         bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
