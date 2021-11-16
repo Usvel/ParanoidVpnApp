@@ -59,8 +59,9 @@
         android:layout_marginTop="@dimen/settings_fragment_small_padding"
         android:backgroundTint="?attr/backgroundVioletLight"
         app:cardElevation="3dp"
-        android:clickable="true"
         android:focusable="true"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="20dp"
         app:layout_constraintStart_toStartOf="@+id/configurationNumber"
         app:layout_constraintTop_toBottomOf="@+id/configurationNumber">
@@ -79,6 +80,7 @@
         android:layout_marginTop="@dimen/settings_fragment_small_padding"
         android:backgroundTint="?attr/backgroundVioletLight"
         android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:focusable="true"
         app:cardCornerRadius="25dp"
         app:cardElevation="3dp"

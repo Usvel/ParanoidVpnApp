@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     android:paddingTop="@dimen/base_padding"
     android:paddingBottom="@dimen/base_padding">
 
@@ -19,6 +21,7 @@
         android:innerRadius="0dp"
         android:paddingStart="@dimen/small_padding"
         android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:paddingEnd="@dimen/small_padding"
         android:shape="ring">
 
