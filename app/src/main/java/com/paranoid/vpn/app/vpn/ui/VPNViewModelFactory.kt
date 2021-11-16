@@ -14,6 +14,9 @@ class VPNViewModelFactory(
     ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return VPNViewModel(application) as T
+        if (modelClass.isAssignableFrom(VPNViewModel::class.java)) {
+            return VPNViewModel(application) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

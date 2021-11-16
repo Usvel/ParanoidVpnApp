@@ -14,6 +14,7 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
@@ -52,7 +53,8 @@ class QRScanner : AppCompatActivity() {
         codescanner.decodeCallback = DecodeCallback {
             runOnUiThread {
                 try {
-                    val configItem = Gson().fromJson(it.text, VPNConfigItem::class.java)
+                    val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+                    val configItem: VPNConfigItem = gson.fromJson(it.text, VPNConfigItem::class.java)
                     CoroutineScope(Dispatchers.IO).launch {
                         VPNConfigRepository(application).addConfig(configItem)
                     }
@@ -70,9 +72,7 @@ class QRScanner : AppCompatActivity() {
         }
 
         scannerView.setOnClickListener{
-            Toast.makeText(this, "before scanner", Toast.LENGTH_SHORT).show()
             codescanner.startPreview()
-            print("after printscan")
         }
     }
 

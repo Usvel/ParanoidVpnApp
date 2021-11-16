@@ -18,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.common.utils.ClickHandlers
@@ -235,7 +236,7 @@ class VPNFragment :
     private fun showQRCode(id: Long) {
         val config = VPNConfigRepository(requireActivity().application)
             .getConfig(id)
-        val gson = Gson()
+        val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
         val intent = Intent(context, QRCreator::class.java)
         intent.putExtra("config", gson.toJson(config))
         startActivity(intent)

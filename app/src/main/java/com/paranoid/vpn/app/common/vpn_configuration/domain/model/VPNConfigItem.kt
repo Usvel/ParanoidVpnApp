@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import com.google.gson.Gson
+import com.google.gson.annotations.Expose
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.annotations.NotNull
 import java.util.stream.Collectors
@@ -25,14 +26,24 @@ data class ForwardingRule(
 data class VPNConfigItem(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
+    @Expose()
     var name: String,
-    @NonNull var primary_dns: String = "",
+    @NonNull
+    @Expose()
+    var primary_dns: String = "",
+    @Expose()
     var secondary_dns: String? = null,
     @TypeConverters(ArrayConverter::class)
+    @Expose()
     var proxy_ip: MutableList<String>? = null,
-    @NonNull var local_ip: String = "",
-    @NonNull var gateway: String = "",
+    @NonNull
+    @Expose()
+    var local_ip: String = "",
+    @NonNull
+    @Expose()
+    var gateway: String = "",
     @TypeConverters(ForwardingRuleConverter::class)
+    @Expose()
     @NotNull var forwarding_rules: MutableList<ForwardingRule>,
 )
 
