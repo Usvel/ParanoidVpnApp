@@ -162,11 +162,11 @@ class VPNFragment :
 
     private fun setListeners() {
         binding.cvSettingsIcon.setOnClickListener {
-            showConfigDetails(1L)
+            showConfigDetails(viewModel.getConfigId())
         }
 
         binding.llCurrentConfiguration.setOnLongClickListener {
-            showConfigDetails(1L)
+            showConfigDetails(viewModel.getConfigId())
             return@setOnLongClickListener false
         }
 
@@ -211,7 +211,7 @@ class VPNFragment :
         binding.ivQrIcon.setOnClickListener {
             context?.let {
                 CoroutineScope(Dispatchers.IO).launch {
-                    showQRCode(1L)
+                    showQRCode(viewModel.getConfigId())
                 }
             }
         }

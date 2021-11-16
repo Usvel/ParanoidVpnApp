@@ -28,11 +28,18 @@ class VPNViewModel(
 
     /////////////////////////////////  Repository part
     private val sharedPref: SharedPreferences = application.getSharedPreferences(
-        getString(R.string.config_sp), Context.MODE_PRIVATE)
+        getString(R.string.config_sp), Context.MODE_PRIVATE
+    )
     private val vpnConfigRepository: VPNConfigRepository = VPNConfigRepository(application)
 
     private var currentConfig: VPNConfigItem? = null
     private val allConfigs = vpnConfigRepository.readAllData
+
+    fun getConfigId(): Long {
+        return sharedPref.getLong(
+            getString(R.string.config_sp_tag_ID), DEFAULT_CONFIG_ID
+        )
+    }
 
     fun getConfig(): VPNConfigItem? {
         if (currentConfig == null)
