@@ -23,7 +23,7 @@ class VPNConfigAdapter(
 
         return ViewHolder(view) {
             onItemClicked(
-                mList[it].id, ClickHandlers.Configuration
+                mList[it].id, ClickHandlers.GetConfiguration
             )
         }
     }
@@ -36,13 +36,11 @@ class VPNConfigAdapter(
         val configItem = mList[position]
 
         holder.configName.text = configItem.name
-        holder.itemView.setOnLongClickListener {
-            onItemClicked(configItem.id, ClickHandlers.Configuration)
-            return@setOnLongClickListener false
+        holder.itemView.setOnClickListener {
+            onItemClicked(configItem.id, ClickHandlers.SetConfiguration)
         }
-        holder.cvSettingsIcon.setOnLongClickListener {
-            onItemClicked(configItem.id, ClickHandlers.Configuration)
-            return@setOnLongClickListener false
+        holder.cvSettingsIcon.setOnClickListener {
+            onItemClicked(configItem.id, ClickHandlers.GetConfiguration)
         }
         holder.imQRIcon.setOnClickListener {
             onItemClicked(configItem.id, ClickHandlers.QRCode)
@@ -65,9 +63,8 @@ class VPNConfigAdapter(
         val cvSettingsIcon: CardView = itemView.findViewById(R.id.cvSettingsIcon)
 
         init {
-            itemView.setOnLongClickListener {
+            itemView.setOnClickListener {
                 onItemClicked(bindingAdapterPosition)
-                return@setOnLongClickListener false
             }
             cvSettingsIcon.setOnClickListener {
                 onItemClicked(bindingAdapterPosition)

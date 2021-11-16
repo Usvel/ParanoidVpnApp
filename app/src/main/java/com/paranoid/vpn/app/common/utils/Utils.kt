@@ -91,5 +91,5 @@ class Validators {
 }
 
 enum class ClickHandlers {
-    Configuration, QRCode, Edit, Share
+    GetConfiguration, SetConfiguration, QRCode, Edit, Share
 }

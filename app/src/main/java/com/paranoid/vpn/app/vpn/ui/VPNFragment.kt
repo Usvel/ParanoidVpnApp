@@ -91,7 +91,17 @@ class VPNFragment :
         viewModel.getAllConfigs().observe(viewLifecycleOwner) { value ->
             val adapter = VPNConfigAdapter(value) { id, code ->
                 when (code) {
-                    ClickHandlers.Configuration -> showConfigDetails(id)
+                    ClickHandlers.GetConfiguration -> showConfigDetails(id)
+                    ClickHandlers.SetConfiguration -> {
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            viewModel.setConfig(id)
+                            LocalVPNService2.currentConfig = viewModel.getConfig()
+                            viewModel.getConfig()?.let { updateConfigText(configName = it.name) }
+                            withContext(Dispatchers.Main) {
+                                hideBottomSheetDialog()
+                            }
+                        }
+                    }
                     ClickHandlers.QRCode -> CoroutineScope(Dispatchers.IO).launch { showQRCode(id) }
                     else -> showConfigDetails(id)
                 }
@@ -233,6 +243,10 @@ class VPNFragment :
 
     private fun showBottomSheetDialog() {
         bottomSheetDialog.show()
+    }
+
+    private fun hideBottomSheetDialog() {
+        bottomSheetDialog.hide()
     }
 
     private fun setObservers() {

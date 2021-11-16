@@ -37,8 +37,6 @@ class LocalVPNService2 : VpnService() {
 
     private val context = Dispatchers.IO
 
-    var currentConfig: VPNConfigItem? = null
-
     override fun onCreate() {
         Log.d(TAG, "onCreate")
         super.onCreate()
@@ -154,6 +152,8 @@ class LocalVPNService2 : VpnService() {
     }
 
     companion object {
+        var currentConfig: VPNConfigItem? = null
+
         val TAG: String = LocalVPNService2::class.java.simpleName
         private val VPN_ADDRESS = "10.0.0.2" // Only IPv4 support for now
         private val VPN_ROUTE = "0.0.0.0" // Intercept everything
