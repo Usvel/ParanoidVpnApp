@@ -235,6 +235,50 @@ tools:context=".settings.ui.vpn_config.VPNConfigAddFragment">
     </androidx.constraintlayout.widget.ConstraintLayout>
 </HorizontalScrollView>
 
+    <HorizontalScrollView
+        android:id="@+id/cvHorizontalLayoutProxy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:measureAllChildren="false"
+        app:layout_constraintTop_toBottomOf="@+id/cvHorizontalLayout"
+        android:padding="@dimen/settings_fragment_small_padding"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clConfigProxy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAddProxy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+
+                tools:listitem="@android:layout/two_line_list_item" />
+            <Button
+                android:id="@+id/addProxyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_margin="@dimen/base_padding"
+                android:text="@string/add_proxy"
+                app:layout_constraintLeft_toRightOf="@+id/rvAddProxy"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/clConfigProxy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/box_stroke_color">
+            </Button>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </HorizontalScrollView>
+
 
     <Button
         android:id="@+id/addConfigurationButton"

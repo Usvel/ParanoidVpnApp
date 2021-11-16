@@ -6,23 +6,32 @@ import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
+import com.paranoid.vpn.app.common.utils.ClickHandlers
 import com.paranoid.vpn.app.common.utils.Validators.Companion.validateIP
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.ForwardingRule
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.Protocols
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import com.paranoid.vpn.app.databinding.NavigationVpnConfigAddFragmentBinding
+import com.paranoid.vpn.app.vpn.core.LocalVPNService2
+import com.paranoid.vpn.app.vpn.ui.VPNConfigAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class VPNConfigAddFragment :
     BaseFragment<NavigationVpnConfigAddFragmentBinding, VPNConfigAddViewModel>(
         NavigationVpnConfigAddFragmentBinding::inflate
     ) {
+
+    private var proxyList = mutableListOf(String)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -61,6 +70,13 @@ class VPNConfigAddFragment :
                 it.findNavController().navigate(R.id.action_vpn_config_add_element_to_settings_fragment)
             }
         }
+        binding.addProxyButton.setOnClickListener {
+
+        }
+    }
+
+    private fun setRecyclerViews() {
+
     }
 
     // Animations

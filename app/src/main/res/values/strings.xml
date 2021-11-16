@@ -85,4 +85,6 @@
     <string name="local_ip_is">Local ip:</string>
     <string name="gateway_is">Gateway:</string>
     <string name="proxy_ips_is">Proxy ips:</string>
+    <string name="proxy">Proxy</string>
+    <string name="add_proxy">Add proxy</string>
 </resources>
