@@ -8,6 +8,7 @@
 
     <TextView
         android:id="@+id/tvProfileHello"
+        android:paddingTop="@dimen/medium_padding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/profile_fragment_content_margin_horizontal"

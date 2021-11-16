@@ -8,6 +8,7 @@
 
     <TextView
         android:id="@+id/tvProfileHello"
+        android:paddingTop="@dimen/medium_padding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/profile_fragment_content_margin_horizontal"
@@ -35,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
         android:backgroundTint="?attr/iconBackground"
+        android:foreground="?android:attr/selectableItemBackground"
         android:innerRadius="0dp"
         android:shape="ring"
         app:cardCornerRadius="@dimen/small_corner_radius"
@@ -60,6 +62,7 @@
         android:layout_marginStart="@dimen/profile_fragment_icon_margin_start"
         android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
         android:backgroundTint="?attr/iconBackgroundRed"
+        android:foreground="?android:attr/selectableItemBackground"
         android:innerRadius="0dp"
         android:shape="ring"
         app:cardCornerRadius="@dimen/small_corner_radius"
@@ -86,6 +89,7 @@
         android:layout_marginStart="@dimen/profile_fragment_icon_margin_start"
         android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
         android:backgroundTint="?attr/iconBackground"
+        android:foreground="?android:attr/selectableItemBackground"
         android:innerRadius="0dp"
         android:shape="ring"
         app:cardCornerRadius="@dimen/small_corner_radius"

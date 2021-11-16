@@ -7,6 +7,7 @@
     tools:context=".vpn.ui.VPNFragment">
 
     <LinearLayout
+        android:paddingTop="@dimen/medium_padding"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,6 +43,7 @@
             android:layout_height="@dimen/vpn_fragment_icon_size"
             android:layout_marginEnd="@dimen/top_bar_elements_start"
             android:backgroundTint="?attr/iconBackground"
+            android:foreground="?android:attr/selectableItemBackground"
             android:innerRadius="0dp"
             android:shape="ring"
             app:cardCornerRadius="@dimen/small_corner_radius"

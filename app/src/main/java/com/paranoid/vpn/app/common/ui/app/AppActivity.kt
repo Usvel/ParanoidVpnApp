@@ -19,13 +19,15 @@ class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infla
 
         // TODO
         //val w: Window = window // in Activity's onCreate() for instance
-//
+
         //w.setFlags(
         //    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
         //    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         //)
 
         // supportFragmentManager.beginTransaction().replace(R.id.my_nav_host_fragment, RegistrationFragment()).commit()
+        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 
     fun setProceedBottomNav(next: () -> Unit) {
