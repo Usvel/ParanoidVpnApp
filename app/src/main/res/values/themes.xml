@@ -117,4 +117,8 @@
         <item name="android:textColor">@color/nav_indicator_dark</item>
     </style>
 
+    <style name="TranslucentStatusBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
 </resources>

@@ -2,12 +2,19 @@ package com.paranoid.vpn.app.common.ui.app
 
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.Window
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.paranoid.vpn.app.common.ui.base.BaseActivity
 import com.paranoid.vpn.app.databinding.ActivityMainBinding
 import android.view.WindowManager
+import androidx.core.view.WindowInsetsCompat
+
+import androidx.core.view.ViewCompat
+
+
+
 
 
 
@@ -18,16 +25,13 @@ class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infla
         setUpBottomNav(binding.bottomTabBar)
 
         // TODO
-        //val w: Window = window // in Activity's onCreate() for instance
-
-        //w.setFlags(
+        // supportFragmentManager.beginTransaction().replace(R.id.my_nav_host_fragment, RegistrationFragment()).commit()
+        //window.setFlags(
         //    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
         //    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         //)
 
-        // supportFragmentManager.beginTransaction().replace(R.id.my_nav_host_fragment, RegistrationFragment()).commit()
-        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
     }
 
     fun setProceedBottomNav(next: () -> Unit) {
