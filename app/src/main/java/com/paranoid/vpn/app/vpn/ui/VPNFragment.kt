@@ -81,7 +81,7 @@ class VPNFragment :
     }
 
     private fun analyzeNetworkState() {
-        when(viewModel.vpnStateOn.value) {
+        when (viewModel.vpnStateOn.value) {
             VPNState.CONNECTED -> vpnButtonConnected()
             VPNState.ERROR -> vpnButtonError()
             VPNState.NOT_CONNECTED -> vpnButtonDisable()
@@ -105,6 +105,14 @@ class VPNFragment :
                 when (code) {
                     ClickHandlers.GetConfiguration -> showConfigDetails(id)
                     ClickHandlers.SetConfiguration -> {
+                        if (connection.isBound) {
+                            Toast.makeText(
+                                context,
+                                "Cannot set config if service is running!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            return@VPNConfigAdapter
+                        }
                         lifecycleScope.launch(Dispatchers.IO) {
                             viewModel.setConfig(id)
                             LocalVPNService2.currentConfig = viewModel.getConfig()
