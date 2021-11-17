@@ -59,7 +59,7 @@ class VPNFragment :
         setObservers()
 
         CoroutineScope(Dispatchers.IO).launch {
-            viewModel.getConfig()?.let { updateConfigText(configName = it.name) }
+            viewModel?.getConfig()?.let { updateConfigText(configName = it.name) }
         }
 
 
@@ -67,8 +67,8 @@ class VPNFragment :
 
         textUpdater = lifecycleScope.launch(Dispatchers.Default) {
             while (true) {
-                if (viewModel.vpnStateOn.value == VPNState.CONNECTED
-                    && viewModel.isConnected.value == true
+                if (viewModel?.vpnStateOn?.value == VPNState.CONNECTED
+                    && viewModel?.isConnected?.value == true
                 )
                     updateText()
                 delay(500)
@@ -81,7 +81,7 @@ class VPNFragment :
     }
 
     private fun analyzeNetworkState() {
-        when (viewModel.vpnStateOn.value) {
+        when (viewModel?.vpnStateOn?.value) {
             VPNState.CONNECTED -> vpnButtonConnected()
             VPNState.ERROR -> vpnButtonError()
             VPNState.NOT_CONNECTED -> vpnButtonDisable()
@@ -100,7 +100,7 @@ class VPNFragment :
 
         rvAllConfigs!!.layoutManager = LinearLayoutManager(context)
 
-        viewModel.getAllConfigs().observe(viewLifecycleOwner) { value ->
+        viewModel?.getAllConfigs()?.observe(viewLifecycleOwner) { value ->
             val adapter = VPNConfigAdapter(value) { id, code ->
                 when (code) {
                     ClickHandlers.GetConfiguration -> showConfigDetails(id)
@@ -114,9 +114,9 @@ class VPNFragment :
                             return@VPNConfigAdapter
                         }
                         lifecycleScope.launch(Dispatchers.IO) {
-                            viewModel.setConfig(id)
-                            LocalVPNService2.currentConfig = viewModel.getConfig()
-                            viewModel.getConfig()?.let { updateConfigText(configName = it.name) }
+                            viewModel?.setConfig(id)
+                            LocalVPNService2.currentConfig = viewModel?.getConfig()
+                            viewModel?.getConfig()?.let { updateConfigText(configName = it.name) }
                             withContext(Dispatchers.Main) {
                                 hideBottomSheetDialog()
                             }
@@ -197,11 +197,11 @@ class VPNFragment :
 
     private fun setListeners() {
         binding.cvSettingsIcon.setOnClickListener {
-            showConfigDetails(viewModel.getConfigId())
+            viewModel?.getConfigId()?.let { it1 -> showConfigDetails(it1) }
         }
 
         binding.llCurrentConfiguration.setOnLongClickListener {
-            showConfigDetails(viewModel.getConfigId())
+            viewModel?.getConfigId()?.let { it1 -> showConfigDetails(it1) }
             return@setOnLongClickListener false
         }
 
@@ -210,16 +210,16 @@ class VPNFragment :
         }
 
         binding.vpnButtonBackground.setOnClickListener {
-            when (viewModel.vpnStateOn.value) {
+            when (viewModel?.vpnStateOn?.value) {
                 VPNState.CONNECTED -> {
                     vpnButtonDisable()
-                    viewModel.changeVpnState()
+                    viewModel?.changeVpnState()
                 }
 
                 VPNState.NOT_CONNECTED -> {
                     vpnButtonConnected()
-                    if (viewModel.isConnected.value == true)
-                        viewModel.changeVpnState()
+                    if (viewModel?.isConnected?.value == true)
+                        viewModel?.changeVpnState()
                 }
                 VPNState.ERROR -> vpnButtonDisable()
             }
@@ -246,7 +246,7 @@ class VPNFragment :
         binding.ivQrIcon.setOnClickListener {
             context?.let {
                 CoroutineScope(Dispatchers.IO).launch {
-                    showQRCode(viewModel.getConfigId())
+                    viewModel?.getConfigId()?.let { it1 -> showQRCode(it1) }
                 }
             }
         }
@@ -270,7 +270,7 @@ class VPNFragment :
     }
 
     private fun setObservers() {
-        viewModel.isConnected.observe(viewLifecycleOwner) { value ->
+        viewModel?.isConnected?.observe(viewLifecycleOwner) { value ->
             when (value) {
                 false -> {
                     vpnButtonDisable()
@@ -283,10 +283,10 @@ class VPNFragment :
             }
         }
 
-        viewModel.vpnStateOn.observe(viewLifecycleOwner) { value ->
+        viewModel?.vpnStateOn?.observe(viewLifecycleOwner) { value ->
             when (value) {
                 VPNState.CONNECTED -> {
-                    if (viewModel.isConnected.value == true)
+                    if (viewModel?.isConnected?.value == true)
                         startVpn()
                 }
                 VPNState.NOT_CONNECTED -> stopVpn()
@@ -311,7 +311,7 @@ class VPNFragment :
 
     private fun vpnButtonConnected() {
         // TODO: Remove Toasts
-        when (viewModel.isConnected.value) {
+        when (viewModel?.isConnected?.value) {
             false ->
                 Toast.makeText(requireContext(), "Error: connectivity is off!", Toast.LENGTH_SHORT)
                     .show()

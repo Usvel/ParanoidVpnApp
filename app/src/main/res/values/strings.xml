@@ -59,7 +59,6 @@
     <string name="firebase">Firebase</string>
     <string name="firebase_reset_password">Check your email for password recovery</string>
     <string name="firebase_error">Error Firebase</string>
-    <string name="settings">Settings</string>
     <string name="vpn_configurations">VPN Configurations</string>
     <string name="fragment_settings_tools_cofig_num">1 configuration found</string>
     <string name="add_configuration">Add configuration</string>

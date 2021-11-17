@@ -82,7 +82,7 @@ class VPNConfigAddFragment :
             val proxyIP = binding.etProxy.text.toString()
         if (validateIP(listOf(primaryDNS, secondaryDNS, localIP, gateway))) {
             CoroutineScope(Dispatchers.IO).launch {
-                viewModel.insertConfigToDataBase(
+                viewModel?.insertConfigToDataBase(
                     VPNConfigItem(
                         name = name,
                         primary_dns = primaryDNS,

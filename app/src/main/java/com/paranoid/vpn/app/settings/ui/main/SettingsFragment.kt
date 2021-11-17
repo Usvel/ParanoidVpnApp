@@ -34,7 +34,7 @@ class SettingsFragment :
     }
 
     private fun updateConfigNumber(){
-        viewModel.getAllConfigs().observe(viewLifecycleOwner){ value ->
+        viewModel?.getAllConfigs()?.observe(viewLifecycleOwner){ value ->
             val configSize = value.size
             binding.configurationNumber.text = "Already added $configSize configuration(s)"
         }
