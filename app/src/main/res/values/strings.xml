@@ -87,4 +87,9 @@
     <string name="proxy_ips_is">Proxy ips:</string>
     <string name="proxy">Proxy</string>
     <string name="add_proxy">Add proxy</string>
+    <string name="add_rule">Add forwarding rule</string>
+    <string name="protocol_name">Protocol</string>
+    <string name="source_port">Source port</string>
+    <string name="target_ip">Target IP</string>
+    <string name="target_port">Target port</string>
 </resources>

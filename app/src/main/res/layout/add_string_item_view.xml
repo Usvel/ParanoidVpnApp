@@ -1,45 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilProxy"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="160dp"
+    android:layout_marginTop="@dimen/base_padding"
+
+    app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+    app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+    app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+    app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+    >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/base_padding"
-        android:layout_marginTop="@dimen/base_padding"
-        android:layout_marginRight="@dimen/base_padding"
+        app:boxStrokeColor="@color/box_stroke_color"
         app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
         app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
         app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
-        app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
-        app:boxStrokeColor="@color/box_stroke_color"
-        app:endIconDrawable="@drawable/ic_clear"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/text_view_black"
-        app:hintEnabled="false"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius">
 
-        app:startIconDrawable="@drawable/ic_outline_location"
-        app:startIconTint="@color/text_view_dark_text_transparent">
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_margin="15dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/mTitle"
+                android:text="Title"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size"
+                android:textColor="@color/black"
+                android:ellipsize="end"
+                android:layout_margin="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/mMenus"
+            android:src="@drawable/ic_more"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+    </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etProxy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:hint="@string/proxy"
-            android:inputType="textEmailAddress"
-            android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
-            android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
-            android:singleLine="true"
-            android:textColorHint="?attr/textTransparent"
-            android:textSize="@dimen/authentication_fragment_edit_text_size" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
