@@ -89,7 +89,7 @@ class LoginFragment : BaseFragment<NavigationAuthenticationFragmentBinding, Logi
 
     private fun setListeners() {
         binding.bAuthenticationForgot.setOnClickListener {
-            if (binding.etAuthenticationPassword.text.isNullOrEmpty()) {
+            if (binding.etAuthenticationName.text.isNullOrEmpty()) {
                 Utils.makeToast(it.context, "Enter your email")
             }
 
