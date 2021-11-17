@@ -42,11 +42,11 @@ class VpnReadWorker(
             var bufferToNetwork: ByteBuffer?
             while (coroutineContext.isActive) {
                 bufferToNetwork = ByteBufferPool.acquire()
-                val readBytes = vpnInput.read(bufferToNetwork)
+                val readBytes = runInterruptible { vpnInput.read(bufferToNetwork) }
                 VPNFragment.upByte.addAndGet(readBytes.toLong())
                 if (readBytes > 0) {
                     bufferToNetwork.flip()
-                    val packet = Packet(bufferToNetwork)
+                    val packet = runInterruptible { Packet(bufferToNetwork) }
                     when {
                         packet.isUDP() -> {
                             if (Config.logRW) {
@@ -70,17 +70,10 @@ class VpnReadWorker(
                             )
                         }
                     }
-                } else {
-                    try {
-                        delay(10)
-                    } catch (e: InterruptedException) {
-                        e.printStackTrace()
-                    }
                 }
             }
         } catch (e: IOException) {
             Log.w(LocalVPNService2.TAG, e.toString(), e)
-            coroutineContext.cancel()
         } finally {
             LocalVPNService2.closeResources(vpnInput, vpnOutput)
             job.cancelAndJoin()

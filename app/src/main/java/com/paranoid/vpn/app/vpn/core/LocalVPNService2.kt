@@ -10,6 +10,8 @@ import android.os.IBinder
 import android.os.ParcelFileDescriptor
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigDataGenerator
+import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import com.paranoid.vpn.app.vpn.core.handlers.udp.BioUdpHandler
 import com.paranoid.vpn.app.vpn.core.handlers.tcp.NioSingleThreadTcpHandler
 import com.paranoid.vpn.app.vpn.core.config.Config
@@ -38,7 +40,7 @@ class LocalVPNService2 : VpnService() {
     override fun onCreate() {
         Log.d(TAG, "onCreate")
         super.onCreate()
-        setupVPN()
+        setupVPN(currentConfig ?: VPNConfigDataGenerator.getVPNConfigItem())
 
         deviceToNetworkUDPQueue = ArrayBlockingQueue(1000)
         deviceToNetworkTCPQueue = ArrayBlockingQueue(1000)
@@ -74,13 +76,14 @@ class LocalVPNService2 : VpnService() {
         VPNRunnableJob!!.start()
     }
 
-    private fun setupVPN() {
+    private fun setupVPN(config: VPNConfigItem) {
         try {
             if (vpnInterface == null) {
                 val builder = Builder()
-                builder.addAddress(VPN_ADDRESS, 32)
+                builder.addAddress(config.local_ip, 32)
                 builder.addRoute(VPN_ROUTE, 0)
-                builder.addDnsServer(Config.dns)
+                builder.addDnsServer(config.primary_dns)
+                config.secondary_dns?.let { builder.addDnsServer(it) }
                 if (Config.testLocal) {
                     builder.addAllowedApplication(packageName)
                 }
@@ -133,10 +136,15 @@ class LocalVPNService2 : VpnService() {
 
     private suspend fun cleanup() {
         bioUdpHandlerJob?.cancelAndJoin()
-        nioSingleThreadTcpHandlerJob?.cancel()
-        VPNRunnableJob?.cancel()
+        Log.i(TAG, "Vpnservice after bioUdpHandlerJob.cancelAndJoin")
+        nioSingleThreadTcpHandlerJob?.cancelAndJoin()
+        Log.i(TAG, "Vpnservice after nioSingleThreadTcpHandlerJob.cancelAndJoin")
+        VPNRunnableJob?.cancelAndJoin()
+        Log.i(TAG, "Vpnservice after all cancelAndJoin")
         context.cancel()
+        Log.i(LocalVPNService2.TAG, "Vpnservice after cancel context")
         CoroutineScope(context).coroutineContext.cancelChildren()
+        Log.i(LocalVPNService2.TAG, "Vpnservice after cancelChildren")
         deviceToNetworkTCPQueue = null
         deviceToNetworkUDPQueue = null
         networkToDeviceQueue = null
@@ -144,6 +152,8 @@ class LocalVPNService2 : VpnService() {
     }
 
     companion object {
+        var currentConfig: VPNConfigItem? = null
+
         val TAG: String = LocalVPNService2::class.java.simpleName
         private val VPN_ADDRESS = "10.0.0.2" // Only IPv4 support for now
         private val VPN_ROUTE = "0.0.0.0" // Intercept everything

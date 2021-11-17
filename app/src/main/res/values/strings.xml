@@ -57,4 +57,32 @@
     <!-- Firebase -->
     <string name="firebase_error">Error Firebase</string>
     <string name="settings">Settings</string>
+    <string name="vpn_configurations">VPN Configurations</string>
+    <string name="fragment_settings_tools_cofig_num">1 configuration found</string>
+    <string name="add_configuration">Add configuration</string>
+    <!-- SettingsFragment -->
+    <string name="configuration_number">Already added %1$s configuration(s)</string>
+    <!-- TAG -->
+    <string name="config_sp">PARANOID_VPN_SP</string>
+    <string name="config_sp_tag_ID">CURRENT_CONFIG_ID</string>
+    <!-- VPN Fragment -->
+    <string name="favorite">Favorite</string>
+    <string name="choose_configuration">Choose configuration</string>
+    <string name="bottom_handler">Bottom handler</string>
+    <string name="search_coming_soon">Search coming soon</string>
+    <string name="share_vpn_configuration">Share VPN configuration</string>
+    <string name="scan_the_qr_code_description">Scan the QR code with another device to set this configuration</string>
+    <string name="generated_qr_code">Generated QR code</string>
+    <!-- Config -->
+    <string name="config_name">Config name</string>
+    <string name="primary_dns">Primary DNS</string>
+    <string name="secondary_dns">Secondary DNS</string>
+    <string name="local_ip">Local ip</string>
+    <string name="gateway">Gateway</string>
+    <string name="proxy_ips">Proxy ips</string>
+    <string name="primary_dns_is">Primary DNS:</string>
+    <string name="secondary_dns_is">Secondary DNS:</string>
+    <string name="local_ip_is">Local ip:</string>
+    <string name="gateway_is">Gateway:</string>
+    <string name="proxy_ips_is">Proxy ips:</string>
 </resources>

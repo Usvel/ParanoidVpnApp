@@ -4,6 +4,7 @@
     <dimen name="logo_text_size">20sp</dimen>
     <dimen name="top_bar_elements_start">20dp</dimen>
     <dimen name="base_padding">20dp</dimen>
+    <dimen name="medium_padding">0dp</dimen>
     <dimen name="extra_padding">40dp</dimen>
     <dimen name="small_padding">10dp</dimen>
     <dimen name="card_corner_radius">20dp</dimen>
@@ -16,6 +17,7 @@
     <dimen name="vpn_button_background_radius">95dp</dimen>
     <dimen name="simple_corner_radius">75dp</dimen>
     <dimen name="icon_inner_padding">10dp</dimen>
+    <dimen name="icon_inner_padding_small">5dp</dimen>
     <dimen name="small_corner_radius">24dp</dimen>
     <dimen name="big_corner_radius">50dp</dimen>
     <!--  AppActivity  -->
@@ -69,4 +71,11 @@
     <dimen name="authentication_fragment_card_view_image_vk_margin">13dp</dimen>
     <dimen name="authentication_fragment_card_view_text_vk_margin_start">21dp</dimen>
     <dimen name="progress_dialog_padding">10dp</dimen>
+    <!--  SettingsFragment  -->
+    <dimen name="settings_fragment_title_size">15sp</dimen>
+    <dimen name="settings_fragment_small_padding">15dp</dimen>
+    <dimen name="settings_fragment_icon_padding">10dp</dimen>
+    <dimen name="fragment_settings_buttons_sizes">42dp</dimen>
+    <!--  SettingsFragment  -->
+    <dimen name="vpn_fragment_icon_size">32dp</dimen>
 </resources>

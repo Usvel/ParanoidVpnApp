@@ -8,6 +8,7 @@
 
     <TextView
         android:id="@+id/tvProfileHello"
+        android:paddingTop="@dimen/medium_padding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/profile_fragment_content_margin_horizontal"
@@ -35,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
         android:backgroundTint="?attr/iconBackground"
+        android:foreground="?android:attr/selectableItemBackground"
         android:innerRadius="0dp"
         android:shape="ring"
         app:cardCornerRadius="@dimen/small_corner_radius"
@@ -54,12 +56,13 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvProfileBasket"
+        android:id="@+id/cvProfileDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/profile_fragment_icon_margin_start"
         android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
-        android:backgroundTint="?attr/iconBackground"
+        android:backgroundTint="?attr/iconBackgroundRed"
+        android:foreground="?android:attr/selectableItemBackground"
         android:innerRadius="0dp"
         android:shape="ring"
         app:cardCornerRadius="@dimen/small_corner_radius"
@@ -75,6 +78,33 @@
             android:foregroundGravity="center_vertical"
             android:padding="@dimen/icon_inner_padding"
             android:src="@drawable/ic_delete"
+            app:tint="?attr/toolBarColor" />
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvProfileLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/profile_fragment_icon_margin_start"
+        android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
+        android:backgroundTint="?attr/iconBackground"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        app:cardCornerRadius="@dimen/small_corner_radius"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toEndOf="@id/cvProfileDelete"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileName">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/profile_fragment_about_delete"
+            android:foregroundGravity="center_vertical"
+            android:padding="@dimen/icon_inner_padding"
+            android:src="@drawable/ic_logout"
             app:tint="?attr/toolBarColor" />
     </androidx.cardview.widget.CardView>
 
@@ -110,7 +140,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="tvProfileStatistics, ivProfileStatistic,
-        cvProfileСhange, cvProfileBasket,
+        cvProfileСhange, cvProfileDelete, cvProfileLogOut,
         tvProfileAccounts, cvProfileGoogle, cvProfileVk, gProfileEmail" />
 
     <TextView

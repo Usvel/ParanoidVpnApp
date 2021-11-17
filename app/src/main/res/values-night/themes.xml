@@ -31,6 +31,8 @@
         <item name="vpnButtonError">@color/vpn_color_error</item>
         <!-- Item color -->
         <item name="iconBackground">@color/icon_background_dark</item>
+        <!-- Item color -->
+        <item name="iconBackgroundRed">@color/icon_background_red_dark</item>
     </style>
 
     <style name="Widget.Material3.BottomNavigationView.ActiveIndicator.Paranoid"
@@ -41,4 +43,19 @@
         <item name="shapeAppearance">@style/ShapeAppearance.Material3.NavigationBarView.ActiveIndicator</item>
         <item name="android:color">?attr/navBarIconIndicator</item>
     </style>
+
+    <!-- Alert Dialog -->
+    <style name="ThemeOverlay.MaterialComponents.MaterialAlertDialog_Background"
+        parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <!-- Background Color-->
+        <item name="android:background">@color/minor_color_dark_theme</item>
+        <!-- Style for negative button -->
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="@style/Widget.MaterialComponents.Button.TextButton">
+        <!-- text color for the button -->
+        <item name="android:textColor">@color/light_nav_icon_selected</item>
+    </style>
+
 </resources>

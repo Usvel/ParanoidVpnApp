@@ -4,10 +4,7 @@ import android.util.Log
 import com.paranoid.vpn.app.vpn.core.handlers.SuspendableRunnable
 import com.paranoid.vpn.app.vpn.core.protocol.tcpip.IpUtil
 import com.paranoid.vpn.app.vpn.core.util.ByteBufferPool
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.nio.ByteBuffer
@@ -51,7 +48,7 @@ class UdpReadWorker(
     override suspend fun run() {
         try {
             while (coroutineContext.isActive) {
-                val readyChannels = withContext(Dispatchers.IO) {
+                val readyChannels = runInterruptible {
                     selector!!.select()
                 }
                 while (true) {
@@ -60,12 +57,13 @@ class UdpReadWorker(
                         break
                     } else {
                         try {
-                            val key = tunnel.channel!!.register(
-                                selector, SelectionKey.OP_READ, tunnel
-                            )
+                            val key = runInterruptible {
+                                tunnel.channel!!.register(
+                                    selector, SelectionKey.OP_READ, tunnel)
+                            }
                             key.interestOps(SelectionKey.OP_READ)
                         } catch (e: IOException) {
-                            Log.d(BioUdpHandler.TAG, "register fail", e)
+                            Log.v(BioUdpHandler.TAG, "register fail", e)
                         }
                     }
                 }
@@ -82,7 +80,7 @@ class UdpReadWorker(
                         try {
                             val inputChannel = key.channel() as DatagramChannel
                             val receiveBuffer = ByteBufferPool.acquire()
-                            withContext(Dispatchers.IO) {
+                            runInterruptible {
                                 inputChannel.read(receiveBuffer)
                             }
                             receiveBuffer.flip()
@@ -94,16 +92,15 @@ class UdpReadWorker(
                                 data
                             )
                         } catch (e: IOException) {
-                            Log.e(TAG, "error", e)
+                            Log.v(TAG, "error", e)
                         }
                     }
                 }
             }
         } catch (e: Exception) {
-            Log.e(TAG, "error", e)
+            Log.v(TAG, "error", e)
         } finally {
-            Log.d(TAG, "BioUdpHandler quit")
-            coroutineContext.cancel()
+            Log.v(TAG, "BioUdpHandler quit")
         }
     }
 

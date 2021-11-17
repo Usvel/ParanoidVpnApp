@@ -28,7 +28,7 @@ class BioUdpHandler(
         var writeJob: Job? = null
         try {
             val tunnelQueue: BlockingQueue<UdpTunnel> = ArrayBlockingQueue(100)
-            selector = withContext(Dispatchers.IO) {
+            selector = runInterruptible {
                 Selector.open()
             }
             readJob = CoroutineScope(context).launch {
@@ -64,7 +64,6 @@ class BioUdpHandler(
             closeResources()
             readJob?.cancelAndJoin()
             writeJob?.cancelAndJoin()
-            coroutineContext.cancel()
         }
     }
 

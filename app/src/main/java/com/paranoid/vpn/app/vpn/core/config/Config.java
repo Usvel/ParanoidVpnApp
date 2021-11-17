@@ -1,5 +1,6 @@
 package com.paranoid.vpn.app.vpn.core.config;
 
+
 public class Config {
     //只代理本app的流量
     public static boolean testLocal = false;

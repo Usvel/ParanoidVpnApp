@@ -28,7 +28,7 @@ class ProfileFragment :
         binding.cvProfileLogin.setOnClickListener {
             it.findNavController().navigate(R.id.action_profile_fragment_to_login_fragment)
         }
-        binding.cvProfileBasket.setOnClickListener {
+        binding.cvProfileLogOut.setOnClickListener {
             viewModel.singOutUser()
         }
     }
