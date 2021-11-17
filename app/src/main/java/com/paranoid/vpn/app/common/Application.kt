@@ -4,12 +4,11 @@ import android.app.Application
 import android.os.StrictMode
 import androidx.viewbinding.BuildConfig
 import com.paranoid.vpn.app.common.remote.FirebaseServiceFactory
+import com.paranoid.vpn.app.common.remote.GoogleServiceFactory
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.vpn_configuration.domain.database.VPNConfigDatabase
 
 class Application : Application() {
-
-
     override fun onCreate() {
         super.onCreate()
         FirebaseServiceFactory.makeFirebase()

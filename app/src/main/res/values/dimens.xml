@@ -70,6 +70,15 @@
     <dimen name="authentication_fragment_card_view_content_margin_bottom">66dp</dimen>
     <dimen name="authentication_fragment_card_view_image_vk_margin">13dp</dimen>
     <dimen name="authentication_fragment_card_view_text_vk_margin_start">21dp</dimen>
+    <!-- EditUser -->
+    <dimen name="edit_user_fragment_card_view_bottom_margin">22dp</dimen>
+    <dimen name="edit_user_fragment_text_input_layout_radius">15dp</dimen>
+    <dimen name="edit_user_fragment_entry_margin">25sp</dimen>
+    <dimen name="edit_user_fragment_card_view_text_size">14sp</dimen>
+    <dimen name="edit_user_fragment_entry_size">19sp</dimen>
+    <dimen name="edit_user_fragment_edit_text_padding">15dp</dimen>
+    <dimen name="edit_user_fragment_content_margin_horizontal">30dp</dimen>
+    <!-- ProgressDialog -->
     <dimen name="progress_dialog_padding">10dp</dimen>
     <!--  SettingsFragment  -->
     <dimen name="settings_fragment_title_size">15sp</dimen>

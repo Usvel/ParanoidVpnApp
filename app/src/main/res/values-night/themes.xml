@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.Paranoid" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorPrimary">@color/primaryLight</item>
         <item name="colorOnPrimary">@color/primaryDark</item>
+        <!-- Window Style -->
+        <item name="android:windowNoTitle">true</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/status_bar_color</item>
@@ -25,22 +25,33 @@
         <item name="toolBarColorSecond">@color/second_background_transparent</item>
         <!-- Text -->
         <item name="textTransparent">@color/light_text_transparent</item>
+        <item name="textDedicated">@color/white</item>
         <!-- VPN Button -->
         <item name="vpnButtonDisabled">@color/vpn_color_disabled_dark</item>
         <item name="vpnButtonConnected">@color/vpn_color_connected</item>
         <item name="vpnButtonError">@color/vpn_color_error</item>
+        <!-- CardViewButton -->
+        <item name="cardViewBackground">@color/card_view_background_dark</item>
+        <!-- ProfileFragment -->
+        <item name="textButtonProfile">@color/text_button_profile_dark</item>
+        <item name="cardViewText">@color/text_card_view_dark</item>
+        <!-- AuthenticationFragment -->
+        <item name="boxStrokeColor">@color/white</item>
         <!-- Item color -->
         <item name="iconBackground">@color/icon_background_dark</item>
         <!-- Item color -->
         <item name="iconBackgroundRed">@color/icon_background_red_dark</item>
     </style>
 
-    <style name="Widget.Material3.BottomNavigationView.ActiveIndicator.Paranoid"
-            parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+
+    <style name="Widget.Material3.BottomNavigationView.ActiveIndicator.Paranoid" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:width">@dimen/m3_bottom_nav_item_active_indicator_width</item>
         <item name="android:height">@dimen/m3_bottom_nav_item_active_indicator_height</item>
-        <item name="marginHorizontal">@dimen/m3_bottom_nav_item_active_indicator_margin_horizontal</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.Material3.NavigationBarView.ActiveIndicator</item>
+        <item name="marginHorizontal">@dimen/m3_bottom_nav_item_active_indicator_margin_horizontal
+        </item>
+        <item name="shapeAppearance">
+            @style/ShapeAppearance.Material3.NavigationBarView.ActiveIndicator
+        </item>
         <item name="android:color">?attr/navBarIconIndicator</item>
     </style>
 

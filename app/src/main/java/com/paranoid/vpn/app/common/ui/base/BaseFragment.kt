@@ -13,12 +13,13 @@ typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 abstract class BaseFragment<VB : ViewBinding, VM : BaseFragmentViewModel>(
     private val inflate: Inflate<VB>
 ) : Fragment() {
+
     private var _binding: VB? = null
     protected val binding get() = _binding!!
 
     private var baseActivity: BaseActivity<*>? = null
 
-    protected lateinit var viewModel: VM
+    protected var viewModel: VM? = null
 
     private var appActivity: AppActivity? = null
 
@@ -51,7 +52,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseFragmentViewModel>(
     abstract fun initViewModel()
 
     private fun initData() {
-        viewModel.getCurrentData()
+        viewModel?.getCurrentData()
     }
 
     fun setUpBottomNav() {
@@ -67,22 +68,8 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseFragmentViewModel>(
     }
 
     fun showMessage(
-        title: String?,
-        message: String?,
-        posBtnTxt: String? = null,
-        negBtnTxt: String? = null,
-        posBtnAction: (() -> Unit)? = null,
-        negBtnAction: (() -> Unit)? = null,
-        cancellable: Boolean = true
+        messageData: MessageData
     ) {
-        baseActivity?.showMessage(
-            title = title,
-            message = message,
-            posBtnTxt = posBtnTxt,
-            negBtnTxt = negBtnTxt,
-            posBtnAction = posBtnAction,
-            negBtnAction = negBtnAction,
-            cancellable = cancellable
-        )
+        baseActivity?.showMessage(messageData)
     }
 }

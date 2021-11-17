@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">Paranoid VPN</string>
     <string name="vpn_client">VPN client</string>
+    <string name="settings">Settings</string>
     <string name="profile">Profile</string>
     <string name="this_is_profile">This is profile</string>
     <string name="this_is_vpn">This is VPN</string>
-    <string name="this_is_settings">Coming soon…</string>
+    <string name="this_is_settings">This is settings</string>
     <string name="get_information_about_vpn">Get information about VPN</string>
     <string name="click_to_choose_configuration">Click to choose configuration</string>
     <string name="configuration_settings">Configuration settings</string>
@@ -45,7 +46,7 @@
     <string name="authentication_fragment_hi">Hello,</string>
     <string name="authentication_fragment_google">Login with Google</string>
     <string name="authentication_fragment_vk">Login with Vk</string>
-    <string name="authentication_fragment_hint_login">User Name</string>
+    <string name="authentication_fragment_hint_login">User Email</string>
     <string name="authentication_fragment_hint_password">Password</string>
     <string name="authentication_fragment_forgot">Forgot password</string>
     <string name="authentication_fragment_about_image">Image profile</string>
@@ -55,6 +56,8 @@
     <string name="authentication_fragment_invalid_password">Invalid password</string>
     <string name="authentication_fragment_about_password">Your password must be 8–24 characters long and contain a combination of letters and numbers</string>
     <!-- Firebase -->
+    <string name="firebase">Firebase</string>
+    <string name="firebase_reset_password">Check your email for password recovery</string>
     <string name="firebase_error">Error Firebase</string>
     <string name="settings">Settings</string>
     <string name="vpn_configurations">VPN Configurations</string>
@@ -92,4 +95,14 @@
     <string name="source_port">Source port</string>
     <string name="target_ip">Target IP</string>
     <string name="target_port">Target port</string>
+    <string name="firebase_error_loading_user">Error loading User</string>
+    <!-- EditUser -->
+    <string name="edit_user_fragment_hint_login">User Name</string>
+    <string name="edit_user_fragment_hint_password">Password</string>
+    <string name="edit_user_fragment_hint_email">Email</string>
+    <string name="edit_user_fragment_hint_url">Url Image</string>
+    <string name="edit_user_fragment_invalid_url">Invalid url</string>
+    <string name="edit_user_fragment_invalid_email">Invalid email</string>
+    <string name="edit_user_fragment_invalid_name">Invalid name</string>
+    <string name="edit_user_fragment_entry">Edit User</string>
 </resources>

@@ -8,7 +8,6 @@
 
     <TextView
         android:id="@+id/tvProfileHello"
-        android:paddingTop="@dimen/medium_padding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/profile_fragment_content_margin_horizontal"
@@ -36,7 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
         android:backgroundTint="?attr/iconBackground"
-        android:foreground="?android:attr/selectableItemBackground"
         android:innerRadius="0dp"
         android:shape="ring"
         app:cardCornerRadius="@dimen/small_corner_radius"
@@ -56,13 +54,12 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvProfileDelete"
+        android:id="@+id/cvProfileBasket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/profile_fragment_icon_margin_start"
         android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
-        android:backgroundTint="?attr/iconBackgroundRed"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:backgroundTint="?attr/iconBackground"
         android:innerRadius="0dp"
         android:shape="ring"
         app:cardCornerRadius="@dimen/small_corner_radius"
@@ -81,20 +78,18 @@
             app:tint="?attr/toolBarColor" />
     </androidx.cardview.widget.CardView>
 
-
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvProfileLogOut"
+        android:id="@+id/cvProfileOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/profile_fragment_icon_margin_start"
         android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
         android:backgroundTint="?attr/iconBackground"
-        android:foreground="?android:attr/selectableItemBackground"
         android:innerRadius="0dp"
         android:shape="ring"
         app:cardCornerRadius="@dimen/small_corner_radius"
         app:cardElevation="0dp"
-        app:layout_constraintStart_toEndOf="@id/cvProfileDelete"
+        app:layout_constraintStart_toEndOf="@id/cvProfileBasket"
         app:layout_constraintTop_toBottomOf="@id/tvProfileName">
 
         <ImageView
@@ -123,6 +118,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/ivProfileImage"
             android:layout_width="@dimen/profile_fragment_image_size"
             android:layout_height="@dimen/profile_fragment_image_size"
             android:layout_gravity="center_vertical"
@@ -130,8 +126,7 @@
             android:contentDescription="@string/profile_fragment_about_image"
             android:foregroundGravity="center_vertical"
             android:padding="@dimen/profile_fragment_image_padding"
-            android:src="@drawable/ic_image_profile"
-            app:tint="?attr/toolBarColor" />
+            android:src="@drawable/ic_image_profile" />
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.Group
@@ -140,7 +135,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="tvProfileStatistics, ivProfileStatistic,
-        cvProfileСhange, cvProfileDelete, cvProfileLogOut,
+        cvProfileСhange, cvProfileBasket, cvProfileOut,
         tvProfileAccounts, cvProfileGoogle, cvProfileVk, gProfileEmail" />
 
     <TextView
@@ -256,7 +251,7 @@
         android:layout_marginBottom="@dimen/profile_fragment_card_view_bottom_margin"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="@color/card_view_background"
+        app:cardBackgroundColor="?attr/cardViewBackground"
         app:cardCornerRadius="@dimen/profile_fragment_card_view_radius"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toTopOf="@id/cvProfileRegistration"
@@ -300,7 +295,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="@color/card_view_background"
+        app:cardBackgroundColor="?attr/cardViewBackground"
         app:cardCornerRadius="@dimen/profile_fragment_card_view_radius"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toTopOf="@id/tvProfileAccounts"
@@ -329,4 +324,42 @@
             android:textColor="@color/text_view_black"
             android:textSize="@dimen/profile_fragment_card_view_text_size" />
     </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilProfilePassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/authentication_fragment_edit_text_margin"
+        app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+        app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+        app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+        app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+        app:boxStrokeColor="?attr/textDedicated"
+        app:endIconDrawable="@drawable/ic_eye"
+        app:endIconMode="password_toggle"
+        app:endIconTint="?attr/toolBarColor"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cvProfileImage"
+        app:layout_constraintStart_toStartOf="@+id/tvProfileName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/ic_lock"
+        app:startIconTint="?attr/textTransparent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etProfilePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="@string/authentication_fragment_hint_password"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+            android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+            android:singleLine="true"
+            android:textColorHint="?attr/textTransparent"
+            android:textSize="@dimen/authentication_fragment_edit_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

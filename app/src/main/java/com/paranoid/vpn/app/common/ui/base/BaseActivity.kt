@@ -1,7 +1,6 @@
 package com.paranoid.vpn.app.common.ui.base
 
 import android.app.AlertDialog
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -58,24 +57,22 @@ abstract class BaseActivity<VB : ViewBinding>(
     }
 
     fun showMessage(
-        title: String?,
-        message: String?,
-        posBtnTxt: String? = null,
-        negBtnTxt: String? = null,
-        posBtnAction: (() -> Unit)? = null,
-        negBtnAction: (() -> Unit)? = null,
-        cancellable: Boolean = true
+        messageData: MessageData
     ) {
         AlertDialog.Builder(this).apply {
             setTitle(title)
-            setMessage(message)
-            setCancelable(cancellable)
-            setPositiveButton(posBtnTxt) { _, _ ->
-                if (posBtnAction != null) posBtnAction()
+            setMessage(messageData.message)
+            setCancelable(messageData.cancellable)
+            setPositiveButton(messageData.posBtnTxt) { _, _ ->
+                messageData.negBtnAction?.let {
+                    it()
+                }
             }
-            negBtnTxt?.let {
-                setNegativeButton(negBtnTxt) { _, _ ->
-                    if (negBtnAction != null) negBtnAction()
+            messageData.negBtnTxt?.let {
+                setNegativeButton(messageData.negBtnTxt) { _, _ ->
+                    messageData.negBtnAction?.let {
+                        it()
+                    }
                 }
             }
             show()
@@ -100,3 +97,13 @@ abstract class BaseActivity<VB : ViewBinding>(
         const val TAG = "BaseActivity"
     }
 }
+
+data class MessageData(
+    val title: String?,
+    val message: String?,
+    val posBtnTxt: String? = null,
+    val negBtnTxt: String? = null,
+    val posBtnAction: (() -> Unit)? = null,
+    val negBtnAction: (() -> Unit)? = null,
+    val cancellable: Boolean = true
+)

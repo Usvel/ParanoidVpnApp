@@ -12,7 +12,6 @@
     <attr name="textTransparent" format="reference|color" />
     <attr name="textDedicated" format="reference|color" />
     <!-- Profile fragment -->
-    <attr name="textProfile" format="reference|color" />
     <attr name="textButtonProfile" format="reference|color" />
     <!-- Authentication fragment -->
     <attr name="boxStrokeColor" format="reference|color" />

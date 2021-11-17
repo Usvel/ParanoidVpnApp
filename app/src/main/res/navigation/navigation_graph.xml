@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_profile_fragment_to_login_fragment"
             app:destination="@id/login_fragment" />
+        <action
+            android:id="@+id/action_profile_fragment_to_edit_user_fragment"
+            app:destination="@id/edit_user_fragment" />
     </fragment>
 
     <fragment
@@ -72,5 +75,17 @@
             app:destination="@id/profile_fragment"
             app:popUpTo="@+id/profile_fragment"
             app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/edit_user_fragment"
+        android:name="com.paranoid.vpn.app.profile.ui.edit.EditUserFragment"
+        tools:layout="@layout/navigation_edit_user_fragment">
+
+        <action
+            android:id="@+id/action_edit_user_fragment_to_profile_fragment"
+            app:destination="@id/profile_fragment"
+            app:popUpTo="@+id/profile_fragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>
