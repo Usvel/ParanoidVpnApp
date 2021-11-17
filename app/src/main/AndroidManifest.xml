@@ -22,8 +22,7 @@
         android:theme="@style/Theme.Paranoid">
         <activity
             android:name="com.paranoid.vpn.app.common.ui.app.AppActivity"
-            android:exported="true"
-            android:screenOrientation="portrait">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

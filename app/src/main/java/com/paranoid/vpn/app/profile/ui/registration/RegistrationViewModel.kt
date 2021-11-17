@@ -1,6 +1,5 @@
 package com.paranoid.vpn.app.profile.ui.registration
 
-import android.app.usage.NetworkStats
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +12,6 @@ import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.profile.domain.entity.UserEntity
 import com.paranoid.vpn.app.profile.domain.usecase.CreateFirebaseUserUseCase
 import com.paranoid.vpn.app.profile.remote.UserFirebaseImpl
-import com.paranoid.vpn.app.profile.ui.login.LoginViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

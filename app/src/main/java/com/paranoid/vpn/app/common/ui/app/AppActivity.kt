@@ -3,14 +3,13 @@ package com.paranoid.vpn.app.common.ui.app
 import android.os.Bundle
 import androidx.core.view.isVisible
 import com.paranoid.vpn.app.common.ui.base.BaseActivity
-import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.databinding.ActivityMainBinding
 
 class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setUpBottomNav(binding.bottomTabBar)
-
         // TODO
         //val w: Window = window // in Activity's onCreate() for instance
 //

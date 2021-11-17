@@ -46,10 +46,10 @@
             android:layout_width="@dimen/authentication_fragment_image_size"
             android:layout_height="@dimen/authentication_fragment_image_size"
             android:layout_gravity="center_vertical"
+            android:alpha="0.7"
             android:contentDescription="@string/authentication_fragment_about_image"
             android:foregroundGravity="center_vertical"
             android:padding="@dimen/icon_inner_padding"
-            android:alpha="0.7"
             android:src="@drawable/ic_image_profile"
             app:tint="?attr/toolBarColor" />
     </androidx.cardview.widget.CardView>
@@ -152,6 +152,12 @@
         app:layout_constraintEnd_toEndOf="@+id/tilAuthenticationPassword"
         app:layout_constraintTop_toBottomOf="@id/tilAuthenticationPassword" />
 
+    <androidx.constraintlayout.widget.Group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="cvVk,cvAuthenticationGoogle" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cvAuthenticationGoogle"
         android:layout_width="0dp"
@@ -159,10 +165,10 @@
         android:layout_marginBottom="@dimen/authentication_fragment_card_view_margin"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="@color/card_view_background"
+        app:cardBackgroundColor="?attr/cardViewBackground"
         app:cardCornerRadius="@dimen/authentication_fragment_card_view_radius"
         app:cardElevation="0dp"
-        app:layout_constraintBottom_toTopOf="@id/cvProfileRegistration"
+        app:layout_constraintBottom_toTopOf="@id/cvVk"
         app:layout_constraintEnd_toEndOf="@id/tilAuthenticationPassword"
         app:layout_constraintStart_toStartOf="@id/tilAuthenticationPassword">
 
@@ -195,13 +201,13 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvProfileRegistration"
+        android:id="@+id/cvVk"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/authentication_fragment_card_view_content_margin_bottom"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="@color/card_view_background"
+        app:cardBackgroundColor="?attr/cardViewBackground"
         app:cardCornerRadius="@dimen/authentication_fragment_card_view_radius"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -220,10 +226,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/authentication_fragment_card_view_image_vk_margin"
                 android:layout_marginTop="@dimen/authentication_fragment_card_view_image_vk_margin"
-                app:tint="@color/text_view_black"
                 android:layout_marginBottom="@dimen/authentication_fragment_card_view_image_vk_margin"
                 android:contentDescription="@string/authentication_fragment_about_vk"
-                android:src="@drawable/ic_vk" />
+                android:src="@drawable/ic_vk"
+                app:tint="@color/text_view_black" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.os.IBinder
 import android.util.TypedValue
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat.startForegroundService
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -79,8 +78,8 @@ class VPNFragment :
 
         textUpdater = lifecycleScope.launch(Dispatchers.Default) {
             while (true) {
-                if (viewModel.vpnStateOn.value == VPNState.CONNECTED
-                    && viewModel.isConnected.value == true
+                if (viewModel?.vpnStateOn?.value == VPNState.CONNECTED
+                    && viewModel?.isConnected?.value == true
                 )
                     updateText()
                 delay(500)
@@ -113,16 +112,16 @@ class VPNFragment :
 
     private fun setListeners() {
         binding.vpnButtonBackground.setOnClickListener {
-            when (viewModel.vpnStateOn.value) {
+            when (viewModel?.vpnStateOn?.value) {
                 VPNState.CONNECTED -> {
                     vpnButtonDisable()
-                    viewModel.changeVpnState()
+                    viewModel?.changeVpnState()
                 }
 
                 VPNState.NOT_CONNECTED -> {
                     vpnButtonConnected()
-                    if (viewModel.isConnected.value == true)
-                        viewModel.changeVpnState()
+                    if (viewModel?.isConnected?.value == true)
+                        viewModel?.changeVpnState()
                 }
                 VPNState.ERROR -> vpnButtonDisable()
             }
@@ -157,11 +156,11 @@ class VPNFragment :
     }
 
     private fun setObservers() {
-        viewModel.isConnected.observe(viewLifecycleOwner) { value ->
+        viewModel?.isConnected?.observe(viewLifecycleOwner) { value ->
             when (value) {
                 false -> {
                     vpnButtonDisable()
-                    if (viewModel.vpnStateOn.value == VPNState.NOT_CONNECTED)
+                    if (viewModel?.vpnStateOn?.value == VPNState.NOT_CONNECTED)
                         stopVpn()
                 }
 
@@ -171,14 +170,14 @@ class VPNFragment :
             }
         }
 
-        viewModel.vpnStateOn.observe(viewLifecycleOwner) { value ->
+        viewModel?.vpnStateOn?.observe(viewLifecycleOwner) { value ->
             when (value) {
                 VPNState.CONNECTED -> {
-                    if (viewModel.isConnected.value == true)
+                    if (viewModel?.isConnected?.value == true)
                         startVpn()
                 }
                 VPNState.NOT_CONNECTED -> {
-                    if (viewModel.isConnected.value == true)
+                    if (viewModel?.isConnected?.value == true)
                         stopVpn()
                 }
             }
@@ -202,10 +201,8 @@ class VPNFragment :
 
     private fun vpnButtonConnected() {
         // TODO: Remove Toasts
-        when (viewModel.isConnected.value) {
-            false ->
-                Toast.makeText(requireContext(), "Error: connectivity is off!", Toast.LENGTH_SHORT)
-                    .show()
+        when (viewModel?.isConnected?.value) {
+            false -> Utils.makeToast(requireContext(), "Error: connectivity is off!")
             true -> {
                 binding.connectionStatus.visibility = View.VISIBLE
                 binding.turnOnVPN.setImageResource(R.drawable.ic_power)

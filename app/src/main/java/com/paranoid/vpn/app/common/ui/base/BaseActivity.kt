@@ -1,7 +1,6 @@
 package com.paranoid.vpn.app.common.ui.base
 
 import android.app.AlertDialog
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController

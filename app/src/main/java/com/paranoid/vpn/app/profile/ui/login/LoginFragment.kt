@@ -89,7 +89,7 @@ class LoginFragment : BaseFragment<NavigationAuthenticationFragmentBinding, Logi
 
     private fun setListeners() {
         binding.bAuthenticationForgot.setOnClickListener {
-            if (binding.etAuthenticationPassword.text.isNullOrEmpty()){
+            if (binding.etAuthenticationPassword.text.isNullOrEmpty()) {
                 Utils.makeToast(it.context, "Enter your email")
             }
 
@@ -134,5 +134,9 @@ class LoginFragment : BaseFragment<NavigationAuthenticationFragmentBinding, Logi
         binding.etAuthenticationPassword.addTextChangedListener {
             binding.tilAuthenticationPassword.error = null
         }
+    }
+
+    companion object{
+        const val TAG = "LoginFragment"
     }
 }

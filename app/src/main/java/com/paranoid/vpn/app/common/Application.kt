@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.StrictMode
 import androidx.viewbinding.BuildConfig
 import com.paranoid.vpn.app.common.remote.FirebaseServiceFactory
+import com.paranoid.vpn.app.common.remote.GoogleServiceFactory
 import com.paranoid.vpn.app.common.utils.Utils
 
 class Application : Application() {
@@ -11,6 +12,8 @@ class Application : Application() {
         super.onCreate()
 
         FirebaseServiceFactory.makeFirebase()
+
+        GoogleServiceFactory.makeGoogleSignInClient(this)
 
         Utils.init(this)
 

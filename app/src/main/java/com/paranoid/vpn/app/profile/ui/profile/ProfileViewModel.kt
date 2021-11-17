@@ -11,6 +11,7 @@ import com.paranoid.vpn.app.common.ui.base.MessageData
 import com.paranoid.vpn.app.common.utils.NetworkStatus
 import com.paranoid.vpn.app.common.utils.UserLoggedState
 import com.paranoid.vpn.app.common.utils.Utils
+import com.paranoid.vpn.app.common.utils.Utils.getString
 import com.paranoid.vpn.app.profile.domain.entity.UserEntity
 import com.paranoid.vpn.app.profile.domain.usecase.DeleteFirebaseUserUseCase
 import com.paranoid.vpn.app.profile.domain.usecase.GetFirebaseUserUseCase
@@ -61,7 +62,7 @@ class ProfileViewModel : BaseFragmentViewModel() {
             Log.d(TAG, user.toString())
             if (user == null) {
                 _user.value = UserEntity(
-                    name = Utils.getString(R.string.name_user)
+                    name = getString(R.string.name_user)
                 )
                 _userState.value = UserLoggedState.USER_LOGGED_OUT
             } else {
@@ -96,7 +97,7 @@ class ProfileViewModel : BaseFragmentViewModel() {
                 }
                 _networkStateDeleteUser.value = NetworkStatus.Error(
                     MessageData(
-                        title = Utils.getString(R.string.firebase_error),
+                        title = getString(R.string.firebase_error),
                         message = e.message.toString()
                     )
                 )
@@ -118,7 +119,7 @@ class ProfileViewModel : BaseFragmentViewModel() {
                 Log.e(EditUserViewModel.TAG, e.message.toString())
                 _networkStateReauthenticate.value = NetworkStatus.Error(
                     MessageData(
-                        title = Utils.getString(R.string.firebase_error),
+                        title = getString(R.string.firebase_error),
                         message = e.message
                     )
                 )

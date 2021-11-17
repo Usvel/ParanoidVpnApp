@@ -28,7 +28,6 @@ class RegistrationFragment :
             )
         }
         setObservers()
-        setListeners()
         initView()
     }
 
@@ -60,10 +59,6 @@ class RegistrationFragment :
                 }
             }
         }
-    }
-
-    private fun setListeners() {
-        // TODO
     }
 
     private fun initView() {

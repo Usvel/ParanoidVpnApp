@@ -6,7 +6,6 @@
     <color name="text_view_dark_text_transparent">#99FFFFFF</color>
     <color name="text_view_light_text_transparent">#99000000</color>
     <!-- CardViewButton -->
-    <color name="card_view_background">#191919</color>
     <color name="box_stroke_color">#C3C3C3</color>
     <color name="text_card_view">#A8A8A8</color>
 </resources>
