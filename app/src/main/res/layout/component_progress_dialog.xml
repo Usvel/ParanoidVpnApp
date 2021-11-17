@@ -4,9 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     app:cardElevation="3dp"
-    app:cardBackgroundColor="?attr/cardViewBackground"
-    android:layout_margin="@dimen/progress_dialog_padding"
-    app:cardCornerRadius="@dimen/profile_fragment_card_view_radius">
+    android:background="@android:color/transparent">
 
     <LinearLayout
         android:layout_width="wrap_content"
