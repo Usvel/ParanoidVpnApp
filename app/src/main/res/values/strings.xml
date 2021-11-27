@@ -104,4 +104,7 @@
     <string name="edit_user_fragment_invalid_email">Invalid email</string>
     <string name="edit_user_fragment_invalid_name">Invalid name</string>
     <string name="edit_user_fragment_entry">Edit User</string>
+    <string name="tab_vpn">VPN</string>
+    <string name="tab_proxy">Proxy</string>
+    <string name="tab_traffic">Traffic</string>
 </resources>

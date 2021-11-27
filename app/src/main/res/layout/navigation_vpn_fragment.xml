@@ -7,18 +7,18 @@
     tools:context=".vpn.ui.VPNFragment">
 
     <LinearLayout
-        android:paddingTop="@dimen/medium_padding"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/fragment_top_padding"
         android:orientation="horizontal"
+        android:paddingTop="@dimen/medium_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/paranoidIcon"
+            android:id="@+id/ivParanoidIcon"
             android:layout_width="@dimen/logo_icon_size"
             android:layout_height="@dimen/logo_icon_size"
             android:layout_gravity="center_vertical"
@@ -27,7 +27,7 @@
             android:src="@drawable/ic_paranoid_vpn" />
 
         <TextView
-            android:id="@+id/paranoidText"
+            android:id="@+id/tvParanoidText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -38,7 +38,7 @@
             android:textSize="@dimen/logo_text_size" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/help_button"
+            android:id="@+id/cvHelpButton"
             android:layout_width="@dimen/vpn_fragment_icon_size"
             android:layout_height="@dimen/vpn_fragment_icon_size"
             android:layout_marginEnd="@dimen/top_bar_elements_start"
@@ -50,13 +50,13 @@
             app:cardElevation="0dp">
 
             <ImageView
-                android:id="@+id/helpIcon"
+                android:id="@+id/ivHelpIcon"
                 android:layout_width="@dimen/vpn_fragment_icon_size"
                 android:layout_height="@dimen/vpn_fragment_icon_size"
                 android:layout_gravity="center_vertical"
+                android:alpha="0.7"
                 android:contentDescription="@string/get_information_about_vpn"
                 android:foregroundGravity="center_vertical"
-                android:alpha="0.7"
                 android:padding="@dimen/icon_inner_padding_small"
                 android:src="@drawable/ic_baseline_help_outline_24"
                 app:tint="?attr/toolBarColor" />
@@ -64,12 +64,12 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/connectionStatus"
+        android:id="@+id/llConnectionStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/extra_padding"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/vpnButtonBackground"
+        app:layout_constraintBottom_toTopOf="@+id/cvVpnButtonBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -84,7 +84,7 @@
             app:cardElevation="0dp">
 
             <ImageView
-                android:id="@+id/wifiIcon"
+                android:id="@+id/ivWifiIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -103,19 +103,59 @@
 
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/vpnButtonBackground"
-        android:layout_width="@dimen/vpn_button_background_size"
-        android:layout_height="@dimen/vpn_button_background_size"
-        android:backgroundTint="?attr/vpnButtonDisabled"
-        app:cardCornerRadius="@dimen/vpn_button_background_radius"
-        app:layout_constraintBottom_toTopOf="@+id/mainConfigurationCard"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tlTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/tab_padding"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:tabMode="fixed">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_outline_vpn_key"
+            android:text="@string/tab_vpn" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_outline_router"
+            android:text="@string/tab_proxy" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_outline_data_exploration"
+            android:text="@string/tab_traffic" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpVpnPager"
+        app:layout_anchor="@id/tlTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toTopOf="@+id/cvMainConfigurationCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/tlTabLayout" />
+
+    <!--androidx.cardview.widget.CardView
+        android:id="@+id/cvVpnButtonBackground"
+        android:layout_width="@dimen/vpn_button_background_size"
+        android:layout_height="@dimen/vpn_button_background_size"
+        android:visibility="gone"
+        android:backgroundTint="?attr/vpnButtonDisabled"
+        app:layout_constraintBottom_toTopOf="@+id/cvMainConfigurationCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tlTabLayout"
+        app:cardCornerRadius="@dimen/vpn_button_background_radius">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/vpnButton"
+            android:id="@+id/cvVpnButton"
             android:layout_width="@dimen/vpn_button_size"
             android:layout_height="@dimen/vpn_button_size"
             android:layout_gravity="center"
@@ -125,7 +165,7 @@
             app:cardElevation="0dp">
 
             <ImageView
-                android:id="@+id/turnOnVPN"
+                android:id="@+id/imTurnOnVPN"
                 android:layout_width="@dimen/turn_vpn_button_size"
                 android:layout_height="@dimen/turn_vpn_button_size"
                 android:layout_gravity="center"
@@ -136,10 +176,10 @@
 
         </androidx.cardview.widget.CardView>
 
-    </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView-->
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/mainConfigurationCard"
+        android:id="@+id/cvMainConfigurationCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/base_padding"
@@ -153,7 +193,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
-            android:id="@+id/mainConfigurationLayout"
+            android:id="@+id/cvMainConfigurationLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -161,7 +201,7 @@
             android:paddingEnd="@dimen/base_padding">
 
             <TextView
-                android:id="@+id/chooseConfigurationText"
+                android:id="@+id/tvChooseConfigurationText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -250,13 +290,14 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/isConnected"
+    <!--TextView
+        android:visibility="gone"
+        android:id="@+id/tvIsConnected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/base_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vpnButtonBackground"
-        tools:text="@string/not_connected" />
+        app:layout_constraintTop_toBottomOf="@+id/cvVpnButtonBackground"
+        tools:text="@string/not_connected" /-->
 </androidx.constraintlayout.widget.ConstraintLayout>

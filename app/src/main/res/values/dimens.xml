@@ -87,4 +87,5 @@
     <dimen name="fragment_settings_buttons_sizes">42dp</dimen>
     <!--  SettingsFragment  -->
     <dimen name="vpn_fragment_icon_size">32dp</dimen>
+    <dimen name="tab_padding">30dp</dimen>
 </resources>

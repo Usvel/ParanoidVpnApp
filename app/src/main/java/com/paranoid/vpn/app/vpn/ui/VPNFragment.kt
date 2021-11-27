@@ -4,11 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.net.VpnService
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getDrawable
 import androidx.core.content.ContextCompat.startForegroundService
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
@@ -27,6 +28,7 @@ import com.paranoid.vpn.app.common.vpn_configuration.domain.repository.VPNConfig
 import com.paranoid.vpn.app.databinding.NavigationVpnFragmentBinding
 import com.paranoid.vpn.app.qr.QRCreator
 import com.paranoid.vpn.app.vpn.core.LocalVPNService2
+import com.paranoid.vpn.app.vpn.ui.vpn_pager.VPNFragmentPagerAdapter
 import kotlinx.coroutines.*
 import java.util.concurrent.atomic.AtomicLong
 import java.util.stream.Collectors
@@ -62,30 +64,34 @@ class VPNFragment :
             viewModel?.getConfig()?.let { updateConfigText(configName = it.name) }
         }
 
-
-        analyzeNetworkState()
-
-        textUpdater = lifecycleScope.launch(Dispatchers.Default) {
-            while (true) {
-                if (viewModel?.vpnStateOn?.value == VPNState.CONNECTED
-                    && viewModel?.isConnected?.value == true
-                )
-                    updateText()
-                delay(500)
-            }
-        }
-
         Intent(context, LocalVPNService2::class.java).also { intent ->
             activity?.bindService(intent, connection, 0)
         }
+
+        initTabLayout()
     }
 
-    private fun analyzeNetworkState() {
-        when (viewModel?.vpnStateOn?.value) {
-            VPNState.CONNECTED -> vpnButtonConnected()
-            VPNState.ERROR -> vpnButtonError()
-            VPNState.NOT_CONNECTED -> vpnButtonDisable()
-        }
+    private fun initTabLayout() {
+        val vpnFragmentPagerAdapter = viewModel?.let { VPNFragmentPagerAdapter(activity, it) }
+        binding.vpVpnPager.adapter = vpnFragmentPagerAdapter
+
+        TabLayoutMediator(binding.tlTabLayout, binding.vpVpnPager) { tab, position ->
+            when (position) {
+                0 -> {
+                    tab.text = Utils.getString(R.string.tab_vpn)
+                    tab.icon = context?.let { getDrawable(it, R.drawable.ic_outline_vpn_key) }
+                }
+                1 -> {
+                    tab.text = Utils.getString(R.string.tab_proxy)
+                    tab.icon = context?.let { getDrawable(it, R.drawable.ic_outline_router) }
+                }
+                2 -> {
+                    tab.text = Utils.getString(R.string.tab_traffic)
+                    tab.icon =
+                        context?.let { getDrawable(it, R.drawable.ic_outline_data_exploration) }
+                }
+            }
+        }.attach()
     }
 
     private fun initBottomSheetDialog() {
@@ -140,17 +146,13 @@ class VPNFragment :
             activity?.unbindService(connection)
     }
 
-    private suspend fun updateText() = withContext(Dispatchers.Main) {
-        binding.isConnected.text = "up: $upByte B, down: $downByte B"
-    }
-
     private suspend fun updateConfigText(configName: String) = withContext(Dispatchers.Main) {
         binding.tvMainConfigurationText.text = configName
     }
 
     private fun loadMainConfiguration() {
         binding.tvMainConfigurationText.text = Utils.getString(R.string.test_first_configuration)
-        binding.mainConfigurationCard.setOnClickListener {
+        binding.cvMainConfigurationCard.setOnClickListener {
             context?.let { context_ ->
                 Utils.makeToast(
                     context_,
@@ -205,27 +207,11 @@ class VPNFragment :
             return@setOnLongClickListener false
         }
 
-        binding.mainConfigurationCard.setOnClickListener {
+        binding.cvMainConfigurationCard.setOnClickListener {
             showBottomSheetDialog()
         }
 
-        binding.vpnButtonBackground.setOnClickListener {
-            when (viewModel?.vpnStateOn?.value) {
-                VPNState.CONNECTED -> {
-                    vpnButtonDisable()
-                    viewModel?.changeVpnState()
-                }
-
-                VPNState.NOT_CONNECTED -> {
-                    vpnButtonConnected()
-                    if (viewModel?.isConnected?.value == true)
-                        viewModel?.changeVpnState()
-                }
-                VPNState.ERROR -> vpnButtonDisable()
-            }
-        }
-
-        binding.helpButton.setOnClickListener {
+        binding.cvHelpButton.setOnClickListener {
             context?.let { context_ ->
                 Utils.makeToast(
                     context_,
@@ -270,19 +256,6 @@ class VPNFragment :
     }
 
     private fun setObservers() {
-        viewModel?.isConnected?.observe(viewLifecycleOwner) { value ->
-            when (value) {
-                false -> {
-                    vpnButtonDisable()
-                    stopVpn()
-                }
-
-                true -> {
-                    // Not starting service automatically yet
-                }
-            }
-        }
-
         viewModel?.vpnStateOn?.observe(viewLifecycleOwner) { value ->
             when (value) {
                 VPNState.CONNECTED -> {
@@ -290,45 +263,10 @@ class VPNFragment :
                         startVpn()
                 }
                 VPNState.NOT_CONNECTED -> stopVpn()
+                else -> stopVpn()
             }
 
         }
-    }
-
-    private fun getVpnButtonColor(vpnButtonStateAttr: Int): Int {
-        val typedValue = TypedValue()
-        requireContext().theme.resolveAttribute(vpnButtonStateAttr, typedValue, true)
-        return typedValue.data
-    }
-
-    private fun vpnButtonDisable() {
-        binding.connectionStatus.visibility = View.GONE
-        binding.turnOnVPN.setImageResource(R.drawable.ic_power)
-        binding.isConnected.text = getString(R.string.not_connected)
-        binding.connectionStatus.visibility = View.GONE
-        binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonDisabled))
-    }
-
-    private fun vpnButtonConnected() {
-        // TODO: Remove Toasts
-        when (viewModel?.isConnected?.value) {
-            false ->
-                Toast.makeText(requireContext(), "Error: connectivity is off!", Toast.LENGTH_SHORT)
-                    .show()
-            true -> {
-                binding.connectionStatus.visibility = View.VISIBLE
-                binding.turnOnVPN.setImageResource(R.drawable.ic_power)
-                //binding.isConnected.text = getString(R.string.connected)
-                binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonConnected))
-            }
-        }
-    }
-
-    private fun vpnButtonError() {
-        binding.turnOnVPN.setImageResource(R.drawable.ic_dino)
-        binding.connectionStatus.visibility = View.GONE
-        binding.isConnected.text = Utils.getString(R.string.error)
-        binding.vpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonError))
     }
 
     private fun startVpn() {
