@@ -46,4 +46,39 @@
         android:layout_weight="1"
         android:paddingEnd="@dimen/small_padding" />
 
+    <ImageView
+        android:id="@+id/imEditIcon"
+        android:alpha="0.2"
+        app:tint="?attr/toolBarColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:contentDescription="@string/configuration_sharing"
+        android:paddingStart="@dimen/small_padding"
+        android:paddingEnd="@dimen/small_padding"
+        android:src="@drawable/ic_outline_edit" />
+
+    <ImageView
+        android:id="@+id/imShareIcon"
+        android:alpha="0.2"
+        app:tint="?attr/toolBarColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:contentDescription="@string/configuration_sharing"
+        android:paddingStart="@dimen/small_padding"
+        android:paddingEnd="@dimen/small_padding"
+        android:src="@drawable/ic_share" />
+
+    <ImageView
+        android:id="@+id/imQRIcon"
+        app:tint="?attr/toolBarColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:contentDescription="@string/configuration_qr"
+        android:paddingStart="@dimen/small_padding"
+        android:paddingEnd="@dimen/small_padding"
+        android:clickable="true"
+        android:src="@drawable/ic_qr_selected" />
 </LinearLayout>

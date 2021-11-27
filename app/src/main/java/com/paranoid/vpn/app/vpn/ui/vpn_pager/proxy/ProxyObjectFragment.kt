@@ -1,4 +1,4 @@
-package com.paranoid.vpn.app.vpn.ui.vpn_pager
+package com.paranoid.vpn.app.vpn.ui.vpn_pager.proxy
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.paranoid.vpn.app.R
 
-class TrafficObjectFragment : Fragment() {
+class ProxyObjectFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.page_traffic, container, false)
+        return inflater.inflate(R.layout.page_proxy_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

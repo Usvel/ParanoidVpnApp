@@ -1,4 +1,4 @@
-package com.paranoid.vpn.app.vpn.ui.vpn_pager
+package com.paranoid.vpn.app.vpn.ui.vpn_pager.vpn
 
 import android.app.Activity
 import android.content.Intent
@@ -52,8 +52,8 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
 
         textUpdater = lifecycleScope.launch(Dispatchers.Default) {
             while (true) {
-                if (oldViewModel.vpnStateOn?.value == VPNState.CONNECTED
-                    && oldViewModel.isConnected?.value == true
+                if (oldViewModel.vpnStateOn.value == VPNState.CONNECTED
+                    && oldViewModel.isConnected.value == true
                 )
                     updateText()
                 delay(500)
@@ -85,7 +85,7 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
     }
 
     private fun setObservers() {
-        oldViewModel.isConnected?.observe(viewLifecycleOwner) { value ->
+        oldViewModel.isConnected.observe(viewLifecycleOwner) { value ->
             when (value) {
                 false -> {
                     vpnButtonDisable()
@@ -98,10 +98,10 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
             }
         }
 
-        oldViewModel.vpnStateOn?.observe(viewLifecycleOwner) { value ->
+        oldViewModel.vpnStateOn.observe(viewLifecycleOwner) { value ->
             when (value) {
                 VPNState.CONNECTED -> {
-                    if (oldViewModel.isConnected?.value == true)
+                    if (oldViewModel.isConnected.value == true)
                         startVpn()
                 }
                 VPNState.NOT_CONNECTED -> stopVpn()
@@ -112,7 +112,7 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
     }
 
     private fun analyzeNetworkState() {
-        when (oldViewModel.vpnStateOn?.value) {
+        when (oldViewModel.vpnStateOn.value) {
             VPNState.CONNECTED -> vpnButtonConnected()
             VPNState.ERROR -> vpnButtonError()
             VPNState.NOT_CONNECTED -> vpnButtonDisable()
@@ -134,7 +134,7 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
 
     private fun vpnButtonConnected() {
         // TODO: Remove Toasts
-        when (oldViewModel.isConnected?.value) {
+        when (oldViewModel.isConnected.value) {
             false ->
                 Toast.makeText(requireContext(), "Error: connectivity is off!", Toast.LENGTH_SHORT)
                     .show()

@@ -63,13 +63,12 @@
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
-    <LinearLayout
+    <!--LinearLayout
         android:id="@+id/llConnectionStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/extra_padding"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/cvVpnButtonBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -101,7 +100,7 @@
             android:layout_gravity="center"
             android:text="@string/stable_connection" />
 
-    </LinearLayout>
+    </LinearLayout-->
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tlTabLayout"
