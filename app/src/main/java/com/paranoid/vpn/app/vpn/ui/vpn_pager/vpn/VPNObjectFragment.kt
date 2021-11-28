@@ -75,7 +75,7 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
 
         rvAllConfigs!!.layoutManager = LinearLayoutManager(context)
 
-        oldViewModel.getAllConfigs()?.observe(viewLifecycleOwner) { value ->
+        oldViewModel.getAllConfigs().observe(viewLifecycleOwner) { value ->
             val adapter = VPNConfigAdapter(value) { id, code ->
                 when (code) {
                     ClickHandlers.GetConfiguration -> showConfigDetails(id)

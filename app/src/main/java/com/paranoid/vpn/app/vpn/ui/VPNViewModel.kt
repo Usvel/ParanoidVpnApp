@@ -56,6 +56,38 @@ class VPNViewModel(
         )
     }
 
+    fun getProxyType(): String? {
+        return sharedPref.getString(
+            getString(R.string.proxy_type_sp_tag_ID), ""
+        )
+    }
+
+    fun getProxyPing(): String? {
+        return sharedPref.getString(
+            getString(R.string.proxy_ping_sp_tag_ID), getString(R.string.possible_ping)
+        )
+    }
+
+    fun setProxyPing(ping: String) {
+        with(sharedPref.edit()) {
+            putString(getString(R.string.proxy_ping_sp_tag_ID), ping)
+            apply()
+        }
+    }
+
+    fun getProxyCountry(): String? {
+        return sharedPref.getString(
+            getString(R.string.proxy_country_sp_tag_ID), getString(R.string.countries)
+        )
+    }
+
+    fun setProxyCountry(country: String) {
+        with(sharedPref.edit()) {
+            putString(getString(R.string.proxy_country_sp_tag_ID), country)
+            apply()
+        }
+    }
+
     fun getConfig(): VPNConfigItem? {
         if (currentConfig == null)
             currentConfig = vpnConfigRepository.getConfig(
@@ -90,11 +122,14 @@ class VPNViewModel(
             })
     }
 
-    fun loadAllProxiesFromNetwork() {
+    fun loadAllProxiesFromNetwork(
+        country: String = "",
+        ping: String = ""
+    ) {
         proxyApi?.getProxies(
             limit = 20,
-            country = "",
-            ping = "",
+            country = country,
+            ping = ping,
             type = ""
         )
             ?.enqueue(object : Callback<List<ProxyItem>> {

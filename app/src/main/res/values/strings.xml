@@ -67,6 +67,9 @@
     <!-- TAG -->
     <string name="config_sp">PARANOID_VPN_SP</string>
     <string name="config_sp_tag_ID">CURRENT_CONFIG_ID</string>
+    <string name="proxy_type_sp_tag_ID">CURRENT_PROXY_TYPE_ID</string>
+    <string name="proxy_ping_sp_tag_ID">CURRENT_PROXY_PING_ID</string>
+    <string name="proxy_country_sp_tag_ID">CURRENT_PROXY_COUNTRY_ID</string>
     <!-- VPN Fragment -->
     <string name="favorite">Favorite</string>
     <string name="choose_configuration">Choose configuration</string>
@@ -104,9 +107,21 @@
     <string name="edit_user_fragment_invalid_email">Invalid email</string>
     <string name="edit_user_fragment_invalid_name">Invalid name</string>
     <string name="edit_user_fragment_entry">Edit User</string>
+    <!-- Tabs -->
     <string name="tab_vpn">VPN</string>
     <string name="tab_proxy">Proxy</string>
     <string name="tab_traffic">Traffic</string>
     <string name="network_data">Network data</string>
     <string name="proxy_configuration">Proxy configuration</string>
+    <string name="filter_proxies">Filter proxies</string>
+    <!-- Proxy Protocols -->
+    <string name="http">HTTP</string>
+    <string name="https">HTTPS</string>
+    <string name="socks4">SOCKS4</string>
+    <string name="socks5">SOCKS5</string>
+    <string name="proxy_type">Proxy type</string>
+    <string name="ping">Ping</string>
+    <string name="possible_ping">Possible ping</string>
+    <string name="country">Country</string>
+    <string name="countries">Countries</string>
 </resources>

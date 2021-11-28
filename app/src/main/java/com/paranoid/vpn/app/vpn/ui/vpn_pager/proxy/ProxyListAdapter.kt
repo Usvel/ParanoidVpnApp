@@ -38,7 +38,7 @@ class ProxyListAdapter(
 
         val configItem = mList[position]
 
-        holder.countryName.text = configItem.Location.country
+        holder.countryName.text = "${configItem.Location.country} · ${configItem.Location.city}"
         holder.ipAddress.text = configItem.Ip
         val currentPing = configItem.Ping
         holder.ping.text = "${currentPing}ms"

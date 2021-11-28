@@ -11,11 +11,24 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/real_medium_padding"
         android:paddingStart="@dimen/real_medium_padding"
-        android:paddingEnd="@dimen/settings_fragment_small_padding"
+        android:paddingEnd="@dimen/real_medium_padding"
         android:text="@string/network_data"
         android:textSize="@dimen/proxy_header_title_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivFilterProxies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_outline_filter_alt_24"
+        android:paddingTop="@dimen/real_medium_padding"
+        android:paddingStart="@dimen/real_medium_padding"
+        android:paddingEnd="@dimen/real_medium_padding"
+        android:contentDescription="@string/filter_proxies"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNetworkHeader"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvNetworkHeader" />
 
 
     <LinearLayout
