@@ -107,4 +107,5 @@
     <string name="tab_vpn">VPN</string>
     <string name="tab_proxy">Proxy</string>
     <string name="tab_traffic">Traffic</string>
+    <string name="network_data">Network data</string>
 </resources>

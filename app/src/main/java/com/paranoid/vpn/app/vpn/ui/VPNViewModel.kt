@@ -11,6 +11,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paranoid.vpn.app.R
+import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
+import com.paranoid.vpn.app.common.proxy_configuration.domain.repository.ProxyRepository
 import com.paranoid.vpn.app.common.ui.base.BaseFragmentViewModel
 import com.paranoid.vpn.app.common.utils.Utils.getString
 import com.paranoid.vpn.app.common.utils.VPNState
@@ -31,9 +33,13 @@ class VPNViewModel(
         getString(R.string.config_sp), Context.MODE_PRIVATE
     )
     private val vpnConfigRepository: VPNConfigRepository = VPNConfigRepository(application)
+    private val proxyRepository: ProxyRepository = ProxyRepository(application)
 
     private var currentConfig: VPNConfigItem? = null
     private val allConfigs = vpnConfigRepository.readAllData
+
+    private var currentProxy: ProxyItem? = null
+    private val allProxies = proxyRepository.readAllData
 
     fun getConfigId(): Long {
         return sharedPref.getLong(
@@ -54,9 +60,13 @@ class VPNViewModel(
     fun getAllConfigs(): LiveData<List<VPNConfigItem>> {
         return allConfigs
     }
-    
+
+    fun getAllProxies(): LiveData<List<ProxyItem>> {
+        return allProxies
+    }
+
     fun setConfig(newId: Long) {
-        with (sharedPref.edit()) {
+        with(sharedPref.edit()) {
             putLong(getString(R.string.config_sp_tag_ID), newId)
             apply()
         }

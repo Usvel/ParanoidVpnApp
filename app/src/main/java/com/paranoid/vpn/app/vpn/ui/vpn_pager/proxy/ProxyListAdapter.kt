@@ -8,18 +8,19 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.paranoid.vpn.app.R
+import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
 import com.paranoid.vpn.app.common.utils.ClickHandlers
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 
 
 class ProxyListAdapter(
-    private val mList: List<VPNConfigItem>,
+    private val mList: List<ProxyItem>,
     private val onItemClicked: (Long, ClickHandlers) -> Unit,
 ) : RecyclerView.Adapter<ProxyListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.config_item_view, parent, false)
+            .inflate(R.layout.proxy_item_view, parent, false)
 
         return ViewHolder(view) {
             onItemClicked(
@@ -35,15 +36,14 @@ class ProxyListAdapter(
 
         val configItem = mList[position]
 
-        holder.configName.text = configItem.name
-        holder.itemView.setOnClickListener {
-            onItemClicked(configItem.id, ClickHandlers.SetConfiguration)
-        }
-        holder.cvSettingsIcon.setOnClickListener {
+        holder.countryName.text = configItem.Location.country
+        holder.ipAddress.text = configItem.Ip
+        holder.ping.text = "${configItem.Ping}ms"
+        holder.protocol.text = configItem.Type?.joinToString(separator = ", ") ?: "None"
+
+
+        holder.proxy.setOnClickListener {
             onItemClicked(configItem.id, ClickHandlers.GetConfiguration)
-        }
-        holder.imQRIcon.setOnClickListener {
-            onItemClicked(configItem.id, ClickHandlers.QRCode)
         }
 
     }
@@ -58,18 +58,14 @@ class ProxyListAdapter(
         ItemView: View,
         onItemClicked: (Int) -> Unit
     ) : RecyclerView.ViewHolder(ItemView) {
-        val configName: TextView = itemView.findViewById(R.id.tvConfigurationName)
-        val imQRIcon: ImageView  = itemView.findViewById(R.id.imQRIcon)
-        val cvSettingsIcon: CardView = itemView.findViewById(R.id.cvSettingsIcon)
+        val countryName: TextView = itemView.findViewById(R.id.tvCountryName)
+        val ipAddress: TextView = itemView.findViewById(R.id.tvProxyIp)
+        val ping: TextView  = itemView.findViewById(R.id.tvPing)
+        val protocol: TextView = itemView.findViewById(R.id.tvProtocol)
+        val proxy: CardView = itemView.findViewById(R.id.cvProxy)
 
         init {
             itemView.setOnClickListener {
-                onItemClicked(bindingAdapterPosition)
-            }
-            cvSettingsIcon.setOnClickListener {
-                onItemClicked(bindingAdapterPosition)
-            }
-            imQRIcon.setOnClickListener {
                 onItemClicked(bindingAdapterPosition)
             }
         }

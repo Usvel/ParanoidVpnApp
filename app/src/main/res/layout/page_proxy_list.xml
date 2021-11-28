@@ -5,10 +5,22 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <TextView
+        android:id="@+id/tvNetworkHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/real_medium_padding"
+        android:paddingStart="@dimen/real_medium_padding"
+        android:paddingEnd="@dimen/settings_fragment_small_padding"
+        android:text="@string/network_data"
+        android:textSize="@dimen/proxy_header_title_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <HorizontalScrollView
         android:id="@+id/cvProxyHorizontalLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fillViewport="true"
         android:measureAllChildren="false"
         android:padding="@dimen/settings_fragment_small_padding"
@@ -16,7 +28,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tvNetworkHeader"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -25,10 +38,10 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvAllProxy"
-                tools:listitem="@android:layout/two_line_list_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="vertical" />
+                android:scrollbars="vertical"
+                tools:listitem="@android:layout/two_line_list_item" />
         </LinearLayout>
     </HorizontalScrollView>
 

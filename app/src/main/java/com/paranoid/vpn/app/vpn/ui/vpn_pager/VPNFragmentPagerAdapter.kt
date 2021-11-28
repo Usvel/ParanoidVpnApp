@@ -14,7 +14,7 @@ class VPNFragmentPagerAdapter(fragmentActivity: FragmentActivity?, private val o
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> VPNObjectFragment(oldViewModel)
-            1 -> ProxyObjectFragment()
+            1 -> ProxyObjectFragment(oldViewModel)
             else -> TrafficObjectFragment()
         }
     }

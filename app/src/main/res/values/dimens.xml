@@ -5,7 +5,9 @@
     <dimen name="top_bar_elements_start">20dp</dimen>
     <dimen name="base_padding">20dp</dimen>
     <dimen name="medium_padding">0dp</dimen>
+    <dimen name="real_medium_padding">30dp</dimen>
     <dimen name="extra_padding">40dp</dimen>
+    <dimen name="minimum_padding">5dp</dimen>
     <dimen name="small_padding">10dp</dimen>
     <dimen name="card_corner_radius">20dp</dimen>
     <dimen name="card_elevation">5dp</dimen>
@@ -18,6 +20,7 @@
     <dimen name="simple_corner_radius">75dp</dimen>
     <dimen name="icon_inner_padding">10dp</dimen>
     <dimen name="icon_inner_padding_small">5dp</dimen>
+    <dimen name="minimum_corner_radius">15dp</dimen>
     <dimen name="small_corner_radius">24dp</dimen>
     <dimen name="big_corner_radius">50dp</dimen>
     <!--  AppActivity  -->
@@ -88,4 +91,6 @@
     <!--  SettingsFragment  -->
     <dimen name="vpn_fragment_icon_size">32dp</dimen>
     <dimen name="tab_padding">30dp</dimen>
+    <!--  VPNFragment  -->
+    <dimen name="proxy_header_title_size">15sp</dimen>
 </resources>

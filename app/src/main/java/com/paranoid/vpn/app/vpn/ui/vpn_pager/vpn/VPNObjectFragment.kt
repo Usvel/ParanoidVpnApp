@@ -30,7 +30,6 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
 
     private var textUpdater: Job? = null
     private val VPN_REQUEST_CODE = 0x0F
-    private lateinit var bottomSheetDialog: BottomSheetDialog
 
     /** Defines callbacks for service binding, passed to bindService()  */
     private var connection = VPNServiceConnection()
