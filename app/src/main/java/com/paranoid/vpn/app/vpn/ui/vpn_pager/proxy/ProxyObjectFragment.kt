@@ -66,12 +66,12 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
         if(oldViewModel.getProxyPing() != "")
             customAlertDialogView.findViewById<TextInputEditText>(
                 R.id.etEditProxyPing
-            ).hint = oldViewModel.getProxyPing()
+            ).setText(oldViewModel.getProxyPing())
 
         if(oldViewModel.getProxyCountry() != "")
             customAlertDialogView.findViewById<TextInputEditText>(
                 R.id.etEditCountry
-            ).hint = oldViewModel.getProxyCountry()
+            ).setText(oldViewModel.getProxyCountry())
 
         materialAlertDialogBuilder
             ?.setView(customAlertDialogView)
