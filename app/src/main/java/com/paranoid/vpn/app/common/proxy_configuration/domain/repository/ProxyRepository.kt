@@ -11,6 +11,7 @@ class ProxyRepository(application: Application) {
     private val proxyDao = proxyDatabase.ProxyDao()
     val readAllData: LiveData<List<ProxyItem>> = proxyDao.getAll()
 
+
     fun getConfig(id: Long) = proxyDao.getById(id)
 
     suspend fun addProxy(proxyItem: ProxyItem) {

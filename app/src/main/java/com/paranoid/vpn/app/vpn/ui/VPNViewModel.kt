@@ -13,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
 import com.paranoid.vpn.app.common.proxy_configuration.domain.repository.ProxyRepository
+import com.paranoid.vpn.app.common.proxy_configuration.network.ProxyNetworkService
 import com.paranoid.vpn.app.common.ui.base.BaseFragmentViewModel
 import com.paranoid.vpn.app.common.utils.Utils.getString
 import com.paranoid.vpn.app.common.utils.VPNState
@@ -20,6 +21,9 @@ import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import com.paranoid.vpn.app.common.vpn_configuration.domain.repository.VPNConfigRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 private const val DEFAULT_CONFIG_ID = 1L
 
@@ -39,7 +43,12 @@ class VPNViewModel(
     private val allConfigs = vpnConfigRepository.readAllData
 
     private var currentProxy: ProxyItem? = null
-    private val allProxies = proxyRepository.readAllData
+    private var allProxies = proxyRepository.readAllData
+
+    private var allNetworkProxies: MutableLiveData<List<ProxyItem>> = MutableLiveData()
+
+
+    private val proxyApi = ProxyNetworkService.instance?.getProxyApi()
 
     fun getConfigId(): Long {
         return sharedPref.getLong(
@@ -64,6 +73,46 @@ class VPNViewModel(
     fun getAllProxies(): LiveData<List<ProxyItem>> {
         return allProxies
     }
+
+    fun getProxyFromNetwork() {
+        proxyApi?.getProxy(1)
+            ?.enqueue(object : Callback<ProxyItem> {
+                override fun onResponse(call: Call<ProxyItem>, response: Response<ProxyItem>) {
+                    val proxyItem: ProxyItem? = response.body()
+                    if (proxyItem != null) {
+                        currentProxy = proxyItem
+                    }
+                }
+
+                override fun onFailure(call: Call<ProxyItem>, t: Throwable) {
+                    t.printStackTrace()
+                }
+            })
+    }
+
+    fun loadAllProxiesFromNetwork() {
+        proxyApi?.getProxies()
+            ?.enqueue(object : Callback<List<ProxyItem>> {
+                override fun onResponse(
+                    call: Call<List<ProxyItem>>,
+                    response: Response<List<ProxyItem>>
+                ) {
+                    val proxyItems: List<ProxyItem>? = response.body()
+                    if (proxyItems != null) {
+                        allNetworkProxies.value = proxyItems
+                    }
+                }
+
+                override fun onFailure(call: Call<List<ProxyItem>>, t: Throwable) {
+                    t.printStackTrace()
+                }
+            })
+    }
+
+    fun getAllProxiesFromNetwork(): LiveData<List<ProxyItem>> {
+        return allNetworkProxies
+    }
+
 
     fun setConfig(newId: Long) {
         with(sharedPref.edit()) {

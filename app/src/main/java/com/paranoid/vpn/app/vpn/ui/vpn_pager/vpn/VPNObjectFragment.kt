@@ -8,20 +8,31 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.R
+import com.paranoid.vpn.app.common.utils.ClickHandlers
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.utils.VPNState
+import com.paranoid.vpn.app.common.vpn_configuration.domain.repository.VPNConfigRepository
 import com.paranoid.vpn.app.databinding.PageVpnButtonBinding
+import com.paranoid.vpn.app.qr.QRCreator
 import com.paranoid.vpn.app.vpn.core.LocalVPNService2
+import com.paranoid.vpn.app.vpn.ui.VPNConfigAdapter
 import com.paranoid.vpn.app.vpn.ui.VPNFragment
 import com.paranoid.vpn.app.vpn.ui.VPNServiceConnection
 import com.paranoid.vpn.app.vpn.ui.VPNViewModel
 import kotlinx.coroutines.*
+import java.util.stream.Collectors
 
 class VPNObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
 
@@ -30,6 +41,7 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
 
     private var textUpdater: Job? = null
     private val VPN_REQUEST_CODE = 0x0F
+    private lateinit var bottomSheetDialog: BottomSheetDialog
 
     /** Defines callbacks for service binding, passed to bindService()  */
     private var connection = VPNServiceConnection()
@@ -45,10 +57,17 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadMainConfiguration()
         setListeners()
+        initBottomSheetDialog()
+        setRecyclerViews()
         setObservers()
         analyzeNetworkState()
 
+
+        CoroutineScope(Dispatchers.IO).launch {
+            oldViewModel.getConfig()?.let { updateConfigText(configName = it.name) }
+        }
         textUpdater = lifecycleScope.launch(Dispatchers.Default) {
             while (true) {
                 if (oldViewModel.vpnStateOn.value == VPNState.CONNECTED
@@ -60,14 +79,105 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
         }
     }
 
+    private fun setRecyclerViews() {
+        val rvAllConfigs = bottomSheetDialog.findViewById<RecyclerView>(R.id.rvAllConfigs)
+
+        rvAllConfigs!!.layoutManager = LinearLayoutManager(context)
+
+        oldViewModel.getAllConfigs()?.observe(viewLifecycleOwner) { value ->
+            val adapter = VPNConfigAdapter(value) { id, code ->
+                when (code) {
+                    ClickHandlers.GetConfiguration -> showConfigDetails(id)
+                    ClickHandlers.SetConfiguration -> {
+                        if (connection.isBound) {
+                            Toast.makeText(
+                                context,
+                                "Cannot set config if service is running!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            return@VPNConfigAdapter
+                        }
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            oldViewModel.setConfig(id)
+                            LocalVPNService2.currentConfig = oldViewModel.getConfig()
+                            oldViewModel.getConfig()?.let { updateConfigText(configName = it.name) }
+                            withContext(Dispatchers.Main) {
+                                hideBottomSheetDialog()
+                            }
+                        }
+                    }
+                    ClickHandlers.QRCode -> CoroutineScope(Dispatchers.IO).launch { showQRCode(id) }
+                    else -> showConfigDetails(id)
+                }
+            }
+            rvAllConfigs.adapter = adapter
+        }
+
+    }
+
+
+    private suspend fun updateConfigText(configName: String) = withContext(Dispatchers.Main) {
+        binding.tvMainConfigurationText.text = configName
+    }
+
+
+    private fun initBottomSheetDialog() {
+        bottomSheetDialog =
+            context?.let { BottomSheetDialog(it, R.style.AppBottomSheetDialogTheme) }!!
+        bottomSheetDialog.setContentView(R.layout.vpn_bottom_sheet_dialog_layout)
+        bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
+
+    private fun loadMainConfiguration() {
+        binding.tvMainConfigurationText.text = Utils.getString(R.string.test_first_configuration)
+        binding.cvMainConfigurationCard.setOnClickListener {
+            context?.let { context_ ->
+                Utils.makeToast(
+                    context_,
+                    Utils.getString(R.string.test_first_configuration)
+                )
+            }
+        }
+    }
 
     private suspend fun updateText() = withContext(Dispatchers.Main) {
         binding.tvIsConnected.text = "up: ${VPNFragment.upByte} B, down: ${VPNFragment.downByte} B"
     }
 
     private fun setListeners() {
+        binding.cvSettingsIcon.setOnClickListener {
+            oldViewModel.getConfigId().let { it1 -> showConfigDetails(it1) }
+        }
+
+        binding.llCurrentConfiguration.setOnLongClickListener {
+            oldViewModel.getConfigId().let { it1 -> showConfigDetails(it1) }
+            return@setOnLongClickListener false
+        }
+
+        binding.cvMainConfigurationCard.setOnClickListener {
+            showBottomSheetDialog()
+        }
+
+        binding.ivShareIcon.setOnClickListener {
+            context?.let { context_ ->
+                Utils.makeToast(
+                    context_,
+                    Utils.getString(R.string.share_configuration)
+                )
+            }
+        }
+
+        binding.ivQrIcon.setOnClickListener {
+            context?.let {
+                CoroutineScope(Dispatchers.IO).launch {
+                    oldViewModel.getConfigId().let { it1 -> showQRCode(it1) }
+                }
+            }
+        }
+
         binding.cvVpnButtonBackground.setOnClickListener {
-            when (oldViewModel.vpnStateOn?.value) {
+            when (oldViewModel.vpnStateOn.value) {
                 VPNState.CONNECTED -> {
                     vpnButtonDisable()
                     oldViewModel.changeVpnState()
@@ -184,5 +294,57 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
         val stopIntent = Intent(context, LocalVPNService2::class.java)
         stopIntent.action = "stop"
         context?.let { ContextCompat.startForegroundService(it, stopIntent) }
+    }
+
+    private fun showConfigDetails(config_id: Long) {
+        val customAlertDialogView = LayoutInflater.from(context)
+            .inflate(R.layout.config_details_dialog, null, false)
+        CoroutineScope(Dispatchers.IO).launch {
+            val config = VPNConfigRepository(requireActivity().application)
+                .getConfig(config_id)
+            withContext(Dispatchers.Main) {
+                val materialAlertDialogBuilder = context?.let {
+                    MaterialAlertDialogBuilder(
+                        it,
+                        R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Background
+                    )
+                }
+                customAlertDialogView.findViewById<TextView>(R.id.tvPrimaryDNS).text =
+                    config?.primary_dns
+                customAlertDialogView.findViewById<TextView>(R.id.tvSecondaryDNS).text =
+                    config?.secondary_dns
+                customAlertDialogView.findViewById<TextView>(R.id.tvLocalIp).text =
+                    config?.local_ip
+                customAlertDialogView.findViewById<TextView>(R.id.tvGateway).text =
+                    config?.gateway
+                customAlertDialogView.findViewById<TextView>(R.id.tvProxyIp).text =
+                    config?.proxy_ip?.stream()?.collect(Collectors.joining(", "))
+                materialAlertDialogBuilder
+                    ?.setView(customAlertDialogView)
+                    ?.setTitle(config?.name)
+                    ?.setMessage("Current configuration details")
+                    ?.setNegativeButton("Cancel") { dialog, _ ->
+                        dialog.dismiss()
+                    }?.show()
+
+            }
+        }
+    }
+
+    private fun showQRCode(id: Long) {
+        val config = VPNConfigRepository(requireActivity().application)
+            .getConfig(id)
+        val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+        val intent = Intent(context, QRCreator::class.java)
+        intent.putExtra("config", gson.toJson(config))
+        startActivity(intent)
+    }
+
+    private fun showBottomSheetDialog() {
+        bottomSheetDialog.show()
+    }
+
+    private fun hideBottomSheetDialog() {
+        bottomSheetDialog.hide()
     }
 }

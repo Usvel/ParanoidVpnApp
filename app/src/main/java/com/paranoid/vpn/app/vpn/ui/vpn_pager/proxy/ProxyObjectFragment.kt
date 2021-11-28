@@ -25,11 +25,16 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setLoaders()
         setRecyclerViews()
     }
 
+    private fun setLoaders() {
+        oldViewModel.loadAllProxiesFromNetwork()
+    }
+
     private fun setRecyclerViews() {
-        oldViewModel.getAllProxies().observe(viewLifecycleOwner) { value ->
+        oldViewModel.getAllProxiesFromNetwork().observe(viewLifecycleOwner) { value ->
             binding.rvAllProxy.layoutManager = LinearLayoutManager(context)
             val adapter = ProxyListAdapter(value) { id, code ->
                 //when (code) {
