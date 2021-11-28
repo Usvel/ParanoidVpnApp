@@ -1,16 +1,15 @@
 package com.paranoid.vpn.app.vpn.ui.vpn_pager.proxy
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
 import com.paranoid.vpn.app.common.utils.ClickHandlers
-import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 
 
 class ProxyListAdapter(
@@ -29,6 +28,7 @@ class ProxyListAdapter(
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(
         holder: ViewHolder,
         position: Int
@@ -39,12 +39,17 @@ class ProxyListAdapter(
         holder.countryName.text = configItem.Location.country
         holder.ipAddress.text = configItem.Ip
         holder.ping.text = "${configItem.Ping}ms"
-        holder.protocol.text = configItem.Type?.joinToString(separator = ", ") ?: "None"
-
-
-        holder.proxy.setOnClickListener {
-            onItemClicked(configItem.id, ClickHandlers.GetConfiguration)
+        if (configItem.Type != null) {
+            if (configItem.Type?.size == 2)
+                holder.protocol.text = "SOCKS4/5"
+            else
+                holder.protocol.text = configItem.Type?.joinToString(separator = ", ") ?: "None"
         }
+
+
+        //holder.proxy.setOnClickListener {
+        //    onItemClicked(configItem.id, ClickHandlers.GetConfiguration)
+        //}
 
     }
 

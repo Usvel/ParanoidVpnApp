@@ -8,7 +8,6 @@
     android:orientation="horizontal"
     android:foreground="?android:attr/selectableItemBackground">
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cvProxy"
         android:layout_width="0dp"
@@ -16,7 +15,7 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:layout_margin="@dimen/small_padding"
-        app:cardCornerRadius="@dimen/minimum_corner_radius">
+        app:cardCornerRadius="@dimen/extra_small_corner_radius">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -45,40 +44,49 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        app:cardBackgroundColor="?attr/vpnButtonConnected"
-        android:layout_margin="@dimen/minimum_padding"
-        app:cardCornerRadius="@dimen/minimum_corner_radius">
+        android:orientation="vertical">
 
-        <TextView
+        <com.google.android.material.chip.Chip
             android:id="@+id/tvPing"
+            style="@style/Widget.Material3.Chip.Assist.Elevated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/text_view_black"
-            android:layout_margin="@dimen/small_padding"
+            android:textColor="?attr/vpnButtonConnected"
             tools:text="30ms" />
-    </androidx.cardview.widget.CardView>
 
+        <com.google.android.material.chip.Chip
+            android:id="@+id/tvProtocol"
+            style="@style/Widget.Material3.Chip.Assist.Elevated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="HTTP" />
 
-    <androidx.cardview.widget.CardView
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imEditIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/minimum_padding"
-        app:cardCornerRadius="@dimen/minimum_corner_radius">
+        android:layout_gravity="center"
+        android:alpha="0.2"
+        android:contentDescription="@string/configuration_sharing"
+        android:paddingStart="@dimen/small_padding"
+        android:paddingEnd="@dimen/small_padding"
+        android:src="@drawable/ic_outline_save_24"
+        app:tint="?attr/toolBarColor" />
 
-        <TextView
-            android:id="@+id/tvProtocol"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/text_view_black"
-            android:layout_margin="@dimen/small_padding"
-            tools:text="HTTP" />
-    </androidx.cardview.widget.CardView>
+    <ImageView
+        android:id="@+id/imShareIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:alpha="0.2"
+        android:contentDescription="@string/configuration_sharing"
+        android:paddingStart="@dimen/small_padding"
+        android:paddingEnd="@dimen/small_padding"
+        android:src="@drawable/ic_outline_info"
+        app:tint="?attr/toolBarColor" />
 </LinearLayout>

@@ -60,7 +60,7 @@
     <string name="firebase_reset_password">Check your email for password recovery</string>
     <string name="firebase_error">Error Firebase</string>
     <string name="vpn_configurations">VPN Configurations</string>
-    <string name="fragment_settings_tools_cofig_num">1 configuration found</string>
+    <string name="fragment_settings_tools_config_num">1 configuration found</string>
     <string name="add_configuration">Add configuration</string>
     <!-- SettingsFragment -->
     <string name="configuration_number">Already added %1$s configuration(s)</string>
@@ -108,4 +108,5 @@
     <string name="tab_proxy">Proxy</string>
     <string name="tab_traffic">Traffic</string>
     <string name="network_data">Network data</string>
+    <string name="proxy_configuration">Proxy configuration</string>
 </resources>

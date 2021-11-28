@@ -20,10 +20,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.R
+import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.common.utils.ClickHandlers
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.utils.VPNState
 import com.paranoid.vpn.app.common.vpn_configuration.domain.repository.VPNConfigRepository
+import com.paranoid.vpn.app.databinding.NavigationVpnFragmentBinding
 import com.paranoid.vpn.app.databinding.PageVpnButtonBinding
 import com.paranoid.vpn.app.qr.QRCreator
 import com.paranoid.vpn.app.vpn.core.LocalVPNService2
@@ -34,10 +36,8 @@ import com.paranoid.vpn.app.vpn.ui.VPNViewModel
 import kotlinx.coroutines.*
 import java.util.stream.Collectors
 
-class VPNObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
-
-    private var _binding: PageVpnButtonBinding? = null
-    private val binding get() = _binding!!
+class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
+    BaseFragment<PageVpnButtonBinding, VPNViewModel>(PageVpnButtonBinding::inflate) {
 
     private var textUpdater: Job? = null
     private val VPN_REQUEST_CODE = 0x0F
@@ -45,15 +45,6 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
 
     /** Defines callbacks for service binding, passed to bindService()  */
     private var connection = VPNServiceConnection()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = PageVpnButtonBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -346,5 +337,8 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
 
     private fun hideBottomSheetDialog() {
         bottomSheetDialog.hide()
+    }
+
+    override fun initViewModel() {
     }
 }

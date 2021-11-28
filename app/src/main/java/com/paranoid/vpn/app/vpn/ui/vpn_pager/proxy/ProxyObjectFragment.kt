@@ -1,27 +1,14 @@
 package com.paranoid.vpn.app.vpn.ui.vpn_pager.proxy
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.databinding.PageProxyListBinding
 import com.paranoid.vpn.app.vpn.ui.VPNViewModel
 
-class ProxyObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
-
-    private var _binding: PageProxyListBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = PageProxyListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
+    BaseFragment<PageProxyListBinding, VPNViewModel>(PageProxyListBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,6 +31,9 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) : Fragment() {
             binding.rvAllProxy.adapter = adapter
         }
 
+    }
+
+    override fun initViewModel() {
     }
 
 }
