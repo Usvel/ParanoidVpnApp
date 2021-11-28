@@ -91,7 +91,12 @@ class VPNViewModel(
     }
 
     fun loadAllProxiesFromNetwork() {
-        proxyApi?.getProxies()
+        proxyApi?.getProxies(
+            limit = 20,
+            country = "",
+            ping = "",
+            type = ""
+        )
             ?.enqueue(object : Callback<List<ProxyItem>> {
                 override fun onResponse(
                     call: Call<List<ProxyItem>>,

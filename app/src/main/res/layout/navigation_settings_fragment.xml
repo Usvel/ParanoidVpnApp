@@ -133,12 +133,14 @@
         app:cardCornerRadius="20dp"
         app:layout_constraintStart_toStartOf="@+id/proxyConfigurationNumber"
         app:layout_constraintTop_toBottomOf="@+id/proxyConfigurationNumber">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textColor="@color/text_view_black"
             android:text="@string/add_configuration" />
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,8 @@ import com.paranoid.vpn.app.common.utils.ClickHandlers
 
 class ProxyListAdapter(
     private val mList: List<ProxyItem>,
+    private val warningColor: Int,
+    private val errorColor: Int,
     private val onItemClicked: (Long, ClickHandlers) -> Unit,
 ) : RecyclerView.Adapter<ProxyListAdapter.ViewHolder>() {
 
@@ -38,7 +40,12 @@ class ProxyListAdapter(
 
         holder.countryName.text = configItem.Location.country
         holder.ipAddress.text = configItem.Ip
-        holder.ping.text = "${configItem.Ping}ms"
+        val currentPing = configItem.Ping
+        holder.ping.text = "${currentPing}ms"
+        if (currentPing > 100)
+            holder.ping.setTextColor(warningColor)
+        else if (currentPing > 500)
+            holder.ping.setTextColor(errorColor)
         if (configItem.Type != null) {
             if (configItem.Type?.size == 2)
                 holder.protocol.text = "SOCKS4/5"
@@ -46,11 +53,9 @@ class ProxyListAdapter(
                 holder.protocol.text = configItem.Type?.joinToString(separator = ", ") ?: "None"
         }
 
-
         //holder.proxy.setOnClickListener {
         //    onItemClicked(configItem.id, ClickHandlers.GetConfiguration)
         //}
-
     }
 
     // return the number of the items in the list
@@ -65,14 +70,14 @@ class ProxyListAdapter(
     ) : RecyclerView.ViewHolder(ItemView) {
         val countryName: TextView = itemView.findViewById(R.id.tvCountryName)
         val ipAddress: TextView = itemView.findViewById(R.id.tvProxyIp)
-        val ping: TextView  = itemView.findViewById(R.id.tvPing)
+        val ping: TextView = itemView.findViewById(R.id.tvPing)
         val protocol: TextView = itemView.findViewById(R.id.tvProtocol)
         val proxy: CardView = itemView.findViewById(R.id.cvProxy)
 
         init {
-            itemView.setOnClickListener {
-                onItemClicked(bindingAdapterPosition)
-            }
+            //itemView.setOnClickListener {
+            //   onItemClicked(bindingAdapterPosition)
+            //}
         }
     }
 }

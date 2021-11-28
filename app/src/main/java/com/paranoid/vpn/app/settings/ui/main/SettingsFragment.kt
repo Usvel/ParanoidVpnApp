@@ -1,5 +1,6 @@
 package com.paranoid.vpn.app.settings.ui.main
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -33,14 +34,17 @@ class SettingsFragment :
         )[SettingsViewModel::class.java]
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateConfigNumber(){
-        viewModel?.getAllConfigs()?.observe(viewLifecycleOwner){ value ->
+        viewModel?.getAllConfigs()?.observe(viewLifecycleOwner) { value ->
             val configSize = value.size
             binding.configurationNumber.text = "Already added $configSize configuration(s)"
         }
 
-
-        //binding.configurationNumber.text = String().format(resources.getString(R.string.configuration_number), viewModel.configsLiveData)
+        viewModel?.getAllProxies()?.observe(viewLifecycleOwner) { value ->
+            val configSize = value.size
+            binding.proxyConfigurationNumber.text = "Already added $configSize configuration(s)"
+        }
     }
 
     private fun setListeners(){

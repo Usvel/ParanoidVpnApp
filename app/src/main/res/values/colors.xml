@@ -23,6 +23,7 @@
     <color name="vpn_color_disabled_dark">#5F5F5F</color>
     <color name="vpn_color_connected">#7BDAA7</color>
     <color name="vpn_color_error">#DA7B7B</color>
+    <color name="vpn_color_warning">#DABA7B</color>
     <!-- Bar -->
     <color name="status_bar_color">#65000000</color>
     <color name="nav_bar_color">#000000</color>

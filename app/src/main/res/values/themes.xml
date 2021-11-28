@@ -30,6 +30,7 @@
         <item name="vpnButtonDisabled">@color/vpn_color_disabled</item>
         <item name="vpnButtonConnected">@color/vpn_color_connected</item>
         <item name="vpnButtonError">@color/vpn_color_error</item>
+        <item name="vpnButtonWarning">@color/vpn_color_warning</item>
         <!-- CardViewButton -->
         <item name="cardViewBackground">@color/card_view_background_light</item>
         <!-- ProfileFragment -->
