@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.chip.Chip
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -41,12 +42,17 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
             oldViewModel.getProxyCountry()
         else ""
 
+        val proxyType = oldViewModel.getProxyType()
+
         if (proxyCountry != null) {
             if (proxyPing != null) {
-                oldViewModel.loadAllProxiesFromNetwork(
-                    proxyCountry,
-                    proxyPing
-                )
+                if (proxyType != null) {
+                    oldViewModel.loadAllProxiesFromNetwork(
+                        proxyCountry,
+                        proxyPing,
+                        proxyType
+                    )
+                }
             }
         }
     }
@@ -67,15 +73,35 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
             )
         }
 
-        if(oldViewModel.getProxyPing() != "")
+        if (oldViewModel.getProxyPing() != "")
             customAlertDialogView.findViewById<TextInputEditText>(
                 R.id.etEditProxyPing
             ).setText(oldViewModel.getProxyPing())
 
-        if(oldViewModel.getProxyCountry() != "")
+        if (oldViewModel.getProxyCountry() != "")
             customAlertDialogView.findViewById<TextInputEditText>(
                 R.id.etEditCountry
             ).setText(oldViewModel.getProxyCountry())
+
+        val types = oldViewModel.getProxyType()?.split(",")
+        if (types != null) {
+            for (type in types) {
+                when (type) {
+                    "http" -> customAlertDialogView.findViewById<Chip>(
+                        R.id.cHttp
+                    ).isChecked = true
+                    "https" -> customAlertDialogView.findViewById<Chip>(
+                        R.id.cHttps
+                    ).isChecked = true
+                    "socks4" -> customAlertDialogView.findViewById<Chip>(
+                        R.id.cSocks4
+                    ).isChecked = true
+                    "socks5" -> customAlertDialogView.findViewById<Chip>(
+                        R.id.cSocks5
+                    ).isChecked = true
+                }
+            }
+        }
 
         materialAlertDialogBuilder
             ?.setView(customAlertDialogView)
@@ -92,6 +118,37 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
                         R.id.etEditProxyPing
                     ).text.toString()
                 )
+
+                var typesFromDialog = ""
+
+                if (customAlertDialogView.findViewById<Chip>(
+                        R.id.cHttp
+                    ).isChecked
+                )
+                    typesFromDialog += "http,"
+
+                if (customAlertDialogView.findViewById<Chip>(
+                        R.id.cHttps
+                    ).isChecked
+                )
+                    typesFromDialog += "https,"
+
+                if (customAlertDialogView.findViewById<Chip>(
+                        R.id.cSocks4
+                    ).isChecked
+                )
+                    typesFromDialog += "socks4,"
+
+                if (customAlertDialogView.findViewById<Chip>(
+                        R.id.cSocks5
+                    ).isChecked
+                )
+                    typesFromDialog += "socks5,"
+
+                oldViewModel.setProxyType(
+                    typesFromDialog
+                )
+
                 setLoaders()
                 dialog.dismiss()
             }

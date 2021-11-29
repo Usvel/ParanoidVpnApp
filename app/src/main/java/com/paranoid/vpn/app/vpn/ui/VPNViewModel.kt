@@ -62,6 +62,13 @@ class VPNViewModel(
         )
     }
 
+    fun setProxyType(type: String) {
+        with(sharedPref.edit()) {
+            putString(getString(R.string.proxy_type_sp_tag_ID), type)
+            apply()
+        }
+    }
+
     fun getProxyPing(): String? {
         return sharedPref.getString(
             getString(R.string.proxy_ping_sp_tag_ID), getString(R.string.possible_ping)
@@ -124,13 +131,14 @@ class VPNViewModel(
 
     fun loadAllProxiesFromNetwork(
         country: String = "",
-        ping: String = ""
+        ping: String = "",
+        proxyType: String = "",
     ) {
         proxyApi?.getProxies(
             limit = 20,
             country = country,
             ping = ping,
-            type = ""
+            type = proxyType
         )
             ?.enqueue(object : Callback<List<ProxyItem>> {
                 override fun onResponse(

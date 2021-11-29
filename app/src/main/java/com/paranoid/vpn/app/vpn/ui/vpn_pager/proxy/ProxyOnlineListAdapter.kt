@@ -49,7 +49,10 @@ class ProxyOnlineListAdapter(
             holder.ping.setTextColor(errorColor)
         if (configItem.Type != null) {
             if (configItem.Type?.size == 2)
-                holder.protocol.text = "SOCKS4/5"
+                if(configItem.Type!![0] == "SOCKS4" || configItem.Type!![0] == "SOCKS5")
+                    holder.protocol.text = "SOCKS4/5"
+                else
+                    holder.protocol.text = "HTTP(S)"
             else
                 holder.protocol.text = configItem.Type?.joinToString(separator = ", ") ?: "None"
         }
