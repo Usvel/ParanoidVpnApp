@@ -25,177 +25,210 @@
             android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/extra_padding"
-            android:paddingTop="@dimen/extra_padding"
-            android:paddingEnd="@dimen/extra_padding"
+            android:paddingStart="@dimen/small_padding"
+            android:paddingTop="@dimen/small_padding"
+            android:paddingEnd="@dimen/small_padding"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvProxyTitle">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvProxyIp"
-                    android:layout_width="wrap_content"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="IP" />
+                    app:cardElevation="5dp"
+                    android:layout_margin="@dimen/real_medium_padding"
+                    app:cardCornerRadius="@dimen/minimum_corner_radius">
 
-                <TextView
-                    android:id="@+id/tvProxyPort"
-                    android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/real_medium_padding"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvProxyIp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="IP" />
+
+                        <TextView
+                            android:id="@+id/tvProxyPort"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Port" />
+
+                        <TextView
+                            android:id="@+id/tvProxyTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Time" />
+
+                        <TextView
+                            android:id="@+id/tvProxyPing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Ping" />
+
+                        <TextView
+                            android:id="@+id/tvProxyFailed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Failed" />
+
+                        <TextView
+                            android:id="@+id/tvProxyAnonymity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Anonymity" />
+
+                        <TextView
+                            android:id="@+id/tvProxyUpTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Up time" />
+
+                        <TextView
+                            android:id="@+id/tvProxyRecheckCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Recheck Count" />
+
+                        <TextView
+                            android:id="@+id/tvProxyWorkingCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="WorkingCount" />
+
+                        <TextView
+                            android:id="@+id/tvType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Type" />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Port" />
+                    app:cardElevation="5dp"
+                    app:cardCornerRadius="@dimen/minimum_corner_radius"
+                    android:layout_margin="@dimen/real_medium_padding"
+                    android:layout_marginTop="@dimen/real_medium_padding">
 
-                <TextView
-                    android:id="@+id/tvProxyTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Time" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/real_medium_padding"
+                        android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvProxyPing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Ping" />
+                        <TextView
+                            android:id="@+id/tvProxyLocationCity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="City" />
 
-                <TextView
-                    android:id="@+id/tvProxyFailed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Failed" />
+                        <TextView
+                            android:id="@+id/tvProxyLocationCountry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Country" />
 
-                <TextView
-                    android:id="@+id/tvProxyAnonymity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Anonymity" />
+                        <TextView
+                            android:id="@+id/tvProxyLocationContinent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Continent" />
 
-                <TextView
-                    android:id="@+id/tvProxyUpTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Up time" />
+                        <TextView
+                            android:id="@+id/tvProxyLocationCountryCode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="CountryCode" />
 
-                <TextView
-                    android:id="@+id/tvProxyRecheckCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Recheck Count" />
+                        <TextView
+                            android:id="@+id/tvProxyLocationIpName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="IpName" />
 
-                <TextView
-                    android:id="@+id/tvProxyWorkingCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="WorkingCount" />
+                        <TextView
+                            android:id="@+id/tvProxyLocationIpType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="IpType" />
 
-                <TextView
-                    android:id="@+id/tvType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="IP" />
+                        <TextView
+                            android:id="@+id/tvProxyLocationISP"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="ISP" />
 
-                <TextView
-                    android:id="@+id/tvProxyLocationCity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="City" />
+                        <TextView
+                            android:id="@+id/tvProxyLocationLat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Lat" />
 
-                <TextView
-                    android:id="@+id/tvProxyLocationCountry"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Country" />
+                        <TextView
+                            android:id="@+id/tvProxyLocationLan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Lan" />
 
-                <TextView
-                    android:id="@+id/tvProxyLocationContinent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Continent" />
+                        <TextView
+                            android:id="@+id/tvProxyLocationOrg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Org" />
 
-                <TextView
-                    android:id="@+id/tvProxyLocationCountryCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="CountryCode" />
+                        <TextView
+                            android:id="@+id/tvProxyLocationQuery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Query" />
 
-                <TextView
-                    android:id="@+id/tvProxyLocationIpName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="IpName" />
+                        <TextView
+                            android:id="@+id/tvProxyLocationRegion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Region" />
 
-                <TextView
-                    android:id="@+id/tvProxyLocationIpType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="IpType" />
+                        <TextView
+                            android:id="@+id/tvProxyLocationStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/small_padding"
+                            tools:text="Status" />
 
-                <TextView
-                    android:id="@+id/tvProxyLocationISP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="ISP" />
+                    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvProxyLocationLat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Lat" />
-
-                <TextView
-                    android:id="@+id/tvProxyLocationLan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Lan" />
-
-                <TextView
-                    android:id="@+id/tvProxyLocationOrg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Org" />
-
-                <TextView
-                    android:id="@+id/tvProxyLocationQuery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Query" />
-
-                <TextView
-                    android:id="@+id/tvProxyLocationRegion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Region" />
-
-                <TextView
-                    android:id="@+id/tvProxyLocationStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/small_padding"
-                    tools:text="Status" />
-
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
@@ -226,6 +259,8 @@
                     android:background="@null"
                     android:contentDescription="@string/proxy_save"
                     android:foreground="?android:attr/selectableItemBackground"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
                     android:padding="@dimen/small_padding"
                     android:src="@drawable/ic_outline_save_24" />
 
@@ -238,6 +273,8 @@
                     android:background="@null"
                     android:contentDescription="@string/proxy_set_proxy"
                     android:foreground="?android:attr/selectableItemBackground"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
                     android:padding="@dimen/small_padding"
                     android:src="@drawable/ic_baseline_upload_file_24" />
 
@@ -249,6 +286,8 @@
                     android:background="@null"
                     android:contentDescription="@string/proxy_delete"
                     android:foreground="?android:attr/selectableItemBackground"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
                     android:padding="@dimen/small_padding"
                     android:src="@drawable/ic_delete" />
 
@@ -261,6 +300,8 @@
                     android:background="@null"
                     android:contentDescription="@string/proxy_edit"
                     android:foreground="?android:attr/selectableItemBackground"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
                     android:padding="@dimen/small_padding"
                     android:src="@drawable/ic_outline_edit" />
 
@@ -272,6 +313,8 @@
                     android:background="@null"
                     android:contentDescription="@string/proxy_share"
                     android:foreground="?android:attr/selectableItemBackground"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
                     android:padding="@dimen/small_padding"
                     android:src="@drawable/ic_share" />
             </LinearLayout>
