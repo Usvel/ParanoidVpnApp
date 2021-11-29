@@ -7,11 +7,9 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,11 +19,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
-import com.paranoid.vpn.app.common.utils.ClickHandlers
+import com.paranoid.vpn.app.common.utils.ConfigurationClickHandlers
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.utils.VPNState
 import com.paranoid.vpn.app.common.vpn_configuration.domain.repository.VPNConfigRepository
-import com.paranoid.vpn.app.databinding.NavigationVpnFragmentBinding
 import com.paranoid.vpn.app.databinding.PageVpnButtonBinding
 import com.paranoid.vpn.app.qr.QRCreator
 import com.paranoid.vpn.app.vpn.core.LocalVPNService2
@@ -78,8 +75,8 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
         oldViewModel.getAllConfigs().observe(viewLifecycleOwner) { value ->
             val adapter = VPNConfigAdapter(value) { id, code ->
                 when (code) {
-                    ClickHandlers.GetConfiguration -> showConfigDetails(id)
-                    ClickHandlers.SetConfiguration -> {
+                    ConfigurationClickHandlers.GetConfiguration -> showConfigDetails(id)
+                    ConfigurationClickHandlers.SetConfiguration -> {
                         if (connection.isBound) {
                             Toast.makeText(
                                 context,
@@ -97,7 +94,7 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
                             }
                         }
                     }
-                    ClickHandlers.QRCode -> CoroutineScope(Dispatchers.IO).launch { showQRCode(id) }
+                    ConfigurationClickHandlers.QRCode -> CoroutineScope(Dispatchers.IO).launch { showQRCode(id) }
                     else -> showConfigDetails(id)
                 }
             }

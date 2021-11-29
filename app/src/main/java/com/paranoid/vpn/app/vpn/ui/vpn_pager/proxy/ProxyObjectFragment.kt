@@ -3,12 +3,16 @@ package com.paranoid.vpn.app.vpn.ui.vpn_pager.proxy
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.R
+import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
+import com.paranoid.vpn.app.common.utils.ProxyClickHandlers
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.databinding.PageProxyListBinding
 import com.paranoid.vpn.app.vpn.ui.VPNViewModel
@@ -102,15 +106,49 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
         val errorColor = MaterialColors.getColor(binding.root, R.attr.vpnButtonError)
 
         oldViewModel.getAllProxiesFromNetwork().observe(viewLifecycleOwner) { value ->
-            binding.rvAllProxy.layoutManager = LinearLayoutManager(context)
-            val adapter = ProxyListAdapter(value, warningColor, errorColor) { id, code ->
-                //when (code) {
-                //ClickHandlers.GetConfiguration -> showConfigDetails(id)
-                //}
-            }
-            binding.rvAllProxy.adapter = adapter
+            binding.rvOnlineProxy.layoutManager = LinearLayoutManager(context)
+            val adapter =
+                ProxyOnlineListAdapter(value, warningColor, errorColor) { proxyItem, code ->
+                    when (code) {
+                        ProxyClickHandlers.Info -> openProxyInFragment(proxyItem, false)
+                        else -> {}
+                    }
+                }
+            binding.rvOnlineProxy.adapter = adapter
         }
 
+        oldViewModel.getAllProxies().observe(viewLifecycleOwner) { value ->
+            binding.rvLocalProxy.layoutManager = LinearLayoutManager(context)
+            val adapter = ProxyLocalListAdapter(value) { proxyItem, code ->
+                when (code) {
+                    ProxyClickHandlers.Info -> openProxyInFragment(proxyItem, true)
+                    else -> {}
+                }
+            }
+            binding.rvLocalProxy.adapter = adapter
+        }
+
+    }
+
+    private fun openProxyInFragment(proxyItem: ProxyItem, local: Boolean) {
+        val gson = GsonBuilder().create()
+        val bundle = Bundle()
+        bundle.putString(
+            "proxyItem", gson.toJson(proxyItem)
+        )
+
+        bundle.putString(
+            "location", gson.toJson(proxyItem.Location)
+        )
+
+        bundle.putBoolean(
+            "local", local
+        )
+
+        view?.findNavController()?.navigate(
+            R.id.action_vpn_fragment_to_proxy_view_fragment,
+            bundle
+        )
     }
 
     override fun initViewModel() {

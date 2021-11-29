@@ -1,7 +1,6 @@
 package com.paranoid.vpn.app.settings.ui.vpn_config
 
 import android.app.AlertDialog
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,35 +8,23 @@ import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.Toast
-import androidx.compose.ui.text.toUpperCase
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
-import com.paranoid.vpn.app.common.utils.ClickHandlers
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.utils.Validators.Companion.validateIP
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.ForwardingRule
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.Protocols
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import com.paranoid.vpn.app.databinding.NavigationVpnConfigAddFragmentBinding
-import com.paranoid.vpn.app.vpn.core.LocalVPNService2
-import com.paranoid.vpn.app.vpn.ui.VPNConfigAdapter
-import com.squareup.moshi.internal.Util
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.lang.IllegalArgumentException
-import java.util.*
 import kotlin.collections.ArrayList
 
 

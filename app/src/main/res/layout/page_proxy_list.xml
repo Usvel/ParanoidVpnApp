@@ -1,21 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tvNetworkHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/real_medium_padding"
-        android:paddingStart="@dimen/real_medium_padding"
-        android:paddingEnd="@dimen/real_medium_padding"
-        android:text="@string/network_data"
-        android:textSize="@dimen/proxy_header_title_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvLocalHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/real_medium_padding"
+            android:paddingTop="@dimen/real_medium_padding"
+            android:paddingEnd="@dimen/real_medium_padding"
+            android:text="@string/local_data"
+            android:textSize="@dimen/proxy_header_title_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/llLocalProxy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/settings_fragment_small_padding"
+            android:paddingTop="@dimen/settings_fragment_small_padding"
+            android:paddingEnd="@dimen/settings_fragment_small_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLocalHeader">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvLocalProxy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                tools:listitem="@android:layout/two_line_list_item" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvNetworkHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/real_medium_padding"
+            android:paddingTop="@dimen/small_padding"
+            android:paddingEnd="@dimen/real_medium_padding"
+            android:text="@string/network_data"
+            android:textSize="@dimen/proxy_header_title_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llLocalProxy" />
 
     <ImageView
         android:id="@+id/ivFilterProxies"
@@ -46,11 +83,12 @@
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvAllProxy"
+            android:id="@+id/rvOnlineProxy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
             tools:listitem="@android:layout/two_line_list_item" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

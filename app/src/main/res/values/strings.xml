@@ -124,4 +124,12 @@
     <string name="possible_ping">Possible ping</string>
     <string name="country">Country</string>
     <string name="countries">Countries</string>
+    <string name="view_proxy">View proxy</string>
+    <string name="save_proxy">Save proxy</string>
+    <string name="local_data">Local data</string>
+    <string name="proxy_save">Save</string>
+    <string name="proxy_set_proxy">Set proxy</string>
+    <string name="proxy_share">Share</string>
+    <string name="proxy_delete">Delete</string>
+    <string name="proxy_edit">Edit</string>
 </resources>

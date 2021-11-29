@@ -48,8 +48,8 @@ data class ProxyItem(
     var RecheckCount: Int,
     @Expose()
     var WorkingCount: Int,
-    @Expose()
     @TypeConverters(ArrayConverter::class)
+    @Expose()
     var Type: MutableList<String>? = null,
     @TypeConverters(LocationConverter::class)
     @Expose()

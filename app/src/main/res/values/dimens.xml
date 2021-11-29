@@ -94,5 +94,7 @@
     <dimen name="vpn_fragment_icon_size">32dp</dimen>
     <dimen name="tab_padding">20dp</dimen>
     <!--  VPNFragment  -->
+    <!--  Proxy Fragment  -->
     <dimen name="proxy_header_title_size">15sp</dimen>
+    <dimen name="navigation_proxy_title_text_size">20sp</dimen>
 </resources>

@@ -59,7 +59,7 @@
         android:src="@drawable/ic_outline_edit" />
 
     <ImageView
-        android:id="@+id/imShareIcon"
+        android:id="@+id/imInfoIcon"
         android:alpha="0.2"
         app:tint="?attr/toolBarColor"
         android:layout_width="wrap_content"

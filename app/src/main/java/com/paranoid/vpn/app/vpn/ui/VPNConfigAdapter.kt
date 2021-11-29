@@ -8,13 +8,13 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.paranoid.vpn.app.R
-import com.paranoid.vpn.app.common.utils.ClickHandlers
+import com.paranoid.vpn.app.common.utils.ConfigurationClickHandlers
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 
 
 class VPNConfigAdapter(
     private val mList: List<VPNConfigItem>,
-    private val onItemClicked: (Long, ClickHandlers) -> Unit,
+    private val onItemClicked: (Long, ConfigurationClickHandlers) -> Unit,
 ) : RecyclerView.Adapter<VPNConfigAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,7 +23,7 @@ class VPNConfigAdapter(
 
         return ViewHolder(view) {
             onItemClicked(
-                mList[it].id, ClickHandlers.GetConfiguration
+                mList[it].id, ConfigurationClickHandlers.GetConfiguration
             )
         }
     }
@@ -37,13 +37,13 @@ class VPNConfigAdapter(
 
         holder.configName.text = configItem.name
         holder.itemView.setOnClickListener {
-            onItemClicked(configItem.id, ClickHandlers.SetConfiguration)
+            onItemClicked(configItem.id, ConfigurationClickHandlers.SetConfiguration)
         }
         holder.cvSettingsIcon.setOnClickListener {
-            onItemClicked(configItem.id, ClickHandlers.GetConfiguration)
+            onItemClicked(configItem.id, ConfigurationClickHandlers.GetConfiguration)
         }
         holder.imQRIcon.setOnClickListener {
-            onItemClicked(configItem.id, ClickHandlers.QRCode)
+            onItemClicked(configItem.id, ConfigurationClickHandlers.QRCode)
         }
 
     }

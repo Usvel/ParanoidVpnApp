@@ -4,28 +4,27 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
-import com.paranoid.vpn.app.common.utils.ClickHandlers
+import com.paranoid.vpn.app.common.utils.ProxyClickHandlers
 
 
-class ProxyListAdapter(
+class ProxyLocalListAdapter(
     private val mList: List<ProxyItem>,
-    private val warningColor: Int,
-    private val errorColor: Int,
-    private val onItemClicked: (Long, ClickHandlers) -> Unit,
-) : RecyclerView.Adapter<ProxyListAdapter.ViewHolder>() {
+    private val onItemClicked: (ProxyItem, ProxyClickHandlers) -> Unit,
+) : RecyclerView.Adapter<ProxyLocalListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.proxy_item_view, parent, false)
+            .inflate(R.layout.proxy_item_local, parent, false)
 
         return ViewHolder(view) {
             onItemClicked(
-                mList[it].id, ClickHandlers.GetConfiguration
+                mList[it], ProxyClickHandlers.Info
             )
         }
     }
@@ -40,12 +39,6 @@ class ProxyListAdapter(
 
         holder.countryName.text = "${configItem.Location.country} · ${configItem.Location.city}"
         holder.ipAddress.text = configItem.Ip
-        val currentPing = configItem.Ping
-        holder.ping.text = "${currentPing}ms"
-        if (currentPing > 100)
-            holder.ping.setTextColor(warningColor)
-        else if (currentPing > 500)
-            holder.ping.setTextColor(errorColor)
         if (configItem.Type != null) {
             if (configItem.Type?.size == 2)
                 holder.protocol.text = "SOCKS4/5"
@@ -53,9 +46,9 @@ class ProxyListAdapter(
                 holder.protocol.text = configItem.Type?.joinToString(separator = ", ") ?: "None"
         }
 
-        //holder.proxy.setOnClickListener {
-        //    onItemClicked(configItem.id, ClickHandlers.GetConfiguration)
-        //}
+        holder.infoButton.setOnClickListener {
+            onItemClicked(configItem, ProxyClickHandlers.Info)
+        }
     }
 
     // return the number of the items in the list
@@ -70,14 +63,15 @@ class ProxyListAdapter(
     ) : RecyclerView.ViewHolder(ItemView) {
         val countryName: TextView = itemView.findViewById(R.id.tvCountryName)
         val ipAddress: TextView = itemView.findViewById(R.id.tvProxyIp)
-        val ping: TextView = itemView.findViewById(R.id.tvPing)
         val protocol: TextView = itemView.findViewById(R.id.tvProtocol)
         val proxy: CardView = itemView.findViewById(R.id.cvProxy)
+        val setButton: ImageView = itemView.findViewById(R.id.imUploadIcon)
+        val infoButton: ImageView = itemView.findViewById(R.id.imInfoIcon)
 
         init {
-            //itemView.setOnClickListener {
-            //   onItemClicked(bindingAdapterPosition)
-            //}
+            infoButton.setOnClickListener {
+                onItemClicked(bindingAdapterPosition)
+            }
         }
     }
 }
