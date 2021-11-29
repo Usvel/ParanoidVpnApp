@@ -8,6 +8,7 @@
     android:orientation="horizontal"
     android:foreground="?android:attr/selectableItemBackground">
 
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cvProxy"
         android:layout_width="0dp"
@@ -17,54 +18,70 @@
         android:layout_margin="@dimen/small_padding"
         app:cardCornerRadius="@dimen/extra_small_corner_radius">
 
-        <LinearLayout
+        <HorizontalScrollView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/small_padding"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tvCountryName"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:alpha="0.7"
-                android:textColor="@color/text_view_black"
-                tools:text="Germany" />
+                android:layout_marginEnd="@dimen/small_padding"
+                android:layout_marginTop="@dimen/minimum_padding"
+                android:layout_marginBottom="@dimen/minimum_padding"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvProxyIp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:layout_gravity="center"
-                android:textColor="@color/text_view_black"
-                android:textSize="@dimen/logo_text_size"
-                tools:text="10.10.10.10" />
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_padding"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvCountryName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:alpha="0.7"
+                        android:textColor="@color/text_view_black"
+                        tools:text="Germany" />
+
+                    <TextView
+                        android:id="@+id/tvProxyIp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:singleLine="true"
+                        android:textColor="@color/text_view_black"
+                        android:textSize="@dimen/logo_text_size"
+                        tools:text="10.10.10.10" />
+                </LinearLayout>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/tvPing"
+                    style="@style/Widget.Material3.Chip.Assist.Elevated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/small_padding"
+                    android:textColor="?attr/vpnButtonConnected"
+                    tools:text="30ms" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/tvProtocol"
+                    style="@style/Widget.Material3.Chip.Assist.Elevated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/small_padding"
+                    android:paddingEnd="@dimen/small_padding"
+                    tools:text="HTTP"
+                    tools:ignore="RtlSymmetry" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/tvPing"
-            style="@style/Widget.Material3.Chip.Assist.Elevated"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?attr/vpnButtonConnected"
-            tools:text="30ms" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/tvProtocol"
-            style="@style/Widget.Material3.Chip.Assist.Elevated"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="HTTP" />
-
-    </LinearLayout>
 
     <ImageView
         android:id="@+id/imEditIcon"
