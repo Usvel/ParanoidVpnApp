@@ -18,7 +18,6 @@ import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.databinding.PageProxyListBinding
 import com.paranoid.vpn.app.vpn.ui.VPNViewModel
 
-
 class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
     BaseFragment<PageProxyListBinding, VPNViewModel>(PageProxyListBinding::inflate) {
 

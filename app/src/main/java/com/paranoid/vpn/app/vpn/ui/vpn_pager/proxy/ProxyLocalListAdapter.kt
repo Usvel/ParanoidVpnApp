@@ -12,7 +12,6 @@ import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
 import com.paranoid.vpn.app.common.utils.ProxyClickHandlers
 
-
 class ProxyLocalListAdapter(
     private val mList: List<ProxyItem>,
     private val onItemClicked: (ProxyItem, ProxyClickHandlers) -> Unit,
@@ -51,12 +50,10 @@ class ProxyLocalListAdapter(
         }
     }
 
-    // return the number of the items in the list
     override fun getItemCount(): Int {
         return mList.size
     }
 
-    // Holds the views for adding it to image and text
     class ViewHolder(
         ItemView: View,
         onItemClicked: (Int) -> Unit
