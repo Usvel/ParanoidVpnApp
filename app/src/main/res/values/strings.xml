@@ -111,7 +111,7 @@
     <string name="tab_vpn">VPN</string>
     <string name="tab_proxy">Proxy</string>
     <string name="tab_traffic">Traffic</string>
-    <string name="network_data">Network data</string>
+    <string name="network_data">Online data</string>
     <string name="proxy_configuration">Proxy configuration</string>
     <string name="filter_proxies">Filter proxies</string>
     <!-- Proxy Protocols -->

@@ -199,75 +199,83 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:orientation="horizontal"
-            android:padding="@dimen/extra_padding"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:layout_marginBottom="@dimen/real_medium_padding"
+            android:paddingBottom="@dimen/small_padding"
+            app:cardCornerRadius="@dimen/minimum_corner_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/scrollView2">
 
-            <ImageButton
-                android:id="@+id/ibSaveProxy"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/small_padding"
                 android:background="@null"
-                android:contentDescription="@string/proxy_save"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:padding="@dimen/small_padding"
-                android:src="@drawable/ic_outline_save_24" />
+                android:orientation="horizontal"
+                android:padding="@dimen/small_padding">
 
-            <ImageButton
-                android:id="@+id/ibSetProxy"
-                android:alpha="0.2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/small_padding"
-                android:background="@null"
-                android:contentDescription="@string/proxy_set_proxy"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:padding="@dimen/small_padding"
-                android:src="@drawable/ic_baseline_upload_file_24" />
+                <ImageButton
+                    android:id="@+id/ibSaveProxy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/small_padding"
+                    android:background="@null"
+                    android:contentDescription="@string/proxy_save"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/small_padding"
+                    android:src="@drawable/ic_outline_save_24" />
 
-            <ImageButton
-                android:id="@+id/ibDeleteProxy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/small_padding"
-                android:background="@null"
-                android:contentDescription="@string/proxy_delete"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:padding="@dimen/small_padding"
-                android:src="@drawable/ic_delete" />
+                <ImageButton
+                    android:id="@+id/ibSetProxy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/small_padding"
+                    android:alpha="0.2"
+                    android:background="@null"
+                    android:contentDescription="@string/proxy_set_proxy"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/small_padding"
+                    android:src="@drawable/ic_baseline_upload_file_24" />
 
-            <ImageButton
-                android:id="@+id/ibEditProxy"
-                android:alpha="0.2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/small_padding"
-                android:background="@null"
-                android:contentDescription="@string/proxy_edit"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:padding="@dimen/small_padding"
-                android:src="@drawable/ic_outline_edit" />
+                <ImageButton
+                    android:id="@+id/ibDeleteProxy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/small_padding"
+                    android:background="@null"
+                    android:contentDescription="@string/proxy_delete"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/small_padding"
+                    android:src="@drawable/ic_delete" />
 
-            <ImageButton
-                android:id="@+id/ibShareProxy"
-                android:alpha="0.2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/small_padding"
-                android:background="@null"
-                android:contentDescription="@string/proxy_share"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:padding="@dimen/small_padding"
-                android:src="@drawable/ic_share" />
-        </LinearLayout>
+                <ImageButton
+                    android:id="@+id/ibEditProxy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/small_padding"
+                    android:alpha="0.2"
+                    android:background="@null"
+                    android:contentDescription="@string/proxy_edit"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/small_padding"
+                    android:src="@drawable/ic_outline_edit" />
 
+                <ImageButton
+                    android:id="@+id/ibShareProxy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/small_padding"
+                    android:background="@null"
+                    android:contentDescription="@string/proxy_share"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/small_padding"
+                    android:src="@drawable/ic_share" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -94,7 +94,19 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
                             }
                         }
                     }
-                    ConfigurationClickHandlers.QRCode -> CoroutineScope(Dispatchers.IO).launch { showQRCode(id) }
+                    ConfigurationClickHandlers.QRCode -> CoroutineScope(Dispatchers.IO).launch {
+                        showQRCode(
+                            id
+                        )
+                    }
+                    ConfigurationClickHandlers.Share -> {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            val config = VPNConfigRepository(requireActivity().application)
+                                .getConfig(id)
+                            val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+                            shareConfiguration(gson.toJson(config))
+                        }
+                    }
                     else -> showConfigDetails(id)
                 }
             }
@@ -135,11 +147,11 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
 
     private fun setListeners() {
         binding.cvSettingsIcon.setOnClickListener {
-            oldViewModel.getConfigId().let { it1 -> showConfigDetails(it1) }
+            showConfigDetails(oldViewModel.getConfigId())
         }
 
         binding.llCurrentConfiguration.setOnLongClickListener {
-            oldViewModel.getConfigId().let { it1 -> showConfigDetails(it1) }
+            showConfigDetails(oldViewModel.getConfigId())
             return@setOnLongClickListener false
         }
 
@@ -148,18 +160,20 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
         }
 
         binding.ivShareIcon.setOnClickListener {
-            context?.let { context_ ->
-                Utils.makeToast(
-                    context_,
-                    Utils.getString(R.string.share_configuration)
-                )
+            context?.let {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val config = VPNConfigRepository(requireActivity().application)
+                        .getConfig(oldViewModel.getConfigId())
+                    val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+                    shareConfiguration(gson.toJson(config))
+                }
             }
         }
 
         binding.ivQrIcon.setOnClickListener {
             context?.let {
                 CoroutineScope(Dispatchers.IO).launch {
-                    oldViewModel.getConfigId().let { it1 -> showQRCode(it1) }
+                    showQRCode(oldViewModel.getConfigId())
                 }
             }
         }
@@ -317,6 +331,17 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
 
             }
         }
+    }
+
+    private fun shareConfiguration(config: String) {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, config)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 
     private fun showQRCode(id: Long) {

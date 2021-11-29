@@ -1,11 +1,11 @@
 package com.paranoid.vpn.app.vpn.ui.vpn_pager.proxy.proxy_item
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.findNavController
 import com.google.gson.GsonBuilder
-import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.Location
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
 import com.paranoid.vpn.app.common.proxy_configuration.domain.repository.ProxyRepository
@@ -33,7 +33,11 @@ class ProxyViewFragment :
         val proxyItem: ProxyItem = gson.fromJson(proxyItemGson, ProxyItem::class.java)
         val location: Location = gson.fromJson(locationGson, Location::class.java)
         setProxyItem(proxyItem, location)
-        setListeners(proxyItem, local)
+        if (proxyItemGson != null) {
+            if (locationGson != null) {
+                setListeners(proxyItemGson, locationGson, proxyItem, local)
+            }
+        }
 
     }
 
@@ -66,7 +70,12 @@ class ProxyViewFragment :
         binding.tvProxyLocationStatus.text = "Status: ${location.status}"
     }
 
-    private fun setListeners(proxyItem: ProxyItem, local: Boolean?) {
+    private fun setListeners(
+        proxyItemGson: String,
+        locationGson: String,
+        proxyItem: ProxyItem,
+        local: Boolean?
+    ) {
         if (local == true) {
             binding.ibSaveProxy.visibility = View.GONE
         }
@@ -97,9 +106,20 @@ class ProxyViewFragment :
             //
         }
         binding.ibShareProxy.setOnClickListener {
-            //
+            shareProxy(proxyItemGson + locationGson)
         }
 
+    }
+
+    private fun shareProxy(proxyItemGson: String) {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, proxyItemGson)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 
     override fun initViewModel() {

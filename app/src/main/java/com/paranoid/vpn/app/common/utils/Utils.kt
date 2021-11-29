@@ -2,6 +2,7 @@ package com.paranoid.vpn.app.common.utils
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.util.Patterns
 import android.widget.Toast
 import androidx.annotation.StringRes
