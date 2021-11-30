@@ -88,6 +88,6 @@
         android:contentDescription="@string/configuration_sharing"
         android:paddingStart="@dimen/small_padding"
         android:paddingEnd="@dimen/small_padding"
-        android:src="@drawable/ic_outline_info"
+        android:src="@drawable/ic_outline_info_selected"
         app:tint="?attr/toolBarColor" />
 </LinearLayout>

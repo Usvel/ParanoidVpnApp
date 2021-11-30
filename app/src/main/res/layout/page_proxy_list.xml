@@ -57,7 +57,7 @@
         android:id="@+id/ivFilterProxies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_outline_filter_alt_24"
+        android:src="@drawable/ic_outline_filter_alt_24_selected"
         android:paddingTop="@dimen/real_medium_padding"
         android:paddingStart="@dimen/real_medium_padding"
         android:paddingEnd="@dimen/real_medium_padding"
