@@ -12,6 +12,7 @@ import android.os.ParcelFileDescriptor
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.viewModelScope
+import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.common.utils.VPNState
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigDataGenerator
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
@@ -50,7 +51,6 @@ class LocalVPNService2 : VpnService() {
     override fun onCreate() {
         Log.d(TAG, "onCreate")
         super.onCreate()
-        setupVPN(currentConfig ?: VPNConfigDataGenerator.getVPNConfigItem())
 
         connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         networkCallback = getNetworkCallBack()
@@ -58,9 +58,6 @@ class LocalVPNService2 : VpnService() {
             getNetworkRequest(),
             networkCallback!!
         )
-
-        startJobs()
-        // startWatchDog()
     }
 
     private fun setupVPN(config: VPNConfigItem) {
@@ -157,10 +154,25 @@ class LocalVPNService2 : VpnService() {
                     .setContentText("App is running")
                     .setContentIntent(pendingIntent).build()
                 startForeground(1, notification)
+                val config = intent.getSerializableExtra("config").toString()
+                val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+                val currentConfig = gson.fromJson(config, VPNConfigItem::class.java)
+                setupVPN(currentConfig)
+                startJobs()
             }
             "stop" -> {
                 CoroutineScope(context).launch {
                     stopVPN()
+                }
+            }
+            "config" -> {
+                CoroutineScope(context).launch {
+                    cleanup()
+                    val config = intent.getSerializableExtra(Intent.EXTRA_TEXT).toString()
+                    val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+                    val configItem: VPNConfigItem = gson.fromJson(config, VPNConfigItem::class.java)
+                    setupVPN(configItem)
+                    startJobs()
                 }
             }
         }
@@ -204,6 +216,7 @@ class LocalVPNService2 : VpnService() {
         deviceToNetworkUDPQueue = null
         networkToDeviceQueue = null
         closeResources(vpnInterface!!)
+        vpnInterface = null
     }
 
     private fun isConnected(): Boolean {
@@ -224,9 +237,9 @@ class LocalVPNService2 : VpnService() {
             override fun onAvailable(network: Network) {
                 super.onAvailable(network)
 
-                if (nioSingleThreadTcpHandlerJob?.isActive != true)
+                if (nioSingleThreadTcpHandlerJob != null && nioSingleThreadTcpHandlerJob?.isActive != true)
                     startTcpJob()
-                if (bioUdpHandlerJob?.isActive != true)
+                if (bioUdpHandlerJob != null && bioUdpHandlerJob?.isActive != true)
                     startUdpJob()
 //                if (watchDogJob?.isActive != true)
 //                    startWatchDog()
@@ -256,8 +269,6 @@ class LocalVPNService2 : VpnService() {
     }
 
     companion object {
-        var currentConfig: VPNConfigItem? = null
-
         val TAG: String = LocalVPNService2::class.java.simpleName
         private val VPN_ADDRESS = "10.0.0.2" // Only IPv4 support for now
         private val VPN_ROUTE = "0.0.0.0" // Intercept everything
