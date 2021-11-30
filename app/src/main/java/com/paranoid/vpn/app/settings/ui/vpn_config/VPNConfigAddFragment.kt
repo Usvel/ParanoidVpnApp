@@ -1,17 +1,14 @@
 package com.paranoid.vpn.app.settings.ui.vpn_config
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.LinearInterpolator
-import android.view.animation.RotateAnimation
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
@@ -24,7 +21,7 @@ import com.paranoid.vpn.app.databinding.NavigationVpnConfigAddFragmentBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.IllegalArgumentException
+import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -40,7 +37,6 @@ class VPNConfigAddFragment :
         super.onViewCreated(view, savedInstanceState)
         val navBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
         navBar?.visibility = View.GONE
-        buttonRotationSet()
         setRecyclerViews()
         setListeners()
     }
@@ -98,27 +94,27 @@ private fun setRecyclerViews() {
 
 private fun addRule() {
     val inflater = LayoutInflater.from(context)
-    val v = inflater.inflate(R.layout.add_rule, null)
+    val v = inflater.inflate(R.layout.add_rule_dialog, null)
 
     val protoName = v.findViewById<TextInputEditText>(R.id.etProtocolName)
     val sourcePort = v.findViewById<TextInputEditText>(R.id.etSourcePort)
     val targetIp = v.findViewById<TextInputEditText>(R.id.etTargetIp)
     val targetPort = v.findViewById<TextInputEditText>(R.id.etTargetPort)
-    val addDialog = AlertDialog.Builder(context)
+    val addDialog = MaterialAlertDialogBuilder(context!!)
     addDialog.setView(v)
 
     addDialog.setPositiveButton("Ok") { dialog, _ ->
         try {
-            val proto = Protocols.valueOf(protoName.text.toString().toUpperCase())
-            val source_port = sourcePort.text.toString()
-            val target_ip = targetIp.text.toString()
-            val target_port = targetPort.text.toString()
+            val proto = Protocols.valueOf(protoName.text.toString().uppercase(Locale.getDefault()))
+            val sourcePortDialog = sourcePort.text.toString()
+            val targetIpDialog = targetIp.text.toString()
+            val targetPortDialog = targetPort.text.toString()
             rulesList.add(
                 ForwardingRule(
                     protocol = proto,
-                    ports = mutableListOf(source_port),
-                    target_ip = target_ip,
-                    target_port = target_port
+                    ports = mutableListOf(sourcePortDialog),
+                    target_ip = targetIpDialog,
+                    target_port = targetPortDialog
                 )
             )
             rulesAdapter?.notifyDataSetChanged()
@@ -135,21 +131,5 @@ private fun addRule() {
     addDialog.create()
     addDialog.show()
 
-}
-
-// Animations
-
-private fun buttonRotationSet() {
-    val rotate = RotateAnimation(
-        0F,
-        180F,
-        Animation.RELATIVE_TO_SELF,
-        0.5f,
-        Animation.RELATIVE_TO_SELF,
-        0.5f
-    )
-    rotate.duration = 5000
-    rotate.interpolator = LinearInterpolator()
-    binding.settingsIcon.startAnimation(rotate)
 }
 }

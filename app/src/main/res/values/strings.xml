@@ -134,7 +134,8 @@
     <string name="proxy_share">Share</string>
     <string name="proxy_delete">Delete</string>
     <string name="proxy_edit">Edit</string>
-    <string name="edit_proxy_title">Edit proxy</string>
+    <string name="edit_proxy_title">Add/Edit proxy</string>
+    <string name="edit_config_title">Add/Edit config</string>
     <string name="proxy_ip">IP</string>
     <string name="proxy_port">Port</string>
     <string name="proxy_city">City</string>
@@ -146,4 +147,5 @@
     <string name="proxy_region">Region</string>
     <string name="view_information_about_online_proxy">Information about online proxy</string>
     <string name="view_information_about_local_proxy">Information about local proxy</string>
+    <string name="expand_menu">Expand menu</string>
 </resources>

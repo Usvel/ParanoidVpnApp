@@ -21,7 +21,6 @@ import com.paranoid.vpn.app.vpn.ui.VPNViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.net.InetAddress
 
 class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
     BaseFragment<PageProxyListBinding, VPNViewModel>(PageProxyListBinding::inflate) {
@@ -63,19 +62,15 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
 
     private fun setListeners() {
         binding.ivFilterProxies.setOnClickListener {
-            showConfigDetails()
+            showFilterDialog()
         }
     }
 
-    private fun showConfigDetails() {
+    private fun showFilterDialog() {
         val customAlertDialogView = LayoutInflater.from(context)
             .inflate(R.layout.proxy_filter_dialog, null, false)
-        val materialAlertDialogBuilder = context?.let {
-            MaterialAlertDialogBuilder(
-                it,
-                R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Background
-            )
-        }
+        val materialAlertDialogBuilder = MaterialAlertDialogBuilder(context!!)
+        materialAlertDialogBuilder.setView(customAlertDialogView)
 
         if (oldViewModel.getProxyPing() != "")
             customAlertDialogView.findViewById<TextInputEditText>(
@@ -108,10 +103,10 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
         }
 
         materialAlertDialogBuilder
-            ?.setView(customAlertDialogView)
-            ?.setTitle("Proxy filter")
-            ?.setMessage("Current configuration details")
-            ?.setPositiveButton("Ok") { dialog, _ ->
+            .setView(customAlertDialogView)
+            .setTitle("Proxy filter")
+            .setMessage("Current configuration details")
+            .setPositiveButton("Ok") { dialog, _ ->
                 oldViewModel.setProxyCountry(
                     customAlertDialogView.findViewById<TextInputEditText>(
                         R.id.etEditCountry
@@ -156,9 +151,9 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
                 setLoaders()
                 dialog.dismiss()
             }
-            ?.setNegativeButton("Cancel") { dialog, _ ->
+            .setNegativeButton("Cancel") { dialog, _ ->
                 dialog.dismiss()
-            }?.show()
+            }.show()
     }
 
 

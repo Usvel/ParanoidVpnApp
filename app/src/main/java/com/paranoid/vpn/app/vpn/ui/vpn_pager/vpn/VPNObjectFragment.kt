@@ -305,12 +305,8 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
             val config = VPNConfigRepository(requireActivity().application)
                 .getConfig(config_id)
             withContext(Dispatchers.Main) {
-                val materialAlertDialogBuilder = context?.let {
-                    MaterialAlertDialogBuilder(
-                        it,
-                        R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Background
-                    )
-                }
+                val materialAlertDialogBuilder = MaterialAlertDialogBuilder(context!!)
+                materialAlertDialogBuilder.setView(customAlertDialogView)
                 customAlertDialogView.findViewById<TextView>(R.id.tvPrimaryDNS).text =
                     config?.primary_dns
                 customAlertDialogView.findViewById<TextView>(R.id.tvSecondaryDNS).text =
@@ -322,12 +318,12 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
                 customAlertDialogView.findViewById<TextView>(R.id.tvProxyIp).text =
                     config?.proxy_ip?.stream()?.collect(Collectors.joining(", "))
                 materialAlertDialogBuilder
-                    ?.setView(customAlertDialogView)
-                    ?.setTitle(config?.name)
-                    ?.setMessage("Current configuration details")
-                    ?.setNegativeButton("Cancel") { dialog, _ ->
+                    .setView(customAlertDialogView)
+                    .setTitle(config?.name)
+                    .setMessage("Current configuration details")
+                    .setNegativeButton("Cancel") { dialog, _ ->
                         dialog.dismiss()
-                    }?.show()
+                    }.show()
 
             }
         }
