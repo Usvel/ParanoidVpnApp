@@ -20,4 +20,8 @@ class VPNConfigAddViewModel(application: Application) : BaseFragmentViewModel() 
         vpnConfigRepository.updateConfig(vpnConfigItem)
     }
 
+    suspend fun deleteConfigFromDataBase(vpnConfigItem: VPNConfigItem){
+        vpnConfigRepository.deleteConfig(vpnConfigItem)
+    }
+
 }

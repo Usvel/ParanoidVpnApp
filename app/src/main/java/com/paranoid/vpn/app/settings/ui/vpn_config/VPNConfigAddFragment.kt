@@ -90,7 +90,20 @@ class VPNConfigAddFragment :
         binding.addRuleButton.setOnClickListener {
             addRule()
         }
+        binding.deleteConfigurationButton.setOnClickListener {
+            deleteConfig()
+        }
+    }
 
+    private fun deleteConfig() {
+        val vpnConfigGson = arguments?.getString("vpnConfig")
+        val gson = GsonBuilder().create()
+        val vpnConfig: VPNConfigItem = gson.fromJson(vpnConfigGson, VPNConfigItem::class.java)
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel?.deleteConfigFromDataBase(vpnConfig)
+        }
+        context?.let { Utils.makeToast(it, "Deleted") }
+        binding.root.findNavController().popBackStack()
     }
 
     private fun addConfig() {
