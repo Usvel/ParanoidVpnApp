@@ -45,6 +45,9 @@ class VPNConfigAdapter(
         holder.imQRIcon.setOnClickListener {
             onItemClicked(configItem.id, ConfigurationClickHandlers.QRCode)
         }
+        holder.imEditIcon.setOnClickListener {
+            onItemClicked(configItem.id, ConfigurationClickHandlers.Edit)
+        }
         holder.imShareIcon.setOnClickListener {
             onItemClicked(configItem.id, ConfigurationClickHandlers.Share)
         }
@@ -63,6 +66,7 @@ class VPNConfigAdapter(
     ) : RecyclerView.ViewHolder(ItemView) {
         val configName: TextView = itemView.findViewById(R.id.tvConfigurationName)
         val imQRIcon: ImageView  = itemView.findViewById(R.id.imQRIcon)
+        val imEditIcon: ImageView  = itemView.findViewById(R.id.imEditIcon)
         val imShareIcon: ImageView  = itemView.findViewById(R.id.imShareIcon)
         val cvSettingsIcon: CardView = itemView.findViewById(R.id.cvSettingsIcon)
 
@@ -74,6 +78,9 @@ class VPNConfigAdapter(
                 onItemClicked(bindingAdapterPosition)
             }
             imQRIcon.setOnClickListener {
+                onItemClicked(bindingAdapterPosition)
+            }
+            imEditIcon.setOnClickListener {
                 onItemClicked(bindingAdapterPosition)
             }
             imShareIcon.setOnClickListener {

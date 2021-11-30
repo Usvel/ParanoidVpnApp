@@ -293,7 +293,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/base_padding"
-            android:text="@string/add_configuration"
+            android:text="@string/save_configuration"
             android:textColor="@color/box_stroke_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

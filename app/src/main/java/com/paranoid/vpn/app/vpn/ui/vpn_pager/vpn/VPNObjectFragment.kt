@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -99,6 +100,7 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
                             id
                         )
                     }
+                    ConfigurationClickHandlers.Edit -> openConfigEditingFragment(id)
                     ConfigurationClickHandlers.Share -> {
                         CoroutineScope(Dispatchers.IO).launch {
                             val config = VPNConfigRepository(requireActivity().application)
@@ -115,6 +117,27 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
 
     }
 
+    private fun openConfigEditingFragment(id: Long) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val config = VPNConfigRepository(requireActivity().application)
+                .getConfig(id)
+            val gson = GsonBuilder().create()
+            val bundle = Bundle()
+            bundle.putString(
+                "vpnConfig", gson.toJson(config)
+            )
+            withContext(Dispatchers.Main) {
+                bottomSheetDialog.hide()
+                view?.findNavController()?.navigate(
+                    R.id.action_vpn_fragment_to_vpn_config_add_element,
+                    bundle
+                )
+            }
+
+        }
+
+
+    }
 
     private suspend fun updateConfigText(configName: String) = withContext(Dispatchers.Main) {
         binding.tvMainConfigurationText.text = configName
@@ -157,6 +180,10 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
 
         binding.cvMainConfigurationCard.setOnClickListener {
             showBottomSheetDialog()
+        }
+
+        binding.ivEditIcon.setOnClickListener {
+            openConfigEditingFragment(oldViewModel.getConfigId())
         }
 
         binding.ivShareIcon.setOnClickListener {

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.common.utils.Utils
@@ -35,10 +36,34 @@ class VPNConfigAddFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val vpnConfigGson = arguments?.getString("vpnConfig")
+        var editConfig = false
+        if (vpnConfigGson != null) {
+            editConfig = true
+            val gson = GsonBuilder().create()
+            val vpnConfig: VPNConfigItem = gson.fromJson(vpnConfigGson, VPNConfigItem::class.java)
+            setEditTextData(vpnConfig)
+        }
+
         val navBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
         navBar?.visibility = View.GONE
         setRecyclerViews()
-        setListeners()
+        setListeners(editConfig)
+    }
+
+    private fun setEditTextData(vpnConfig: VPNConfigItem) {
+        binding.etConfigName.setText(vpnConfig.name)
+        binding.etPrimaryDNS.setText(vpnConfig.primary_dns)
+        binding.etSecondaryDNS.setText(vpnConfig.secondary_dns)
+        binding.etLocalIP.setText(vpnConfig.local_ip)
+        binding.etProxy.setText(vpnConfig.proxy_ip?.joinToString())
+        binding.etGateway.setText(vpnConfig.gateway)
+
+        for (forwardingRule in vpnConfig.forwarding_rules) {
+            rulesList.add(forwardingRule)
+        }
+
     }
 
     override fun onDestroyView() {
@@ -55,14 +80,26 @@ class VPNConfigAddFragment :
         )[VPNConfigAddViewModel::class.java]
     }
 
-    private fun setListeners() {
+    private fun setListeners(editConfig: Boolean) {
         binding.addConfigurationButton.setOnClickListener {
-            val name = binding.etConfigName.text.toString()
-            val primaryDNS: String = binding.etPrimaryDNS.text.toString()
-            val secondaryDNS = binding.etSecondaryDNS.text.toString()
-            val localIP = binding.etLocalIP.text.toString()
-            val gateway = binding.etGateway.text.toString()
-            val proxyIP = binding.etProxy.text.toString()
+            if (editConfig) {
+                editConfig()
+            } else
+                addConfig()
+        }
+        binding.addRuleButton.setOnClickListener {
+            addRule()
+        }
+
+    }
+
+    private fun addConfig() {
+        val name = binding.etConfigName.text.toString()
+        val primaryDNS: String = binding.etPrimaryDNS.text.toString()
+        val secondaryDNS = binding.etSecondaryDNS.text.toString()
+        val localIP = binding.etLocalIP.text.toString()
+        val gateway = binding.etGateway.text.toString()
+        val proxyIP = binding.etProxy.text.toString()
         if (validateIP(listOf(primaryDNS, secondaryDNS, localIP, gateway))) {
             CoroutineScope(Dispatchers.IO).launch {
                 viewModel?.insertConfigToDataBase(
@@ -77,24 +114,53 @@ class VPNConfigAddFragment :
                     )
                 )
             }
-            it.findNavController().navigate(R.id.action_vpn_config_add_element_to_settings_fragment)
+            context?.let { Utils.makeToast(it, "VPN Config added") }
+            binding.root.findNavController().popBackStack()
         } else
             context?.let { ct -> Utils.makeToast(ct, "Validation of ip is failed!") }
     }
-    binding.addRuleButton.setOnClickListener {
-        addRule()
+
+    private fun editConfig() {
+        val vpnConfigGson = arguments?.getString("vpnConfig")
+        val gson = GsonBuilder().create()
+        val vpnConfig: VPNConfigItem = gson.fromJson(vpnConfigGson, VPNConfigItem::class.java)
+        vpnConfig.forwarding_rules = rulesList
+
+        if (binding.etConfigName.text != null) {
+            vpnConfig.name = binding.etConfigName.text.toString()
+        }
+        if (binding.etPrimaryDNS.text != null) {
+            vpnConfig.primary_dns = binding.etPrimaryDNS.text.toString()
+        }
+        if (binding.etSecondaryDNS.text != null) {
+            vpnConfig.secondary_dns = binding.etSecondaryDNS.text.toString()
+        }
+        if (binding.etLocalIP.text != null) {
+            vpnConfig.local_ip = binding.etLocalIP.text.toString()
+        }
+        if (binding.etGateway.text != null) {
+            vpnConfig.gateway = binding.etGateway.text.toString()
+        }
+        if (binding.etProxy.text != null) {
+            vpnConfig.proxy_ip = binding.etProxy.text.toString().split(",").toMutableList()
+        }
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel?.updateConfigInDataBase(vpnConfig)
+        }
+        context?.let { Utils.makeToast(it, "VPN Config updated") }
+        binding.root.findNavController().popBackStack()
+
     }
-}
 
-private fun setRecyclerViews() {
-    binding.rvForwardingRules.layoutManager = LinearLayoutManager(context)
-    rulesAdapter = context?.let { ForwardingRulesAdapter(it, rulesList) }
-    binding.rvForwardingRules.adapter = rulesAdapter!!
-}
+    private fun setRecyclerViews() {
+        binding.rvForwardingRules.layoutManager = LinearLayoutManager(context)
+        rulesAdapter = context?.let { ForwardingRulesAdapter(it, rulesList) }
+        binding.rvForwardingRules.adapter = rulesAdapter!!
+    }
 
-private fun addRule() {
-    val inflater = LayoutInflater.from(context)
-    val v = inflater.inflate(R.layout.add_rule_dialog, null)
+    private fun addRule() {
+        val inflater = LayoutInflater.from(context)
+        val v = inflater.inflate(R.layout.add_rule_dialog, null)
 
     val protoName = v.findViewById<TextInputEditText>(R.id.etProtocolName)
     val sourcePort = v.findViewById<TextInputEditText>(R.id.etSourcePort)

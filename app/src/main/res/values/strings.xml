@@ -62,6 +62,7 @@
     <string name="vpn_configurations">VPN Configurations</string>
     <string name="fragment_settings_tools_config_num">1 configuration found</string>
     <string name="add_configuration">Add configuration</string>
+    <string name="save_configuration">Save configuration</string>
     <string name="add_proxy_configuration">Add proxy</string>
     <!-- SettingsFragment -->
     <string name="configuration_number">Already added %1$s configuration(s)</string>

@@ -48,7 +48,6 @@
 
     <ImageView
         android:id="@+id/imEditIcon"
-        android:alpha="0.2"
         app:tint="?attr/toolBarColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

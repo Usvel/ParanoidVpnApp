@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.findNavController
 import com.google.gson.GsonBuilder
-import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.Location
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
 import com.paranoid.vpn.app.common.proxy_configuration.domain.repository.ProxyRepository

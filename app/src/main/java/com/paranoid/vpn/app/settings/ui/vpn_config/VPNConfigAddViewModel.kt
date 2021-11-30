@@ -16,4 +16,8 @@ class VPNConfigAddViewModel(application: Application) : BaseFragmentViewModel() 
         vpnConfigRepository.insert(vpnConfigItem)
     }
 
+    suspend fun updateConfigInDataBase(vpnConfigItem: VPNConfigItem){
+        vpnConfigRepository.updateConfig(vpnConfigItem)
+    }
+
 }
