@@ -3,13 +3,16 @@ package com.paranoid.vpn.app.vpn.core
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
-import android.net.VpnService
+import android.net.*
 import android.os.Binder
 import android.os.IBinder
 import android.os.ParcelFileDescriptor
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.lifecycle.viewModelScope
+import com.paranoid.vpn.app.common.utils.VPNState
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigDataGenerator
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import com.paranoid.vpn.app.vpn.core.handlers.udp.BioUdpHandler
@@ -26,14 +29,21 @@ import java.util.concurrent.BlockingQueue
 class LocalVPNService2 : VpnService() {
     private val binder = LocalBinder()
 
+    private var connectivityManager: ConnectivityManager? = null
+    private var networkCallback: ConnectivityManager.NetworkCallback? = null
+
     private var vpnInterface: ParcelFileDescriptor? = null
     private var pendingIntent: PendingIntent? = null
+
     private var deviceToNetworkUDPQueue: BlockingQueue<Packet>? = null
     private var deviceToNetworkTCPQueue: BlockingQueue<Packet>? = null
     private var networkToDeviceQueue: BlockingQueue<ByteBuffer>? = null
+
     private var bioUdpHandlerJob: Job? = null
     private var nioSingleThreadTcpHandlerJob: Job? = null
     private var VPNRunnableJob: Job? = null
+
+    private var watchDogJob: Job? = null
 
     private val context = Dispatchers.IO
 
@@ -42,38 +52,15 @@ class LocalVPNService2 : VpnService() {
         super.onCreate()
         setupVPN(currentConfig ?: VPNConfigDataGenerator.getVPNConfigItem())
 
-        deviceToNetworkUDPQueue = ArrayBlockingQueue(1000)
-        deviceToNetworkTCPQueue = ArrayBlockingQueue(1000)
-        networkToDeviceQueue = ArrayBlockingQueue(1000)
+        connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        networkCallback = getNetworkCallBack()
+        connectivityManager!!.registerNetworkCallback(
+            getNetworkRequest(),
+            networkCallback!!
+        )
 
-        bioUdpHandlerJob = CoroutineScope(context).launch {
-            BioUdpHandler(
-                deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
-                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
-                this@LocalVPNService2,
-                context
-            ).run()
-        }
-        bioUdpHandlerJob!!.start()
-
-        nioSingleThreadTcpHandlerJob = CoroutineScope(context).launch {
-            NioSingleThreadTcpHandler(
-                deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
-                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
-                this@LocalVPNService2
-            ).run()
-        }
-        nioSingleThreadTcpHandlerJob!!.start()
-
-        VPNRunnableJob = CoroutineScope(context).launch {
-            VpnReadWorker(
-                vpnInterface!!.fileDescriptor,
-                deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
-                deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
-                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>
-            ).run()
-        }
-        VPNRunnableJob!!.start()
+        startJobs()
+        // startWatchDog()
     }
 
     private fun setupVPN(config: VPNConfigItem) {
@@ -91,6 +78,70 @@ class LocalVPNService2 : VpnService() {
             }
         } catch (e: Exception) {
             Log.e(TAG, "error", e)
+        }
+    }
+
+    private fun startUdpJob() {
+        bioUdpHandlerJob = CoroutineScope(context).launch {
+            BioUdpHandler(
+                deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
+                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
+                this@LocalVPNService2,
+                context
+            ).run()
+        }
+        bioUdpHandlerJob!!.start()
+    }
+
+    private fun startTcpJob() {
+        nioSingleThreadTcpHandlerJob = CoroutineScope(context).launch {
+            NioSingleThreadTcpHandler(
+                deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
+                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
+                this@LocalVPNService2
+            ).run()
+        }
+        nioSingleThreadTcpHandlerJob!!.start()
+    }
+
+    private fun startJobs() {
+        deviceToNetworkUDPQueue = ArrayBlockingQueue(1000)
+        deviceToNetworkTCPQueue = ArrayBlockingQueue(1000)
+        networkToDeviceQueue = ArrayBlockingQueue(1000)
+
+        startUdpJob()
+        startTcpJob()
+
+        VPNRunnableJob = CoroutineScope(context).launch {
+            VpnReadWorker(
+                vpnInterface!!.fileDescriptor,
+                deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
+                deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
+                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>
+            ).run()
+        }
+        VPNRunnableJob!!.start()
+    }
+
+    private fun startWatchDog() {
+        watchDogJob = CoroutineScope(context).launch {
+            while (coroutineContext.isActive) {
+                if (bioUdpHandlerJob?.isActive != true) {
+                    Log.i(TAG, "watchDogJob cancelling bioUdpHandlerJob")
+                    bioUdpHandlerJob?.cancelAndJoin()
+                    Log.i(TAG, "watchDogJob starting bioUdpHandlerJob")
+                    startUdpJob()
+                }
+
+                if (nioSingleThreadTcpHandlerJob?.isActive != true) {
+                    Log.i(TAG, "watchDogJob canceling nioSingleThreadTcpHandlerJob")
+                    nioSingleThreadTcpHandlerJob?.cancelAndJoin()
+                    Log.i(TAG, "watchDogJob starting nioSingleThreadTcpHandlerJob")
+                    startTcpJob()
+                }
+
+                delay(5000)
+            }
         }
     }
 
@@ -131,10 +182,14 @@ class LocalVPNService2 : VpnService() {
     private suspend fun stopVPN() {
         stopForeground(true)
         stopSelf()
+
+        networkCallback?.let { connectivityManager?.unregisterNetworkCallback(it) }
         cleanup()
     }
 
     private suspend fun cleanup() {
+        // watchDogJob?.cancelAndJoin()
+        // Log.i(TAG, "Vpnservice after watchDogJob.cancelAndJoin")
         bioUdpHandlerJob?.cancelAndJoin()
         Log.i(TAG, "Vpnservice after bioUdpHandlerJob.cancelAndJoin")
         nioSingleThreadTcpHandlerJob?.cancelAndJoin()
@@ -149,6 +204,55 @@ class LocalVPNService2 : VpnService() {
         deviceToNetworkUDPQueue = null
         networkToDeviceQueue = null
         closeResources(vpnInterface!!)
+    }
+
+    private fun isConnected(): Boolean {
+        val capabilities =
+            connectivityManager?.getNetworkCapabilities(connectivityManager?.activeNetwork)
+        if (capabilities != null) {
+            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) or
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) or
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
+            )
+                return true
+        }
+        return false
+    }
+
+    private fun getNetworkCallBack(): ConnectivityManager.NetworkCallback {
+        return object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                super.onAvailable(network)
+
+                if (nioSingleThreadTcpHandlerJob?.isActive != true)
+                    startTcpJob()
+                if (bioUdpHandlerJob?.isActive != true)
+                    startUdpJob()
+//                if (watchDogJob?.isActive != true)
+//                    startWatchDog()
+            }
+
+            override fun onLost(network: Network) {
+                super.onLost(network)
+                CoroutineScope(context).launch {
+                    // watchDogJob?.cancelAndJoin()
+                    // Log.i(TAG, "onLost after watchDogJob.cancelAndJoin")
+                    bioUdpHandlerJob?.cancelAndJoin()
+                    Log.i(TAG, "onLost after bioUdpHandlerJob.cancelAndJoin")
+                    nioSingleThreadTcpHandlerJob?.cancelAndJoin()
+                    Log.i(TAG, "onLost after nioSingleThreadTcpHandlerJob.cancelAndJoin")
+                }
+            }
+
+        }
+    }
+
+    private fun getNetworkRequest(): NetworkRequest {
+        return NetworkRequest.Builder()
+            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+            .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+            .addTransportType(NetworkCapabilities.TRANSPORT_ETHERNET)
+            .build()
     }
 
     companion object {

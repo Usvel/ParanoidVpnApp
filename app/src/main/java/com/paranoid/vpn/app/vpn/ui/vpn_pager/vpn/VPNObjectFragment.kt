@@ -31,6 +31,7 @@ import com.paranoid.vpn.app.vpn.ui.VPNFragment
 import com.paranoid.vpn.app.vpn.ui.VPNServiceConnection
 import com.paranoid.vpn.app.vpn.ui.VPNViewModel
 import kotlinx.coroutines.*
+import java.util.concurrent.atomic.AtomicLong
 import java.util.stream.Collectors
 
 class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
@@ -42,6 +43,14 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
 
     /** Defines callbacks for service binding, passed to bindService()  */
     private var connection = VPNServiceConnection()
+
+    companion object {
+        @JvmStatic
+        var downByte: AtomicLong = AtomicLong(0)
+
+        @JvmStatic
+        var upByte: AtomicLong = AtomicLong(0)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,9 +67,7 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
         }
         textUpdater = lifecycleScope.launch(Dispatchers.Default) {
             while (true) {
-                if (oldViewModel.vpnStateOn.value == VPNState.CONNECTED
-                    && oldViewModel.isConnected.value == true
-                )
+                if (oldViewModel.vpnStateOn.value == VPNState.CONNECTED)
                     updateText()
                 delay(500)
             }
@@ -142,7 +149,7 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
     }
 
     private suspend fun updateText() = withContext(Dispatchers.Main) {
-        binding.tvIsConnected.text = "up: ${VPNFragment.upByte} B, down: ${VPNFragment.downByte} B"
+        binding.tvIsConnected.text = "up: ${VPNObjectFragment.upByte} B, down: ${VPNObjectFragment.downByte} B"
     }
 
     private fun setListeners() {
@@ -179,46 +186,26 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
         }
 
         binding.cvVpnButtonBackground.setOnClickListener {
-            when (oldViewModel.vpnStateOn.value) {
-                VPNState.CONNECTED -> {
-                    vpnButtonDisable()
-                    oldViewModel.changeVpnState()
-                }
-
-                VPNState.NOT_CONNECTED -> {
-                    vpnButtonConnected()
-                    if (oldViewModel.isConnected.value == true)
-                        oldViewModel.changeVpnState()
-                }
-                VPNState.ERROR -> vpnButtonDisable()
-            }
+            oldViewModel.changeVpnState()
         }
     }
 
     private fun setObservers() {
-        oldViewModel.isConnected.observe(viewLifecycleOwner) { value ->
-            when (value) {
-                false -> {
-                    vpnButtonDisable()
-                    stopVpn()
-                }
-
-                true -> {
-                    // Not starting service automatically yet
-                }
-            }
-        }
-
         oldViewModel.vpnStateOn.observe(viewLifecycleOwner) { value ->
             when (value) {
                 VPNState.CONNECTED -> {
-                    if (oldViewModel.isConnected.value == true)
-                        startVpn()
+                    vpnButtonConnected()
+                    startVpn()
                 }
-                VPNState.NOT_CONNECTED -> stopVpn()
-                else -> stopVpn()
+                VPNState.NOT_CONNECTED -> {
+                    vpnButtonDisable()
+                    stopVpn()
+                }
+                else -> {
+                    vpnButtonDisable()
+                    stopVpn()
+                }
             }
-
         }
     }
 
@@ -244,18 +231,10 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
     }
 
     private fun vpnButtonConnected() {
-        // TODO: Remove Toasts
-        when (oldViewModel.isConnected.value) {
-            false ->
-                Toast.makeText(requireContext(), "Error: connectivity is off!", Toast.LENGTH_SHORT)
-                    .show()
-            true -> {
-                binding.llConnectionStatus.visibility = View.VISIBLE
-                binding.imTurnOnVPN.setImageResource(R.drawable.ic_power)
-                //binding.tvIsConnected.text = getString(R.string.connected)
-                binding.cvVpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonConnected))
-            }
-        }
+        binding.llConnectionStatus.visibility = View.VISIBLE
+        binding.imTurnOnVPN.setImageResource(R.drawable.ic_power)
+        //binding.tvIsConnected.text = getString(R.string.connected)
+        binding.cvVpnButtonBackground.background.setTint(getVpnButtonColor(R.attr.vpnButtonConnected))
     }
 
     private fun vpnButtonError() {

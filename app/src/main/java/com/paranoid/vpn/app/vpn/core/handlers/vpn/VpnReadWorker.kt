@@ -7,6 +7,7 @@ import com.paranoid.vpn.app.vpn.core.config.Config
 import com.paranoid.vpn.app.vpn.core.handlers.SuspendableRunnable
 import com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet
 import com.paranoid.vpn.app.vpn.core.util.ByteBufferPool
+import com.paranoid.vpn.app.vpn.ui.vpn_pager.vpn.VPNObjectFragment
 import kotlinx.coroutines.*
 import java.io.FileDescriptor
 import java.io.FileInputStream
@@ -43,7 +44,7 @@ class VpnReadWorker(
             while (coroutineContext.isActive) {
                 bufferToNetwork = ByteBufferPool.acquire()
                 val readBytes = runInterruptible { vpnInput.read(bufferToNetwork) }
-                VPNFragment.upByte.addAndGet(readBytes.toLong())
+                VPNObjectFragment.upByte.addAndGet(readBytes.toLong())
                 if (readBytes > 0) {
                     bufferToNetwork.flip()
                     val packet = runInterruptible { Packet(bufferToNetwork) }

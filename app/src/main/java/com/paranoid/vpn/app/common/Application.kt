@@ -25,7 +25,7 @@ class Application : Application() {
                     // .detectDiskWrites()
                     .detectNetwork()
                     .penaltyLog()
-                    .penaltyDeath()
+                    // .penaltyDeath()
                     .build()
             )
             StrictMode.setVmPolicy(
@@ -33,7 +33,7 @@ class Application : Application() {
                     .detectLeakedSqlLiteObjects()
                     .detectLeakedClosableObjects()
                     .penaltyLog()
-                    .penaltyDeath()
+                    // .penaltyDeath()
                     .build()
             )
         }
