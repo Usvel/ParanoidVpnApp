@@ -42,7 +42,7 @@ class ProxyOnlineListAdapter(
         holder.ipAddress.text = configItem.Ip
         val currentPing = configItem.Ping
         holder.ping.text = "${currentPing}ms"
-        if (currentPing > 100)
+        if (currentPing!! > 100)
             holder.ping.setTextColor(warningColor)
         else if (currentPing > 500)
             holder.ping.setTextColor(errorColor)
@@ -59,6 +59,9 @@ class ProxyOnlineListAdapter(
         holder.infoButton.setOnClickListener {
             onItemClicked(configItem, ProxyClickHandlers.Info)
         }
+        holder.saveButton.setOnClickListener {
+            onItemClicked(configItem, ProxyClickHandlers.Save)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -74,11 +77,14 @@ class ProxyOnlineListAdapter(
         val ping: TextView = itemView.findViewById(R.id.tvPing)
         val protocol: TextView = itemView.findViewById(R.id.tvProtocol)
         val proxy: CardView = itemView.findViewById(R.id.cvProxy)
-        val editButton: ImageView = itemView.findViewById(R.id.imEditIcon)
+        val saveButton: ImageView = itemView.findViewById(R.id.imSaveIcon)
         val infoButton: ImageView = itemView.findViewById(R.id.imInfoIcon)
 
         init {
             infoButton.setOnClickListener {
+                onItemClicked(bindingAdapterPosition)
+            }
+            saveButton.setOnClickListener {
                 onItemClicked(bindingAdapterPosition)
             }
         }

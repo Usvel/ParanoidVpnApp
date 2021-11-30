@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textColor="@color/text_view_black"
-            android:text="@string/add_configuration" />
+            android:text="@string/add_proxy_configuration" />
 
     </androidx.cardview.widget.CardView>
 

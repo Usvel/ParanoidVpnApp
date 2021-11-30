@@ -12,11 +12,16 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
+import com.paranoid.vpn.app.common.proxy_configuration.domain.repository.ProxyRepository
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.common.utils.ProxyClickHandlers
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.databinding.PageProxyListBinding
 import com.paranoid.vpn.app.vpn.ui.VPNViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.net.InetAddress
 
 class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
     BaseFragment<PageProxyListBinding, VPNViewModel>(PageProxyListBinding::inflate) {
@@ -167,6 +172,12 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
                 ProxyOnlineListAdapter(value, warningColor, errorColor) { proxyItem, code ->
                     when (code) {
                         ProxyClickHandlers.Info -> openProxyInFragment(proxyItem, false)
+                        ProxyClickHandlers.Save -> {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                ProxyRepository(requireActivity().application).addProxy(proxyItem)
+                            }
+                            context?.let { it1 -> Utils.makeToast(it1, "Proxy added") }
+                        }
                         else -> {}
                     }
                 }

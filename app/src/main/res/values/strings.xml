@@ -62,6 +62,7 @@
     <string name="vpn_configurations">VPN Configurations</string>
     <string name="fragment_settings_tools_config_num">1 configuration found</string>
     <string name="add_configuration">Add configuration</string>
+    <string name="add_proxy_configuration">Add proxy</string>
     <!-- SettingsFragment -->
     <string name="configuration_number">Already added %1$s configuration(s)</string>
     <!-- TAG -->
@@ -119,6 +120,7 @@
     <string name="https">HTTPS</string>
     <string name="socks4">SOCKS4</string>
     <string name="socks5">SOCKS5</string>
+    <!-- Proxy Fragments -->
     <string name="proxy_type">Proxy type</string>
     <string name="ping">Ping</string>
     <string name="possible_ping">Possible ping</string>
@@ -132,4 +134,16 @@
     <string name="proxy_share">Share</string>
     <string name="proxy_delete">Delete</string>
     <string name="proxy_edit">Edit</string>
+    <string name="edit_proxy_title">Edit proxy</string>
+    <string name="proxy_ip">IP</string>
+    <string name="proxy_port">Port</string>
+    <string name="proxy_city">City</string>
+    <string name="proxy_country">Country</string>
+    <string name="proxy_continent">Continent</string>
+    <string name="proxy_country_code">Country code</string>
+    <string name="proxy_lat">Lat</string>
+    <string name="proxy_lon">Lon</string>
+    <string name="proxy_region">Region</string>
+    <string name="view_information_about_online_proxy">Information about online proxy</string>
+    <string name="view_information_about_local_proxy">Information about local proxy</string>
 </resources>

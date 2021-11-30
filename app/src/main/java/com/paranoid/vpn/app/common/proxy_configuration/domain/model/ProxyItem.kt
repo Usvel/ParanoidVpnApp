@@ -15,15 +15,15 @@ data class Location(
     var continent: String?,
     var country: String?,
     var countryCode: String?,
-    var ipName: String?,
-    var ipType: String?,
-    var isp: String?,
+    var ipName: String? = "no information",
+    var ipType: String? = "no information",
+    var isp: String? = "no information",
     var lat: String?,
     var lon: String?,
-    var org: String?,
-    var query: String?,
+    var org: String? = "no information",
+    var query: String? = "no information",
     var region: String?,
-    var status: String?,
+    var status: String? = "no information",
 )
 
 @Entity(tableName = "proxy_item")
@@ -35,19 +35,19 @@ data class ProxyItem(
     @Expose()
     var Port: Int,
     @Expose()
-    var Time: Int,
+    var Time: Int? = -1,
     @Expose()
-    var Ping: Int,
+    var Ping: Int? = -1,
     @Expose()
-    var Failed: Boolean,
+    var Failed: Boolean? = false,
     @Expose()
-    var Anonymity: String,
+    var Anonymity: String? = "no information",
     @Expose()
-    var Uptime: Double,
+    var Uptime: Double? = -1.0,
     @Expose()
-    var RecheckCount: Int,
+    var RecheckCount: Int? = -1,
     @Expose()
-    var WorkingCount: Int,
+    var WorkingCount: Int? = -1,
     @TypeConverters(ArrayConverter::class)
     @Expose()
     var Type: MutableList<String>? = null,

@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvHorizontalLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:fillViewport="true"
+    android:measureAllChildren="false"
+    android:padding="@dimen/settings_fragment_small_padding"
+    android:scrollbars="vertical"
+    app:layout_constraintStart_toStartOf="parent"
+    tools:context=".vpn.ui.vpn_pager.proxy.proxy_item.ProxyAddFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvProxyTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:text="@string/edit_proxy_title"
+            android:textSize="@dimen/navigation_proxy_title_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilProxyIp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_padding"
+            android:layout_marginRight="@dimen/base_padding"
+            android:paddingTop="@dimen/real_medium_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProxyTitle"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProxyIp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/proxy_ip"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilProxyPort"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_padding"
+            android:layout_marginTop="@dimen/base_padding"
+            android:layout_marginRight="@dimen/base_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilProxyIp"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProxyPort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/proxy_port"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/hsvChips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_padding"
+            android:paddingStart="@dimen/real_medium_padding"
+            android:paddingEnd="@dimen/real_medium_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilProxyPort">
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium_padding">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/cHttp"
+                    style="@style/Widget.Material3.Chip.Filter.Elevated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/http" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/cHttps"
+                    style="@style/Widget.Material3.Chip.Filter.Elevated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/https" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/cSocks4"
+                    style="@style/Widget.Material3.Chip.Filter.Elevated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/socks4" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/cSocks5"
+                    style="@style/Widget.Material3.Chip.Filter.Elevated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/socks5" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilProxyCity"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_padding"
+            android:layout_marginTop="@dimen/base_padding"
+            android:layout_marginRight="@dimen/base_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hsvChips"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProxyCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/proxy_city"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilProxyCountry"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_padding"
+            android:layout_marginTop="@dimen/base_padding"
+            android:layout_marginRight="@dimen/base_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilProxyCity"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProxyCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/proxy_country"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilProxyContinent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_padding"
+            android:layout_marginTop="@dimen/base_padding"
+            android:layout_marginRight="@dimen/base_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilProxyCountry"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProxyContinent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/proxy_continent"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilProxyCountryCode"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_padding"
+            android:layout_marginTop="@dimen/base_padding"
+            android:layout_marginRight="@dimen/base_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilProxyContinent"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProxyCountryCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/proxy_country_code"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilLat"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_padding"
+            android:layout_marginTop="@dimen/base_padding"
+            android:layout_marginRight="@dimen/base_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilProxyCountryCode"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/proxy_lat"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilLon"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_padding"
+            android:layout_marginTop="@dimen/base_padding"
+            android:layout_marginRight="@dimen/base_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilLat"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/proxy_lon"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilRegion"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_padding"
+            android:layout_marginTop="@dimen/base_padding"
+            android:layout_marginRight="@dimen/base_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilLon"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRegion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/proxy_region"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/bSave"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/extra_padding"
+            android:text="@string/save_proxy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilRegion" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
+
+
