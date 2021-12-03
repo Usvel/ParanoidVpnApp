@@ -24,23 +24,22 @@ class BioUdpHandler(
     private var udpSockets = ConcurrentHashMap<String?, DatagramChannel?>()
 
     override suspend fun run() {
-        var readJob: Job? = null
-        var writeJob: Job? = null
+        var readJob: Deferred<Unit>? = null
+        var writeJob: Deferred<Unit>? = null
         try {
             val tunnelQueue: BlockingQueue<UdpTunnel> = ArrayBlockingQueue(100)
             selector = runInterruptible {
                 Selector.open()
             }
-            readJob = CoroutineScope(context).launch {
+            readJob = CoroutineScope(context).async {
                 UdpReadWorker(
                     selector,
                     networkToDeviceQueue,
                     tunnelQueue
                 ).run()
             }
-            readJob.start()
 
-            writeJob = CoroutineScope(context).launch {
+            writeJob = CoroutineScope(context).async {
                 UdpWriteWorker(
                     selector,
                     tunnelQueue,
@@ -49,11 +48,9 @@ class BioUdpHandler(
                     vpnService
                 ).run()
             }
-            writeJob.start()
 
-            while (coroutineContext.isActive) {
-                continue
-            }
+            readJob.await()
+            writeJob.await()
 
         } catch (e: Exception) {
             Log.v(TAG, "error")

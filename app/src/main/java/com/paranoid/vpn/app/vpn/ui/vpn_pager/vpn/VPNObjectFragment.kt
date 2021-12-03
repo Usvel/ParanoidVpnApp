@@ -285,6 +285,8 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel) :
             return
         activity?.unbindService(connection)
         connection.isBound = false
+        downByte.set(0)
+        upByte.set(0)
         val stopIntent = Intent(context, LocalVPNService2::class.java)
         stopIntent.action = "stop"
         context?.let { ContextCompat.startForegroundService(it, stopIntent) }

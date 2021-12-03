@@ -64,9 +64,9 @@ class LocalVPNService2 : VpnService() {
         try {
             if (vpnInterface == null) {
                 val builder = Builder()
-                builder.addAddress(config.local_ip, 32)
-                builder.addRoute(VPN_ROUTE, 0)
-                builder.addDnsServer(config.primary_dns)
+                    .addAddress(config.local_ip, 32)
+                    .addRoute(VPN_ROUTE, 0)
+                    .addDnsServer(config.primary_dns)
                 config.secondary_dns?.let { builder.addDnsServer(it) }
                 if (Config.testLocal) {
                     builder.addAllowedApplication(packageName)
@@ -209,9 +209,9 @@ class LocalVPNService2 : VpnService() {
         VPNRunnableJob?.cancelAndJoin()
         Log.i(TAG, "Vpnservice after all cancelAndJoin")
         context.cancel()
-        Log.i(LocalVPNService2.TAG, "Vpnservice after cancel context")
+        Log.i(TAG, "Vpnservice after cancel context")
         CoroutineScope(context).coroutineContext.cancelChildren()
-        Log.i(LocalVPNService2.TAG, "Vpnservice after cancelChildren")
+        Log.i(TAG, "Vpnservice after cancelChildren")
         deviceToNetworkTCPQueue = null
         deviceToNetworkUDPQueue = null
         networkToDeviceQueue = null
