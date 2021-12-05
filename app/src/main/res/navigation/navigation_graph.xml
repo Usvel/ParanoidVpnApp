@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_settings_fragment_to_vpn_config_add_element"
             app:destination="@id/vpn_config_add_element" />
+        <action
+            android:id="@+id/action_settings_fragment_to_qr_scanner"
+            app:destination="@id/qr_scanner"/>
     </fragment>
 
     <fragment
@@ -86,6 +89,23 @@
             android:id="@+id/action_edit_user_fragment_to_profile_fragment"
             app:destination="@id/profile_fragment"
             app:popUpTo="@+id/profile_fragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/qr_creator"
+        android:name="com.paranoid.vpn.app.qr.QRCreator"
+        tools:layout="@layout/qr_creator">
+    </fragment>
+
+    <fragment
+        android:id="@+id/qr_scanner"
+        android:name="com.paranoid.vpn.app.qr.QRScanner"
+        tools:layout="@layout/qr_scanner">
+        <action
+            android:id="@+id/action_qr_scanner_to_settings"
+            app:destination="@id/settings_fragment"
+            app:popUpTo="@+id/settings_fragment"
             app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

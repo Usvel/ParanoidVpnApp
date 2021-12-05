@@ -1,6 +1,5 @@
 package com.paranoid.vpn.app.settings.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
@@ -11,7 +10,6 @@ import androidx.navigation.findNavController
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.databinding.NavigationSettingsFragmentBinding
-import com.paranoid.vpn.app.qr.QRScanner
 
 
 class SettingsFragment :
@@ -49,8 +47,7 @@ class SettingsFragment :
         }
 
         binding.addConfigurationButtonByQr.setOnClickListener {
-            val intent = Intent(context, QRScanner::class.java)
-            startActivity(intent)
+            it.findNavController().navigate(R.id.action_settings_fragment_to_qr_scanner)
         }
     }
 

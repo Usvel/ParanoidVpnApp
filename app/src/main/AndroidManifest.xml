@@ -35,7 +35,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".qr.QRCreator" android:exported="true"/>
-        <activity android:name=".qr.QRScanner" android:exported="true"/>
 
         <service
             android:name="com.paranoid.vpn.app.vpn.core.LocalVPNService2"
