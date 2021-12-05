@@ -149,4 +149,6 @@
     <string name="view_information_about_online_proxy">Information about online proxy</string>
     <string name="view_information_about_local_proxy">Information about local proxy</string>
     <string name="expand_menu">Expand menu</string>
+    <string name="advertisement_blocking">Advertisement blocking</string>
+    <string name="view_advertisement_ips">View Advertisement Ips</string>
 </resources>

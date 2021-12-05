@@ -143,4 +143,40 @@
 
     </androidx.cardview.widget.CardView>
 
+
+    <TextView
+        android:id="@+id/adIpConfigurationGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base_padding"
+        android:textSize="@dimen/settings_fragment_title_size"
+        android:textColor="@color/text_color_blue"
+        android:textStyle="bold"
+        android:text="@string/advertisement_blocking"
+        app:layout_constraintStart_toStartOf="@+id/addProxyConfigurationButton"
+        app:layout_constraintTop_toBottomOf="@+id/addProxyConfigurationButton" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/viewAdIpConfigurationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/settings_fragment_small_padding"
+        android:backgroundTint="?attr/backgroundVioletLight"
+        app:cardElevation="3dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintStart_toStartOf="@+id/adIpConfigurationGroup"
+        app:layout_constraintTop_toBottomOf="@+id/adIpConfigurationGroup">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/text_view_black"
+            android:text="@string/view_advertisement_ips" />
+
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
