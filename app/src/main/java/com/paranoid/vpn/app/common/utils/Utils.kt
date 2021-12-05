@@ -136,7 +136,7 @@ class Validators {
 }
 
 enum class ConfigurationClickHandlers {
-    GetConfiguration, SetConfiguration, QRCode, Edit, Share
+    GetConfiguration, SetConfiguration, QRCode, Edit, Share, Like
 }
 
 enum class ProxyClickHandlers {

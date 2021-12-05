@@ -49,7 +49,7 @@ class QRScanner : AppCompatActivity() {
                     val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
                     val configItem: VPNConfigItem = gson.fromJson(it.text, VPNConfigItem::class.java)
                     CoroutineScope(Dispatchers.IO).launch {
-                        VPNConfigRepository(application).addConfig(configItem)
+                        VPNConfigRepository().addConfig(configItem)
                     }
                 } catch (e: JsonSyntaxException) {
                     Toast.makeText(this, "Bad QR-code", Toast.LENGTH_SHORT).show()

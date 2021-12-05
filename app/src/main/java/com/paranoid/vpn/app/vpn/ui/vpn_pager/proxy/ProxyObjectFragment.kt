@@ -173,7 +173,7 @@ class ProxyObjectFragment() :
                         ProxyClickHandlers.Info -> openProxyInFragment(proxyItem, false)
                         ProxyClickHandlers.Save -> {
                             CoroutineScope(Dispatchers.IO).launch {
-                                ProxyRepository(requireActivity().application).addProxy(proxyItem)
+                                ProxyRepository().addProxy(proxyItem)
                             }
                             context?.let { it1 -> Utils.makeToast(it1, "Proxy added") }
                         }

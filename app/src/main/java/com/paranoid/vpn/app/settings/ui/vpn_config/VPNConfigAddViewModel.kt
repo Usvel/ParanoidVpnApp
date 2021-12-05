@@ -6,7 +6,7 @@ import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import com.paranoid.vpn.app.common.vpn_configuration.domain.repository.VPNConfigRepository
 
 class VPNConfigAddViewModel(application: Application) : BaseFragmentViewModel() {
-    private val vpnConfigRepository: VPNConfigRepository = VPNConfigRepository(application)
+    private val vpnConfigRepository: VPNConfigRepository = VPNConfigRepository()
 
     override fun getCurrentData() {
         // TODO

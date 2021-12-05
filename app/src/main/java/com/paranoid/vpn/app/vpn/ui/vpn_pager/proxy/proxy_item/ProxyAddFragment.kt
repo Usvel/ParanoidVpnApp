@@ -76,7 +76,7 @@ class ProxyAddFragment :
     }
 
     private fun editProxy() {
-        val proxyRepository = ProxyRepository(requireActivity().application)
+        val proxyRepository = ProxyRepository()
         CoroutineScope(Dispatchers.IO).launch {
             val gson = GsonBuilder().create()
             val proxyItemGson = arguments?.getString("proxyItem")
@@ -116,7 +116,7 @@ class ProxyAddFragment :
 
     private fun addProxy() {
         if ((binding.etProxyIp.text != null) && (binding.etProxyPort.text != null)) {
-            val proxyRepository = ProxyRepository(requireActivity().application)
+            val proxyRepository = ProxyRepository()
             CoroutineScope(Dispatchers.IO).launch {
                 var proxyIp = ""
                 var proxyPort = 0

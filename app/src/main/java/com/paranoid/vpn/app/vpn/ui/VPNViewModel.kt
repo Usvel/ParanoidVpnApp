@@ -36,11 +36,12 @@ class VPNViewModel(
     private val sharedPref: SharedPreferences = application.getSharedPreferences(
         getString(R.string.config_sp), Context.MODE_PRIVATE
     )
-    private val vpnConfigRepository: VPNConfigRepository = VPNConfigRepository(application)
-    private val proxyRepository: ProxyRepository = ProxyRepository(application)
+    private val vpnConfigRepository: VPNConfigRepository = VPNConfigRepository()
+    private val proxyRepository: ProxyRepository = ProxyRepository()
 
     private var currentConfig: VPNConfigItem? = null
     private val allConfigs = vpnConfigRepository.readAllData
+    private val allConfigsFavorite = vpnConfigRepository.readAllDataFavorite
 
     private var currentProxy: ProxyItem? = null
     private var allProxies = proxyRepository.readAllData
@@ -105,8 +106,19 @@ class VPNViewModel(
         return currentConfig
     }
 
-    fun getAllConfigs(): LiveData<List<VPNConfigItem>> {
-        return allConfigs
+    fun getAllConfigs(favorite: Boolean = false): LiveData<List<VPNConfigItem>> {
+        return if (favorite)
+            allConfigsFavorite
+        else
+            allConfigs
+    }
+
+    fun getConfigByName(name: String): VPNConfigItem? {
+        return vpnConfigRepository.getConfigByName(name)
+    }
+
+    suspend fun updateConfig(config: VPNConfigItem) {
+        return vpnConfigRepository.updateConfig(config)
     }
 
     fun getAllProxies(): LiveData<List<ProxyItem>> {

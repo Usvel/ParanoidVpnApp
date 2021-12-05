@@ -7,7 +7,7 @@ import com.paranoid.vpn.app.common.ad_block_configuration.domain.repository.IpRe
 import com.paranoid.vpn.app.common.ui.base.BaseFragmentViewModel
 
 class IpViewViewModel(application: Application) : BaseFragmentViewModel() {
-    private val ipRepository: IpRepository = IpRepository(application)
+    private val ipRepository: IpRepository = IpRepository()
     private val allIp = ipRepository.readAllData
 
     override fun getCurrentData() {
