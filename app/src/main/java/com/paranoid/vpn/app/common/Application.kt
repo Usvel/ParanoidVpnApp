@@ -3,6 +3,7 @@ package com.paranoid.vpn.app.common
 import android.app.Application
 import android.os.StrictMode
 import androidx.viewbinding.BuildConfig
+import com.paranoid.vpn.app.common.ad_block_configuration.domain.database.IpDatabase
 import com.paranoid.vpn.app.common.proxy_configuration.domain.database.ProxyDatabase
 import com.paranoid.vpn.app.common.remote.FirebaseServiceFactory
 import com.paranoid.vpn.app.common.utils.Utils
@@ -15,6 +16,7 @@ class Application : Application() {
 
         VPNConfigDatabase.setInstance(this)
         ProxyDatabase.setInstance(this)
+        IpDatabase.setInstance(this)
 
         Utils.init(this)
 
