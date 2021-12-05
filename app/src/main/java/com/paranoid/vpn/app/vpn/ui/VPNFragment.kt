@@ -255,7 +255,7 @@ class VPNFragment :
         }
     }
 
-    private fun showQRCode(id: Long) {
+    private suspend fun showQRCode(id: Long) {
         val config = VPNConfigRepository(requireActivity().application)
             .getConfig(id)
         val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
@@ -263,10 +263,13 @@ class VPNFragment :
         bundle.putString(
             "qr_creator", gson.toJson(config)
         )
-        view?.findNavController()?.navigate(
-            R.id.action_vpn_fragment_to_qr_creator,
-            bundle
-        )
+        withContext(Dispatchers.Main) {
+            bottomSheetDialog.hide()
+            view?.findNavController()?.navigate(
+                R.id.action_vpn_fragment_to_qr_creator,
+                bundle
+            )
+        }
     }
 
     private fun showBottomSheetDialog() {
