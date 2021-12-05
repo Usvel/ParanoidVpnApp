@@ -48,6 +48,10 @@ class SettingsFragment :
     }
 
     private fun setListeners(){
+        binding.viewAdIpConfigurationButton.setOnClickListener{
+            it.findNavController().navigate(R.id.action_settings_fragment_to_advert_fragment)
+        }
+
         binding.addConfigurationButton.setOnClickListener {
             it.findNavController().navigate(R.id.action_settings_fragment_to_vpn_config_add_element)
         }

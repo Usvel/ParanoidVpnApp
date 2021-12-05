@@ -4,10 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.paranoid.vpn.app.common.ad_block_configuration.domain.model.AdBlockIpDataGenerator
 import com.paranoid.vpn.app.common.ad_block_configuration.domain.model.AdBlockIpItem
-import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyDataGenerator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -30,13 +28,7 @@ abstract class IpDatabase : RoomDatabase() {
                         INSTANCE = Room.databaseBuilder(
                             context.applicationContext,
                             IpDatabase::class.java, "ip_database"
-                        ).addCallback(object : RoomDatabase.Callback() {
-                            override fun onCreate(db: SupportSQLiteDatabase) {
-                                super.onCreate(db)
-                                populateDatabase(INSTANCE!!)
-                            }
-                        })
-                            .build()
+                        ).build()
                     }
                 }
             }
@@ -48,10 +40,11 @@ abstract class IpDatabase : RoomDatabase() {
             return INSTANCE!!
         }
 
-        private fun populateDatabase(db: IpDatabase) {
-            val ipDao = db.IpDao()
+        fun populateDatabase() {
+            val ipDao = getInstance().IpDao()
             CoroutineScope(IO).launch {
-                ipDao.insertAll(AdBlockIpDataGenerator.getAdBlockIpItems())
+                val data = AdBlockIpDataGenerator.getAdBlockIpItems()
+                ipDao.insertAll(data)
             }
         }
     }

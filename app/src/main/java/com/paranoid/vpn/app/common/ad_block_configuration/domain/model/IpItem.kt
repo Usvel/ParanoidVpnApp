@@ -2,15 +2,8 @@ package com.paranoid.vpn.app.common.ad_block_configuration.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
-import androidx.room.TypeConverters
-import com.google.gson.Gson
 import com.google.gson.annotations.Expose
-import com.google.gson.reflect.TypeToken
-import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
-import com.paranoid.vpn.app.common.vpn_configuration.domain.model.ArrayConverter
-import org.jetbrains.annotations.NotNull
-import java.io.File
+import com.paranoid.vpn.app.common.utils.Utils
 
 @Entity(tableName = "ad_ip_item")
 data class AdBlockIpItem(
@@ -28,12 +21,15 @@ class AdBlockIpDataGenerator {
     companion object {
         fun getAdBlockIpItems(): MutableList<AdBlockIpItem> {
             val adBlockItems: MutableList<AdBlockIpItem> = arrayListOf()
+            val fileName = "ipsList"
             var id = 1L
-            File("ipsList").forEachLine {
-                adBlockItems.add(AdBlockIpItem(
-                    id = id++,
-                    Ip = it
-                ))
+            for (ip in Utils.readLines(fileName)) {
+                adBlockItems.add(
+                    AdBlockIpItem(
+                        id = id++,
+                        Ip = ip
+                    )
+                )
             }
             return adBlockItems
         }

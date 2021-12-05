@@ -29,6 +29,15 @@
         <action
             android:id="@+id/action_settings_fragment_to_proxy_add_fragment"
             app:destination="@id/proxy_add_fragment" />
+        <action
+            android:id="@+id/action_settings_fragment_to_advert_fragment"
+            app:destination="@id/advert_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/advert_fragment"
+        android:name="com.paranoid.vpn.app.settings.ui.ad_ip_cofig.IPViewFragment"
+        tools:layout="@layout/navigation_advert_fragment" >
     </fragment>
 
     <fragment

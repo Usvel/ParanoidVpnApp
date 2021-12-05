@@ -22,7 +22,7 @@ class IpRepository(application: Application) {
         ipDao.update(proxyItem)
     }
 
-    suspend fun deleteProxy(proxyItem: AdBlockIpItem) {
+    suspend fun deleteItem(proxyItem: AdBlockIpItem) {
         ipDao.delete(proxyItem)
     }
 

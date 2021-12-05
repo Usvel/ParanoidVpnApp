@@ -3,7 +3,6 @@ package com.paranoid.vpn.app.common.ad_block_configuration.domain.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.paranoid.vpn.app.common.ad_block_configuration.domain.model.AdBlockIpItem
-import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
 
 
 @Dao
@@ -15,7 +14,7 @@ interface IpDao {
     fun getById(id: Long): AdBlockIpItem?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(objects: List<AdBlockIpItem>)
+    suspend fun insertAll(objects: List<AdBlockIpItem>)
 
     @Insert
     suspend fun insert(ipItem: AdBlockIpItem?)
