@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.startForegroundService
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -244,11 +245,13 @@ class VPNFragment :
         }
 
         binding.ivQrIcon.setOnClickListener {
+            val bundle = Bundle()
             context?.let {
                 CoroutineScope(Dispatchers.IO).launch {
                     viewModel?.getConfigId()?.let { it1 -> showQRCode(it1) }
                 }
             }
+
         }
     }
 
@@ -256,9 +259,14 @@ class VPNFragment :
         val config = VPNConfigRepository(requireActivity().application)
             .getConfig(id)
         val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
-        val intent = Intent(context, QRCreator::class.java)
-        intent.putExtra("config", gson.toJson(config))
-        startActivity(intent)
+        val bundle = Bundle()
+        bundle.putString(
+            "qr_creator", gson.toJson(config)
+        )
+        view?.findNavController()?.navigate(
+            R.id.action_vpn_fragment_to_qr_creator,
+            bundle
+        )
     }
 
     private fun showBottomSheetDialog() {

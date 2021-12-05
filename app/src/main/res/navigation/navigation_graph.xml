@@ -56,6 +56,14 @@
             app:popUpTo="@id/profile_fragment"
             app:popUpToInclusive="true"
             app:destination="@id/profile_fragment" />
+        <action
+            android:id="@+id/action_vpn_fragment_to_qr_creator"
+            app:destination="@id/qr_creator">
+            <argument
+                android:name="qr_creator"
+                app:argType="string" />
+        </action>
+
     </fragment>
 
     <fragment

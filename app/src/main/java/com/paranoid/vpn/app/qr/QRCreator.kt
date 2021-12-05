@@ -3,22 +3,26 @@ package com.paranoid.vpn.app.qr
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.google.zxing.qrcode.QRCodeWriter
 import com.paranoid.vpn.app.R
+import com.paranoid.vpn.app.common.ui.base.BaseFragment
+import com.paranoid.vpn.app.databinding.QrCreatorBinding
+import com.paranoid.vpn.app.settings.ui.main.QRCreatorViewModel
+import com.paranoid.vpn.app.settings.ui.main.QRScannerViewModel
 
-class QRCreator : AppCompatActivity() {
+class QRCreator : BaseFragment<QrCreatorBinding, QRCreatorViewModel>(QrCreatorBinding::inflate) {
     private lateinit var ivQRcode: ImageView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.qr_creator)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        ivQRcode = findViewById(R.id.ivQRCode)
-        val data = intent.getSerializableExtra("config").toString()
+        ivQRcode = binding.ivQRCode
+        val data = arguments?.getString("qr_creator")
         val writer = QRCodeWriter()
 
         try {
@@ -35,5 +39,8 @@ class QRCreator : AppCompatActivity() {
         } catch (e: WriterException) {
             e.printStackTrace()
         }
+    }
+
+    override fun initViewModel() {
     }
 }

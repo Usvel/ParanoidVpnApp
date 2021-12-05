@@ -87,4 +87,10 @@
     <dimen name="fragment_settings_buttons_sizes">42dp</dimen>
     <!--  SettingsFragment  -->
     <dimen name="vpn_fragment_icon_size">32dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">0dp</dimen>
 </resources>

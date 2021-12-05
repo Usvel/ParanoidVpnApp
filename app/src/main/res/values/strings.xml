@@ -104,4 +104,7 @@
     <string name="edit_user_fragment_invalid_email">Invalid email</string>
     <string name="edit_user_fragment_invalid_name">Invalid name</string>
     <string name="edit_user_fragment_entry">Edit User</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>
