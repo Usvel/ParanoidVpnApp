@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,25 +28,24 @@ import com.paranoid.vpn.app.common.vpn_configuration.domain.repository.VPNConfig
 import com.paranoid.vpn.app.databinding.PageVpnButtonBinding
 import com.paranoid.vpn.app.qr.QRCreator
 import com.paranoid.vpn.app.vpn.core.LocalVPNService2
-import com.paranoid.vpn.app.vpn.ui.VPNConfigAdapter
-import com.paranoid.vpn.app.vpn.ui.VPNFragment
-import com.paranoid.vpn.app.vpn.ui.VPNServiceConnection
-import com.paranoid.vpn.app.vpn.ui.VPNViewModel
+import com.paranoid.vpn.app.vpn.ui.*
 import kotlinx.coroutines.*
 import java.util.stream.Collectors
 
-class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
+class VPNObjectFragment() :
     BaseFragment<PageVpnButtonBinding, VPNViewModel>(PageVpnButtonBinding::inflate) {
 
     private var textUpdater: Job? = null
     private val VPN_REQUEST_CODE = 0x0F
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var oldViewModel: VPNViewModel
 
     /** Defines callbacks for service binding, passed to bindService()  */
     private var connection = VPNServiceConnection()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewModel()
         loadMainConfiguration()
         setListeners()
         initBottomSheetDialog()
@@ -58,7 +58,7 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
             oldViewModel.getConfig()?.let { updateConfigText(configName = it.name) }
         }
         textUpdater = lifecycleScope.launch(Dispatchers.Default) {
-            while (true) {
+            while (coroutineContext.isActive) {
                 if (oldViewModel.vpnStateOn.value == VPNState.CONNECTED
                     && oldViewModel.isConnected.value == true
                 )
@@ -385,5 +385,10 @@ class VPNObjectFragment(private val oldViewModel: VPNViewModel)  :
     }
 
     override fun initViewModel() {
+        viewModel = ViewModelProvider(
+            this,
+            VPNViewModelFactory(requireActivity().application)
+        )[VPNViewModel::class.java]
+        oldViewModel = viewModel as VPNViewModel
     }
 }
