@@ -61,8 +61,6 @@ object Utils {
             do {
                 line = reader.readLine()
                 linesFromFile.add(line)
-                if (linesFromFile.size == 500)
-                    break
             } while (line != null)
 
         } catch (e: IOException) {

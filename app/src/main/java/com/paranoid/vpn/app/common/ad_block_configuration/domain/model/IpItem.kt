@@ -21,18 +21,21 @@ data class AdBlockIpItem(
 
 class AdBlockIpDataGenerator {
     companion object {
-        fun getAdBlockIpItems(): MutableList<AdBlockIpItem> {
+        fun getAdBlockIpItems(size: Int): MutableList<AdBlockIpItem> {
             val adBlockItems: MutableList<AdBlockIpItem> = arrayListOf()
             val fileName = "ipsList"
             var id = 1L
-            for (ip in Utils.readLines(fileName)) {
-                adBlockItems.add(
-                    AdBlockIpItem(
-                        id = id++,
-                        Ip = ip,
-                        IsLocal = true
+            val ipLines = Utils.readLines(fileName)
+            while (adBlockItems.size < size) {
+                val randomIp = ipLines.random()
+                if (adBlockItems.none { it.Ip == randomIp })
+                    adBlockItems.add(
+                        AdBlockIpItem(
+                            id = id++,
+                            Ip = randomIp,
+                            IsLocal = true
+                        )
                     )
-                )
             }
             return adBlockItems
         }
