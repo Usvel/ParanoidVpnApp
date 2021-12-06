@@ -157,4 +157,7 @@
     <string name="advertisement_blocking_list">Advertisement blocking list</string>
     <string name="search">Search...</string>
     <string name="no_any_configs">No any configs...</string>
+    <string name="backup">Backup</string>
+    <string name="backup_or_restore">Backup or restore databases</string>
+    <string name="restore">Restore</string>
 </resources>

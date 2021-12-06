@@ -81,7 +81,7 @@ class VPNConfigAddFragment :
     }
 
     private fun setListeners(editConfig: Boolean) {
-        binding.addConfigurationButton.setOnClickListener {
+        binding.viewAddConfigurationButton.setOnClickListener {
             if (editConfig) {
                 editConfig()
             } else

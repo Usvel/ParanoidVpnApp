@@ -45,6 +45,18 @@
                 <action android:name="android.net.VpnService" />
             </intent-filter>
         </service>
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.paranoid.vpn.provider"
+            android:exported="false"
+            android:enabled="true"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

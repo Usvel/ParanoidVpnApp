@@ -287,7 +287,7 @@
     </Button>
 
         <Button
-            android:id="@+id/addConfigurationButton"
+            android:id="@+id/viewAddConfigurationButton"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -314,7 +314,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addConfigurationButton">
+            app:layout_constraintTop_toBottomOf="@+id/viewAddConfigurationButton">
 
         </Button>
 

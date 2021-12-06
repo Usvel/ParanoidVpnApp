@@ -5,8 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.paranoid.vpn.app.common.utils.VPN_CONFIG_DB_NAME
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.ArrayConverter
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.ForwardingRuleConverter
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigDataGenerator
@@ -32,7 +32,7 @@ abstract class VPNConfigDatabase : RoomDatabase() {
                     if (INSTANCE == null) {
                         INSTANCE = Room.databaseBuilder(
                             context.applicationContext,
-                            VPNConfigDatabase::class.java, "vpn_config_database"
+                            VPNConfigDatabase::class.java, VPN_CONFIG_DB_NAME
                         ).addCallback(object : RoomDatabase.Callback() {
                             override fun onCreate(db: SupportSQLiteDatabase) {
                                 super.onCreate(db)
