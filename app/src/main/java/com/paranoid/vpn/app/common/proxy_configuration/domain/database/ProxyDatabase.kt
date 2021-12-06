@@ -14,6 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
+private const val PROXY_DB_NAME = "proxy_database"
 
 @Database(entities = [ProxyItem::class], version = 1, exportSchema = false)
 @TypeConverters(ArrayConverter::class, LocationConverter::class)
@@ -32,7 +33,7 @@ abstract class ProxyDatabase : RoomDatabase() {
                     if (INSTANCE == null) {
                         INSTANCE = Room.databaseBuilder(
                             context.applicationContext,
-                            ProxyDatabase::class.java, "proxy_database"
+                            ProxyDatabase::class.java, PROXY_DB_NAME
                         ).addCallback(object : RoomDatabase.Callback() {
                             override fun onCreate(db: SupportSQLiteDatabase) {
                                 super.onCreate(db)
@@ -59,4 +60,3 @@ abstract class ProxyDatabase : RoomDatabase() {
         }
     }
 }
-

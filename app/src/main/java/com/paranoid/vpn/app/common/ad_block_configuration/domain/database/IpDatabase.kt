@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
+private const val IP_DB_NAME = "ip_database"
 
 @Database(entities = [AdBlockIpItem::class], version = 1, exportSchema = false)
 abstract class IpDatabase : RoomDatabase() {
@@ -27,7 +28,7 @@ abstract class IpDatabase : RoomDatabase() {
                     if (INSTANCE == null) {
                         INSTANCE = Room.databaseBuilder(
                             context.applicationContext,
-                            IpDatabase::class.java, "ip_database"
+                            IpDatabase::class.java, IP_DB_NAME
                         ).build()
                     }
                 }
@@ -49,4 +50,3 @@ abstract class IpDatabase : RoomDatabase() {
         }
     }
 }
-

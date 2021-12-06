@@ -56,9 +56,9 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
 
     // material3
-    implementation 'com.google.android.material:material:1.5.0-beta01'
-    implementation("androidx.compose.compiler:compiler:1.1.0-beta03")
-    implementation("androidx.compose.material3:material3:1.0.0-alpha01")
+    implementation 'com.google.android.material:material:1.6.0-alpha01'
+    implementation("androidx.compose.compiler:compiler:1.1.0-beta04")
+    implementation("androidx.compose.material3:material3:1.0.0-alpha02")
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
@@ -110,6 +110,9 @@ dependencies {
     implementation 'com.google.zxing:core:3.4.0'
     implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
     implementation 'com.budiyev.android:code-scanner:2.1.0'
+
+    // csv
+    implementation "com.github.doyaaaaaken:kotlin-csv-jvm:0.9.0"
 
     //SOCKS5 library
     // implementation 'com.github.mike10004:fengyouchao-sockslib:1.0.6'
