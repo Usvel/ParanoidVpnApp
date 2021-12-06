@@ -110,7 +110,7 @@ class VPNObjectFragment() :
                     }
                     ConfigurationClickHandlers.Share -> {
                         CoroutineScope(Dispatchers.IO).launch {
-                            val config = VPNConfigRepository(requireActivity().application)
+                            val config = VPNConfigRepository()
                                 .getConfig(id)
                             val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
                             shareConfiguration(gson.toJson(config))
@@ -152,20 +152,11 @@ class VPNObjectFragment() :
                                         id
                                     )
                                     ConfigurationClickHandlers.SetConfiguration -> {
-                                        if (connection.isBound) {
-                                            Toast.makeText(
-                                                context,
-                                                "Cannot set config if service is running!",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                            return@VPNConfigAdapter
-                                        }
                                         lifecycleScope.launch(Dispatchers.IO) {
                                             oldViewModel.setConfig(id)
-                                            LocalVPNService2.currentConfig =
-                                                oldViewModel.getConfig()
-                                            oldViewModel.getConfig()
-                                                ?.let { updateConfigText(configName = it.name) }
+                                            if (connection.isBound)
+                                                setVpnConfig()
+                                            oldViewModel.getConfig()?.let { updateConfigText(configName = it.name) }
                                             withContext(Dispatchers.Main) {
                                                 hideBottomSheetDialog()
                                             }
@@ -410,16 +401,22 @@ class VPNObjectFragment() :
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == VPN_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val config = oldViewModel.getConfig().let {
-                val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
-                return@let gson.toJson(it)
+            CoroutineScope(Dispatchers.IO).launch {
+                val config = oldViewModel.getConfig().let {
+                    val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+                    return@let gson.toJson(it)
+                }
+                val intent = Intent(context, LocalVPNService2::class.java).apply {
+                    action = "start"
+                    putExtra("config", config)
+                    type = "text/plain"
+                }
+                withContext(Dispatchers.Main) {
+                    context?.let { ContextCompat.startForegroundService(it, intent) }
+                }
             }
-            val intent = Intent(context, LocalVPNService2::class.java).apply {
-                action = "start"
-                putExtra("config", config)
-                type = "text/plain"
-            }
-            context?.let { ContextCompat.startForegroundService(it, intent) }
+
+
         }
     }
 
