@@ -36,6 +36,10 @@ class VPNConfigAdapter(
         val configItem = mList[position]
 
         holder.configName.text = configItem.name
+
+        if(configItem.favorite)
+            holder.imFavIcon.setImageResource(R.drawable.ic_favorite_full)
+
         holder.itemView.setOnClickListener {
             onItemClicked(configItem.id, ConfigurationClickHandlers.SetConfiguration)
         }
@@ -45,10 +49,15 @@ class VPNConfigAdapter(
         holder.imQRIcon.setOnClickListener {
             onItemClicked(configItem.id, ConfigurationClickHandlers.QRCode)
         }
+        holder.imEditIcon.setOnClickListener {
+            onItemClicked(configItem.id, ConfigurationClickHandlers.Edit)
+        }
         holder.imShareIcon.setOnClickListener {
             onItemClicked(configItem.id, ConfigurationClickHandlers.Share)
         }
-
+        holder.imFavIcon.setOnClickListener {
+            onItemClicked(configItem.id, ConfigurationClickHandlers.Like)
+        }
     }
 
     // return the number of the items in the list
@@ -63,7 +72,9 @@ class VPNConfigAdapter(
     ) : RecyclerView.ViewHolder(ItemView) {
         val configName: TextView = itemView.findViewById(R.id.tvConfigurationName)
         val imQRIcon: ImageView  = itemView.findViewById(R.id.imQRIcon)
-        val imShareIcon: ImageView  = itemView.findViewById(R.id.imShareIcon)
+        val imEditIcon: ImageView = itemView.findViewById(R.id.imEditIcon)
+        val imFavIcon: ImageView = itemView.findViewById(R.id.imFavIcon)
+        val imShareIcon: ImageView = itemView.findViewById(R.id.imShareIcon)
         val cvSettingsIcon: CardView = itemView.findViewById(R.id.cvSettingsIcon)
 
         init {
@@ -74,6 +85,12 @@ class VPNConfigAdapter(
                 onItemClicked(bindingAdapterPosition)
             }
             imQRIcon.setOnClickListener {
+                onItemClicked(bindingAdapterPosition)
+            }
+            imEditIcon.setOnClickListener {
+                onItemClicked(bindingAdapterPosition)
+            }
+            imFavIcon.setOnClickListener {
                 onItemClicked(bindingAdapterPosition)
             }
             imShareIcon.setOnClickListener {

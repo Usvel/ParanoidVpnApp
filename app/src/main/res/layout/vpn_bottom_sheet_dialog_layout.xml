@@ -22,10 +22,24 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imBottomSheetGrapple"
         android:layout_marginTop="0dp"
-        android:textColor="@color/text_view_black"
         android:gravity="center"
         android:padding="@dimen/settings_fragment_small_padding"
-        android:text="@string/choose_configuration">
+        android:text="@string/choose_configuration"
+        android:textColor="@color/text_view_black">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/tvNoData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/tvChooseConfig"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:padding="@dimen/settings_fragment_small_padding"
+        android:text="@string/no_any_configs"
+        android:textColor="@color/text_view_black">
 
     </TextView>
 
@@ -33,7 +47,7 @@
         android:id="@+id/cvHorizontalLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvChooseConfig"
+        android:layout_below="@+id/tvNoData"
         android:fillViewport="true"
         android:measureAllChildren="false"
         android:padding="@dimen/settings_fragment_small_padding"
@@ -53,55 +67,69 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <!-- TEST ONLY -->
-    <!-- COMING IN MVP 2 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cvHorizontalLayout"
         android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAdProxyIp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="@dimen/base_padding"
-            android:layout_marginTop="@dimen/base_padding"
-            android:layout_marginEnd="@dimen/base_padding"
-            android:layout_marginBottom="@dimen/base_padding"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/real_medium_padding"
             android:layout_weight="1"
-            android:backgroundTint="?attr/backgroundVioletLight"
-            app:cardCornerRadius="32dp">
+            android:drawableEnd="@drawable/ic_clear"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvConfigTitle"
+            app:startIconDrawable="@drawable/ic_search"
+            app:startIconTint="@color/text_view_dark_text_transparent">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProxyIp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/text_view_black"
-                android:text="@string/search_coming_soon">
-            </TextView>
+                android:ellipsize="end"
+                android:hint="@string/search"
+                android:inputType="text"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="@dimen/base_padding"
-            android:layout_marginTop="@dimen/base_padding"
-            android:layout_marginEnd="@dimen/base_padding"
-            android:layout_marginBottom="@dimen/base_padding"
+            android:id="@+id/viewFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/real_medium_padding"
             android:backgroundTint="?attr/backgroundVioletLight"
             android:shape="ring"
             app:cardCornerRadius="32dp">
 
             <ImageView
+                android:id="@+id/ivFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:contentDescription="@string/favorite"
-                app:tint="?attr/navBarIconColor"
-                android:alpha="0.7"
                 android:foregroundGravity="center_vertical"
-                android:src="@drawable/ic_baseline_favorite" />
+                android:padding="@dimen/small_padding"
+                android:src="@drawable/ic_baseline_favorite"
+                app:tint="?attr/navBarIconColor" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 

@@ -14,12 +14,22 @@
             android:id="@+id/tvProxyTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/extra_padding"
+            android:layout_marginTop="@dimen/real_medium_padding"
             android:text="@string/view_proxy"
             android:textSize="@dimen/navigation_proxy_title_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvProxyDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_padding"
+            android:text="@string/view_information_about_online_proxy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProxyTitle" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView2"
@@ -29,7 +39,7 @@
             android:paddingTop="@dimen/small_padding"
             android:paddingEnd="@dimen/small_padding"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvProxyTitle">
+            app:layout_constraintTop_toBottomOf="@+id/tvProxyDescription">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,8 +49,8 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="5dp"
-                    android:layout_margin="@dimen/real_medium_padding"
+                    app:cardElevation="@dimen/card_elevation"
+                    android:layout_margin="@dimen/small_padding"
                     app:cardCornerRadius="@dimen/minimum_corner_radius">
 
                     <LinearLayout
@@ -124,10 +134,9 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="5dp"
+                    app:cardElevation="@dimen/card_elevation"
                     app:cardCornerRadius="@dimen/minimum_corner_radius"
-                    android:layout_margin="@dimen/real_medium_padding"
-                    android:layout_marginTop="@dimen/real_medium_padding">
+                    android:layout_margin="@dimen/small_padding">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -296,7 +305,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/small_padding"
-                    android:alpha="0.2"
                     android:background="@null"
                     android:contentDescription="@string/proxy_edit"
                     android:foreground="?android:attr/selectableItemBackground"

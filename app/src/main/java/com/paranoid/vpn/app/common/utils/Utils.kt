@@ -2,12 +2,14 @@ package com.paranoid.vpn.app.common.utils
 
 import android.app.Application
 import android.content.Context
-import android.content.Intent
 import android.util.Patterns
 import android.widget.Toast
 import androidx.annotation.StringRes
 import com.paranoid.vpn.app.common.ui.base.MessageData
 import retrofit2.HttpException
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
 import java.net.ConnectException
 import java.net.NoRouteToHostException
 import java.net.SocketTimeoutException
@@ -21,6 +23,36 @@ object Utils {
 
     fun init(application: Application) {
         Utils.application = application
+    }
+
+    fun readLines(fileName: String): List<String> {
+
+        var reader: BufferedReader? = null
+        val linesFromFile: MutableList<String> = arrayListOf()
+        try {
+            reader = BufferedReader(
+                InputStreamReader(application?.assets?.open(fileName), "UTF-8")
+            );
+
+            var line: String?
+            do {
+                line = reader.readLine()
+                linesFromFile.add(line)
+                if (linesFromFile.size == 100)
+                    break
+            } while (line != null)
+
+        } catch (e: IOException) {
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (e: IOException) {
+                }
+            }
+        }
+
+        return linesFromFile
     }
 
     fun Exception.isNetworkError(): Boolean {
@@ -104,7 +136,7 @@ class Validators {
 }
 
 enum class ConfigurationClickHandlers {
-    GetConfiguration, SetConfiguration, QRCode, Edit, Share
+    GetConfiguration, SetConfiguration, QRCode, Edit, Share, Like
 }
 
 enum class ProxyClickHandlers {

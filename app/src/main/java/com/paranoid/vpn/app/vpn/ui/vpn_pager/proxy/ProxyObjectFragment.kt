@@ -3,6 +3,7 @@ package com.paranoid.vpn.app.vpn.ui.vpn_pager.proxy
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
@@ -12,14 +13,21 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
+import com.paranoid.vpn.app.common.proxy_configuration.domain.repository.ProxyRepository
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.common.utils.ProxyClickHandlers
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.databinding.PageProxyListBinding
 import com.paranoid.vpn.app.vpn.ui.VPNViewModel
+import com.paranoid.vpn.app.vpn.ui.VPNViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
+class ProxyObjectFragment() :
     BaseFragment<PageProxyListBinding, VPNViewModel>(PageProxyListBinding::inflate) {
+
+    private lateinit var oldViewModel: VPNViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,19 +66,15 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
 
     private fun setListeners() {
         binding.ivFilterProxies.setOnClickListener {
-            showConfigDetails()
+            showFilterDialog()
         }
     }
 
-    private fun showConfigDetails() {
+    private fun showFilterDialog() {
         val customAlertDialogView = LayoutInflater.from(context)
             .inflate(R.layout.proxy_filter_dialog, null, false)
-        val materialAlertDialogBuilder = context?.let {
-            MaterialAlertDialogBuilder(
-                it,
-                R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Background
-            )
-        }
+        val materialAlertDialogBuilder = MaterialAlertDialogBuilder(context!!)
+        materialAlertDialogBuilder.setView(customAlertDialogView)
 
         if (oldViewModel.getProxyPing() != "")
             customAlertDialogView.findViewById<TextInputEditText>(
@@ -103,10 +107,10 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
         }
 
         materialAlertDialogBuilder
-            ?.setView(customAlertDialogView)
-            ?.setTitle("Proxy filter")
-            ?.setMessage("Current configuration details")
-            ?.setPositiveButton("Ok") { dialog, _ ->
+            .setView(customAlertDialogView)
+            .setTitle("Proxy filter")
+            .setMessage("Current configuration details")
+            .setPositiveButton("Ok") { dialog, _ ->
                 oldViewModel.setProxyCountry(
                     customAlertDialogView.findViewById<TextInputEditText>(
                         R.id.etEditCountry
@@ -151,9 +155,9 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
                 setLoaders()
                 dialog.dismiss()
             }
-            ?.setNegativeButton("Cancel") { dialog, _ ->
+            .setNegativeButton("Cancel") { dialog, _ ->
                 dialog.dismiss()
-            }?.show()
+            }.show()
     }
 
 
@@ -167,6 +171,12 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
                 ProxyOnlineListAdapter(value, warningColor, errorColor) { proxyItem, code ->
                     when (code) {
                         ProxyClickHandlers.Info -> openProxyInFragment(proxyItem, false)
+                        ProxyClickHandlers.Save -> {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                ProxyRepository().addProxy(proxyItem)
+                            }
+                            context?.let { it1 -> Utils.makeToast(it1, "Proxy added") }
+                        }
                         else -> {}
                     }
                 }
@@ -208,6 +218,11 @@ class ProxyObjectFragment(private val oldViewModel: VPNViewModel) :
     }
 
     override fun initViewModel() {
+        viewModel = ViewModelProvider(
+            this,
+            VPNViewModelFactory(requireActivity().application)
+        )[VPNViewModel::class.java]
+        oldViewModel = viewModel as VPNViewModel
     }
 
 }

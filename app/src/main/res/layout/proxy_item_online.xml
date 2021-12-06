@@ -48,7 +48,7 @@
                         android:id="@+id/tvProxyIp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:layout_gravity="start"
                         android:singleLine="true"
                         android:textColor="@color/text_view_black"
                         android:textSize="@dimen/logo_text_size"
@@ -81,15 +81,14 @@
     </androidx.cardview.widget.CardView>
 
     <ImageView
-        android:id="@+id/imEditIcon"
+        android:id="@+id/imSaveIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:alpha="0.2"
         android:contentDescription="@string/configuration_sharing"
         android:paddingStart="@dimen/small_padding"
         android:paddingEnd="@dimen/small_padding"
-        android:src="@drawable/ic_outline_save_24"
+        android:src="@drawable/ic_outline_save_24_selected"
         app:tint="?attr/toolBarColor" />
 
     <ImageView
@@ -100,6 +99,6 @@
         android:contentDescription="@string/configuration_sharing"
         android:paddingStart="@dimen/small_padding"
         android:paddingEnd="@dimen/small_padding"
-        android:src="@drawable/ic_outline_info"
+        android:src="@drawable/ic_outline_info_selected"
         app:tint="?attr/toolBarColor" />
 </LinearLayout>

@@ -171,15 +171,14 @@
                     tools:text="First configuration" />
 
                 <ImageView
-                    android:id="@+id/imEditIcon"
+                    android:id="@+id/ivEditIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:alpha="0.2"
                     android:contentDescription="@string/configuration_sharing"
                     android:paddingStart="@dimen/small_padding"
                     android:paddingEnd="@dimen/small_padding"
-                    android:src="@drawable/ic_outline_edit"
+                    android:src="@drawable/ic_edit_selected"
                     app:tint="?attr/toolBarColor" />
 
                 <ImageView
@@ -190,7 +189,7 @@
                     android:contentDescription="@string/configuration_sharing"
                     android:paddingStart="@dimen/small_padding"
                     android:paddingEnd="@dimen/small_padding"
-                    android:src="@drawable/ic_share"
+                    android:src="@drawable/ic_share_selected"
                     app:tint="?attr/toolBarColor" />
 
                 <ImageView

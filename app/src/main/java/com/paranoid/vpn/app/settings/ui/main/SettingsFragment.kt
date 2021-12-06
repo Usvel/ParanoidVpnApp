@@ -43,13 +43,21 @@ class SettingsFragment :
 
         viewModel?.getAllProxies()?.observe(viewLifecycleOwner) { value ->
             val configSize = value.size
-            binding.proxyConfigurationNumber.text = "Already added $configSize configuration(s)"
+            binding.proxyConfigurationNumber.text = "Already added $configSize proxies(s)"
         }
     }
 
     private fun setListeners(){
+        binding.viewAdIpConfigurationButton.setOnClickListener{
+            it.findNavController().navigate(R.id.action_settings_fragment_to_advert_fragment)
+        }
+
         binding.addConfigurationButton.setOnClickListener {
             it.findNavController().navigate(R.id.action_settings_fragment_to_vpn_config_add_element)
+        }
+
+        binding.addProxyConfigurationButton.setOnClickListener {
+            it.findNavController().navigate(R.id.action_settings_fragment_to_proxy_add_fragment)
         }
 
         binding.addConfigurationButtonByQr.setOnClickListener {

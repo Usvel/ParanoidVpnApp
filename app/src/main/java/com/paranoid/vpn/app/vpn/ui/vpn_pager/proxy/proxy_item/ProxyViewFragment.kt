@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.findNavController
 import com.google.gson.GsonBuilder
+import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.Location
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
 import com.paranoid.vpn.app.common.proxy_configuration.domain.repository.ProxyRepository
@@ -31,7 +32,7 @@ class ProxyViewFragment :
         val gson = GsonBuilder().create()
         val proxyItem: ProxyItem = gson.fromJson(proxyItemGson, ProxyItem::class.java)
         val location: Location = gson.fromJson(locationGson, Location::class.java)
-        setProxyItem(proxyItem, location)
+        setProxyItem(proxyItem, location, local)
         if (proxyItemGson != null) {
             if (locationGson != null) {
                 setListeners(proxyItemGson, locationGson, proxyItem, local)
@@ -41,7 +42,18 @@ class ProxyViewFragment :
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setProxyItem(proxyItem: ProxyItem, location: Location) {
+    private fun setProxyItem(proxyItem: ProxyItem, location: Location, local: Boolean?) {
+
+        if (local == true){
+            binding.tvProxyDescription.text =
+                Utils.getString(R.string.view_information_about_local_proxy)
+            binding.tvProxyTime.visibility = View.GONE
+            binding.tvProxyPing.visibility = View.GONE
+            binding.tvProxyFailed.visibility = View.GONE
+            binding.tvProxyUpTime.visibility = View.GONE
+            binding.tvProxyRecheckCount.visibility = View.GONE
+            binding.tvProxyWorkingCount.visibility = View.GONE
+        }
 
         binding.tvProxyIp.text = "IP: ${proxyItem.Ip}"
         binding.tvProxyPort.text = "Port: ${proxyItem.Port}"
@@ -86,7 +98,7 @@ class ProxyViewFragment :
 
         binding.ibSaveProxy.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                ProxyRepository(requireActivity().application).addProxy(proxyItem)
+                ProxyRepository().addProxy(proxyItem)
             }
             context?.let { it1 -> Utils.makeToast(it1, "Proxy added") }
             it.findNavController().popBackStack()
@@ -96,18 +108,36 @@ class ProxyViewFragment :
         }
         binding.ibDeleteProxy.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                ProxyRepository(requireActivity().application).deleteProxy(proxyItem)
+                ProxyRepository().deleteProxy(proxyItem)
             }
             context?.let { it1 -> Utils.makeToast(it1, "Proxy removed") }
             it.findNavController().popBackStack()
         }
         binding.ibEditProxy.setOnClickListener {
-            //
+            openProxyEditingFragment()
         }
         binding.ibShareProxy.setOnClickListener {
             shareProxy(proxyItemGson + locationGson)
         }
 
+    }
+
+    private fun openProxyEditingFragment() {
+        val proxyItem = arguments?.getString("proxyItem")
+        val location = arguments?.getString("location")
+        val bundle = Bundle()
+        bundle.putString(
+            "proxyItem", proxyItem
+        )
+
+        bundle.putString(
+            "location", location
+        )
+
+        view?.findNavController()?.navigate(
+            R.id.action_proxy_view_fragment_to_proxy_add_fragment,
+            bundle
+        )
     }
 
     private fun shareProxy(proxyItemGson: String) {

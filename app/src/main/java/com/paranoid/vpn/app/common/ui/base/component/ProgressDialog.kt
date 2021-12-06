@@ -3,9 +3,8 @@ package com.paranoid.vpn.app.common.ui.base.component
 import android.app.Dialog
 import android.os.Bundle
 import android.view.ContextThemeWrapper
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.paranoid.vpn.app.R
 
 class ProgressDialog : DialogFragment() {
@@ -15,10 +14,11 @@ class ProgressDialog : DialogFragment() {
             null
         )
 
-        val dialog = AlertDialog.Builder(ContextThemeWrapper(activity, R.style.AlertDialogTheme))
-            .setView(view)
-            .setCancelable(false)
-            .create()
+        val dialog =
+            MaterialAlertDialogBuilder(ContextThemeWrapper(activity, R.style.AlertDialogTheme))
+                .setView(view)
+                .setCancelable(false)
+                .create()
 
         dialog.setCanceledOnTouchOutside(false)
 

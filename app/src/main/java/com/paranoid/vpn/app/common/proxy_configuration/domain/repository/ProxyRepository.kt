@@ -1,12 +1,11 @@
 package com.paranoid.vpn.app.common.proxy_configuration.domain.repository
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import com.paranoid.vpn.app.common.proxy_configuration.domain.database.ProxyDatabase
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
 
 
-class ProxyRepository(application: Application) {
+class ProxyRepository {
     private val proxyDatabase = ProxyDatabase.getInstance()
     private val proxyDao = proxyDatabase.ProxyDao()
     val readAllData: LiveData<List<ProxyItem>> = proxyDao.getAll()

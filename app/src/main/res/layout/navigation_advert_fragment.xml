@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvConfigTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:text="@string/advertisement_blocking_list"
+            android:textSize="@dimen/navigation_proxy_title_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAdProxyIp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/real_medium_padding"
+            android:layout_marginEnd="@dimen/real_medium_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvConfigTitle"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProxyIp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/proxy_ip"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewAddIp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:backgroundTint="?attr/backgroundVioletLight"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilAdProxyIp">
+
+            <TextView
+                android:id="@+id/tvAddIp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/add_advert_ip"
+                android:textColor="@color/text_view_black" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewLoadFromDatabase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:backgroundTint="?attr/backgroundVioletLight"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewAddIp">
+
+            <TextView
+                android:id="@+id/tvLoadFromDatabase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/load_ips_from_database_make_take_times"
+                android:textColor="@color/text_view_black" />
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/llAdBlockIPs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/settings_fragment_small_padding"
+            android:paddingTop="@dimen/settings_fragment_small_padding"
+            android:paddingEnd="@dimen/settings_fragment_small_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewLoadFromDatabase">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAdBlockIPs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                tools:listitem="@android:layout/two_line_list_item" />
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

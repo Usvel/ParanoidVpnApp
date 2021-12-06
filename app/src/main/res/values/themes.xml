@@ -108,7 +108,7 @@
 
     <!-- Alert Dialog -->
     <style name="ThemeOverlay.MaterialComponents.MaterialAlertDialog_Background"
-        parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog.Centered">
         <!-- Background Color-->
         <item name="android:background">@color/minor_color_light</item>
         <!-- Style for negative button -->

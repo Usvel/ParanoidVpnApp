@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.ArrayConverter
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.ForwardingRuleConverter
@@ -14,8 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
-
-@Database(entities = [VPNConfigItem::class], version = 1, exportSchema = false)
+@Database(entities = [VPNConfigItem::class], version = 2, exportSchema = false)
 @TypeConverters(ArrayConverter::class, ForwardingRuleConverter::class)
 abstract class VPNConfigDatabase : RoomDatabase() {
 
@@ -34,11 +34,11 @@ abstract class VPNConfigDatabase : RoomDatabase() {
                             context.applicationContext,
                             VPNConfigDatabase::class.java, "vpn_config_database"
                         ).addCallback(object : RoomDatabase.Callback() {
-                                override fun onCreate(db: SupportSQLiteDatabase) {
-                                    super.onCreate(db)
-                                    populateDatabase(INSTANCE!!)
-                                }
-                            })
+                            override fun onCreate(db: SupportSQLiteDatabase) {
+                                super.onCreate(db)
+                                populateDatabase(INSTANCE!!)
+                            }
+                        })
                             .build()
                     }
                 }
