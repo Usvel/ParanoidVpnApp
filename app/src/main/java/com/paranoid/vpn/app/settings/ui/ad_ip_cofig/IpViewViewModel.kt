@@ -9,22 +9,29 @@ import com.paranoid.vpn.app.common.ui.base.BaseFragmentViewModel
 class IpViewViewModel(application: Application) : BaseFragmentViewModel() {
     private val ipRepository: IpRepository = IpRepository()
     private val allIp = ipRepository.readAllData
+    private val allAdded = ipRepository.readAddedData
 
     override fun getCurrentData() {
         // TODO
     }
 
-    fun getIPs(): LiveData<List<AdBlockIpItem>> {
-        return allIp
-    }
+    fun getIPs(): LiveData<List<AdBlockIpItem>> = allIp
+
+    fun getIpsSize(): LiveData<Int> = ipRepository.allAddressCount
+
+    fun getAddedIPs(): LiveData<List<AdBlockIpItem>> = allAdded
 
     suspend fun insertToDataBase(ipItem: AdBlockIpItem) {
-        ipRepository.insert(ipItem)
+        if (ipItem.Ip?.let { ipRepository.getConfigCount(it) } == 0)
+            ipRepository.insert(ipItem)
     }
-
 
     suspend fun deleteFromDataBase(ipItem: AdBlockIpItem) {
         ipRepository.deleteItem(ipItem)
+    }
+
+    suspend fun deleteAllLocalIps() {
+        ipRepository.deleteAllLocalIps()
     }
 
 }

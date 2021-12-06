@@ -20,6 +20,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
+        <TextView
+            android:id="@+id/tvAdressCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            tools:text="@string/added_adresses"
+            android:textSize="@dimen/navigation_proxy_title_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvConfigTitle"/>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilAdProxyIp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -47,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:hint="@string/proxy_ip"
-                android:inputType="textEmailAddress"
+                android:inputType="textFilter"
                 android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
                 android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
                 android:singleLine="true"
@@ -105,6 +116,31 @@
 
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewDeleteFromDatabase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:backgroundTint="?attr/backgroundVioletLight"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewLoadFromDatabase">
+
+            <TextView
+                android:id="@+id/tvDeleteFromDatabase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/delete_from_database"
+                android:textColor="@color/text_view_black" />
+
+        </androidx.cardview.widget.CardView>
+
         <LinearLayout
             android:id="@+id/llAdBlockIPs"
             android:layout_width="match_parent"
@@ -115,7 +151,7 @@
             android:paddingEnd="@dimen/settings_fragment_small_padding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewLoadFromDatabase">
+            app:layout_constraintTop_toBottomOf="@+id/viewDeleteFromDatabase">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvAdBlockIPs"

@@ -1,5 +1,6 @@
 package com.paranoid.vpn.app.settings.ui.ad_ip_cofig
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +27,7 @@ class IPViewFragment :
         setListeners()
         initViewModel()
         setRecyclerViews()
+        setObservers()
     }
 
     override fun initViewModel() {
@@ -39,12 +41,14 @@ class IPViewFragment :
         binding.viewAddIp.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
                 val ip = binding.etProxyIp.text.toString()
-                if (Validators.validateIP(arrayListOf(ip)))
+                if (Validators.validateIP(arrayListOf(ip))) {
                     viewModel!!.insertToDataBase(
                         AdBlockIpItem(
-                            Ip = binding.etProxyIp.text.toString()
+                            Ip = binding.etProxyIp.text.toString(),
+                            IsLocal = false
                         )
                     )
+                }
                 else
                     withContext(Dispatchers.Main) {
                         context?.let { it1 -> Utils.makeToast(it1, "Ip is not correct") }
@@ -55,10 +59,15 @@ class IPViewFragment :
             IpDatabase.populateDatabase()
             setProgressVisibility(true)
         }
+        binding.viewDeleteFromDatabase.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+                viewModel?.deleteAllLocalIps()
+            }
+        }
     }
 
     private fun setRecyclerViews() {
-        viewModel?.getIPs()?.observe(viewLifecycleOwner) { value ->
+        viewModel?.getAddedIPs()?.observe(viewLifecycleOwner) { value ->
             setProgressVisibility(true)
             binding.rvAdBlockIPs.layoutManager = LinearLayoutManager(context)
             val adapter = IPsListAdapter(value) { adBlockItem ->
@@ -68,6 +77,13 @@ class IPViewFragment :
             }
             binding.rvAdBlockIPs.adapter = adapter
             setProgressVisibility(false)
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setObservers() {
+        viewModel?.getIpsSize()?.observe(viewLifecycleOwner) { value ->
+            binding.tvAdressCount.text = "Added $value addresses"
         }
     }
 }

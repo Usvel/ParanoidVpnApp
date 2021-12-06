@@ -15,6 +15,8 @@ data class AdBlockIpItem(
     var Domain: String? = "",
     @Expose()
     var IsDomain: Boolean = false,
+    @Expose()
+    var IsLocal: Boolean = false
 )
 
 class AdBlockIpDataGenerator {
@@ -27,7 +29,8 @@ class AdBlockIpDataGenerator {
                 adBlockItems.add(
                     AdBlockIpItem(
                         id = id++,
-                        Ip = ip
+                        Ip = ip,
+                        IsLocal = true
                     )
                 )
             }
