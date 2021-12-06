@@ -19,6 +19,9 @@ interface IpDao {
     @Query("SELECT * FROM ad_ip_item WHERE id = :id")
     fun getById(id: Long): AdBlockIpItem?
 
+    @Query("SELECT * FROM ad_ip_item WHERE Ip = :ip")
+    fun getItemByIp(ip: String): AdBlockIpItem?
+
     @Query("SELECT COUNT(Ip) FROM ad_ip_item WHERE Ip = :ip")
     fun getByIp(ip: String): Int
 

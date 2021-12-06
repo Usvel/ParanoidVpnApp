@@ -55,6 +55,21 @@ class IPViewFragment :
                     }
             }
         }
+        binding.viewDeleteIp.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val ip = binding.etProxyIp.text.toString()
+                if (Validators.validateIP(arrayListOf(ip))) {
+                    val ipItem = viewModel!!.getItemByIp(ip)
+                    if (ipItem != null){
+                        viewModel!!.deleteFromDataBase(ipItem)
+                    }
+                }
+                else
+                    withContext(Dispatchers.Main) {
+                        context?.let { it1 -> Utils.makeToast(it1, "Ip is not correct") }
+                    }
+            }
+        }
         binding.viewLoadFromDatabase.setOnClickListener {
             IpDatabase.populateDatabase()
             setProgressVisibility(true)
@@ -83,7 +98,7 @@ class IPViewFragment :
     @SuppressLint("SetTextI18n")
     private fun setObservers() {
         viewModel?.getIpsSize()?.observe(viewLifecycleOwner) { value ->
-            binding.tvAdressCount.text = "Added $value addresses"
+            binding.tvAddressCount.text = "Added $value addresses"
         }
     }
 }

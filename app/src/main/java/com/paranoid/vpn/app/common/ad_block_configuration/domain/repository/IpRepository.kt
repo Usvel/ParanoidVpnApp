@@ -14,6 +14,8 @@ class IpRepository {
 
     fun getConfig(id: Long) = ipDao.getById(id)
 
+    fun getConfigByIp(ip: String) = ipDao.getItemByIp(ip)
+
     fun getConfigCount(ip: String) = ipDao.getByIp(ip)
 
     suspend fun addIp(proxyItem: AdBlockIpItem) {

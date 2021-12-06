@@ -30,6 +30,10 @@ class IpViewViewModel(application: Application) : BaseFragmentViewModel() {
         ipRepository.deleteItem(ipItem)
     }
 
+    fun getItemByIp(ip: String): AdBlockIpItem? {
+        return ipRepository.getConfigByIp(ip)
+    }
+
     suspend fun deleteAllLocalIps() {
         ipRepository.deleteAllLocalIps()
     }

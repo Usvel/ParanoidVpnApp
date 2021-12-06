@@ -21,15 +21,29 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:id="@+id/tvAdressCount"
+            android:id="@+id/tvPreloadedDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/real_medium_padding"
-            tools:text="@string/added_adresses"
-            android:textSize="@dimen/navigation_proxy_title_text_size"
+            android:layout_marginTop="@dimen/small_padding"
+            android:paddingStart="@dimen/real_medium_padding"
+            android:paddingEnd="@dimen/real_medium_padding"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvConfigTitle"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvPreloadedTitle"
+            android:text="@string/preloaded_data_desc" />
+
+        <TextView
+            android:id="@+id/tvAddressCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/real_medium_padding"
+            android:layout_marginTop="@dimen/small_padding"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPreloadedDescription"
+            tools:text="@string/added_addresses" />
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilAdProxyIp"
@@ -71,48 +85,82 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/real_medium_padding"
-            android:backgroundTint="?attr/backgroundVioletLight"
+            android:layout_marginEnd="@dimen/small_padding"
+            android:backgroundTint="?attr/iconBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:layout_constraintEnd_toStartOf="@+id/viewDeleteIp"
+            app:layout_constraintTop_toBottomOf="@+id/tilAdProxyIp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_advert_ip"
+                android:padding="@dimen/settings_fragment_icon_padding" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewDeleteIp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:layout_marginEnd="@dimen/real_medium_padding"
+            android:backgroundTint="?attr/iconBackgroundRed"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="20dp"
             app:cardElevation="3dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tilAdProxyIp">
 
-            <TextView
-                android:id="@+id/tvAddIp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/add_advert_ip"
-                android:textColor="@color/text_view_black" />
+            <ImageView
+                android:layout_width="@dimen/fragment_settings_buttons_sizes"
+                android:layout_height="@dimen/fragment_settings_buttons_sizes"
+                android:contentDescription="@string/delete_advertisement_ip"
+                android:padding="@dimen/settings_fragment_icon_padding"
+                android:src="@drawable/ic_delete"
+                app:tint="@color/text_view_black" />
 
         </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/tvPreloadedTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/preloaded_data"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:textSize="@dimen/navigation_proxy_title_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewAddIp" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/viewLoadFromDatabase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/real_medium_padding"
-            android:backgroundTint="?attr/backgroundVioletLight"
+            android:layout_marginStart="@dimen/real_medium_padding"
             android:clickable="true"
             android:focusable="true"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:backgroundTint="?attr/iconBackground"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="20dp"
             app:cardElevation="3dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewAddIp">
+            app:layout_constraintTop_toBottomOf="@+id/tvAddressCount">
 
             <TextView
-                android:id="@+id/tvLoadFromDatabase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/load_ips_from_database_make_take_times"
-                android:textColor="@color/text_view_black" />
+                android:text="@string/add_100_ips_from_local_db"
+                android:padding="@dimen/settings_fragment_icon_padding" />
+
 
         </androidx.cardview.widget.CardView>
 
@@ -120,24 +168,23 @@
             android:id="@+id/viewDeleteFromDatabase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/real_medium_padding"
-            android:backgroundTint="?attr/backgroundVioletLight"
+            android:backgroundTint="?attr/iconBackgroundRed"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="20dp"
             app:cardElevation="3dp"
+            android:layout_marginEnd="@dimen/real_medium_padding"
+            app:layout_constraintBottom_toBottomOf="@+id/viewLoadFromDatabase"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewLoadFromDatabase">
+            app:layout_constraintTop_toTopOf="@+id/viewLoadFromDatabase">
 
             <TextView
-                android:id="@+id/tvDeleteFromDatabase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:text="@string/delete_from_database"
-                android:textColor="@color/text_view_black" />
+                android:padding="@dimen/settings_fragment_icon_padding" />
+
 
         </androidx.cardview.widget.CardView>
 
