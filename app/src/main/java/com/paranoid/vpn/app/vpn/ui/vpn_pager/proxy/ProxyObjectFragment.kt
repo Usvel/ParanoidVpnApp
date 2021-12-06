@@ -167,6 +167,10 @@ class ProxyObjectFragment() :
 
         oldViewModel.getAllProxiesFromNetwork().observe(viewLifecycleOwner) { value ->
             binding.rvOnlineProxy.layoutManager = LinearLayoutManager(context)
+            if(value.isNotEmpty())
+                binding.tvNoOnlineProxies.visibility = View.GONE
+            else
+                binding.tvNoOnlineProxies.visibility = View.VISIBLE
             val adapter =
                 ProxyOnlineListAdapter(value, warningColor, errorColor) { proxyItem, code ->
                     when (code) {
@@ -180,17 +184,25 @@ class ProxyObjectFragment() :
                         else -> {}
                     }
                 }
+            if (adapter.itemCount == 0)
+                binding.tvNoOnlineProxies.visibility = View.VISIBLE
             binding.rvOnlineProxy.adapter = adapter
         }
 
         oldViewModel.getAllProxies().observe(viewLifecycleOwner) { value ->
             binding.rvLocalProxy.layoutManager = LinearLayoutManager(context)
+            if(value.isNotEmpty())
+                binding.tvNoLocalProxies.visibility = View.GONE
+            else
+                binding.tvNoLocalProxies.visibility = View.VISIBLE
             val adapter = ProxyLocalListAdapter(value) { proxyItem, code ->
                 when (code) {
                     ProxyClickHandlers.Info -> openProxyInFragment(proxyItem, true)
                     else -> {}
                 }
             }
+            if (adapter.itemCount == 0)
+                binding.tvNoLocalProxies.visibility = View.VISIBLE
             binding.rvLocalProxy.adapter = adapter
         }
 

@@ -33,6 +33,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvLocalHeader">
 
+            <TextView
+                android:id="@+id/tvNoLocalProxies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:gravity="center"
+                android:text="@string/no_local_proxy_saved"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvLocalProxy"
                 android:layout_width="match_parent"
@@ -79,6 +87,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNetworkHeader"
         app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/tvNoOnlineProxies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/can_t_load_online_data"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvOnlineProxy"

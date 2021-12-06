@@ -168,4 +168,6 @@
     <string name="delete_advertisement_ip">Delete advertisement ip</string>
     <string name="add_100_ips_from_local_db">Add 100 IPs from local DB</string>
     <string name="preloaded_data_desc">We have a big number of preloaded ips, but full usage of them may can slow down your connection speed, so you can increase the number of preloaded ips by constant value and check the result</string>
+    <string name="no_local_proxy_saved">No local proxy saved</string>
+    <string name="can_t_load_online_data">Can\'t load online data</string>
 </resources>
