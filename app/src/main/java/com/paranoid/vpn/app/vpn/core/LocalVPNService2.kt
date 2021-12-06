@@ -11,10 +11,7 @@ import android.os.IBinder
 import android.os.ParcelFileDescriptor
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.lifecycle.viewModelScope
 import com.google.gson.GsonBuilder
-import com.paranoid.vpn.app.common.utils.VPNState
-import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigDataGenerator
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import com.paranoid.vpn.app.vpn.core.handlers.udp.BioUdpHandler
 import com.paranoid.vpn.app.vpn.core.handlers.tcp.NioSingleThreadTcpHandler
@@ -114,7 +111,7 @@ class LocalVPNService2 : VpnService() {
                 vpnInterface!!.fileDescriptor,
                 deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
                 deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
-                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>
+                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
             ).run()
         }
         VPNRunnableJob!!.start()

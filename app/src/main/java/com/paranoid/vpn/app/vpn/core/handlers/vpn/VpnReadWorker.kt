@@ -1,7 +1,8 @@
 package com.paranoid.vpn.app.vpn.core.handlers.vpn
 
 import android.util.Log
-import com.paranoid.vpn.app.vpn.ui.VPNFragment
+import com.paranoid.vpn.app.common.ad_block_configuration.domain.model.AdBlockIpItem
+import com.paranoid.vpn.app.common.ad_block_configuration.domain.repository.IpRepository
 import com.paranoid.vpn.app.vpn.core.LocalVPNService2
 import com.paranoid.vpn.app.vpn.core.config.Config
 import com.paranoid.vpn.app.vpn.core.handlers.SuspendableRunnable
@@ -13,6 +14,7 @@ import java.io.FileDescriptor
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
+import java.net.Inet4Address
 import java.nio.ByteBuffer
 import java.util.concurrent.BlockingQueue
 import kotlin.coroutines.coroutineContext
@@ -22,10 +24,18 @@ class VpnReadWorker(
     private val deviceToNetworkUDPQueue: BlockingQueue<Packet>,
     private val deviceToNetworkTCPQueue: BlockingQueue<Packet>,
     private val networkToDeviceQueue: BlockingQueue<ByteBuffer>,
-): SuspendableRunnable {
+) : SuspendableRunnable {
+
+    private var advBlockList: List<AdBlockIpItem>? = null
 
     override suspend fun run() {
         Log.i(LocalVPNService2.TAG, "VPNRunnable Started")
+
+        withContext(Dispatchers.Main) {
+            IpRepository().readAllData.observeForever {
+                advBlockList = it
+            }
+        }
         val vpnInput = FileInputStream(
             vpnFileDescriptor
         ).channel
@@ -48,29 +58,42 @@ class VpnReadWorker(
                 if (readBytes > 0) {
                     bufferToNetwork.flip()
                     val packet = runInterruptible { Packet(bufferToNetwork) }
-                    when {
-                        packet.isUDP() -> {
-                            if (Config.logRW) {
-                                Log.i(LocalVPNService2.TAG, "read udp$readBytes")
+                    if (advBlockList
+                            ?.filter {
+                                Inet4Address.getByName(it.Ip) == packet.ip4Header.destinationAddress ||
+                                        Inet4Address.getByName(it.Ip) == packet.ip4Header.sourceAddress
                             }
-                            deviceToNetworkUDPQueue.offer(packet)
-                        }
-                        packet.isTCP() -> {
-                            if (Config.logRW) {
-                                Log.i(LocalVPNService2.TAG, "read tcp $readBytes")
+                            .isNullOrEmpty()
+                    ) {
+                        when {
+                            packet.isUDP() -> {
+                                if (Config.logRW) {
+                                    Log.i(LocalVPNService2.TAG, "read udp$readBytes")
+                                }
+                                deviceToNetworkUDPQueue.offer(packet)
                             }
-                            deviceToNetworkTCPQueue.offer(packet)
-                        }
-                        else -> {
-                            Log.w(
-                                LocalVPNService2.TAG,
-                                String.format(
-                                    "Unknown packet protocol type %d",
-                                    packet.ip4Header.protocolNum
+                            packet.isTCP() -> {
+                                if (Config.logRW) {
+                                    Log.i(LocalVPNService2.TAG, "read tcp $readBytes")
+                                }
+                                deviceToNetworkTCPQueue.offer(packet)
+                            }
+                            else -> {
+                                Log.w(
+                                    LocalVPNService2.TAG,
+                                    String.format(
+                                        "Unknown packet protocol type %d",
+                                        packet.ip4Header.protocolNum
+                                    )
                                 )
-                            )
+                            }
                         }
-                    }
+                    } else
+                        Log.d(
+                            LocalVPNService2.TAG,
+                            "blocked ip: ${packet.ip4Header.destinationAddress}"
+                        )
+
                 }
             }
         } catch (e: IOException) {
