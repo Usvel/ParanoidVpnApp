@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@null">
+    android:background="@null"
+    app:layoutDescription="@xml/page_vpn_button_scene">
 
     <LinearLayout
         android:id="@+id/llConnectionStatus"
@@ -93,6 +94,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cvVpnButtonBackground"
+        app:layout_constraintVertical_bias="1.0"
         tools:text="@string/not_connected" />
 
 
@@ -102,13 +104,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/base_padding"
         android:layout_marginEnd="@dimen/base_padding"
-        android:layout_marginBottom="@dimen/base_padding"
         android:backgroundTint="?attr/backgroundVioletLight"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="@dimen/card_elevation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvIsConnected">
 
         <LinearLayout
             android:id="@+id/cvMainConfigurationLayout"
@@ -207,4 +209,4 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>
