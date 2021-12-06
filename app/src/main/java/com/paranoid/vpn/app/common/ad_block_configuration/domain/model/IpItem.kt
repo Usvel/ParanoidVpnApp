@@ -31,7 +31,6 @@ class AdBlockIpDataGenerator {
                 if (adBlockItems.none { it.Ip == randomIp })
                     adBlockItems.add(
                         AdBlockIpItem(
-                            id = id++,
                             Ip = randomIp,
                             IsLocal = true
                         )

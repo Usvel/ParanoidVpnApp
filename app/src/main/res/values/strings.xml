@@ -156,7 +156,7 @@
     <string name="view_information_about_local_proxy">Information about local proxy</string>
     <string name="expand_menu">Expand menu</string>
     <string name="add_advert_ip">Add advertisement ip</string>
-    <string name="load_ips_from_database_make_take_times">Load from local database</string>
+    <string name="load_ips_from_database_make_take_times">Load 100 random addresses from local database</string>
     <string name="data_loading">Data loading…</string>
     <string name="advertisement_blocking_list">Advertisement blocking list</string>
     <string name="about_us">About</string>

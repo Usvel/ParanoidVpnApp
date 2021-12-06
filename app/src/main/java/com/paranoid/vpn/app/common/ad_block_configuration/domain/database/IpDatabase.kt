@@ -44,7 +44,7 @@ abstract class IpDatabase : RoomDatabase() {
         fun populateDatabase() {
             val ipDao = getInstance().IpDao()
             CoroutineScope(IO).launch {
-                val data = AdBlockIpDataGenerator.getAdBlockIpItems(500)
+                val data = AdBlockIpDataGenerator.getAdBlockIpItems(100)
                 ipDao.insertAll(data)
             }
         }
