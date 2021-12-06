@@ -10,11 +10,9 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -89,48 +87,50 @@ class VPNObjectFragment() :
         val tvNoData = bottomSheetDialog.findViewById<TextView>(R.id.tvNoData)
 
         rvAllConfigs!!.layoutManager = LinearLayoutManager(context)
-        if ((filter == null) || (filter == ""))
-        oldViewModel.getAllConfigs().observe(viewLifecycleOwner) { value ->
-            val adapter = VPNConfigAdapter(value) { id, code ->
-                when (code) {
-                    ConfigurationClickHandlers.GetConfiguration -> showConfigDetails(id)
-                    ConfigurationClickHandlers.SetConfiguration -> {
-                        lifecycleScope.launch(Dispatchers.IO) {
-                            oldViewModel.setConfig(id)
-                            if (connection.isBound)
-                                setVpnConfig()
-                            oldViewModel.getConfig()?.let { updateConfigText(configName = it.name) }
-                            withContext(Dispatchers.Main) {
-                                hideBottomSheetDialog()
+        if ((filter == null) || (filter == "")) {
+            oldViewModel.getAllConfigs(favorite).observe(viewLifecycleOwner) { value ->
+                val adapter = VPNConfigAdapter(value) { id, code ->
+                    when (code) {
+                        ConfigurationClickHandlers.GetConfiguration -> showConfigDetails(id)
+                        ConfigurationClickHandlers.SetConfiguration -> {
+                            lifecycleScope.launch(Dispatchers.IO) {
+                                oldViewModel.setConfig(id)
+                                if (connection.isBound)
+                                    setVpnConfig()
+                                oldViewModel.getConfig()
+                                    ?.let { updateConfigText(configName = it.name) }
+                                withContext(Dispatchers.Main) {
+                                    hideBottomSheetDialog()
+                                }
                             }
                         }
-                    }
-                    ConfigurationClickHandlers.QRCode -> CoroutineScope(Dispatchers.IO).launch {
-                        showQRCode(id)
-                    }
-                    ConfigurationClickHandlers.Share -> {
-                        CoroutineScope(Dispatchers.IO).launch {
-                            val config = VPNConfigRepository()
-                                .getConfig(id)
-                            val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
-                            shareConfiguration(gson.toJson(config))
+                        ConfigurationClickHandlers.QRCode -> CoroutineScope(Dispatchers.IO).launch {
+                            showQRCode(id)
                         }
-                    }
-                    ConfigurationClickHandlers.Edit -> openConfigEditingFragment(id)
-                    ConfigurationClickHandlers.Like -> {
-                        CoroutineScope(Dispatchers.IO).launch {
-                            val config = VPNConfigRepository()
-                                .getConfig(id)
-                            if (config != null) {
-                                config.favorite = !config.favorite
+                        ConfigurationClickHandlers.Share -> {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                val config = VPNConfigRepository()
+                                    .getConfig(id)
+                                val gson =
+                                    GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+                                shareConfiguration(gson.toJson(config))
                             }
-                            if (config != null) {
-                                oldViewModel.updateConfig(config)
+                        }
+                        ConfigurationClickHandlers.Edit -> openConfigEditingFragment(id)
+                        ConfigurationClickHandlers.Like -> {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                val config = VPNConfigRepository()
+                                    .getConfig(id)
+                                if (config != null) {
+                                    config.favorite = !config.favorite
+                                }
+                                if (config != null) {
+                                    oldViewModel.updateConfig(config)
+                                }
                             }
                         }
                     }
                 }
-            }
                 rvAllConfigs.adapter = adapter
                 if (adapter.itemCount == 0)
                     tvNoData?.visibility = View.VISIBLE
@@ -138,8 +138,8 @@ class VPNObjectFragment() :
                     tvNoData?.visibility = View.GONE
 
 
-        }
-            else {
+            }
+        } else {
             lifecycleScope.launch(Dispatchers.IO) {
                 val result = oldViewModel.getConfigByName(filter)
                 if (result != null) {
