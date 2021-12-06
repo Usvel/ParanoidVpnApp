@@ -163,4 +163,5 @@
     <string name="coming_soon">Coming soon</string>
     <string name="added_adresses">Added</string>
     <string name="delete_from_database">Delete local addresses</string>
+    <string name="year_2021">2021</string>
 </resources>

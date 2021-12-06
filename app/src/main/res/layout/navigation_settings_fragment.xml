@@ -62,29 +62,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/settings_fragment_small_padding"
-            android:backgroundTint="?attr/backgroundVioletLight"
+            android:backgroundTint="?attr/iconBackground"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="20dp"
             app:cardElevation="3dp"
-        app:layout_constraintStart_toStartOf="@+id/tvConfigurationNumber"
-        app:layout_constraintTop_toBottomOf="@+id/tvConfigurationNumber">
+            app:layout_constraintStart_toStartOf="@+id/tvConfigurationNumber"
+            app:layout_constraintTop_toBottomOf="@+id/tvConfigurationNumber">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="@string/add_configuration"
-            android:textColor="@color/text_view_black" />
-    </androidx.cardview.widget.CardView>
+            <ImageView
+                android:layout_width="@dimen/fragment_settings_buttons_sizes"
+                android:layout_height="@dimen/fragment_settings_buttons_sizes"
+                android:contentDescription="@string/add_configuration"
+                android:padding="@dimen/settings_fragment_icon_padding"
+                android:src="@drawable/ic_add"
+                app:tint="@color/text_view_black" />
+
+        </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/viewAddConfigurationButtonByQr"
         android:layout_width="@dimen/fragment_settings_buttons_sizes"
         android:layout_height="@dimen/fragment_settings_buttons_sizes"
         android:layout_marginTop="@dimen/settings_fragment_small_padding"
-        android:backgroundTint="?attr/backgroundVioletLight"
+        android:backgroundTint="?attr/iconBackground"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:focusable="true"
@@ -125,28 +127,29 @@
         app:layout_constraintStart_toStartOf="@+id/tvVPNConfigurationGroup"
         app:layout_constraintTop_toBottomOf="@+id/proxyConfigurationGroup" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/addProxyConfigurationButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/settings_fragment_small_padding"
-        android:backgroundTint="?attr/backgroundVioletLight"
-        app:cardElevation="3dp"
-        android:focusable="true"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintStart_toStartOf="@+id/proxyConfigurationNumber"
-        app:layout_constraintTop_toBottomOf="@+id/proxyConfigurationNumber">
-
-        <TextView
+        <androidx.cardview.widget.CardView
+            android:id="@+id/addProxyConfigurationButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textColor="@color/text_view_black"
-            android:text="@string/add_proxy_configuration" />
+            android:layout_marginTop="@dimen/settings_fragment_small_padding"
+            android:backgroundTint="?attr/iconBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:layout_constraintStart_toStartOf="@+id/proxyConfigurationNumber"
+            app:layout_constraintTop_toBottomOf="@+id/proxyConfigurationNumber">
 
-    </androidx.cardview.widget.CardView>
+            <ImageView
+                android:layout_width="@dimen/fragment_settings_buttons_sizes"
+                android:layout_height="@dimen/fragment_settings_buttons_sizes"
+                android:contentDescription="@string/add_configuration"
+                android:padding="@dimen/settings_fragment_icon_padding"
+                android:src="@drawable/ic_add"
+                app:tint="@color/text_view_black" />
+
+        </androidx.cardview.widget.CardView>
 
 
     <TextView
@@ -167,7 +170,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/settings_fragment_small_padding"
-            android:backgroundTint="?attr/backgroundVioletLight"
+            android:backgroundTint="?attr/iconBackground"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
@@ -176,12 +179,13 @@
             app:layout_constraintStart_toStartOf="@+id/adIpConfigurationGroup"
             app:layout_constraintTop_toBottomOf="@+id/adIpConfigurationGroup">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/view_advertisement_ips"
-                android:textColor="@color/text_view_black" />
+            <ImageView
+                android:layout_width="@dimen/fragment_settings_buttons_sizes"
+                android:layout_height="@dimen/fragment_settings_buttons_sizes"
+                android:contentDescription="@string/view_advertisement_ips"
+                android:padding="@dimen/settings_fragment_icon_padding"
+                android:src="@drawable/ic_open_in_new"
+                app:tint="@color/text_view_black" />
 
         </androidx.cardview.widget.CardView>
 
@@ -189,23 +193,24 @@
             android:id="@+id/viewVpnBackup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/real_medium_padding"
-            android:layout_marginTop="@dimen/base_padding"
             android:backgroundTint="?attr/backgroundVioletLight"
+            android:layout_marginStart="10dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="20dp"
             app:cardElevation="3dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewAddConfigurationButton">
+            app:layout_constraintBottom_toBottomOf="@+id/viewAddConfigurationButtonByQr"
+            app:layout_constraintStart_toEndOf="@+id/viewAddConfigurationButtonByQr"
+            app:layout_constraintTop_toTopOf="@+id/viewAddConfigurationButtonByQr">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/backup"
-                android:textColor="@color/text_view_black" />
+            <ImageView
+                android:layout_width="@dimen/fragment_settings_buttons_sizes"
+                android:layout_height="@dimen/fragment_settings_buttons_sizes"
+                android:contentDescription="@color/text_view_black"
+                android:padding="@dimen/settings_fragment_icon_padding"
+                android:src="@drawable/ic_archive"
+                app:tint="@color/text_view_black" />
 
         </androidx.cardview.widget.CardView>
 
@@ -220,19 +225,20 @@
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="20dp"
-        app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewVpnBackup"
-        app:layout_constraintStart_toEndOf="@+id/viewVpnBackup"
-        app:layout_constraintTop_toTopOf="@+id/viewVpnBackup">
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/viewVpnBackup"
+            app:layout_constraintStart_toEndOf="@+id/viewVpnBackup"
+            app:layout_constraintTop_toTopOf="@+id/viewVpnBackup">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="@string/restore"
-            android:textColor="@color/text_view_black" />
+            <ImageView
+                android:layout_width="@dimen/fragment_settings_buttons_sizes"
+                android:layout_height="@dimen/fragment_settings_buttons_sizes"
+                android:contentDescription="@string/restore"
+                android:padding="@dimen/settings_fragment_icon_padding"
+                android:src="@drawable/ic_unarchive"
+                app:tint="@color/text_view_black" />
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/viewProxyBackup"
@@ -241,20 +247,21 @@
             android:backgroundTint="?attr/backgroundVioletLight"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginTop="@dimen/base_padding"
-            android:layout_marginStart="@dimen/real_medium_padding"
+            android:layout_marginStart="10dp"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="20dp"
             app:cardElevation="3dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addProxyConfigurationButton">
+            app:layout_constraintBottom_toBottomOf="@+id/addProxyConfigurationButton"
+            app:layout_constraintStart_toEndOf="@+id/addProxyConfigurationButton"
+            app:layout_constraintTop_toTopOf="@+id/addProxyConfigurationButton">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/backup"
-                android:textColor="@color/text_view_black" />
+            <ImageView
+                android:layout_width="@dimen/fragment_settings_buttons_sizes"
+                android:layout_height="@dimen/fragment_settings_buttons_sizes"
+                android:contentDescription="@color/text_view_black"
+                android:padding="@dimen/settings_fragment_icon_padding"
+                android:src="@drawable/ic_archive"
+                app:tint="@color/text_view_black" />
 
         </androidx.cardview.widget.CardView>
 
@@ -274,12 +281,13 @@
             app:layout_constraintStart_toEndOf="@+id/viewProxyBackup"
             app:layout_constraintTop_toTopOf="@+id/viewProxyBackup">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/restore"
-                android:textColor="@color/text_view_black" />
+            <ImageView
+                android:layout_width="@dimen/fragment_settings_buttons_sizes"
+                android:layout_height="@dimen/fragment_settings_buttons_sizes"
+                android:contentDescription="@string/restore"
+                android:padding="@dimen/settings_fragment_icon_padding"
+                android:src="@drawable/ic_unarchive"
+                app:tint="@color/text_view_black" />
 
         </androidx.cardview.widget.CardView>
 
@@ -290,20 +298,21 @@
             android:backgroundTint="?attr/backgroundVioletLight"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginTop="@dimen/base_padding"
-            android:layout_marginStart="@dimen/real_medium_padding"
+            android:layout_marginStart="10dp"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="20dp"
             app:cardElevation="3dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewAdIpConfigurationButton">
+            app:layout_constraintBottom_toBottomOf="@+id/viewAdIpConfigurationButton"
+            app:layout_constraintStart_toEndOf="@+id/viewAdIpConfigurationButton"
+            app:layout_constraintTop_toTopOf="@+id/viewAdIpConfigurationButton">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/backup"
-                android:textColor="@color/text_view_black" />
+            <ImageView
+                android:layout_width="@dimen/fragment_settings_buttons_sizes"
+                android:layout_height="@dimen/fragment_settings_buttons_sizes"
+                android:contentDescription="@color/text_view_black"
+                android:padding="@dimen/settings_fragment_icon_padding"
+                android:src="@drawable/ic_archive"
+                app:tint="@color/text_view_black" />
 
         </androidx.cardview.widget.CardView>
 
@@ -323,12 +332,13 @@
             app:layout_constraintStart_toEndOf="@+id/viewIpBackup"
             app:layout_constraintTop_toTopOf="@+id/viewIpBackup">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/restore"
-                android:textColor="@color/text_view_black" />
+            <ImageView
+                android:layout_width="@dimen/fragment_settings_buttons_sizes"
+                android:layout_height="@dimen/fragment_settings_buttons_sizes"
+                android:contentDescription="@string/restore"
+                android:padding="@dimen/settings_fragment_icon_padding"
+                android:src="@drawable/ic_unarchive"
+                app:tint="@color/text_view_black" />
 
         </androidx.cardview.widget.CardView>
 
@@ -351,10 +361,14 @@
             android:id="@+id/tvAboutContacts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/settings_fragment_small_padding"
+            android:layout_marginTop="@dimen/base_padding"
+            android:layout_marginBottom="@dimen/base_padding"
+            android:text="@string/coming_soon"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvAbout"
-            app:layout_constraintTop_toBottomOf="@+id/tvAbout"
-            android:text="@string/coming_soon" />
+            app:layout_constraintTop_toBottomOf="@+id/tvAbout" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
