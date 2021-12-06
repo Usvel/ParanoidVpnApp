@@ -70,7 +70,20 @@ class VPNObjectFragment() :
 
 
         CoroutineScope(Dispatchers.IO).launch {
-            oldViewModel.getConfig()?.let { updateConfigText(configName = it.name) }
+            oldViewModel.getConfig()?.let {
+                updateConfigText(configName = it.name)
+                withContext(Dispatchers.Main) {
+                    binding.ivEditIcon.visibility = View.VISIBLE
+                    binding.ivShareIcon.visibility = View.VISIBLE
+                    binding.ivQrIcon.visibility = View.VISIBLE
+                }
+            }
+            if (oldViewModel.getConfig() == null)
+                withContext(Dispatchers.Main) {
+                    binding.ivEditIcon.visibility = View.GONE
+                    binding.ivShareIcon.visibility = View.GONE
+                    binding.ivQrIcon.visibility = View.GONE
+                }
         }
         textUpdater = lifecycleScope.launch(Dispatchers.Default) {
             while (true) {

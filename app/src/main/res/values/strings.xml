@@ -11,7 +11,7 @@
     <string name="configuration_settings">Configuration settings</string>
     <string name="configuration_sharing">Configuration sharing</string>
     <string name="configuration_qr">Configuration qr</string>
-    <string name="test_first_configuration">First configuration</string>
+    <string name="test_first_configuration">No configuration</string>
     <string name="turn_on_vpn">Turn on VPN</string>
     <string name="not_connected">Not connected</string>
     <string name="connected">Connected</string>
