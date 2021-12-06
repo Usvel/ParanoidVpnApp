@@ -81,6 +81,9 @@ class VPNConfigAddFragment :
     }
 
     private fun setListeners(editConfig: Boolean) {
+        if (!editConfig) {
+            binding.deleteConfigurationButton.visibility = View.GONE
+        }
         binding.addConfigurationButton.setOnClickListener {
             if (editConfig) {
                 editConfig()

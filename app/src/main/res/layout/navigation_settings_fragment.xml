@@ -1,69 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".settings.ui.main.SettingsFragment">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvProfileHello"
-        android:paddingTop="@dimen/medium_padding"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/profile_fragment_content_margin_horizontal"
-        android:layout_marginTop="@dimen/profile_fragment_settings_margin_top"
-        android:text="@string/settings"
-        android:textColor="@color/text_view_dark_text_transparent"
-        android:textSize="@dimen/profile_fragment_name_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:context=".settings.ui.main.SettingsFragment">
 
-    <ImageView
-        android:id="@+id/ivMainSettingsIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:tint="@color/text_view_black"
-        android:alpha="0.5"
-        android:layout_marginTop="-95dp"
-        android:layout_marginEnd="-95dp"
-        android:contentDescription="@string/this_is_settings"
-        android:src="@drawable/ic_outline_settings_max"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tvProfileHello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/profile_fragment_content_margin_horizontal"
+            android:layout_marginTop="@dimen/profile_fragment_settings_margin_top"
+            android:paddingTop="@dimen/medium_padding"
+            android:text="@string/settings"
+            android:textColor="@color/text_view_dark_text_transparent"
+            android:textSize="@dimen/profile_fragment_name_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvVPNConfigurationGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/base_padding"
-        android:textSize="@dimen/settings_fragment_title_size"
-        android:textColor="@color/text_color_blue"
-        android:textStyle="bold"
-        android:text="@string/vpn_configurations"
-        app:layout_constraintStart_toStartOf="@+id/tvProfileHello"
-        app:layout_constraintTop_toBottomOf="@+id/tvProfileHello" />
+        <ImageView
+            android:id="@+id/ivMainSettingsIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-95dp"
+            android:layout_marginEnd="-95dp"
+            android:alpha="0.5"
+            android:contentDescription="@string/this_is_settings"
+            android:src="@drawable/ic_outline_settings_max"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_view_black" />
 
-    <TextView
-        android:id="@+id/tvConfigurationNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/settings_fragment_small_padding"
-        tools:text="@string/fragment_settings_tools_config_num"
-        app:layout_constraintStart_toStartOf="@+id/tvVPNConfigurationGroup"
-        app:layout_constraintTop_toBottomOf="@+id/tvVPNConfigurationGroup" />
+        <TextView
+            android:id="@+id/tvVPNConfigurationGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_padding"
+            android:text="@string/vpn_configurations"
+            android:textColor="@color/text_color_blue"
+            android:textSize="@dimen/settings_fragment_title_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tvProfileHello"
+            app:layout_constraintTop_toBottomOf="@+id/tvProfileHello" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/viewAddConfigurationButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/settings_fragment_small_padding"
-        android:backgroundTint="?attr/backgroundVioletLight"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="3dp"
+        <TextView
+            android:id="@+id/tvConfigurationNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_fragment_small_padding"
+            app:layout_constraintStart_toStartOf="@+id/tvVPNConfigurationGroup"
+            app:layout_constraintTop_toBottomOf="@+id/tvVPNConfigurationGroup"
+            tools:text="@string/fragment_settings_tools_config_num" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewAddConfigurationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_fragment_small_padding"
+            android:backgroundTint="?attr/backgroundVioletLight"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
         app:layout_constraintStart_toStartOf="@+id/tvConfigurationNumber"
         app:layout_constraintTop_toBottomOf="@+id/tvConfigurationNumber">
 
@@ -317,4 +321,29 @@
             android:textColor="@color/text_view_black" />
 
     </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/tvAbout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_padding"
+            android:text="@string/about_us"
+            android:textColor="@color/text_color_blue"
+            android:textSize="@dimen/settings_fragment_title_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/viewIpBackup"
+            app:layout_constraintTop_toBottomOf="@+id/viewIpBackup" />
+
+
+        <TextView
+            android:id="@+id/tvAboutContacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_fragment_small_padding"
+            app:layout_constraintStart_toStartOf="@+id/tvAbout"
+            app:layout_constraintTop_toBottomOf="@+id/tvAbout"
+            android:text="@string/coming_soon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
