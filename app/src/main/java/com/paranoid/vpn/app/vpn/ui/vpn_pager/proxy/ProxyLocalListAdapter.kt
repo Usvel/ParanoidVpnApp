@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
 import com.paranoid.vpn.app.common.utils.ProxyClickHandlers
+
 
 class ProxyLocalListAdapter(
     private val mList: List<ProxyItem>,
@@ -48,10 +51,25 @@ class ProxyLocalListAdapter(
         holder.infoButton.setOnClickListener {
             onItemClicked(configItem, ProxyClickHandlers.Info)
         }
+
+        setAnimation(holder.itemView, position)
     }
 
     override fun getItemCount(): Int {
         return mList.size
+    }
+
+    private var lastPosition = -1
+
+    private fun setAnimation(viewToAnimate: View, position: Int) {
+        if (position > lastPosition) {
+            val animation: Animation = AnimationUtils.loadAnimation(
+                viewToAnimate.context,
+                R.anim.scale_fade_anim
+            )
+            viewToAnimate.startAnimation(animation)
+            lastPosition = position
+        }
     }
 
     class ViewHolder(

@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -62,10 +64,23 @@ class ProxyOnlineListAdapter(
         holder.saveButton.setOnClickListener {
             onItemClicked(configItem, ProxyClickHandlers.Save)
         }
+        setAnimation(holder.itemView, position)
     }
 
     override fun getItemCount(): Int {
         return mList.size
+    }
+
+    private var lastPosition = -1
+    private fun setAnimation(viewToAnimate: View, position: Int) {
+        if (position > lastPosition) {
+            val animation: Animation = AnimationUtils.loadAnimation(
+                viewToAnimate.context,
+                R.anim.scale_fade_anim
+            )
+            viewToAnimate.startAnimation(animation)
+            lastPosition = position
+        }
     }
 
     class ViewHolder(

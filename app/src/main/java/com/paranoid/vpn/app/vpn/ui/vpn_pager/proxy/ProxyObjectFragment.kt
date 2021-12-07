@@ -24,6 +24,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+
 class ProxyObjectFragment() :
     BaseFragment<PageProxyListBinding, VPNViewModel>(PageProxyListBinding::inflate) {
 
@@ -201,11 +202,8 @@ class ProxyObjectFragment() :
                     else -> {}
                 }
             }
-            if (adapter.itemCount == 0)
-                binding.tvNoLocalProxies.visibility = View.VISIBLE
             binding.rvLocalProxy.adapter = adapter
         }
-
     }
 
     private fun openProxyInFragment(proxyItem: ProxyItem, local: Boolean) {

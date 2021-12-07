@@ -3,6 +3,8 @@ package com.paranoid.vpn.app.vpn.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -57,6 +59,21 @@ class VPNConfigAdapter(
         }
         holder.imFavIcon.setOnClickListener {
             onItemClicked(configItem.id, ConfigurationClickHandlers.Like)
+        }
+
+        setAnimation(holder.itemView, position)
+    }
+
+    private var lastPosition = -1
+
+    private fun setAnimation(viewToAnimate: View, position: Int) {
+        if (position > lastPosition) {
+            val animation: Animation = AnimationUtils.loadAnimation(
+                viewToAnimate.context,
+                R.anim.scale_fade_anim
+            )
+            viewToAnimate.startAnimation(animation)
+            lastPosition = position
         }
     }
 

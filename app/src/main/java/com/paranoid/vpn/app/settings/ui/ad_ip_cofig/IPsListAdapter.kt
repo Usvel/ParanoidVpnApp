@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -37,14 +39,28 @@ class IPsListAdapter(
         if (adBlockItem.IsDomain){
             holder.tvIp.text = adBlockItem.Domain
             holder.tvType.text = "Domain"
-        }
-        else{
+        } else {
             holder.tvIp.text = adBlockItem.Ip
             holder.tvType.text = "IP"
         }
 
         holder.imDelete.setOnClickListener {
             onItemClicked(adBlockItem)
+        }
+
+        setAnimation(holder.itemView, position)
+    }
+
+    private var lastPosition = -1
+
+    private fun setAnimation(viewToAnimate: View, position: Int) {
+        if (position > lastPosition) {
+            val animation: Animation = AnimationUtils.loadAnimation(
+                viewToAnimate.context,
+                R.anim.scale_fade_anim
+            )
+            viewToAnimate.startAnimation(animation)
+            lastPosition = position
         }
     }
 
