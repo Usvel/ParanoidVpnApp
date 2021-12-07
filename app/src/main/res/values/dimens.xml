@@ -96,4 +96,10 @@
     <!--  Proxy Fragment  -->
     <dimen name="proxy_header_title_size">15sp</dimen>
     <dimen name="navigation_proxy_title_text_size">20sp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">0dp</dimen>
 </resources>

@@ -157,6 +157,9 @@
     <string name="advertisement_blocking_list">Advertisement blocking list</string>
     <string name="about_us">About us</string>
     <string name="coming_soon">Coming soon</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
     <string name="added_addresses">Already advert ips added</string>
     <string name="delete_from_database">Delete all</string>
     <string name="year_2021" translatable="false">2021</string>
