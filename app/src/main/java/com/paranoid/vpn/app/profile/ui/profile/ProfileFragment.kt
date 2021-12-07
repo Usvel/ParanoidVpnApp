@@ -15,7 +15,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
-import com.paranoid.vpn.app.common.ui.base.MessageData
 import com.paranoid.vpn.app.common.utils.NetworkStatus
 import com.paranoid.vpn.app.common.utils.UserLoggedState
 import com.paranoid.vpn.app.common.utils.Utils

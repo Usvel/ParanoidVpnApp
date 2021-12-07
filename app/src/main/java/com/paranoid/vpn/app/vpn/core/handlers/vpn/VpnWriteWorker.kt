@@ -1,12 +1,12 @@
 package com.paranoid.vpn.app.vpn.core.handlers.vpn
 
 import android.util.Log
-import com.paranoid.vpn.app.vpn.ui.VPNFragment
 import com.paranoid.vpn.app.vpn.core.LocalVPNService2
 import com.paranoid.vpn.app.vpn.core.config.Config
 import com.paranoid.vpn.app.vpn.core.handlers.SuspendableRunnable
 import com.paranoid.vpn.app.vpn.ui.vpn_pager.vpn.VPNObjectFragment
-import kotlinx.coroutines.*
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.runInterruptible
 import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
 import java.util.concurrent.BlockingQueue

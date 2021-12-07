@@ -1,7 +1,6 @@
 package com.paranoid.vpn.app.profile.remote
 
 import android.net.Uri
-import com.google.firebase.auth.EmailAuthCredential
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.paranoid.vpn.app.common.remote.FirebaseService

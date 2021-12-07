@@ -1,7 +1,6 @@
 package com.paranoid.vpn.app.common.vpn_configuration.domain.database
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 

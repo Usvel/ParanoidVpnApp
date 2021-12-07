@@ -11,7 +11,6 @@ import com.paranoid.vpn.app.common.ui.base.MessageData
 import retrofit2.HttpException
 import java.io.BufferedReader
 import java.io.File
-import java.io.File.separator
 import java.io.IOException
 import java.io.InputStreamReader
 import java.net.ConnectException
@@ -20,7 +19,6 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.text.DecimalFormat
 import java.util.regex.Pattern
-import kotlin.math.roundToInt
 
 private const val NETWORK_CODE_500 = 500
 
@@ -171,7 +169,7 @@ class Validators {
         )
 
         private fun validate(ip: String?): Boolean {
-            return PATTERN.matcher(ip).matches()
+            return PATTERN.matcher(ip as CharSequence).matches()
         }
 
         fun validateIP(ips: List<String>): Boolean {

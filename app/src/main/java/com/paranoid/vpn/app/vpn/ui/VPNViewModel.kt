@@ -3,13 +3,8 @@ package com.paranoid.vpn.app.vpn.ui
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkCapabilities
-import android.net.NetworkRequest
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
 import com.paranoid.vpn.app.common.proxy_configuration.domain.repository.ProxyRepository
@@ -19,8 +14,6 @@ import com.paranoid.vpn.app.common.utils.Utils.getString
 import com.paranoid.vpn.app.common.utils.VPNState
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import com.paranoid.vpn.app.common.vpn_configuration.domain.repository.VPNConfigRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -123,22 +116,6 @@ class VPNViewModel(
 
     fun getAllProxies(): LiveData<List<ProxyItem>> {
         return allProxies
-    }
-
-    fun getProxyFromNetwork() {
-        proxyApi?.getProxy(1)
-            ?.enqueue(object : Callback<ProxyItem> {
-                override fun onResponse(call: Call<ProxyItem>, response: Response<ProxyItem>) {
-                    val proxyItem: ProxyItem? = response.body()
-                    if (proxyItem != null) {
-                        currentProxy = proxyItem
-                    }
-                }
-
-                override fun onFailure(call: Call<ProxyItem>, t: Throwable) {
-                    t.printStackTrace()
-                }
-            })
     }
 
     fun loadAllProxiesFromNetwork(

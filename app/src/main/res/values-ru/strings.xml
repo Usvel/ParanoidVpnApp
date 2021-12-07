@@ -34,7 +34,7 @@
     <string name="view_information_about_online_proxy">Информация об Online прокси</string>
     <string name="view_information_about_local_proxy">Информация о локальных прокси</string>
     <string name="expand_menu">Развернуть меню</string>
-    <string name="add_advert_ip">Дбавить рекламный адрес</string>
+    <string name="add_advert_ip">Добавить рекламный адрес</string>
     <string name="scan_qr_code">Сканировать QR-код</string>
     <string name="proceed">Далее</string>
     <string name="name_user">Странник</string>
@@ -116,6 +116,8 @@
     <string name="edit_proxy_title">Добавть/Удалить прокси</string>
     <string name="edit_config_title">Добавть/Удалить конфигурацию</string>
     <string name="proxy">Прокси</string>
+    <string name="dialog_delete">Удалить</string>
+    <string name="rule">Правило %1$s</string>
     <plurals name="proxies_number" tools:ignore="UnusedQuantity">
         <item quantity="one">Уже добавлен %1$s прокси</item>
         <item quantity="few">Уже добавлено %1$s прокси</item>

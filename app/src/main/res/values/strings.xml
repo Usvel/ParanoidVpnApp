@@ -165,6 +165,8 @@
     <string name="can_t_load_online_data">Can\'t load online data</string>
     <string name="please_wait">Please, wait</string>
     <string name="connection_speed" translatable="false">↑ - %1$s · ↓ - %2$s</string>
+    <string name="dialog_delete">Delete</string>
+    <string name="rule">Rule %1$s</string>
     <plurals name="proxies_number">
         <item quantity="one">Already added %1$s proxy</item>
         <item quantity="other">Already added %1$s proxies</item>

@@ -199,7 +199,8 @@ class VPNConfigAddFragment :
                     target_port = targetPortDialog
                 )
             )
-            rulesAdapter?.notifyDataSetChanged()
+            //rulesAdapter?.notifyDataSetChanged()
+            rulesAdapter?.notifyItemInserted(rulesList.size-1)
         } catch (e: IllegalArgumentException) {
             context?.let { Utils.makeToast(it, "Incorrect value passed!") }
         }

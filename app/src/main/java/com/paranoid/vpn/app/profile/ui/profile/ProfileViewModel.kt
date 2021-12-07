@@ -10,7 +10,6 @@ import com.paranoid.vpn.app.common.ui.base.BaseFragmentViewModel
 import com.paranoid.vpn.app.common.ui.base.MessageData
 import com.paranoid.vpn.app.common.utils.NetworkStatus
 import com.paranoid.vpn.app.common.utils.UserLoggedState
-import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.utils.Utils.getString
 import com.paranoid.vpn.app.profile.domain.entity.UserEntity
 import com.paranoid.vpn.app.profile.domain.usecase.DeleteFirebaseUserUseCase

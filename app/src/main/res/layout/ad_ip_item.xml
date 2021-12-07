@@ -21,15 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/small_padding"
-                android:layout_marginTop="@dimen/minimum_padding"
-                android:layout_marginBottom="@dimen/minimum_padding"
-                android:orientation="horizontal">
 
-                <LinearLayout
+        <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_padding"
@@ -55,7 +48,6 @@
                         tools:text="10.10.10.10" />
                 </LinearLayout>
 
-            </LinearLayout>
         </HorizontalScrollView>
     </androidx.cardview.widget.CardView>
 

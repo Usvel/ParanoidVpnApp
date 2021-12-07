@@ -1,27 +1,15 @@
 package com.paranoid.vpn.app.vpn.ui
 
-import android.app.Activity
-import android.content.Intent
-import android.net.VpnService
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat.getDrawable
-import androidx.core.content.ContextCompat.startForegroundService
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.common.utils.Utils
-import com.paranoid.vpn.app.common.utils.VPNState
 import com.paranoid.vpn.app.databinding.NavigationVpnFragmentBinding
-import com.paranoid.vpn.app.vpn.core.LocalVPNService2
 import com.paranoid.vpn.app.vpn.ui.vpn_pager.VPNFragmentPagerAdapter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import java.util.concurrent.atomic.AtomicLong
 
 class VPNFragment :
     BaseFragment<NavigationVpnFragmentBinding, VPNViewModel>(NavigationVpnFragmentBinding::inflate) {

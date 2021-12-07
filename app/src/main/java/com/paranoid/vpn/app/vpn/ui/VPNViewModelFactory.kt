@@ -1,11 +1,7 @@
 package com.paranoid.vpn.app.vpn.ui
 
 import android.app.Application
-import android.content.Context
-import android.net.ConnectivityManager
-import android.util.Log
 import androidx.lifecycle.ViewModel
-
 import androidx.lifecycle.ViewModelProvider
 
 class VPNViewModelFactory(

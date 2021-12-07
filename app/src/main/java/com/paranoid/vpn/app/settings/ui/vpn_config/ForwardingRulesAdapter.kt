@@ -1,5 +1,6 @@
 package com.paranoid.vpn.app.settings.ui.vpn_config
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,7 @@ class ForwardingRulesAdapter(
             ivMenu.setOnClickListener { popupMenus(it) }
         }
 
+        @SuppressLint("DiscouragedPrivateApi")
         private fun popupMenus(v: View) {
             val position = rulesList[absoluteAdapterPosition]
             val popupMenus = PopupMenu(context, v)
@@ -32,7 +34,7 @@ class ForwardingRulesAdapter(
                 when (it.itemId) {
                     R.id.delete -> {
                         rulesList.removeAt(absoluteAdapterPosition)
-                        notifyDataSetChanged()
+                        notifyItemRemoved(absoluteAdapterPosition)
                         true
                     }
                     else -> true
@@ -55,7 +57,9 @@ class ForwardingRulesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.name.text = "Rule ${position + 1}"
+        holder.name.text = holder.itemView.context.resources.getString(
+                R.string.rule,
+                (position + 1).toString())
     }
 
     override fun getItemCount(): Int {
