@@ -11,13 +11,16 @@ import com.paranoid.vpn.app.common.ui.base.MessageData
 import retrofit2.HttpException
 import java.io.BufferedReader
 import java.io.File
+import java.io.File.separator
 import java.io.IOException
 import java.io.InputStreamReader
 import java.net.ConnectException
 import java.net.NoRouteToHostException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import java.text.DecimalFormat
 import java.util.regex.Pattern
+import kotlin.math.roundToInt
 
 private const val NETWORK_CODE_500 = 500
 
@@ -26,6 +29,30 @@ object Utils {
 
     fun init(application: Application) {
         Utils.application = application
+    }
+
+    private const val K: Long = 1024
+    private const val M = K * K
+    private const val G = M * K
+    private const val T = G * K
+
+    fun convertToStringRepresentation(value: Long): String? {
+        val dividers = longArrayOf(T, G, M, K, 1)
+        val units = arrayOf("TB", "GB", "MB", "KB", "B")
+        if (value < 1){
+            return "0 B"
+        }
+        var result: String? = null
+        for (i in dividers.indices) {
+            val divider = dividers[i]
+            if (value >= divider) {
+                val speed = value.toDouble()/divider.toDouble()
+                val df: DecimalFormat = DecimalFormat("#.00")
+                result = "${df.format(speed)} ${units[i]}"
+                break
+            }
+        }
+        return result
     }
 
     fun generateFile(context: Context, fileName: String): File? {
@@ -55,7 +82,7 @@ object Utils {
         try {
             reader = BufferedReader(
                 InputStreamReader(application?.assets?.open(fileName), "UTF-8")
-            );
+            )
 
             var line: String?
             do {
@@ -67,7 +94,7 @@ object Utils {
         } finally {
             if (reader != null) {
                 try {
-                    reader.close();
+                    reader.close()
                 } catch (e: IOException) {
                 }
             }

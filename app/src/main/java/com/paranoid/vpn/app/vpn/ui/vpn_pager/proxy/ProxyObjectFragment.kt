@@ -25,7 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class ProxyObjectFragment() :
+class ProxyObjectFragment:
     BaseFragment<PageProxyListBinding, VPNViewModel>(PageProxyListBinding::inflate) {
 
     private lateinit var oldViewModel: VPNViewModel

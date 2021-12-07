@@ -73,6 +73,6 @@ class BioUdpHandler(
 
     companion object {
         const val HEADER_SIZE = Packet.IP4_HEADER_SIZE + Packet.UDP_HEADER_SIZE
-        val TAG = BioUdpHandler::class.java.simpleName
+        val TAG: String = BioUdpHandler::class.java.simpleName
     }
 }

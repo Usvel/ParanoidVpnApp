@@ -38,7 +38,7 @@ import java.util.concurrent.atomic.AtomicLong
 import java.util.stream.Collectors
 
 
-class VPNObjectFragment() :
+class VPNObjectFragment :
     BaseFragment<PageVpnButtonBinding, VPNViewModel>(PageVpnButtonBinding::inflate) {
 
     private var textUpdater: Job? = null
@@ -284,7 +284,11 @@ class VPNObjectFragment() :
 
     private suspend fun updateText() = withContext(Dispatchers.Main) {
         binding.tvIsConnected.text =
-            "up: ${VPNObjectFragment.upByte} B, down: ${VPNObjectFragment.downByte} B"
+            resources.getString(
+                R.string.connection_speed,
+                Utils.convertToStringRepresentation(upByte.toLong()),
+                Utils.convertToStringRepresentation(downByte.toLong())
+            )
     }
 
     private fun setListeners() {

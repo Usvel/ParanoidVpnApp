@@ -1,21 +1,9 @@
 package com.paranoid.vpn.app.common.ui.app
 
 import android.os.Bundle
-import android.view.View
-import android.view.Window
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.paranoid.vpn.app.common.ui.base.BaseActivity
 import com.paranoid.vpn.app.databinding.ActivityMainBinding
-import android.view.WindowManager
-import androidx.core.view.WindowInsetsCompat
-
-import androidx.core.view.ViewCompat
-
-
-
-
-
 
 
 class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {

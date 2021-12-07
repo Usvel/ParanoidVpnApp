@@ -1,6 +1,8 @@
 package com.paranoid.vpn.app.vpn.core.protocol.tcpip;
 
 
+import androidx.annotation.NonNull;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
@@ -16,7 +18,7 @@ public class Packet {
     public static final int UDP_HEADER_SIZE = 8;
 
 
-    private static AtomicInteger globalPackId=new AtomicInteger();
+    private static final AtomicInteger globalPackId=new AtomicInteger();
     public int packId=globalPackId.addAndGet(1);
     public IP4Header ip4Header;
     public TCPHeader tcpHeader;
@@ -42,6 +44,7 @@ public class Packet {
         this.backingBuffer = buffer;
     }
 
+    @NonNull
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Packet{");
@@ -132,7 +135,7 @@ public class Packet {
     }
 
     private void updateTCPChecksum(int payloadSize) {
-        int sum = 0;
+        int sum;
         int tcpLength = TCP_HEADER_SIZE + payloadSize;
 
         // Calculate pseudo-header checksum
@@ -197,7 +200,7 @@ public class Packet {
             UDP(17),
             Other(0xFF);
 
-            private int protocolNumber;
+            private final int protocolNumber;
 
             TransportProtocol(int protocolNumber) {
                 this.protocolNumber = protocolNumber;
@@ -262,21 +265,20 @@ public class Packet {
             buffer.put(this.destinationAddress.getAddress());
         }
 
+        @NonNull
         @Override
         public String toString() {
-            final StringBuilder sb = new StringBuilder("IP4Header{");
-            sb.append("version=").append(version);
-            sb.append(", IHL=").append(IHL);
-            sb.append(", typeOfService=").append(typeOfService);
-            sb.append(", totalLength=").append(totalLength);
-            sb.append(", identificationAndFlagsAndFragmentOffset=").append(identificationAndFlagsAndFragmentOffset);
-            sb.append(", TTL=").append(TTL);
-            sb.append(", protocol=").append(protocolNum).append(":").append(protocol);
-            sb.append(", headerChecksum=").append(headerChecksum);
-            sb.append(", sourceAddress=").append(sourceAddress.getHostAddress());
-            sb.append(", destinationAddress=").append(destinationAddress.getHostAddress());
-            sb.append('}');
-            return sb.toString();
+            return "IP4Header{" + "version=" + version +
+                    ", IHL=" + IHL +
+                    ", typeOfService=" + typeOfService +
+                    ", totalLength=" + totalLength +
+                    ", identificationAndFlagsAndFragmentOffset=" + identificationAndFlagsAndFragmentOffset +
+                    ", TTL=" + TTL +
+                    ", protocol=" + protocolNum + ":" + protocol +
+                    ", headerChecksum=" + headerChecksum +
+                    ", sourceAddress=" + sourceAddress.getHostAddress() +
+                    ", destinationAddress=" + destinationAddress.getHostAddress() +
+                    '}';
         }
     }
 
@@ -372,7 +374,7 @@ public class Packet {
         }
 
         public static String flagToString(byte flags){
-            final StringBuilder sb = new StringBuilder("");
+            final StringBuilder sb = new StringBuilder();
             if ((flags & FIN) == FIN) sb.append("FIN ");
             if ((flags & SYN) == SYN) sb.append("SYN " );
             if ((flags & RST) == RST) sb.append("RST ");
@@ -382,18 +384,19 @@ public class Packet {
             return sb.toString();
         }
         public String printSimple() {
-            final StringBuilder sb = new StringBuilder("");
+            final StringBuilder sb = new StringBuilder();
             if (isFIN()) sb.append("FIN ");
             if (isSYN()) sb.append("SYN ");
             if (isRST()) sb.append("RST ");
             if (isPSH()) sb.append("PSH ");
             if (isACK()) sb.append("ACK ");
             if (isURG()) sb.append("URG ");
-            sb.append("seq "+sequenceNumber +" ");
-            sb.append("ack "+acknowledgementNumber+" ");
+            sb.append("seq ").append(sequenceNumber).append(" ");
+            sb.append("ack ").append(acknowledgementNumber).append(" ");
             return sb.toString();
         }
 
+        @NonNull
         @Override
         public String toString() {
             final StringBuilder sb = new StringBuilder("TCPHeader{");
@@ -444,15 +447,14 @@ public class Packet {
             buffer.putShort((short) this.checksum);
         }
 
+        @NonNull
         @Override
         public String toString() {
-            final StringBuilder sb = new StringBuilder("UDPHeader{");
-            sb.append("sourcePort=").append(sourcePort);
-            sb.append(", destinationPort=").append(destinationPort);
-            sb.append(", length=").append(length);
-            sb.append(", checksum=").append(checksum);
-            sb.append('}');
-            return sb.toString();
+            return "UDPHeader{" + "sourcePort=" + sourcePort +
+                    ", destinationPort=" + destinationPort +
+                    ", length=" + length +
+                    ", checksum=" + checksum +
+                    '}';
         }
     }
 

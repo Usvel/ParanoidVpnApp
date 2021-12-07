@@ -164,6 +164,7 @@
     <string name="no_local_proxy_saved">No local proxy saved</string>
     <string name="can_t_load_online_data">Can\'t load online data</string>
     <string name="please_wait">Please, wait</string>
+    <string name="connection_speed" translatable="false">↑ - %1$s · ↓ - %2$s</string>
     <plurals name="proxies_number">
         <item quantity="one">Already added %1$s proxy</item>
         <item quantity="other">Already added %1$s proxies</item>
