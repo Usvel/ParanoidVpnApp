@@ -66,7 +66,6 @@ class SettingsFragment :
         )
         binding.mlSettingsMotionLayout.transitionToEnd()
         buttonRotationSet()
-        updateDataNumber()
         setListeners()
     }
 
