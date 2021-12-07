@@ -5,8 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.paranoid.vpn.app.R
@@ -17,6 +19,7 @@ import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import com.paranoid.vpn.app.databinding.NavigationSettingsFragmentBinding
 import com.paranoid.vpn.app.qr.QRScanner
+
 
 private const val VPN_DB_NAME = "vpn_config_database"
 private const val PROXY_DB_NAME = "proxy_database"
@@ -36,6 +39,32 @@ class SettingsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.mlSettingsMotionLayout.setTransitionListener(
+            object : MotionLayout.TransitionListener {
+                override fun onTransitionStarted(
+                    motionLayout: MotionLayout?,
+                    startId: Int,
+                    endId: Int
+                ) {
+                }
+
+                override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+                }
+
+                override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                    updateDataNumber()
+                }
+
+                override fun onTransitionTrigger(
+                    motionLayout: MotionLayout?,
+                    triggerId: Int,
+                    positive: Boolean,
+                    progress: Float
+                ) {
+                }
+            }
+        )
+        binding.mlSettingsMotionLayout.transitionToEnd()
         buttonRotationSet()
         updateDataNumber()
         setListeners()
@@ -53,12 +82,26 @@ class SettingsFragment :
         viewModel?.getAllConfigs()?.observe(viewLifecycleOwner) { value ->
             val configSize = value.size
             configList = value
+
+            val mLoadAnimation: Animation = AnimationUtils.loadAnimation(
+                context,
+                android.R.anim.fade_in
+            )
+            mLoadAnimation.duration = 2000
+            binding.tvConfigurationNumber.startAnimation(mLoadAnimation)
             binding.tvConfigurationNumber.text = "Already added $configSize configuration(s)"
         }
 
         viewModel?.getAllProxies()?.observe(viewLifecycleOwner) { value ->
             val configSize = value.size
             proxyList = value
+
+            val mLoadAnimation: Animation = AnimationUtils.loadAnimation(
+                context,
+                android.R.anim.fade_in
+            )
+            mLoadAnimation.duration = 2000
+            binding.proxyConfigurationNumber.startAnimation(mLoadAnimation)
             binding.proxyConfigurationNumber.text = "Already added $configSize proxies(s)"
         }
 
