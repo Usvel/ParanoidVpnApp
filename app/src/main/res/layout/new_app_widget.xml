@@ -2,33 +2,43 @@
     style="@style/Widget.Paranoid.AppWidget.Container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:theme="@style/Theme.Paranoid.AppWidgetContainer">
-    <ImageView
-        android:id="@+id/to_qr"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:padding="1dp"
-        android:src="@drawable/ic_qr"
-        android:contentDescription="QR Scanner" />
-    <ImageView
-        android:id="@+id/to_list"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:padding="1dp"
-        android:src="@drawable/ic_qr"
-        android:contentDescription="Proxy List" />
-    <ImageView
-        android:id="@+id/to_turn"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:padding="1dp"
-        android:src="@drawable/ic_qr"
-        android:contentDescription="Turn on/off" />
-    <ImageView
-        android:id="@+id/to_service"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:padding="1dp"
-        android:src="@drawable/ic_qr"
-        android:contentDescription="To Service" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/to_qr"
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:contentDescription="QR Scanner"
+            android:padding="1dp"
+            android:src="@drawable/ic_qr" />
+
+        <ImageView
+            android:id="@+id/to_list"
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:contentDescription="Proxy List"
+            android:padding="1dp"
+            android:src="@drawable/ic_more" />
+
+        <ImageView
+            android:id="@+id/to_turn"
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:contentDescription="Turn on/off"
+            android:padding="1dp"
+            android:src="@drawable/ic_power" />
+
+        <ImageView
+            android:id="@+id/to_service"
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:contentDescription="To Service"
+            android:padding="1dp"
+            android:src="@drawable/ic_add_config_dns" />
+    </LinearLayout>
 </RelativeLayout>
