@@ -23,7 +23,6 @@ class VPNFragment :
     private fun initTabLayout() {
         val vpnFragmentPagerAdapter = viewModel?.let { VPNFragmentPagerAdapter(activity, it) }
         binding.vpVpnPager.adapter = vpnFragmentPagerAdapter
-
         TabLayoutMediator(binding.tlTabLayout, binding.vpVpnPager) { tab, position ->
             when (position) {
                 0 -> {
@@ -41,6 +40,9 @@ class VPNFragment :
                 }
             }
         }.attach()
+        if (!arguments?.isEmpty!!) {
+            arguments?.getInt("pageNumber")?.let { binding.vpVpnPager.currentItem = it }
+        }
     }
 
     private fun setListeners() {

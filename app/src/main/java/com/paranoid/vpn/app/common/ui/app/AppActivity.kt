@@ -6,7 +6,16 @@ import android.util.Log
 import androidx.core.view.isVisible
 import com.paranoid.vpn.app.common.ui.base.BaseActivity
 import com.paranoid.vpn.app.databinding.ActivityMainBinding
+import android.view.WindowManager
+import androidx.core.os.bundleOf
+import androidx.core.view.WindowInsetsCompat
+
+import androidx.core.view.ViewCompat
+import androidx.fragment.app.commit
+import androidx.navigation.findNavController
+import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.qr.QRScanner
+import com.paranoid.vpn.app.vpn.ui.vpn_pager.proxy.ProxyObjectFragment
 
 
 class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
@@ -21,6 +30,7 @@ class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infla
                 startActivity(intent)
             }
             if (extras.containsKey("toTurn")) {
+                navController?.navigate(R.id.vpn_fragment, bundleOf(Pair("pageNumber", 1)))
                 Log.println(Log.DEBUG, "logs", "toTurn")
             }
             if (extras.containsKey("toService")) {
@@ -53,7 +63,7 @@ class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infla
         binding.bottomTabBar.isVisible = true
     }
 
-    companion object{
+    companion object {
         const val TAG = "AppActivityTest"
     }
 }

@@ -2,8 +2,7 @@
     style="@style/Widget.Paranoid.AppWidget.Container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:theme="@style/Theme.Paranoid.AppWidgetContainer">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
