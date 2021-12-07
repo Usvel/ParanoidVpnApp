@@ -1,33 +1,32 @@
 package com.paranoid.vpn.app.common.ui.app
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.view.Window
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.paranoid.vpn.app.common.ui.base.BaseActivity
 import com.paranoid.vpn.app.databinding.ActivityMainBinding
+import com.paranoid.vpn.app.qr.QRScanner
+
 
 class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        Log.println(Log.DEBUG, "logs", "starter")
         setUpBottomNav(binding.bottomTabBar)
         val extras = intent.extras
         if (extras != null) {
-            Log.println(Log.DEBUG, "logs", "stARTER2")
-            if (extras.get("toQr") as Boolean) {
-                Log.println(Log.DEBUG, "logs", "toQr")
+            if (extras.containsKey("toQr")) {
+                val intent = Intent(this, QRScanner::class.java)
+                startActivity(intent)
             }
-            if (extras.get("toTurn") as Boolean) {
+            if (extras.containsKey("toTurn")) {
                 Log.println(Log.DEBUG, "logs", "toTurn")
             }
-            if (extras.get("toService") as Boolean) {
+            if (extras.containsKey("toService")) {
                 Log.println(Log.DEBUG, "logs", "toService")
             }
-            if (extras.get("toProxy") as Boolean) {
+            if (extras.containsKey("toProxy")) {
                 Log.println(Log.DEBUG, "logs", "toProxy")
             }
         }

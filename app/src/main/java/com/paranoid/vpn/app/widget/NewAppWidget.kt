@@ -28,34 +28,55 @@ class NewAppWidget : AppWidgetProvider() {
             val intentQr = Intent(context, AppActivity::class.java)
             intentQr.putExtra("toQr", true)
             intentQr.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            val pendingIntentQr = PendingIntent.getActivity(context, 0, intentQr, 0)
+            val pendingIntentQr = PendingIntent.getActivity(
+                context,
+                0,
+                intentQr,
+                PendingIntent.FLAG_IMMUTABLE
+            )
             val viewsQr = RemoteViews(context.packageName, R.layout.new_app_widget)
             viewsQr.setOnClickPendingIntent(R.id.to_qr, pendingIntentQr)
+            appWidgetManager.updateAppWidget(appWidgetId, viewsQr)
 
             Log.println(Log.INFO, "logs", "second")
             val intentTurn = Intent(context, AppActivity::class.java)
             intentTurn.putExtra("toTurn", true)
             intentTurn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            val pendingIntentTurn = PendingIntent.getActivity(context, 0, intentTurn, 0)
+            val pendingIntentTurn = PendingIntent.getActivity(
+                context,
+                0,
+                intentTurn,
+                0
+            )
             val viewsTurn = RemoteViews(context.packageName, R.layout.new_app_widget)
             viewsTurn.setOnClickPendingIntent(R.id.to_turn, pendingIntentTurn)
-
-            val intentService = Intent(context, AppActivity::class.java)
-            intentService.putExtra("toService", true)
-            intentService.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            val pendingIntentService = PendingIntent.getActivity(context, 0, intentService, 0)
-            val viewsService = RemoteViews(context.packageName, R.layout.new_app_widget)
-            viewsService.setOnClickPendingIntent(R.id.to_service, pendingIntentService)
+            appWidgetManager.updateAppWidget(appWidgetId, viewsTurn)
 
             val intentProxy = Intent(context, AppActivity::class.java)
             intentProxy.putExtra("toProxy", true)
             intentProxy.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            val pendingIntentProxy = PendingIntent.getActivity(context, 0, intentProxy, 0)
+            val pendingIntentProxy = PendingIntent.getActivity(
+                context,
+                0,
+                intentProxy,
+                0
+            )
             val viewsProxy = RemoteViews(context.packageName, R.layout.new_app_widget)
             viewsProxy.setOnClickPendingIntent(R.id.to_list, pendingIntentProxy)
+            appWidgetManager.updateAppWidget(appWidgetId, viewsProxy)
 
-            Log.println(Log.DEBUG, "logs", "proxy")
-            updateAppWidget(context, appWidgetManager, appWidgetId)
+            val intentService = Intent(context, AppActivity::class.java)
+            intentService.putExtra("toService", true)
+            intentService.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val pendingIntentService = PendingIntent.getActivity(
+                context,
+                0,
+                intentService,
+                0
+            )
+            val viewsService = RemoteViews(context.packageName, R.layout.new_app_widget)
+            viewsService.setOnClickPendingIntent(R.id.to_service, pendingIntentService)
+            appWidgetManager.updateAppWidget(appWidgetId, viewsService)
         }
     }
 
