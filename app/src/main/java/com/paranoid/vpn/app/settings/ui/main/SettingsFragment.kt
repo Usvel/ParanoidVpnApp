@@ -1,6 +1,5 @@
 package com.paranoid.vpn.app.settings.ui.main
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -76,10 +75,9 @@ class SettingsFragment :
         )[SettingsViewModel::class.java]
     }
 
-    @SuppressLint("SetTextI18n")
     private fun updateDataNumber() {
         viewModel?.getAllConfigs()?.observe(viewLifecycleOwner) { value ->
-            val configSize = value.size
+            val configSize: Int = value.size
             configList = value
 
             val mLoadAnimation: Animation = AnimationUtils.loadAnimation(
@@ -88,11 +86,16 @@ class SettingsFragment :
             )
             mLoadAnimation.duration = 2000
             binding.tvConfigurationNumber.startAnimation(mLoadAnimation)
-            binding.tvConfigurationNumber.text = "Already added $configSize configuration(s)"
+            binding.tvConfigurationNumber.text =
+                resources.getQuantityString(
+                    R.plurals.configuration_number,
+                    configSize,
+                    configSize.toString()
+                )
         }
 
         viewModel?.getAllProxies()?.observe(viewLifecycleOwner) { value ->
-            val configSize = value.size
+            val proxySize: Int = value.size
             proxyList = value
 
             val mLoadAnimation: Animation = AnimationUtils.loadAnimation(
@@ -101,7 +104,12 @@ class SettingsFragment :
             )
             mLoadAnimation.duration = 2000
             binding.proxyConfigurationNumber.startAnimation(mLoadAnimation)
-            binding.proxyConfigurationNumber.text = "Already added $configSize proxies(s)"
+            binding.proxyConfigurationNumber.text =
+                resources.getQuantityString(
+                    R.plurals.proxies_number,
+                    proxySize,
+                    proxySize.toString()
+                )
         }
 
         viewModel?.getAllIPs()?.observe(viewLifecycleOwner) { value ->

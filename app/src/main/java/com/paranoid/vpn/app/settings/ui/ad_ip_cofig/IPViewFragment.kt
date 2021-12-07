@@ -1,11 +1,11 @@
 package com.paranoid.vpn.app.settings.ui.ad_ip_cofig
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ad_block_configuration.domain.database.IpDatabase
 import com.paranoid.vpn.app.common.ad_block_configuration.domain.model.AdBlockIpItem
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
@@ -95,10 +95,14 @@ class IPViewFragment :
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun setObservers() {
         viewModel?.getIpsSize()?.observe(viewLifecycleOwner) { value ->
-            binding.tvAddressCount.text = "Added $value addresses"
+            binding.tvAddressCount.text =
+                resources.getQuantityString(
+                    R.plurals.ips_number,
+                    value,
+                    value.toString()
+                )
         }
     }
 }
