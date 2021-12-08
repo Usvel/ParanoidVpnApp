@@ -3,13 +3,15 @@ package com.paranoid.vpn.app.vpn.core
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
-import android.net.VpnService
+import android.net.*
 import android.os.Binder
 import android.os.IBinder
 import android.os.ParcelFileDescriptor
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigDataGenerator
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import com.paranoid.vpn.app.vpn.core.handlers.udp.BioUdpHandler
@@ -17,6 +19,8 @@ import com.paranoid.vpn.app.vpn.core.handlers.tcp.NioSingleThreadTcpHandler
 import com.paranoid.vpn.app.vpn.core.config.Config
 import com.paranoid.vpn.app.vpn.core.handlers.vpn.VpnReadWorker
 import com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet
+import com.paranoid.vpn.app.vpn.domain.usecase.AddPacketUseCase
+import com.paranoid.vpn.app.vpn.remote.VPNPacketMemoryCache
 import kotlinx.coroutines.*
 import java.io.*
 import java.nio.ByteBuffer
@@ -113,7 +117,6 @@ class LocalVPNService2 : VpnService() {
                 vpnInterface!!.fileDescriptor,
                 deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
                 deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
-                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
                 networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
                 addPacketUseCase
             ).run()

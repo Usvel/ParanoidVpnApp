@@ -16,6 +16,8 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseFragmentViewModel>(
     private val inflate: Inflate<VB>
 ) : Fragment() {
 
+
+
     private var _binding: VB? = null
     protected val binding get() = _binding!!
 

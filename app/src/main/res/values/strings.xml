@@ -121,6 +121,9 @@
     <string name="https" translatable="false">HTTPS</string>
     <string name="socks4" translatable="false">SOCKS4</string>
     <string name="socks5" translatable="false">SOCKS5</string>
+    <!-- TrafficRVAdapter -->
+    <string name="traffic_rv_adapter_tcp" translatable="false">TCP</string>
+    <string name="traffic_rv_adapter_udp" translatable="false">UDP</string>
     <!-- Proxy Fragments -->
     <string name="proxy_type">Proxy type</string>
     <string name="ping">Ping</string>
