@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.paranoid.vpn.app.common.ui.app.AppActivity
+import com.paranoid.vpn.app.common.ui.factory.DaggerViewModelFactory
+import javax.inject.Inject
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 

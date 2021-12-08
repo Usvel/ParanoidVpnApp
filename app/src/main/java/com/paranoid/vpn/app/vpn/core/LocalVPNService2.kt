@@ -10,6 +10,7 @@ import android.os.IBinder
 import android.os.ParcelFileDescriptor
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.paranoid.vpn.app.common.Application
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigDataGenerator
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import com.paranoid.vpn.app.vpn.core.handlers.udp.BioUdpHandler
@@ -17,13 +18,19 @@ import com.paranoid.vpn.app.vpn.core.handlers.tcp.NioSingleThreadTcpHandler
 import com.paranoid.vpn.app.vpn.core.config.Config
 import com.paranoid.vpn.app.vpn.core.handlers.vpn.VpnReadWorker
 import com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet
+import com.paranoid.vpn.app.vpn.domain.usecase.AddPacketUseCase
+import com.paranoid.vpn.app.vpn.remote.VPNPacketMemoryCache
 import kotlinx.coroutines.*
 import java.io.*
 import java.nio.ByteBuffer
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
+import javax.inject.Inject
 
 class LocalVPNService2 : VpnService() {
+
+    val addPacketUseCase = AddPacketUseCase(VPNPacketMemoryCache)
+
     private val binder = LocalBinder()
 
     private var vpnInterface: ParcelFileDescriptor? = null
@@ -70,7 +77,8 @@ class LocalVPNService2 : VpnService() {
                 vpnInterface!!.fileDescriptor,
                 deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
                 deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
-                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>
+                networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
+                addPacketUseCase
             ).run()
         }
         VPNRunnableJob!!.start()

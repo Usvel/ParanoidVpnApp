@@ -4,5 +4,4 @@
         <item name="android:windowDrawsSystemBarBackgrounds">false</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
-
 </resources>

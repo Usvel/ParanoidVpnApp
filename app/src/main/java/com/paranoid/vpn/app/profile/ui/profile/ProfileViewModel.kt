@@ -20,8 +20,14 @@ import com.paranoid.vpn.app.profile.domain.usecase.SignOutFirebaseUserUseCase
 import com.paranoid.vpn.app.profile.remote.UserFirebaseImpl
 import com.paranoid.vpn.app.profile.ui.edit.EditUserViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProfileViewModel : BaseFragmentViewModel() {
+class ProfileViewModel @Inject constructor(
+    private val getFirebaseUserUseCase: GetFirebaseUserUseCase,
+    private val signOutFirebaseUserUseCase: SignOutFirebaseUserUseCase,
+    private val deleteFirebaseUserUseCase: DeleteFirebaseUserUseCase,
+    private val reauthenticateFirebaseUseCase: ReauthenticateFirebaseUserUseCase
+) : BaseFragmentViewModel() {
     private val _userState = MutableLiveData<UserLoggedState>().apply {
         value = UserLoggedState.USER_LOGGED_OUT
     }
@@ -46,20 +52,9 @@ class ProfileViewModel : BaseFragmentViewModel() {
     }
     val user: LiveData<UserEntity> = _user
 
-    private val getFirebaseUserUseCase =
-        GetFirebaseUserUseCase(UserFirebaseImpl)
-
-    private val signOutFirebaseUserUseCase =
-        SignOutFirebaseUserUseCase(UserFirebaseImpl)
-
-    private val deleteFirebaseUserUseCase = DeleteFirebaseUserUseCase(UserFirebaseImpl)
-
-    private val reauthenticateFirebaseUseCase = ReauthenticateFirebaseUserUseCase(UserFirebaseImpl)
-
     override fun getCurrentData() {
         try {
             val user = getFirebaseUserUseCase.execute()
-            Log.d(TAG, user.toString())
             if (user == null) {
                 _user.value = UserEntity(
                     name = getString(R.string.name_user)

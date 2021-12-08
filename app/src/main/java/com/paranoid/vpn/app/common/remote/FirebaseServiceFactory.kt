@@ -1,12 +1,11 @@
 package com.paranoid.vpn.app.common.remote
 
 import com.google.firebase.auth.FirebaseAuth
+import javax.inject.Inject
 
-object FirebaseServiceFactory : FirebaseService {
-    lateinit var mAuth: FirebaseAuth
-
-    fun makeFirebase() {
-        mAuth = FirebaseAuth.getInstance()
+class FirebaseServiceFactory @Inject constructor() : FirebaseService {
+    private val mAuth: FirebaseAuth by lazy {
+        FirebaseAuth.getInstance()
     }
 
     override fun getAuth(): FirebaseAuth {

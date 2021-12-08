@@ -7,13 +7,24 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.paranoid.vpn.app.R
+import com.paranoid.vpn.app.common.Application
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
+import com.paranoid.vpn.app.common.ui.factory.DaggerViewModelFactory
 import com.paranoid.vpn.app.common.utils.*
 import com.paranoid.vpn.app.databinding.NavigationEditUserFragmentBinding
+import javax.inject.Inject
 
 class EditUserFragment : BaseFragment<NavigationEditUserFragmentBinding, EditUserViewModel>(
     NavigationEditUserFragmentBinding::inflate
 ) {
+    @Inject
+    lateinit var viewModelFactory: DaggerViewModelFactory
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initDagger()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObservers()
@@ -34,7 +45,12 @@ class EditUserFragment : BaseFragment<NavigationEditUserFragmentBinding, EditUse
     }
 
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this)[EditUserViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[EditUserViewModel::class.java]
+    }
+
+    private fun initDagger() {
+        (requireActivity().application as Application).getAppComponent().registerProfileFeatureComponent()
+            .create().registerEditUserComponent().create().inject(this)
     }
 
     private fun setObservers() {

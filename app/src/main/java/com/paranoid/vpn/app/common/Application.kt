@@ -3,15 +3,16 @@ package com.paranoid.vpn.app.common
 import android.app.Application
 import android.os.StrictMode
 import androidx.viewbinding.BuildConfig
-import com.paranoid.vpn.app.common.remote.FirebaseServiceFactory
-import com.paranoid.vpn.app.common.remote.GoogleServiceFactory
+import com.paranoid.vpn.app.common.di.component.AppComponent
+import com.paranoid.vpn.app.common.di.component.DaggerAppComponent
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.vpn_configuration.domain.database.VPNConfigDatabase
 
 class Application : Application() {
+    private var appComponent: AppComponent? = null
+
     override fun onCreate() {
         super.onCreate()
-        FirebaseServiceFactory.makeFirebase()
 
         VPNConfigDatabase.setInstance(this)
 
@@ -38,6 +39,11 @@ class Application : Application() {
         }
     }
 
+    fun getAppComponent(): AppComponent {
+        return appComponent ?: DaggerAppComponent.factory().create(applicationContext).also {
+            appComponent = it
+        }
+    }
 
     init {
         instance = this

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.VpnService
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -27,14 +28,19 @@ import com.paranoid.vpn.app.common.vpn_configuration.domain.repository.VPNConfig
 import com.paranoid.vpn.app.databinding.NavigationVpnFragmentBinding
 import com.paranoid.vpn.app.qr.QRCreator
 import com.paranoid.vpn.app.vpn.core.LocalVPNService2
+import com.paranoid.vpn.app.vpn.domain.usecase.LoadListPacket
+import com.paranoid.vpn.app.vpn.remote.VPNPacketMemoryCache
 import kotlinx.coroutines.*
 import java.util.concurrent.atomic.AtomicLong
 import java.util.stream.Collectors
 
 class VPNFragment :
     BaseFragment<NavigationVpnFragmentBinding, VPNViewModel>(NavigationVpnFragmentBinding::inflate) {
+    private val loadListPacket = LoadListPacket(VPNPacketMemoryCache)
 
     companion object {
+        private const val TAG = "VPNFragment"
+
         @JvmStatic
         var downByte: AtomicLong = AtomicLong(0)
 
@@ -48,6 +54,10 @@ class VPNFragment :
 
     /** Defines callbacks for service binding, passed to bindService()  */
     private var connection = VPNServiceConnection()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -226,6 +236,7 @@ class VPNFragment :
         }
 
         binding.helpButton.setOnClickListener {
+            Log.d(TAG, loadListPacket.execute().toString())
             context?.let { context_ ->
                 Utils.makeToast(
                     context_,

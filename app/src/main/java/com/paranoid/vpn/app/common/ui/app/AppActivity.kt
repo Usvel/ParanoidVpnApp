@@ -12,12 +12,6 @@ import androidx.core.view.WindowInsetsCompat
 
 import androidx.core.view.ViewCompat
 
-
-
-
-
-
-
 class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
 

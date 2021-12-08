@@ -2,6 +2,7 @@ package com.paranoid.vpn.app.profile.ui.profile
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
@@ -14,18 +15,28 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.paranoid.vpn.app.R
+import com.paranoid.vpn.app.common.Application
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
-import com.paranoid.vpn.app.common.ui.base.MessageData
+import com.paranoid.vpn.app.common.ui.factory.DaggerViewModelFactory
 import com.paranoid.vpn.app.common.utils.NetworkStatus
 import com.paranoid.vpn.app.common.utils.UserLoggedState
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.utils.isValidEmail
 import com.paranoid.vpn.app.databinding.NavigationProfileFragmentBinding
+import javax.inject.Inject
 
 class ProfileFragment :
     BaseFragment<NavigationProfileFragmentBinding, ProfileViewModel>(
         NavigationProfileFragmentBinding::inflate
     ) {
+    @Inject
+    lateinit var viewModelFactory: DaggerViewModelFactory
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        initDagger()
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObservers()
@@ -35,6 +46,12 @@ class ProfileFragment :
     override fun onStop() {
         setUpBottomNav()
         super.onStop()
+    }
+
+    private fun initDagger() {
+        Log.d(TAG, "InitDagger")
+        (requireActivity().application as Application).getAppComponent().registerProfileFeatureComponent()
+            .create().registerProfileComponent().create().inject(this)
     }
 
     private fun setListeners() {
@@ -163,7 +180,7 @@ class ProfileFragment :
     }
 
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[ProfileViewModel::class.java]
     }
 
     companion object {

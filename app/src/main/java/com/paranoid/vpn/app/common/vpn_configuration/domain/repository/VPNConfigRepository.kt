@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import com.paranoid.vpn.app.common.vpn_configuration.domain.database.VPNConfigDatabase
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 
-
 class VPNConfigRepository(application: Application) {
     private val vpnConfigDatabase = VPNConfigDatabase.getInstance()
     private val vpnConfigDao = vpnConfigDatabase.VPNConfigDao()
