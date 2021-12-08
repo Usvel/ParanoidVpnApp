@@ -2,15 +2,22 @@ package com.paranoid.vpn.app.common.utils
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.util.Patterns
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.content.FileProvider
 import com.paranoid.vpn.app.common.ui.base.MessageData
 import retrofit2.HttpException
+import java.io.BufferedReader
+import java.io.File
+import java.io.IOException
+import java.io.InputStreamReader
 import java.net.ConnectException
 import java.net.NoRouteToHostException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import java.text.DecimalFormat
 import java.util.regex.Pattern
 
 private const val NETWORK_CODE_500 = 500
@@ -20,6 +27,78 @@ object Utils {
 
     fun init(application: Application) {
         Utils.application = application
+    }
+
+    private const val K: Long = 1024
+    private const val M = K * K
+    private const val G = M * K
+    private const val T = G * K
+
+    fun convertToStringRepresentation(value: Long): String? {
+        val dividers = longArrayOf(T, G, M, K, 1)
+        val units = arrayOf("TB", "GB", "MB", "KB", "B")
+        if (value < 1){
+            return "0 B"
+        }
+        var result: String? = null
+        for (i in dividers.indices) {
+            val divider = dividers[i]
+            if (value >= divider) {
+                val speed = value.toDouble()/divider.toDouble()
+                val df: DecimalFormat = DecimalFormat("#.00")
+                result = "${df.format(speed)} ${units[i]}"
+                break
+            }
+        }
+        return result
+    }
+
+    fun generateFile(context: Context, fileName: String): File? {
+        val csvFile = File(context.filesDir, fileName)
+        csvFile.createNewFile()
+
+        return if (csvFile.exists()) {
+            csvFile
+        } else {
+            null
+        }
+    }
+
+    fun goToFileIntent(context: Context, file: File): Intent {
+        val intent = Intent(Intent.ACTION_VIEW)
+        val contentUri = FileProvider.getUriForFile(context, "${context.packageName}.provider", file)
+        val mimeType = context.contentResolver.getType(contentUri)
+        intent.setDataAndType(contentUri, mimeType)
+        intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+        return intent
+    }
+
+    fun readLines(fileName: String): List<String> {
+
+        var reader: BufferedReader? = null
+        val linesFromFile: MutableList<String> = arrayListOf()
+        try {
+            reader = BufferedReader(
+                InputStreamReader(application?.assets?.open(fileName), "UTF-8")
+            )
+
+            var line: String?
+            do {
+                line = reader.readLine()
+                linesFromFile.add(line)
+            } while (line != null)
+
+        } catch (e: IOException) {
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close()
+                } catch (e: IOException) {
+                }
+            }
+        }
+
+        return linesFromFile
     }
 
     fun Exception.isNetworkError(): Boolean {
@@ -90,7 +169,7 @@ class Validators {
         )
 
         private fun validate(ip: String?): Boolean {
-            return PATTERN.matcher(ip).matches()
+            return PATTERN.matcher(ip as CharSequence).matches()
         }
 
         fun validateIP(ips: List<String>): Boolean {
@@ -102,6 +181,10 @@ class Validators {
     }
 }
 
-enum class ClickHandlers {
-    GetConfiguration, SetConfiguration, QRCode, Edit, Share
+enum class ConfigurationClickHandlers {
+    GetConfiguration, SetConfiguration, QRCode, Edit, Share, Like
+}
+
+enum class ProxyClickHandlers {
+    Save, Set, Info
 }

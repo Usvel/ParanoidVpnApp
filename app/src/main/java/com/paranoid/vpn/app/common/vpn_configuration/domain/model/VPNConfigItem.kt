@@ -26,6 +26,8 @@ data class ForwardingRule(
 data class VPNConfigItem(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
+    @NonNull
+    var favorite: Boolean = false,
     @Expose()
     var name: String,
     @NonNull

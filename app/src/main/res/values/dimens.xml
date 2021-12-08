@@ -5,7 +5,10 @@
     <dimen name="top_bar_elements_start">20dp</dimen>
     <dimen name="base_padding">20dp</dimen>
     <dimen name="medium_padding">0dp</dimen>
+    <dimen name="real_medium_padding">30dp</dimen>
     <dimen name="extra_padding">40dp</dimen>
+    <dimen name="max_padding">50dp</dimen>
+    <dimen name="minimum_padding">5dp</dimen>
     <dimen name="small_padding">10dp</dimen>
     <dimen name="card_corner_radius">20dp</dimen>
     <dimen name="card_elevation">5dp</dimen>
@@ -15,9 +18,10 @@
     <dimen name="vpn_button_corner">80dp</dimen>
     <dimen name="vpn_button_background_size">190dp</dimen>
     <dimen name="vpn_button_background_radius">95dp</dimen>
-    <dimen name="simple_corner_radius">75dp</dimen>
     <dimen name="icon_inner_padding">10dp</dimen>
     <dimen name="icon_inner_padding_small">5dp</dimen>
+    <dimen name="extra_small_corner_radius">8dp</dimen>
+    <dimen name="minimum_corner_radius">16dp</dimen>
     <dimen name="small_corner_radius">24dp</dimen>
     <dimen name="big_corner_radius">50dp</dimen>
     <!--  AppActivity  -->
@@ -87,4 +91,9 @@
     <dimen name="fragment_settings_buttons_sizes">42dp</dimen>
     <!--  SettingsFragment  -->
     <dimen name="vpn_fragment_icon_size">32dp</dimen>
+    <dimen name="tab_padding">20dp</dimen>
+    <!--  VPNFragment  -->
+    <!--  Proxy Fragment  -->
+    <dimen name="proxy_header_title_size">15sp</dimen>
+    <dimen name="navigation_proxy_title_text_size">20sp</dimen>
 </resources>

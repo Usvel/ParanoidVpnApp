@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".settings.ui.vpn_config.VPNConfigAddFragment">
-
-
-<ScrollView
-
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cvHorizontalLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,8 +10,8 @@ tools:context=".settings.ui.vpn_config.VPNConfigAddFragment">
     android:measureAllChildren="false"
     app:layout_constraintStart_toStartOf="parent"
     android:padding="@dimen/settings_fragment_small_padding"
-    android:scrollbars="vertical">
-
+    android:scrollbars="vertical"
+    tools:context=".settings.ui.vpn_config.VPNConfigAddFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,18 +19,18 @@ tools:context=".settings.ui.vpn_config.VPNConfigAddFragment">
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/settingsIcon"
+
+        <TextView
+            android:id="@+id/tvConfigTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:tint="@color/text_view_black"
-            android:alpha="0.5"
-            android:layout_marginTop="-95dp"
-            android:layout_marginEnd="-95dp"
-            android:contentDescription="@string/this_is_settings"
-            android:src="@drawable/ic_outline_settings_max"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:text="@string/edit_config_title"
+            android:textSize="@dimen/navigation_proxy_title_text_size"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilConfigName"
@@ -50,7 +43,7 @@ tools:context=".settings.ui.vpn_config.VPNConfigAddFragment">
             app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
             app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
             app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
-            app:boxStrokeColor="@color/box_stroke_color"
+            android:paddingTop="@dimen/real_medium_padding"
             app:endIconDrawable="@drawable/ic_clear"
             app:endIconMode="clear_text"
             app:endIconTint="@color/text_view_black"
@@ -58,7 +51,7 @@ tools:context=".settings.ui.vpn_config.VPNConfigAddFragment">
             android:layout_marginTop="@dimen/base_padding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvConfigTitle"
             app:startIconDrawable="@drawable/ic_add_config_name"
             app:startIconTint="@color/text_view_dark_text_transparent">
 
@@ -88,7 +81,6 @@ tools:context=".settings.ui.vpn_config.VPNConfigAddFragment">
             app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
             app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
             app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
-            app:boxStrokeColor="@color/box_stroke_color"
             app:endIconDrawable="@drawable/ic_clear"
             app:endIconMode="clear_text"
             app:endIconTint="@color/text_view_black"
@@ -125,7 +117,6 @@ tools:context=".settings.ui.vpn_config.VPNConfigAddFragment">
             app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
             app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
             app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
-            app:boxStrokeColor="@color/box_stroke_color"
             app:endIconDrawable="@drawable/ic_clear"
             app:endIconMode="clear_text"
             app:endIconTint="@color/text_view_black"
@@ -162,7 +153,6 @@ tools:context=".settings.ui.vpn_config.VPNConfigAddFragment">
             app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
             app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
             app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
-            app:boxStrokeColor="@color/box_stroke_color"
             app:endIconDrawable="@drawable/ic_clear"
             app:endIconMode="clear_text"
             app:endIconTint="@color/text_view_black"
@@ -199,7 +189,6 @@ tools:context=".settings.ui.vpn_config.VPNConfigAddFragment">
             app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
             app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
             app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
-            app:boxStrokeColor="@color/box_stroke_color"
             app:endIconDrawable="@drawable/ic_clear"
             app:endIconMode="clear_text"
             app:endIconTint="@color/text_view_black"
@@ -236,7 +225,6 @@ tools:context=".settings.ui.vpn_config.VPNConfigAddFragment">
             app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
             app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
             app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
-            app:boxStrokeColor="@color/box_stroke_color"
             app:endIconDrawable="@drawable/ic_clear"
             app:endIconMode="clear_text"
             app:endIconTint="@color/text_view_black"
@@ -298,28 +286,37 @@ tools:context=".settings.ui.vpn_config.VPNConfigAddFragment">
         android:layout_gravity="center">
     </Button>
 
-    <Button
-        android:id="@+id/addConfigurationButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_margin="@dimen/base_padding"
-        app:layout_constraintTop_toBottomOf="@+id/addRuleButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:text="@string/add_configuration"
-        android:textColor="@color/box_stroke_color"
-        android:layout_gravity="center"
-        >
+        <Button
+            android:id="@+id/addConfigurationButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/base_padding"
+            android:text="@string/save_configuration"
+            android:textColor="@color/box_stroke_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addRuleButton"
+            app:layout_constraintVertical_bias="1.0">
 
-    </Button>
+        </Button>
+
+        <Button
+            android:id="@+id/deleteConfigurationButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/base_padding"
+            android:text="@string/proxy_delete"
+            android:textColor="@color/icon_background_red_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addConfigurationButton">
+
+        </Button>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
-
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>

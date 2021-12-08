@@ -22,10 +22,22 @@
     <fragment
         android:id="@+id/settings_fragment"
         android:name="com.paranoid.vpn.app.settings.ui.main.SettingsFragment"
-        tools:layout="@layout/navigation_settings_fragment" >
+        tools:layout="@layout/navigation_settings_fragment">
         <action
             android:id="@+id/action_settings_fragment_to_vpn_config_add_element"
             app:destination="@id/vpn_config_add_element" />
+        <action
+            android:id="@+id/action_settings_fragment_to_proxy_add_fragment"
+            app:destination="@id/proxy_add_fragment" />
+        <action
+            android:id="@+id/action_settings_fragment_to_advert_fragment"
+            app:destination="@id/advert_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/advert_fragment"
+        android:name="com.paranoid.vpn.app.settings.ui.ad_ip_cofig.IPViewFragment"
+        tools:layout="@layout/navigation_advert_fragment" >
     </fragment>
 
     <fragment
@@ -37,6 +49,15 @@
             app:destination="@id/settings_fragment"
             app:popUpTo="@+id/settings_fragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_vpn_config_add_element_to_vpn_fragment"
+            app:destination="@id/vpn_fragment"
+            app:popUpTo="@+id/vpn_fragment"
+            app:popUpToInclusive="true">
+            <argument
+                android:name="vpnConfig"
+                app:argType="string" />
+        </action>
     </fragment>
 
     <fragment
@@ -53,6 +74,61 @@
             app:popUpTo="@id/profile_fragment"
             app:popUpToInclusive="true"
             app:destination="@id/profile_fragment" />
+        <action
+            android:id="@+id/action_vpn_fragment_to_proxy_view_fragment"
+            app:destination="@id/proxy_view_fragment">
+            <argument
+                android:name="proxyItem"
+                app:argType="string" />
+            <argument
+                android:name="local"
+                app:argType="boolean" />
+            <argument
+                android:name="location"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_vpn_fragment_to_vpn_config_add_element"
+            app:destination="@id/vpn_config_add_element" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/proxy_view_fragment"
+        android:name="com.paranoid.vpn.app.vpn.ui.vpn_pager.proxy.proxy_item.ProxyViewFragment"
+        tools:layout="@layout/navigation_proxy_view_fragment">
+        <action
+            android:id="@+id/action_proxy_view_fragment_to_vpn_fragment"
+            app:destination="@id/vpn_fragment"
+            app:popUpTo="@+id/vpn_fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_proxy_view_fragment_to_proxy_add_fragment"
+            app:destination="@id/proxy_add_fragment"
+            app:popUpTo="@+id/proxy_add_fragment"
+            app:popUpToInclusive="true">
+            <argument
+                android:name="proxyItem"
+                app:argType="string" />
+            <argument
+                android:name="location"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/proxy_add_fragment"
+        android:name="com.paranoid.vpn.app.vpn.ui.vpn_pager.proxy.proxy_item.ProxyAddFragment"
+        tools:layout="@layout/navigation_proxy_add_fragment">
+        <action
+            android:id="@+id/action_proxy_add_fragment_to_settings_fragment"
+            app:destination="@id/settings_fragment"
+            app:popUpTo="@+id/settings_fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_proxy_add_fragment_to_proxy_view_fragment"
+            app:destination="@id/proxy_view_fragment"
+            app:popUpTo="@+id/proxy_view_fragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

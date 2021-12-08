@@ -7,6 +7,7 @@ import com.paranoid.vpn.app.vpn.core.config.Config
 import com.paranoid.vpn.app.vpn.core.handlers.SuspendableRunnable
 import com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet
 import com.paranoid.vpn.app.vpn.core.util.ByteBufferPool
+import com.paranoid.vpn.app.vpn.ui.vpn_pager.vpn.VPNObjectFragment
 import com.paranoid.vpn.app.vpn.domain.EntityPacket
 import com.paranoid.vpn.app.vpn.domain.IP4
 import com.paranoid.vpn.app.vpn.domain.TCP
@@ -17,10 +18,9 @@ import java.io.FileDescriptor
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
-import java.net.InetAddress
+import java.net.Inet4Address
 import java.nio.ByteBuffer
 import java.util.concurrent.BlockingQueue
-import javax.inject.Inject
 import kotlin.coroutines.coroutineContext
 
 class VpnReadWorker(
@@ -31,8 +31,16 @@ class VpnReadWorker(
     private val addPacketUseCase: AddPacketUseCase
 ) : SuspendableRunnable {
 
+    private var advBlockList: List<AdBlockIpItem>? = null
+
     override suspend fun run() {
         Log.i(LocalVPNService2.TAG, "VPNRunnable Started")
+
+        withContext(Dispatchers.Main) {
+            IpRepository().readAllData.observeForever {
+                advBlockList = it
+            }
+        }
         val vpnInput = FileInputStream(
             vpnFileDescriptor
         ).channel

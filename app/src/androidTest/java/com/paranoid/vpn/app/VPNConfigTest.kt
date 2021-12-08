@@ -5,10 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.paranoid.vpn.app.common.vpn_configuration.domain.database.VPNConfigDao
 import com.paranoid.vpn.app.common.vpn_configuration.domain.database.VPNConfigDatabase
-import com.paranoid.vpn.app.common.vpn_configuration.domain.model.ForwardingRule
-import com.paranoid.vpn.app.common.vpn_configuration.domain.model.Protocols
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigDataGenerator
-import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals

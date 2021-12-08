@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvConfigTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:gravity="center"
+            android:paddingStart="@dimen/real_medium_padding"
+            android:paddingEnd="@dimen/real_medium_padding"
+            android:text="@string/advertisement_blocking_list"
+            android:textSize="@dimen/navigation_proxy_title_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvPreloadedDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_padding"
+            android:paddingStart="@dimen/real_medium_padding"
+            android:paddingEnd="@dimen/real_medium_padding"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPreloadedTitle"
+            android:text="@string/preloaded_data_desc" />
+
+        <TextView
+            android:id="@+id/tvAddressCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/real_medium_padding"
+            android:layout_marginTop="@dimen/small_padding"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPreloadedDescription"
+            tools:text="@string/added_addresses" />
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAdProxyIp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/real_medium_padding"
+            android:layout_marginEnd="@dimen/real_medium_padding"
+            app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
+            app:boxCornerRadiusTopStart="@dimen/authentication_fragment_text_input_layout_radius"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/text_view_black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvConfigTitle"
+            app:startIconTint="@color/text_view_dark_text_transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProxyIp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/proxy_ip"
+                android:inputType="textFilter"
+                android:paddingStart="@dimen/authentication_fragment_edit_text_padding"
+                android:paddingEnd="@dimen/authentication_fragment_edit_text_padding"
+                android:singleLine="true"
+                android:textColorHint="?attr/textTransparent"
+                android:textSize="@dimen/authentication_fragment_edit_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewAddIp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:layout_marginEnd="@dimen/small_padding"
+            android:backgroundTint="?attr/iconBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:layout_constraintEnd_toStartOf="@+id/viewDeleteIp"
+            app:layout_constraintTop_toBottomOf="@+id/tilAdProxyIp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_advert_ip"
+                android:padding="@dimen/settings_fragment_icon_padding" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewDeleteIp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:layout_marginEnd="@dimen/real_medium_padding"
+            android:backgroundTint="?attr/iconBackgroundRed"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilAdProxyIp">
+
+            <ImageView
+                android:layout_width="@dimen/fragment_settings_buttons_sizes"
+                android:layout_height="@dimen/fragment_settings_buttons_sizes"
+                android:contentDescription="@string/delete_advertisement_ip"
+                android:padding="@dimen/settings_fragment_icon_padding"
+                android:src="@drawable/ic_delete"
+                app:tint="@color/text_view_black" />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/tvPreloadedTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/preloaded_data"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:textSize="@dimen/navigation_proxy_title_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewAddIp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewLoadFromDatabase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/real_medium_padding"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="@dimen/real_medium_padding"
+            android:backgroundTint="?attr/iconBackground"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddressCount">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_100_ips_from_local_db"
+                android:padding="@dimen/settings_fragment_icon_padding" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewDeleteFromDatabase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/iconBackgroundRed"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            android:layout_marginEnd="@dimen/real_medium_padding"
+            app:layout_constraintBottom_toBottomOf="@+id/viewLoadFromDatabase"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/viewLoadFromDatabase">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete_from_database"
+                android:padding="@dimen/settings_fragment_icon_padding" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/llAdBlockIPs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/settings_fragment_small_padding"
+            android:paddingTop="@dimen/settings_fragment_small_padding"
+            android:paddingEnd="@dimen/settings_fragment_small_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewDeleteFromDatabase">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAdBlockIPs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                tools:listitem="@android:layout/two_line_list_item" />
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

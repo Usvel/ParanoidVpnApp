@@ -100,7 +100,7 @@ class UdpReadWorker(
         } catch (e: Exception) {
             Log.v(TAG, "error", e)
         } finally {
-            Log.v(TAG, "BioUdpHandler quit")
+            Log.v(TAG, "UdpReadWorker quit")
         }
     }
 

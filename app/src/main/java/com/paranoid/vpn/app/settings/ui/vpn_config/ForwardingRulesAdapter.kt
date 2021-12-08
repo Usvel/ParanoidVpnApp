@@ -1,7 +1,6 @@
 package com.paranoid.vpn.app.settings.ui.vpn_config
 
-import android.app.AlertDialog
-import android.app.Application
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -18,14 +17,15 @@ class ForwardingRulesAdapter(
     RecyclerView.Adapter<ForwardingRulesAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var name: TextView = itemView.findViewById(R.id.mTitle)
-        var mMenus: ImageView = itemView.findViewById(R.id.mMenus)
+        var name: TextView = itemView.findViewById(R.id.tvTitle)
+        private var ivMenu: ImageView = itemView.findViewById(R.id.ivMenu)
 
         init {
             // mbNum = itemView.findViewById<TextView>(R.id.mSubTitle)
-            mMenus.setOnClickListener { popupMenus(it) }
+            ivMenu.setOnClickListener { popupMenus(it) }
         }
 
+        @SuppressLint("DiscouragedPrivateApi")
         private fun popupMenus(v: View) {
             val position = rulesList[absoluteAdapterPosition]
             val popupMenus = PopupMenu(context, v)
@@ -34,7 +34,7 @@ class ForwardingRulesAdapter(
                 when (it.itemId) {
                     R.id.delete -> {
                         rulesList.removeAt(absoluteAdapterPosition)
-                        notifyDataSetChanged()
+                        notifyItemRemoved(absoluteAdapterPosition)
                         true
                     }
                     else -> true
@@ -57,7 +57,9 @@ class ForwardingRulesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.name.text = "Rule ${position + 1}"
+        holder.name.text = holder.itemView.context.resources.getString(
+                R.string.rule,
+                (position + 1).toString())
     }
 
     override fun getItemCount(): Int {

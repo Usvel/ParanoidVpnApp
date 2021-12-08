@@ -3,7 +3,7 @@
     <!--we add icons-->
     <item
         android:id="@+id/delete"
-        android:title="Delete"
+        android:title="@string/dialog_delete"
         android:icon="@drawable/ic_delete"
         />
 

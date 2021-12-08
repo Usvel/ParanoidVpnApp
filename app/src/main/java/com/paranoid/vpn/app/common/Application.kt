@@ -3,6 +3,9 @@ package com.paranoid.vpn.app.common
 import android.app.Application
 import android.os.StrictMode
 import androidx.viewbinding.BuildConfig
+import com.paranoid.vpn.app.common.ad_block_configuration.domain.database.IpDatabase
+import com.paranoid.vpn.app.common.proxy_configuration.domain.database.ProxyDatabase
+import com.paranoid.vpn.app.common.remote.FirebaseServiceFactory
 import com.paranoid.vpn.app.common.di.component.AppComponent
 import com.paranoid.vpn.app.common.di.component.DaggerAppComponent
 import com.paranoid.vpn.app.common.utils.Utils
@@ -15,6 +18,8 @@ class Application : Application() {
         super.onCreate()
 
         VPNConfigDatabase.setInstance(this)
+        ProxyDatabase.setInstance(this)
+        IpDatabase.setInstance(this)
 
         Utils.init(this)
 
@@ -25,7 +30,7 @@ class Application : Application() {
                     // .detectDiskWrites()
                     .detectNetwork()
                     .penaltyLog()
-                    .penaltyDeath()
+                    // .penaltyDeath()
                     .build()
             )
             StrictMode.setVmPolicy(
@@ -33,7 +38,7 @@ class Application : Application() {
                     .detectLeakedSqlLiteObjects()
                     .detectLeakedClosableObjects()
                     .penaltyLog()
-                    .penaltyDeath()
+                    // .penaltyDeath()
                     .build()
             )
         }

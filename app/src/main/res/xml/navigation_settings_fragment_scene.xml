@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:autoTransition="animateToEnd"
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="500">
+        <KeyFrameSet />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/viewAddConfigurationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_fragment_small_padding"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintStart_toStartOf="@+id/tvConfigurationNumber"
+            motion:layout_constraintTop_toBottomOf="@+id/tvConfigurationNumber" />
+        <Constraint
+            android:id="@+id/viewAddConfigurationButtonByQr"
+            android:layout_width="@dimen/fragment_settings_buttons_sizes"
+            android:layout_height="@dimen/fragment_settings_buttons_sizes"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="@dimen/settings_fragment_small_padding"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintStart_toEndOf="@+id/viewAddConfigurationButton"
+            motion:layout_constraintTop_toBottomOf="@+id/tvConfigurationNumber" />
+        <Constraint
+            android:id="@+id/viewVpnBackup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintBottom_toBottomOf="@+id/viewAddConfigurationButtonByQr"
+            motion:layout_constraintStart_toEndOf="@+id/viewAddConfigurationButtonByQr"
+            motion:layout_constraintTop_toTopOf="@+id/viewAddConfigurationButtonByQr" />
+        <Constraint
+            android:id="@+id/viewVpnRestore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/settings_fragment_small_padding"
+            android:alpha="0.4"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintBottom_toBottomOf="@+id/viewVpnBackup"
+            motion:layout_constraintStart_toEndOf="@+id/viewVpnBackup"
+            motion:layout_constraintTop_toTopOf="@+id/viewVpnBackup" />
+        <Constraint
+            android:id="@+id/addProxyConfigurationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_fragment_small_padding"
+            android:scaleY="0"
+            motion:layout_constraintStart_toStartOf="@+id/proxyConfigurationNumber"
+            motion:layout_constraintTop_toBottomOf="@+id/proxyConfigurationNumber" />
+        <Constraint
+            android:id="@+id/addProxyConfigurationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_fragment_small_padding"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintStart_toStartOf="@+id/proxyConfigurationNumber"
+            motion:layout_constraintTop_toBottomOf="@+id/proxyConfigurationNumber" />
+        <Constraint
+            android:id="@+id/viewAdIpConfigurationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_fragment_small_padding"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintStart_toStartOf="@+id/adIpConfigurationGroup"
+            motion:layout_constraintTop_toBottomOf="@+id/adIpConfigurationGroup" />
+        <Constraint
+            android:id="@+id/viewIpBackup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintBottom_toBottomOf="@+id/viewAdIpConfigurationButton"
+            motion:layout_constraintStart_toEndOf="@+id/viewAdIpConfigurationButton"
+            motion:layout_constraintTop_toTopOf="@+id/viewAdIpConfigurationButton" />
+        <Constraint
+            android:id="@+id/viewProxyBackup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintBottom_toBottomOf="@+id/addProxyConfigurationButton"
+            motion:layout_constraintStart_toEndOf="@+id/addProxyConfigurationButton"
+            motion:layout_constraintTop_toTopOf="@+id/addProxyConfigurationButton" />
+        <Constraint
+            android:id="@+id/viewIpRestore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/settings_fragment_small_padding"
+            android:alpha="0.4"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintBottom_toBottomOf="@+id/viewIpBackup"
+            motion:layout_constraintStart_toEndOf="@+id/viewIpBackup"
+            motion:layout_constraintTop_toTopOf="@+id/viewIpBackup" />
+        <Constraint
+            android:id="@+id/viewProxyRestore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/settings_fragment_small_padding"
+            android:alpha="0.4"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintBottom_toBottomOf="@+id/viewProxyBackup"
+            motion:layout_constraintStart_toEndOf="@+id/viewProxyBackup"
+            motion:layout_constraintTop_toTopOf="@+id/viewProxyBackup" />
+        <Constraint
+            android:id="@+id/ivMainSettingsIcon"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="-95dp"
+            android:alpha="0"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="-95dp"
+            android:scaleX="0"
+            android:scaleY="0" />
+        <Constraint
+            android:id="@+id/tvConfigurationNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@+id/tvVPNConfigurationGroup"
+            motion:layout_constraintStart_toStartOf="@+id/tvVPNConfigurationGroup"
+            android:layout_marginTop="@dimen/settings_fragment_small_padding"
+            android:alpha="0" />
+        <Constraint
+            android:id="@+id/proxyConfigurationNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@+id/proxyConfigurationGroup"
+            motion:layout_constraintStart_toStartOf="@+id/tvVPNConfigurationGroup"
+            android:layout_marginTop="@dimen/settings_fragment_small_padding"
+            android:alpha="0" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end" />
+
+</MotionScene>

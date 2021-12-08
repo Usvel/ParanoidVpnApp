@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/real_medium_padding"
+        android:paddingEnd="@dimen/real_medium_padding"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvPrimaryDNSTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding"
+                android:text="@string/proxy_type" />
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="wrap_content"
+                    android:padding="@dimen/medium_padding"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/cHttp"
+                        style="@style/Widget.Material3.Chip.Filter.Elevated"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/http" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/cHttps"
+                        style="@style/Widget.Material3.Chip.Filter.Elevated"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/https" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/cSocks4"
+                        style="@style/Widget.Material3.Chip.Filter.Elevated"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/socks4" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/cSocks5"
+                        style="@style/Widget.Material3.Chip.Filter.Elevated"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/socks5" />
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvPingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding"
+                android:text="@string/ping" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEditProxyPing"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/edit_user_fragment_content_margin_horizontal"
+                android:layout_marginBottom="@dimen/edit_user_fragment_card_view_bottom_margin"
+                app:boxCornerRadiusBottomEnd="@dimen/edit_user_fragment_text_input_layout_radius"
+                app:boxCornerRadiusBottomStart="@dimen/edit_user_fragment_text_input_layout_radius"
+                app:boxCornerRadiusTopEnd="@dimen/edit_user_fragment_text_input_layout_radius"
+                app:boxCornerRadiusTopStart="@dimen/edit_user_fragment_text_input_layout_radius"
+                app:endIconTint="?attr/toolBarColor"
+                app:hintEnabled="false"
+                app:startIconTint="?attr/textTransparent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEditProxyPing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:hint="@string/possible_ping"
+                    android:inputType="number"
+                    android:paddingStart="@dimen/edit_user_fragment_edit_text_padding"
+                    android:paddingEnd="@dimen/edit_user_fragment_edit_text_padding"
+                    android:singleLine="true"
+                    android:textColorHint="?attr/textTransparent"
+                    android:textSize="@dimen/edit_user_fragment_card_view_text_size" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvCountryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding"
+                android:text="@string/country" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEditCountryPing"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/edit_user_fragment_content_margin_horizontal"
+                android:layout_marginBottom="@dimen/edit_user_fragment_card_view_bottom_margin"
+                app:boxCornerRadiusBottomEnd="@dimen/edit_user_fragment_text_input_layout_radius"
+                app:boxCornerRadiusBottomStart="@dimen/edit_user_fragment_text_input_layout_radius"
+                app:boxCornerRadiusTopEnd="@dimen/edit_user_fragment_text_input_layout_radius"
+                app:boxCornerRadiusTopStart="@dimen/edit_user_fragment_text_input_layout_radius"
+                app:endIconTint="?attr/toolBarColor"
+                app:hintEnabled="false"
+                app:startIconTint="?attr/textTransparent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEditCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:hint="@string/countries"
+                    android:inputType=""
+                    android:paddingStart="@dimen/edit_user_fragment_edit_text_padding"
+                    android:paddingEnd="@dimen/edit_user_fragment_edit_text_padding"
+                    android:singleLine="true"
+                    android:textColorHint="?attr/textTransparent"
+                    android:textSize="@dimen/edit_user_fragment_card_view_text_size" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

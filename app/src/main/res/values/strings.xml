@@ -1,33 +1,28 @@
 <resources>
-    <string name="app_name">Paranoid VPN</string>
-    <string name="vpn_client">VPN client</string>
+    <string name="app_name" translatable="false">Paranoid VPN</string>
+    <string name="vpn_client" translatable="false">VPN client</string>
     <string name="settings">Settings</string>
     <string name="profile">Profile</string>
-    <string name="this_is_profile">This is profile</string>
-    <string name="this_is_vpn">This is VPN</string>
-    <string name="this_is_settings">This is settings</string>
     <string name="get_information_about_vpn">Get information about VPN</string>
     <string name="click_to_choose_configuration">Click to choose configuration</string>
     <string name="configuration_settings">Configuration settings</string>
     <string name="configuration_sharing">Configuration sharing</string>
     <string name="configuration_qr">Configuration qr</string>
-    <string name="test_first_configuration">First configuration</string>
+    <string name="test_first_configuration">No configuration</string>
     <string name="turn_on_vpn">Turn on VPN</string>
     <string name="not_connected">Not connected</string>
     <string name="connected">Connected</string>
     <string name="error">Connection error</string>
     <string name="stable_connection">Stable connection</string>
     <string name="help_info">Help info</string>
-    <string name="share_configuration">Share configuration</string>
     <string name="scan_qr_code">Scan QR code</string>
-    <string name="proceed">Proceed</string>
+    <string name="proceed">Next</string>
     <string name="name_user">Visitor</string>
-    <string name="please_wait">Пожалуйста, подождите</string>
     <!--  AppActivity  -->
-    <string name="app_activity_bottom_nav_proceed">Proceed</string>
+    <string name="app_activity_bottom_nav_proceed">Next</string>
     <!--  ProfileFragment  -->
     <string name="profile_fragment_hi">Hello,</string>
-    <string name="profile_fragment_email">Email</string>
+    <string name="profile_fragment_email" translatable="false">Email</string>
     <string name="profile_fragment_registration">Register now</string>
     <string name="profile_fragment_entry">Login</string>
     <string name="profile_fragment_statistics">Usage statistics</string>
@@ -35,8 +30,8 @@
     <string name="profile_fragment_about_change">Change profile</string>
     <string name="profile_fragment_about_delete">Delete profile</string>
     <string name="profile_fragment_about_image">Image profile</string>
-    <string name="profile_fragment_about_google">Link google account</string>
-    <string name="profile_fragment_about_vk">Link vk account</string>
+    <string name="profile_fragment_about_google">Link Google account</string>
+    <string name="profile_fragment_about_vk">Link VK account</string>
     <string name="profile_fragment_about_login">Registration account</string>
     <string name="profile_fragment_about_registation">Registration account</string>
     <string name="profile_fragment_about_statistics">Statistics account</string>
@@ -44,64 +39,144 @@
     <string name="authentication_fragment_entry_registration">Registration</string>
     <string name="authentication_fragment_entry_login">Login</string>
     <string name="authentication_fragment_hi">Hello,</string>
-    <string name="authentication_fragment_google">Login with Google</string>
-    <string name="authentication_fragment_vk">Login with Vk</string>
+    <string name="authentication_fragment_google" translatable="false">Login with Google</string>
+    <string name="authentication_fragment_vk" translatable="false">Login with Vk</string>
     <string name="authentication_fragment_hint_login">User Email</string>
     <string name="authentication_fragment_hint_password">Password</string>
-    <string name="authentication_fragment_forgot">Forgot password</string>
+    <string name="authentication_fragment_forgot">Forgot password?</string>
     <string name="authentication_fragment_about_image">Image profile</string>
-    <string name="authentication_fragment_about_google">Link google account</string>
-    <string name="authentication_fragment_about_vk">Link vk account</string>
+    <string name="authentication_fragment_about_google">Link Google account</string>
+    <string name="authentication_fragment_about_vk">Link VK account</string>
     <string name="authentication_fragment_invalid_email">Invalid email</string>
     <string name="authentication_fragment_invalid_password">Invalid password</string>
     <string name="authentication_fragment_about_password">Your password must be 8–24 characters long and contain a combination of letters and numbers</string>
     <!-- Firebase -->
-    <string name="firebase">Firebase</string>
+    <string name="firebase" translatable="false">Firebase</string>
     <string name="firebase_reset_password">Check your email for password recovery</string>
     <string name="firebase_error">Error Firebase</string>
     <string name="vpn_configurations">VPN Configurations</string>
-    <string name="fragment_settings_tools_cofig_num">1 configuration found</string>
+    <string name="fragment_settings_tools_config_num" translatable="false">1 configuration found</string>
     <string name="add_configuration">Add configuration</string>
+    <string name="save_configuration">Save configuration</string>
+    <string name="add_proxy_configuration">Add proxy</string>
     <!-- SettingsFragment -->
-    <string name="configuration_number">Already added %1$s configuration(s)</string>
+    <string name="advertisement_blocking">Advertisement blocking</string>
+    <string name="view_advertisement_ips">View Advertisement IPs</string>
+    <string name="backup">Backup</string>
+    <string name="restore">Restore</string>
     <!-- TAG -->
-    <string name="config_sp">PARANOID_VPN_SP</string>
-    <string name="config_sp_tag_ID">CURRENT_CONFIG_ID</string>
+    <string name="config_sp" translatable="false">PARANOID_VPN_SP</string>
+    <string name="config_sp_tag_ID" translatable="false">CURRENT_CONFIG_ID</string>
+    <string name="proxy_type_sp_tag_ID" translatable="false">CURRENT_PROXY_TYPE_ID</string>
+    <string name="proxy_ping_sp_tag_ID" translatable="false">CURRENT_PROXY_PING_ID</string>
+    <string name="proxy_country_sp_tag_ID" translatable="false">CURRENT_PROXY_COUNTRY_ID</string>
     <!-- VPN Fragment -->
     <string name="favorite">Favorite</string>
     <string name="choose_configuration">Choose configuration</string>
-    <string name="bottom_handler">Bottom handler</string>
-    <string name="search_coming_soon">Search coming soon</string>
+    <string name="bottom_handler" translatable="false">Bottom handler</string>
+    <string name="search_coming_soon" translatable="false">Search coming soon</string>
     <string name="share_vpn_configuration">Share VPN configuration</string>
     <string name="scan_the_qr_code_description">Scan the QR code with another device to set this configuration</string>
     <string name="generated_qr_code">Generated QR code</string>
+    <string name="search">Search…</string>
+    <string name="no_any_configs">No any configs…</string>
     <!-- Config -->
     <string name="config_name">Config name</string>
-    <string name="primary_dns">Primary DNS</string>
-    <string name="secondary_dns">Secondary DNS</string>
-    <string name="local_ip">Local ip</string>
-    <string name="gateway">Gateway</string>
-    <string name="proxy_ips">Proxy ips</string>
-    <string name="primary_dns_is">Primary DNS:</string>
-    <string name="secondary_dns_is">Secondary DNS:</string>
-    <string name="local_ip_is">Local ip:</string>
+    <string name="primary_dns" translatable="false">Primary DNS</string>
+    <string name="secondary_dns" translatable="false">Secondary DNS</string>
+    <string name="local_ip" translatable="false">Local ip</string>
+    <string name="gateway" translatable="false">Gateway</string>
+    <string name="proxy_ips" translatable="false">Proxy ips</string>
+    <string name="primary_dns_is" translatable="false">Primary DNS:</string>
+    <string name="secondary_dns_is" translatable="false">Secondary DNS:</string>
+    <string name="local_ip_is" translatable="false">Local ip:</string>
     <string name="gateway_is">Gateway:</string>
-    <string name="proxy_ips_is">Proxy ips:</string>
+    <string name="proxy_ips_is" translatable="false">Proxy ips:</string>
     <string name="proxy">Proxy</string>
     <string name="add_proxy">Add proxy</string>
     <string name="add_rule">Add forwarding rule</string>
     <string name="protocol_name">Protocol</string>
     <string name="source_port">Source port</string>
-    <string name="target_ip">Target IP</string>
+    <string name="target_ip" translatable="false">Target IP</string>
     <string name="target_port">Target port</string>
     <string name="firebase_error_loading_user">Error loading User</string>
     <!-- EditUser -->
     <string name="edit_user_fragment_hint_login">User Name</string>
     <string name="edit_user_fragment_hint_password">Password</string>
-    <string name="edit_user_fragment_hint_email">Email</string>
-    <string name="edit_user_fragment_hint_url">Url Image</string>
+    <string name="edit_user_fragment_hint_email" translatable="false">Email</string>
+    <string name="edit_user_fragment_hint_url" translatable="false">Url Image</string>
     <string name="edit_user_fragment_invalid_url">Invalid url</string>
     <string name="edit_user_fragment_invalid_email">Invalid email</string>
     <string name="edit_user_fragment_invalid_name">Invalid name</string>
     <string name="edit_user_fragment_entry">Edit User</string>
+    <!-- Tabs -->
+    <string name="tab_vpn" translatable="false">VPN</string>
+    <string name="tab_proxy" translatable="false">Proxy</string>
+    <string name="tab_traffic">Traffic</string>
+    <string name="network_data">Online data</string>
+    <string name="proxy_configuration">Proxy configuration</string>
+    <string name="filter_proxies">Filter proxies</string>
+    <!-- Proxy Protocols -->
+    <string name="http" translatable="false">HTTP</string>
+    <string name="https" translatable="false">HTTPS</string>
+    <string name="socks4" translatable="false">SOCKS4</string>
+    <string name="socks5" translatable="false">SOCKS5</string>
+    <!-- Proxy Fragments -->
+    <string name="proxy_type">Proxy type</string>
+    <string name="ping">Ping</string>
+    <string name="possible_ping">Possible ping</string>
+    <string name="country">Country</string>
+    <string name="countries">Countries</string>
+    <string name="view_proxy">View proxy</string>
+    <string name="save_proxy">Save proxy</string>
+    <string name="local_data">Local data</string>
+    <string name="proxy_save">Save</string>
+    <string name="proxy_set_proxy">Set proxy</string>
+    <string name="proxy_share">Share</string>
+    <string name="proxy_delete">Delete</string>
+    <string name="proxy_edit">Edit</string>
+    <string name="edit_proxy_title">Add/Edit proxy</string>
+    <string name="edit_config_title">Add/Edit config</string>
+    <string name="proxy_ip" translatable="false">IP</string>
+    <string name="proxy_port" translatable="false">Port</string>
+    <string name="proxy_city">City</string>
+    <string name="proxy_country">Country</string>
+    <string name="proxy_continent">Continent</string>
+    <string name="proxy_country_code">Country code</string>
+    <string name="proxy_lat" translatable="false">Lat</string>
+    <string name="proxy_lon" translatable="false">Lon</string>
+    <string name="proxy_region">Region</string>
+    <string name="view_information_about_online_proxy">Information about online proxy</string>
+    <string name="view_information_about_local_proxy">Information about local proxy</string>
+    <string name="expand_menu">Expand menu</string>
+    <string name="add_advert_ip">Add advertisement ip</string>
+    <string name="data_loading">Data loading…</string>
+    <string name="advertisement_blocking_list">Advertisement blocking list</string>
+    <string name="about_us">About us</string>
+    <string name="coming_soon">Coming soon</string>
+    <string name="added_addresses">Already advert ips added</string>
+    <string name="delete_from_database">Delete all</string>
+    <string name="year_2021" translatable="false">2021</string>
+    <string name="preloaded_data">Preloaded data</string>
+    <string name="delete_advertisement_ip">Delete advertisement ip</string>
+    <string name="add_100_ips_from_local_db">Add 100 IPs from local DB</string>
+    <string name="preloaded_data_desc">We have a big number of preloaded ips, but full usage of them may can slow down your connection speed, so you can increase the number of preloaded ips by constant value and check the result</string>
+    <string name="no_local_proxy_saved">No local proxy saved</string>
+    <string name="can_t_load_online_data">Can\'t load online data</string>
+    <string name="please_wait">Please, wait</string>
+    <string name="connection_speed" translatable="false">↑ - %1$s · ↓ - %2$s</string>
+    <string name="dialog_delete">Delete</string>
+    <string name="rule">Rule %1$s</string>
+    <plurals name="proxies_number">
+        <item quantity="one">Already added %1$s proxy</item>
+        <item quantity="other">Already added %1$s proxies</item>
+    </plurals>
+    <plurals name="ips_number">
+        <item quantity="one">Already added %1$s ip</item>
+        <item quantity="other">Already added %1$s ips</item>
+    </plurals>
+    <plurals name="configuration_number">
+        <item quantity="one">Already added %1$s configuration</item>
+        <item quantity="other">Already added %1$s configurations</item>
+    </plurals>
 </resources>

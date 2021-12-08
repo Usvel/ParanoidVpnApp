@@ -12,7 +12,6 @@ import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.coroutineContext
 
 class BioUdpHandler(
     private var queue: BlockingQueue<Packet>,
@@ -24,23 +23,22 @@ class BioUdpHandler(
     private var udpSockets = ConcurrentHashMap<String?, DatagramChannel?>()
 
     override suspend fun run() {
-        var readJob: Job? = null
-        var writeJob: Job? = null
+        var readJob: Deferred<Unit>? = null
+        var writeJob: Deferred<Unit>? = null
         try {
             val tunnelQueue: BlockingQueue<UdpTunnel> = ArrayBlockingQueue(100)
             selector = runInterruptible {
                 Selector.open()
             }
-            readJob = CoroutineScope(context).launch {
+            readJob = CoroutineScope(context).async {
                 UdpReadWorker(
                     selector,
                     networkToDeviceQueue,
                     tunnelQueue
                 ).run()
             }
-            readJob.start()
 
-            writeJob = CoroutineScope(context).launch {
+            writeJob = CoroutineScope(context).async {
                 UdpWriteWorker(
                     selector,
                     tunnelQueue,
@@ -49,11 +47,9 @@ class BioUdpHandler(
                     vpnService
                 ).run()
             }
-            writeJob.start()
 
-            while (coroutineContext.isActive) {
-                continue
-            }
+            readJob.await()
+            writeJob.await()
 
         } catch (e: Exception) {
             Log.v(TAG, "error")
@@ -76,6 +72,6 @@ class BioUdpHandler(
 
     companion object {
         const val HEADER_SIZE = Packet.IP4_HEADER_SIZE + Packet.UDP_HEADER_SIZE
-        val TAG = BioUdpHandler::class.java.simpleName
+        val TAG: String = BioUdpHandler::class.java.simpleName
     }
 }
