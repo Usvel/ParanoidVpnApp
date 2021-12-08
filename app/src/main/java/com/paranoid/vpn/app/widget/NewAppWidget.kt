@@ -23,7 +23,7 @@ class NewAppWidget : AppWidgetProvider() {
         appWidgetIds: IntArray
     ) {
         // There may be multiple widgets active, so update all of them
-        /*for (appWidgetId in appWidgetIds) {
+        for (appWidgetId in appWidgetIds) {
             Log.println(Log.INFO, "logs", "start")
             val intentQr = Intent(context, AppActivity::class.java)
             intentQr.putExtra("toQr", true)
@@ -77,7 +77,7 @@ class NewAppWidget : AppWidgetProvider() {
             val viewsService = RemoteViews(context.packageName, R.layout.new_app_widget)
             viewsService.setOnClickPendingIntent(R.id.to_service, pendingIntentService)
             appWidgetManager.updateAppWidget(appWidgetId, viewsService)
-        }*/
+        }
     }
 
     override fun onEnabled(context: Context) {
