@@ -3,19 +3,12 @@ package com.paranoid.vpn.app.common.ui.app
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseActivity
 import com.paranoid.vpn.app.databinding.ActivityMainBinding
-import android.view.WindowManager
-import androidx.core.os.bundleOf
-import androidx.core.view.WindowInsetsCompat
-
-import androidx.core.view.ViewCompat
-import androidx.fragment.app.commit
-import androidx.navigation.findNavController
-import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.qr.QRScanner
-import com.paranoid.vpn.app.vpn.ui.vpn_pager.proxy.ProxyObjectFragment
 
 
 class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
@@ -28,15 +21,31 @@ class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infla
             if (extras.containsKey("toQr")) {
                 val intent = Intent(this, QRScanner::class.java)
                 startActivity(intent)
+
             }
             if (extras.containsKey("toTurn")) {
-                navController?.navigate(R.id.vpn_fragment, bundleOf(Pair("pageNumber", 1)))
+                navController?.navigate(
+                    R.id.vpn_fragment, bundleOf(
+                        Pair("turnOnVPN", true)
+                    )
+                )
                 Log.println(Log.DEBUG, "logs", "toTurn")
+
             }
-            if (extras.containsKey("toService")) {
+            if (extras.containsKey("toFavorite")) {
+                navController?.navigate(
+                    R.id.vpn_fragment, bundleOf(
+                        Pair("favoriteFlag", true)
+                    )
+                )
+                Log.println(Log.DEBUG, "logs", "toFavorite")
+            }
+            if (extras.containsKey("toAdvert")) {
+                navController?.navigate(R.id.advert_fragment)
                 Log.println(Log.DEBUG, "logs", "toService")
             }
             if (extras.containsKey("toProxy")) {
+                navController?.navigate(R.id.vpn_fragment, bundleOf(Pair("pageNumber", 1)))
                 Log.println(Log.DEBUG, "logs", "toProxy")
             }
         }

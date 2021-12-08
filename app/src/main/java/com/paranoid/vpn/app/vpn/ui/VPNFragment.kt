@@ -16,12 +16,26 @@ class VPNFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewModel()
         setListeners()
         initTabLayout()
     }
 
     private fun initTabLayout() {
-        val vpnFragmentPagerAdapter = viewModel?.let { VPNFragmentPagerAdapter(activity, it) }
+        var favorite = false
+        var turnOnVPN = false
+        if (arguments?.isEmpty != true) {
+            arguments?.getBoolean("favoriteFlag")?.let {
+                if (it)
+                    favorite = true
+            }
+            arguments?.getBoolean("turnOnVPN")?.let {
+                if (it)
+                    turnOnVPN = true
+            }
+        }
+        val vpnFragmentPagerAdapter =
+            viewModel?.let { VPNFragmentPagerAdapter(activity, favorite, turnOnVPN) }
         binding.vpVpnPager.adapter = vpnFragmentPagerAdapter
         TabLayoutMediator(binding.tlTabLayout, binding.vpVpnPager) { tab, position ->
             when (position) {

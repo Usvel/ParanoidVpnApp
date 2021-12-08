@@ -3,7 +3,7 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24"
-    android:tint="#FFFFFF"
+    android:tint="@color/nav_indicator_light"
     android:alpha="1.0">
   <path
       android:fillColor="@android:color/white"

@@ -122,11 +122,14 @@
     </style>
 
     <style name="Theme.Paranoid.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">
-        <item name="appWidgetRadius">8dp</item>
-        <item name="appWidgetPadding">4dp</item>
-        <item name="appWidgetInnerRadius">4dp</item>
+        <item name="appWidgetRadius">24dp</item>
+        <item name="android:padding">1dp</item>
+        <item name="appWidgetPadding">16dp</item>
+        <item name="appWidgetInnerRadius">16dp</item>
+        <item name="colorPrimary">@color/minor_color_dark_theme</item>
     </style>
 
-    <style name="Theme.Paranoid.AppWidgetContainer" parent="Theme.Paranoid.AppWidgetContainerParent" />
+    <style name="Theme.Paranoid.AppWidgetContainer" parent="Theme.Paranoid.AppWidgetContainerParent">
+    </style>
 
 </resources>

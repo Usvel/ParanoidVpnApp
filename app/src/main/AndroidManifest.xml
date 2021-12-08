@@ -27,7 +27,7 @@
         tools:ignore="AllowBackup">
 
         <receiver
-            android:name=".widget.NewAppWidget"
+            android:name=".widget.ParanoidAppWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
