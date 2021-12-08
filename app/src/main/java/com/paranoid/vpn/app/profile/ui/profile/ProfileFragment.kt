@@ -14,17 +14,28 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.paranoid.vpn.app.R
+import com.paranoid.vpn.app.common.Application
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
+import com.paranoid.vpn.app.common.ui.factory.DaggerViewModelFactory
 import com.paranoid.vpn.app.common.utils.NetworkStatus
 import com.paranoid.vpn.app.common.utils.UserLoggedState
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.utils.isValidEmail
 import com.paranoid.vpn.app.databinding.NavigationProfileFragmentBinding
+import javax.inject.Inject
 
 class ProfileFragment :
     BaseFragment<NavigationProfileFragmentBinding, ProfileViewModel>(
         NavigationProfileFragmentBinding::inflate
     ) {
+    @Inject
+    lateinit var viewModelFactory: DaggerViewModelFactory
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initDagger()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObservers()
@@ -161,8 +172,14 @@ class ProfileFragment :
         }
     }
 
+    private fun initDagger() {
+        (requireActivity().application as Application).getAppComponent()
+            .registerProfileFeatureComponent()
+            .create().registerProfileComponent().create().inject(this)
+    }
+
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[ProfileViewModel::class.java]
     }
 
     companion object {

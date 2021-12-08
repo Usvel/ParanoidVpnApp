@@ -12,12 +12,15 @@ import android.os.ParcelFileDescriptor
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.gson.GsonBuilder
+import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigDataGenerator
 import com.paranoid.vpn.app.common.vpn_configuration.domain.model.VPNConfigItem
 import com.paranoid.vpn.app.vpn.core.handlers.udp.BioUdpHandler
 import com.paranoid.vpn.app.vpn.core.handlers.tcp.NioSingleThreadTcpHandler
 import com.paranoid.vpn.app.vpn.core.config.Config
 import com.paranoid.vpn.app.vpn.core.handlers.vpn.VpnReadWorker
 import com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet
+import com.paranoid.vpn.app.vpn.domain.usecase.AddPacketUseCase
+import com.paranoid.vpn.app.vpn.remote.VPNPacketMemoryCache
 import kotlinx.coroutines.*
 import java.io.*
 import java.nio.ByteBuffer
@@ -25,6 +28,9 @@ import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 
 class LocalVPNService2 : VpnService() {
+
+    val addPacketUseCase = AddPacketUseCase(VPNPacketMemoryCache)
+
     private val binder = LocalBinder()
 
     private var connectivityManager: ConnectivityManager? = null
@@ -112,6 +118,7 @@ class LocalVPNService2 : VpnService() {
                 deviceToNetworkUDPQueue as ArrayBlockingQueue<Packet>,
                 deviceToNetworkTCPQueue as ArrayBlockingQueue<Packet>,
                 networkToDeviceQueue as ArrayBlockingQueue<ByteBuffer>,
+                addPacketUseCase
             ).run()
         }
         VPNRunnableJob!!.start()

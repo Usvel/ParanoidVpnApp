@@ -111,6 +111,9 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
     implementation 'com.budiyev.android:code-scanner:2.1.0'
 
+    // Dagger
+    kapt "com.google.dagger:dagger-compiler:2.40"
+    implementation "com.google.dagger:dagger:2.40"
     // csv
     implementation "com.github.doyaaaaaken:kotlin-csv-jvm:0.9.0"
 

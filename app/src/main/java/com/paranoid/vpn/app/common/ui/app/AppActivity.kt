@@ -5,7 +5,6 @@ import androidx.core.view.isVisible
 import com.paranoid.vpn.app.common.ui.base.BaseActivity
 import com.paranoid.vpn.app.databinding.ActivityMainBinding
 
-
 class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
 

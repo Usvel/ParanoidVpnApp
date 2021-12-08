@@ -15,13 +15,13 @@ import com.paranoid.vpn.app.profile.remote.UserFirebaseImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class RegistrationViewModel : BaseFragmentViewModel() {
+class RegistrationViewModel @Inject constructor(
+    private val createFirebaseUserUseCase: CreateFirebaseUserUseCase
+) : BaseFragmentViewModel() {
     private val _networkState: MutableLiveData<NetworkStatus<UserEntity>> = MutableLiveData()
     val networkState: LiveData<NetworkStatus<UserEntity>> = _networkState
-
-    private val createFirebaseUserUseCase =
-        CreateFirebaseUserUseCase(UserFirebaseImpl)
 
     fun createUser(email: String, password: String) {
         viewModelScope.launch {

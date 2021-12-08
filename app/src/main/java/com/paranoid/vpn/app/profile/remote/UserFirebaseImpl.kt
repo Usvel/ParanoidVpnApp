@@ -4,14 +4,15 @@ import android.net.Uri
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.paranoid.vpn.app.common.remote.FirebaseService
-import com.paranoid.vpn.app.common.remote.FirebaseServiceFactory
 import com.paranoid.vpn.app.profile.domain.entity.UserEntity
 import com.paranoid.vpn.app.profile.domain.port.UserFirebase
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-object UserFirebaseImpl : UserFirebase {
-    private val firebaseService: FirebaseService = FirebaseServiceFactory
-    private val userFirebaseMapper: UserFirebaseMapper = UserFirebaseMapper
+class UserFirebaseImpl @Inject constructor(
+    private val firebaseService: FirebaseService,
+    private val userFirebaseMapper: UserFirebaseMapper
+) : UserFirebase {
 
     override fun getUser(): UserEntity? {
         return userFirebaseMapper.mapToEntity(firebaseService.getAuth().currentUser)

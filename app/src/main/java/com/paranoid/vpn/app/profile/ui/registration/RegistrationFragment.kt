@@ -7,17 +7,28 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.paranoid.vpn.app.R
+import com.paranoid.vpn.app.common.Application
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
+import com.paranoid.vpn.app.common.ui.factory.DaggerViewModelFactory
 import com.paranoid.vpn.app.common.utils.NetworkStatus
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.utils.isValidEmail
 import com.paranoid.vpn.app.common.utils.isValidPassword
 import com.paranoid.vpn.app.databinding.NavigationAuthenticationFragmentBinding
+import javax.inject.Inject
 
 class RegistrationFragment :
     BaseFragment<NavigationAuthenticationFragmentBinding, RegistrationViewModel>(
         NavigationAuthenticationFragmentBinding::inflate
     ) {
+    @Inject
+    lateinit var viewModelFactory: DaggerViewModelFactory
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initDagger()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setProceedBottomNav {
@@ -37,7 +48,12 @@ class RegistrationFragment :
     }
 
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this)[RegistrationViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[RegistrationViewModel::class.java]
+    }
+
+    private fun initDagger() {
+        (requireActivity().application as Application).getAppComponent().registerProfileFeatureComponent()
+            .create().registerRegistrationComponent().create().inject(this)
     }
 
     private fun setObservers() {

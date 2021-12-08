@@ -16,8 +16,13 @@ import com.paranoid.vpn.app.profile.remote.UserFirebaseImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class LoginViewModel : BaseFragmentViewModel() {
+class LoginViewModel @Inject constructor(
+    private val loginFirebaseUserUseCase: LoginFirebaseUserUseCase,
+    private val resetPasswordUserUseCase : ResetPasswordUserUseCase
+) :
+    BaseFragmentViewModel() {
     private val _networkStateUser: MutableLiveData<NetworkStatus<UserEntity>> = MutableLiveData()
 
     val networkStateUser: LiveData<NetworkStatus<UserEntity>> = _networkStateUser
@@ -26,11 +31,6 @@ class LoginViewModel : BaseFragmentViewModel() {
         MutableLiveData()
     val networkStateResetPasswordUser: LiveData<NetworkStatus<MessageData>> =
         _networkStateResetPasswordUser
-
-    private val loginFirebaseUserUseCase =
-        LoginFirebaseUserUseCase(UserFirebaseImpl)
-
-    private val resetPasswordUserUseCase = ResetPasswordUserUseCase(UserFirebaseImpl)
 
     fun loginUser(email: String, password: String) {
         viewModelScope.launch {

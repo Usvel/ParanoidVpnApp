@@ -17,8 +17,14 @@ import com.paranoid.vpn.app.profile.domain.usecase.UpdateEmailFirebaseUserUseCas
 import com.paranoid.vpn.app.profile.domain.usecase.UpdateProfileFirebaseUseCase
 import com.paranoid.vpn.app.profile.remote.UserFirebaseImpl
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class EditUserViewModel : BaseFragmentViewModel() {
+class EditUserViewModel @Inject constructor(
+    private val getFirebaseUserUseCase: GetFirebaseUserUseCase,
+    private val updateProfileFirebaseUseCase: UpdateProfileFirebaseUseCase,
+    private val updateEmailFirebaseUseCase: UpdateEmailFirebaseUserUseCase,
+    private val reauthenticateFirebaseUseCase: ReauthenticateFirebaseUserUseCase
+) : BaseFragmentViewModel() {
     private val _networkStateUser: MutableLiveData<NetworkStatus<UserEntity>> = MutableLiveData()
     val networkStateUser: LiveData<NetworkStatus<UserEntity>> = _networkStateUser
 
@@ -37,15 +43,6 @@ class EditUserViewModel : BaseFragmentViewModel() {
     val statePasswordUser: MutableLiveData<Boolean> = _statePasswordUser
 
     private var user: UserEntity? = null
-
-    private val getFirebaseUserUseCase =
-        GetFirebaseUserUseCase(UserFirebaseImpl)
-
-    private val updateProfileFirebaseUseCase = UpdateProfileFirebaseUseCase(UserFirebaseImpl)
-
-    private val updateEmailFirebaseUseCase = UpdateEmailFirebaseUserUseCase(UserFirebaseImpl)
-
-    private val reauthenticateFirebaseUseCase = ReauthenticateFirebaseUserUseCase(UserFirebaseImpl)
 
     override fun getCurrentData() {
         val user = getFirebaseUserUseCase.execute()
