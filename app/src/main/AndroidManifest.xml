@@ -26,6 +26,8 @@
         android:theme="@style/Theme.Paranoid"
         tools:ignore="AllowBackup">
         <receiver
+            android:icon="@drawable/ic_open_in_new"
+            android:label="Example Widget"
             android:name=".widget.NewAppWidget"
             android:exported="true">
             <intent-filter>

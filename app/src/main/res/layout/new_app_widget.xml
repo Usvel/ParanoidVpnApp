@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/Widget.Paranoid.AppWidget.Container"
     android:layout_width="match_parent"
@@ -45,4 +45,4 @@
             android:padding="1dp"
             android:src="@drawable/ic_add_config_dns" />
     </LinearLayout>
-</RelativeLayout>
+</FrameLayout>
