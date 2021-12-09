@@ -96,19 +96,16 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
-    <style name="AppBottomSheetDialogTheme"
-        parent="Theme.Design.Light.BottomSheetDialog">
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
 
-    <style name="AppModalStyle"
-        parent="Widget.Design.BottomSheet.Modal">
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/rounded_dialog</item>
     </style>
 
     <!-- Alert Dialog -->
-    <style name="ThemeOverlay.MaterialComponents.MaterialAlertDialog_Background"
-        parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog.Centered">
+    <style name="ThemeOverlay.MaterialComponents.MaterialAlertDialog_Background" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog.Centered">
         <!-- Background Color-->
         <item name="android:background">@color/minor_color_light</item>
         <!-- Style for negative button -->
@@ -122,6 +119,17 @@
 
     <style name="TranslucentStatusBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="Theme.Paranoid.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">
+        <item name="appWidgetRadius">24dp</item>
+        <item name="android:padding">1dp</item>
+        <item name="appWidgetPadding">16dp</item>
+        <item name="appWidgetInnerRadius">16dp</item>
+        <item name="colorPrimary">@color/minor_color_dark_theme</item>
+    </style>
+
+    <style name="Theme.Paranoid.AppWidgetContainer" parent="Theme.Paranoid.AppWidgetContainerParent">
     </style>
 
 </resources>

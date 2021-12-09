@@ -10,6 +10,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -267,6 +268,17 @@ class VPNObjectFragment :
         }
 
         bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+        if (arguments?.isEmpty != true) {
+            arguments?.getBoolean("favorite")?.let {
+                if(it) {
+                    favoriteData = true
+                    setRecyclerViews(favorite = favoriteData)
+                    viewFavoriteImage?.setImageResource(R.drawable.ic_favorite_full)
+                    bottomSheetDialog.show()
+                }
+            }
+        }
     }
 
 
@@ -331,6 +343,14 @@ class VPNObjectFragment :
         binding.cvVpnButtonBackground.setOnClickListener {
             oldViewModel.changeVpnState()
         }
+
+        if (arguments?.isEmpty != true) {
+            arguments?.getBoolean("turnOnVPN")?.let {
+                if(it)
+                    oldViewModel.changeVpnState()
+            }
+        }
+
     }
 
     private fun setObservers() {

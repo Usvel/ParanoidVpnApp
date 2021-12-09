@@ -20,7 +20,7 @@ abstract class BaseActivity<VB : ViewBinding>(
     private var progressDialog: ProgressDialog? = null
 
     protected lateinit var binding: VB
-    private var navController: NavController? = null
+    protected var navController: NavController? = null
 
     private var bottomNav: BottomNavigationView? = null
 

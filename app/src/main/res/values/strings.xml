@@ -182,4 +182,11 @@
         <item quantity="one">Already added %1$s configuration</item>
         <item quantity="other">Already added %1$s configurations</item>
     </plurals>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+    <string name="widget_turn_on_off">Turn on/off</string>
+    <string name="widget_qr_scanner">QR Scanner</string>
+    <string name="widget_proxy_list">Proxy List</string>
+    <string name="widget_to_service">To Service</string>
 </resources>

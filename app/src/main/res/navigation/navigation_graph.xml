@@ -64,6 +64,10 @@
         android:id="@+id/vpn_fragment"
         android:name="com.paranoid.vpn.app.vpn.ui.VPNFragment"
         tools:layout="@layout/navigation_vpn_fragment" >
+        <argument
+            android:name="pageNumber"
+            android:defaultValue="0">
+        </argument>
         <action
             android:id="@+id/action_vpn_fragment_to_settings_fragment"
             app:popUpTo="@id/settings_fragment"

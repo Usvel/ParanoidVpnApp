@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.Paranoid.AppWidget.Container"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/widget_height"
+    android:theme="@style/Theme.Paranoid.AppWidgetContainer">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/to_turn"
+            android:layout_width="@dimen/widget_main_icon_size"
+            android:layout_height="@dimen/widget_main_icon_size"
+            android:background="@drawable/blue_shape">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/widget_turn_on_off"
+                android:padding="@dimen/half_base_padding"
+                android:src="@drawable/ic_power"
+                app:tint="?attr/textDedicated" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/to_qr"
+            android:layout_width="@dimen/widget_icon_size"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/widget_qr_scanner"
+            android:padding="@dimen/half_base_padding"
+            android:src="@drawable/ic_qr"
+            app:tint="?attr/textDedicated" />
+
+        <ImageView
+            android:id="@+id/to_list"
+            android:layout_width="@dimen/widget_icon_size"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/widget_proxy_list"
+            android:padding="@dimen/half_base_padding"
+            android:src="@drawable/ic_outline_router"
+            app:tint="?attr/textDedicated" />
+
+        <ImageView
+            android:id="@+id/to_service"
+            android:layout_width="@dimen/widget_icon_size"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/widget_to_service"
+            android:padding="@dimen/half_base_padding"
+            android:src="@drawable/ic_outline_shield"
+            app:tint="?attr/textDedicated" />
+
+        <ImageView
+            android:id="@+id/to_favorite"
+            android:layout_width="@dimen/widget_icon_size"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/widget_to_service"
+            android:padding="@dimen/half_base_padding"
+            android:src="@drawable/ic_baseline_favorite"
+            app:tint="?attr/textDedicated" />
+    </LinearLayout>
+</RelativeLayout>
