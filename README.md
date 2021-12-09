@@ -11,7 +11,7 @@
 
 ## Code style
 
-1)-f (fix) -a (add) -r (refactor) -t (test) -d (docs)
+1) -f (fix) -a (add) -r (refactor) -t (test) -d (docs)
 
 2) Сделать промежуточные ветки (mvp1), (mvp2), (mvp3)
 
