@@ -138,4 +138,13 @@
         <item quantity="many">Уже добавлено %1$s конфигураций</item>
         <item quantity="other">Уже добавлено %1$s конфигураций</item>
     </plurals>
+    <string name="appwidget_text" translatable="false">Пример</string>
+    <string name="add_widget">Добавить виджет</string>
+    <string name="app_widget_description">Виджет для быстрого доступа</string>
+    <string name="widget_turn_on_off">On/off</string>
+    <string name="widget_qr_scanner">QR Scanner</string>
+    <string name="widget_fav">Избранное</string>
+    <string name="widget_advert">Adblock</string>
+    <string name="widget_proxy_list">Proxy List</string>
+    <string name="widget_to_service">To Service</string>
 </resources>
