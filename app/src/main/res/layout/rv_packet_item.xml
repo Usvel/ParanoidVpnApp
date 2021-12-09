@@ -32,7 +32,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/ipDestination"
             app:layout_constraintTop_toBottomOf="@+id/ipDestination"
-            tools:text="ipAdress" />
+            tools:text="ipAddress" />
 
         <TextView
             android:id="@+id/ipDestinationPort"

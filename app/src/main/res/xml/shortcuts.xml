@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_power"
+        android:shortcutId="0"
+        android:shortcutLongLabel="@string/turn_on_vpn"
+        android:shortcutShortLabel="@string/turn_on_vpn">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.paranoid.vpn.app.common.ui.app.AppActivity"
+            android:targetPackage="com.paranoid.vpn">
+            <extra
+                android:name="toTurn"
+                android:value="true" />
+        </intent>
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_qr_black"
+        android:shortcutId="1"
+        android:shortcutLongLabel="@string/widget_qr_scanner"
+        android:shortcutShortLabel="@string/widget_qr_scanner">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.paranoid.vpn.app.common.ui.app.AppActivity"
+            android:targetPackage="com.paranoid.vpn">
+            <extra
+                android:name="toQr"
+                android:value="true" />
+        </intent>
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_favorite_black"
+        android:shortcutId="2"
+        android:shortcutLongLabel="@string/widget_fav"
+        android:shortcutShortLabel="@string/widget_fav">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.paranoid.vpn.app.common.ui.app.AppActivity"
+            android:targetPackage="com.paranoid.vpn">
+            <extra
+                android:name="toFavorite"
+                android:value="true" />
+        </intent>
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_outline_shield_black"
+        android:shortcutId="3"
+        android:shortcutLongLabel="@string/widget_advert"
+        android:shortcutShortLabel="@string/widget_advert">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.paranoid.vpn.app.common.ui.app.AppActivity"
+            android:targetPackage="com.paranoid.vpn">
+            <extra
+                android:name="toAdvert"
+                android:value="true" />
+        </intent>
+    </shortcut>
+</shortcuts>
