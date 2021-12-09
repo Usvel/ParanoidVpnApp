@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout
+    android:id="@+id/mlSettingsMotionLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layoutDescription="@xml/navigation_profile_fragment_scene"
     tools:context=".profile.ui.profile.ProfileFragment">
 
     <TextView
@@ -30,10 +33,11 @@
         tools:text="UserName" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvProfileСhange"
+        android:id="@+id/viewChangeProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/profile_fragment_icon_margin_top122"
+        android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
+        android:visibility="gone"
         android:backgroundTint="?attr/iconBackground"
         android:innerRadius="0dp"
         android:shape="ring"
@@ -59,12 +63,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/profile_fragment_icon_margin_start"
         android:layout_marginTop="@dimen/profile_fragment_icon_margin_top"
+        android:visibility="gone"
         android:backgroundTint="?attr/iconBackgroundRed"
         android:innerRadius="0dp"
         android:shape="ring"
         app:cardCornerRadius="@dimen/small_corner_radius"
         app:cardElevation="0dp"
-        app:layout_constraintStart_toEndOf="@id/cvProfileСhange"
+        app:layout_constraintStart_toEndOf="@id/viewChangeProfile"
         app:layout_constraintTop_toBottomOf="@id/tvProfileName">
 
         <ImageView
@@ -80,6 +85,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvProfileOut"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/profile_fragment_icon_margin_start"
@@ -128,20 +134,12 @@
             android:src="@drawable/ic_image_profile" />
     </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/gProfileNotEnter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:constraint_referenced_ids="
-        cvProfileСhange, cvProfileBasket, cvProfileOut, gProfileEmail" />
-
     <TextView
         android:id="@+id/tvProfileStatistics"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/base_padding"
-        android:layout_marginBottom="@dimen/profile_fragment_statistics_margin_bottom"
         android:text="@string/profile_fragment_statistics"
         android:textColor="@color/text_view_dark_text_transparent"
         android:textSize="@dimen/profile_fragment_title_size"
@@ -149,13 +147,24 @@
         app:layout_constraintTop_toBottomOf="@id/tvProfileEmailProfile"
         app:layout_constraintVertical_chainStyle="packed" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvGraph"
+        android:visibility="gone"
+        android:layout_width="@dimen/card_size"
+        android:layout_height="@dimen/card_size"
+        android:layout_marginStart="@dimen/real_medium_padding"
+        android:layout_marginTop="@dimen/base_padding"
+        app:cardCornerRadius="@dimen/minimum_corner_radius"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvProfileStatistics">
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/gProfileEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:constraint_referenced_ids="tvProfileEmail,tvProfileEmailProfile" />
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bcGraph"
+            android:layout_width="@dimen/chart_size"
+            android:layout_height="@dimen/chart_size"
+            android:layout_gravity="center" />
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/tvProfileEmail"
@@ -165,12 +174,14 @@
         android:text="@string/profile_fragment_email"
         android:textColor="@color/text_view_dark_text_transparent"
         android:textSize="@dimen/profile_fragment_title_size"
-        app:layout_constraintStart_toStartOf="@id/cvProfileСhange"
-        app:layout_constraintTop_toBottomOf="@id/cvProfileСhange" />
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/viewChangeProfile"
+        app:layout_constraintTop_toBottomOf="@id/viewChangeProfile" />
 
     <TextView
         android:id="@+id/tvProfileEmailProfile"
         android:layout_width="wrap_content"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:textColor="@color/text_view_black"
         android:textSize="@dimen/profile_fragment_email_size"
@@ -216,13 +227,6 @@
             android:textSize="@dimen/profile_fragment_card_view_text_size" />
     </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/gProfileButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:constraint_referenced_ids="cvProfileLogin,cvProfileRegistration" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cvProfileRegistration"
         android:layout_width="0dp"
@@ -263,9 +267,9 @@
         android:id="@+id/tilProfilePassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
-        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/authentication_fragment_edit_text_margin"
+        android:visibility="gone"
         app:boxCornerRadiusBottomEnd="@dimen/authentication_fragment_text_input_layout_radius"
         app:boxCornerRadiusBottomStart="@dimen/authentication_fragment_text_input_layout_radius"
         app:boxCornerRadiusTopEnd="@dimen/authentication_fragment_text_input_layout_radius"
@@ -296,4 +300,4 @@
             android:textSize="@dimen/authentication_fragment_edit_text_size" />
     </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

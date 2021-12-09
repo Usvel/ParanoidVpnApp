@@ -104,4 +104,6 @@
     <dimen name="widget_min_width">250dp</dimen>
     <dimen name="widget_min_height">20dp</dimen>
     <dimen name="widget_height">90dp</dimen>
+    <dimen name="chart_size">300dp</dimen>
+    <dimen name="card_size">320dp</dimen>
 </resources>

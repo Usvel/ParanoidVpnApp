@@ -50,6 +50,9 @@ def loggingInterceptorVersion = "4.9.2"
 
 dependencies {
 
+    // Graphs
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
     // Room
     def room_version = "2.3.0" // check latest version from docs
     implementation 'com.google.code.gson:gson:2.8.9'
