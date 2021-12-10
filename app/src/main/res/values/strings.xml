@@ -14,6 +14,8 @@
     <string name="connected">Connected</string>
     <string name="error">Connection error</string>
     <string name="stable_connection">Stable connection</string>
+    <string name="bad_connection">Unstable connection</string>
+    <string name="no_connection">No connection</string>
     <string name="help_info">Help info</string>
     <string name="scan_qr_code">Scan QR code</string>
     <string name="proceed">Next</string>

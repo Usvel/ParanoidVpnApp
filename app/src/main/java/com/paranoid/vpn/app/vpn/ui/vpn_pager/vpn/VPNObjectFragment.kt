@@ -306,14 +306,17 @@ class VPNObjectFragment :
             (upByte.toLong() < 1024) or (downByte.toLong() < 1024) -> {
                 binding.ivWifiIcon.setImageResource(R.drawable.ic_bad_connection)
                 binding.viewWifiIcon.background.setTint(getVpnButtonColor(R.attr.vpnButtonWarning))
+                binding.tvConnectionQuality.text = Utils.getString(R.string.bad_connection)
             }
             (upByte.toLong() < 10) or (downByte.toLong() < 10) -> {
                 binding.ivWifiIcon.setImageResource(R.drawable.ic_no_connection)
                 binding.viewWifiIcon.background.setTint(getVpnButtonColor(R.attr.vpnButtonError))
+                binding.tvConnectionQuality.text = Utils.getString(R.string.no_connection)
             }
             else -> {
                 binding.viewWifiIcon.background.setTint(getVpnButtonColor(R.attr.iconBackground))
                 binding.ivWifiIcon.setImageResource(R.drawable.ic_stable_connection)
+                binding.tvConnectionQuality.text = Utils.getString(R.string.stable_connection)
             }
         }
 

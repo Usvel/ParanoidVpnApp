@@ -13,6 +13,8 @@
     <string name="connected">Соединение установлено</string>
     <string name="error">Ошибка соединения</string>
     <string name="stable_connection">Стабильное соединение</string>
+    <string name="bad_connection">Нестабильное соединение</string>
+    <string name="no_connection">Нет соединения</string>
     <string name="help_info">Помощь</string>
     <string name="proxy_filter">Фильтр прокси</string>
     <string name="proxy_filter_details">Информация о текущей конфигурации</string>
