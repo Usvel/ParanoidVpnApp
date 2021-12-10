@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseActivity
 import com.paranoid.vpn.app.databinding.ActivityMainBinding
+import com.paranoid.vpn.app.intro.ParanoidIntroScreen
 import com.paranoid.vpn.app.qr.QRScanner
 
 
@@ -15,6 +16,9 @@ class AppActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infla
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+
+        val viewAdapter = ParanoidIntroScreen()
+
         setUpBottomNav(binding.bottomTabBar)
         val extras = intent.extras
         if (extras != null) {

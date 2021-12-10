@@ -26,6 +26,9 @@
         android:theme="@style/Theme.Paranoid"
         tools:ignore="AllowBackup">
 
+        <activity android:name="com.paranoid.vpn.app.intro.ParanoidIntroScreen"
+            android:label="My Custom AppIntro" />
+
         <receiver
             android:name=".widget.ParanoidAppWidget"
             android:exported="true">
