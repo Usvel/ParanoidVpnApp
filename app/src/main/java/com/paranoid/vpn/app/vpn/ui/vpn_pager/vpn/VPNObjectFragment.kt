@@ -10,7 +10,6 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +26,7 @@ import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.common.utils.ConfigurationClickHandlers
+import com.paranoid.vpn.app.common.utils.DebouncedOnClickListener
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.utils.VPNState
 import com.paranoid.vpn.app.common.vpn_configuration.domain.repository.VPNConfigRepository
@@ -313,9 +313,11 @@ class VPNObjectFragment :
             return@setOnLongClickListener false
         }
 
-        binding.cvMainConfigurationCard.setOnClickListener {
+        val debouncedOnClickListener = DebouncedOnClickListener {
             showBottomSheetDialog()
         }
+
+        binding.cvMainConfigurationCard.setOnClickListener(debouncedOnClickListener)
 
         binding.ivEditIcon.setOnClickListener {
             openConfigEditingFragment(oldViewModel.getConfigId())
