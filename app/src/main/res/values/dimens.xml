@@ -96,7 +96,8 @@
     <!--  VPNFragment  -->
     <!--  Proxy Fragment  -->
     <dimen name="proxy_header_title_size">15sp</dimen>
-    <dimen name="navigation_proxy_title_text_size">20sp</dimen>
+    <dimen name="navigation_proxy_title_text_size">24sp</dimen>
+    <dimen name="navigation_card_title_text_size">18sp</dimen>
     <!-- Widget -->
     <dimen name="widget_margin">0dp</dimen>
     <dimen name="widget_icon_size">64dp</dimen>

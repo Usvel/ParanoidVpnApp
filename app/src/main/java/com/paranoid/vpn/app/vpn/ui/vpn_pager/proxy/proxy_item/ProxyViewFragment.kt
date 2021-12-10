@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.Location
@@ -32,6 +33,10 @@ class ProxyViewFragment :
         val gson = GsonBuilder().create()
         val proxyItem: ProxyItem = gson.fromJson(proxyItemGson, ProxyItem::class.java)
         val location: Location = gson.fromJson(locationGson, Location::class.java)
+
+        val navBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+        navBar?.visibility = View.GONE
+
         setProxyItem(proxyItem, location, local)
         if (proxyItemGson != null) {
             if (locationGson != null) {
@@ -56,29 +61,47 @@ class ProxyViewFragment :
         }
 
         binding.tvProxyIp.text = "IP: ${proxyItem.Ip}"
-        binding.tvProxyPort.text = "Port: ${proxyItem.Port}"
-        binding.tvProxyTime.text = "Time: ${proxyItem.Time}"
-        binding.tvProxyPing.text = "Ping: ${proxyItem.Ping}"
-        binding.tvProxyFailed.text = "Failed: ${proxyItem.Failed}"
-        binding.tvProxyAnonymity.text = "Anonymity: ${proxyItem.Anonymity}"
+        binding.tvProxyPort.text = Utils.getString(R.string.proxy_view_port) + ": ${proxyItem.Port}"
+        binding.tvProxyTime.text = Utils.getString(R.string.proxy_view_time) + ": ${proxyItem.Time}"
+        binding.tvProxyPing.text = Utils.getString(R.string.proxy_view_ping) + ": ${proxyItem.Ping}"
+        binding.tvProxyFailed.text =
+            Utils.getString(R.string.proxy_view_anonimity) + ": ${proxyItem.Failed}"
+        binding.tvProxyAnonymity.text =
+            Utils.getString(R.string.proxy_view_anonimity) + ": ${proxyItem.Anonymity}"
         binding.tvProxyUpTime.text = "Uptime: ${proxyItem.Uptime}"
         binding.tvProxyRecheckCount.text = "RecheckCount: ${proxyItem.RecheckCount}"
         binding.tvProxyWorkingCount.text = "WorkingCount: ${proxyItem.WorkingCount}"
-        binding.tvType.text = "Type: ${proxyItem.Type}"
+        binding.tvType.text = Utils.getString(R.string.proxy_view_type) + ": ${proxyItem.Type}"
 
-        binding.tvProxyLocationCity.text = "City: ${location.city}"
-        binding.tvProxyLocationContinent.text = "Continent: ${location.continent}"
-        binding.tvProxyLocationCountryCode.text = "Country code: ${location.countryCode}"
-        binding.tvProxyLocationCountry.text = "Country: ${location.country}"
-        binding.tvProxyLocationIpName.text = "Ip name: ${location.ipName}"
-        binding.tvProxyLocationIpType.text = "Ip Type: ${location.ipType}"
+        binding.tvProxyLocationCity.text =
+            Utils.getString(R.string.proxy_view_city) + ": ${location.city}"
+        binding.tvProxyLocationContinent.text =
+            Utils.getString(R.string.proxy_view_continent) + ": ${location.continent}"
+        binding.tvProxyLocationCountryCode.text =
+            Utils.getString(R.string.proxy_view_country_code) + ": ${location.countryCode}"
+        binding.tvProxyLocationCountry.text =
+            Utils.getString(R.string.proxy_view_country) + ": ${location.country}"
+        binding.tvProxyLocationIpName.text =
+            Utils.getString(R.string.proxy_view_ip_name) + ": ${location.ipName}"
+        binding.tvProxyLocationIpType.text =
+            Utils.getString(R.string.proxy_view_ip_type) + ": ${location.ipType}"
         binding.tvProxyLocationISP.text = "ISP: ${location.isp}"
         binding.tvProxyLocationLat.text = "LAT: ${location.lat}"
         binding.tvProxyLocationLan.text = "LON: ${location.lon}"
         binding.tvProxyLocationOrg.text = "ORG: ${location.org}"
-        binding.tvProxyLocationQuery.text = "Query: ${location.query}"
-        binding.tvProxyLocationRegion.text = "Region: ${location.region}"
-        binding.tvProxyLocationStatus.text = "Status: ${location.status}"
+        binding.tvProxyLocationQuery.text =
+            Utils.getString(R.string.proxy_view_query) + ": ${location.query}"
+        binding.tvProxyLocationRegion.text =
+            Utils.getString(R.string.proxy_view_region) + ": ${location.region}"
+        binding.tvProxyLocationStatus.text =
+            Utils.getString(R.string.proxy_view_status) + ": ${location.status}"
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        val navBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+        navBar?.visibility = View.VISIBLE
     }
 
     private fun setListeners(
@@ -94,6 +117,10 @@ class ProxyViewFragment :
         if (local == false) {
             binding.ibEditProxy.visibility = View.GONE
             binding.ibDeleteProxy.visibility = View.GONE
+        }
+
+        binding.ivBack.setOnClickListener {
+            it.findNavController().popBackStack()
         }
 
         binding.ibSaveProxy.setOnClickListener {

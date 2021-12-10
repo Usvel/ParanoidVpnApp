@@ -193,6 +193,26 @@
     <string name="widget_advert">Adblock</string>
     <string name="widget_proxy_list">Proxy List</string>
     <string name="widget_to_service">To Service</string>
+    <!-- View proxy -->
+    <string name="main_info">Main info</string>
+    <string name="location_info">Location info</string>
+
+    <string name="proxy_view_anonimity">Anonymity</string>
+    <string name="proxy_view_failed">Failed</string>
+    <string name="proxy_view_time">Time</string>
+    <string name="proxy_view_port">Port</string>
+    <string name="proxy_view_ping">Ping</string>
+    <string name="proxy_view_type">Type</string>
+    <string name="proxy_view_city">City</string>
+    <string name="proxy_view_country">Country</string>
+    <string name="proxy_view_country_code">Country code</string>
+    <string name="proxy_view_continent">Continent</string>
+    <string name="proxy_view_ip_name">Ip name</string>
+    <string name="proxy_view_ip_type">Ip Type</string>
+    <string name="proxy_view_region">Region</string>
+    <string name="proxy_view_status">Status</string>
+    <string name="proxy_view_query">Query</string>
+    <!-- Additional -->
     <string-array name="countries_array" >
         <item>AF</item>
         <item>AL</item>

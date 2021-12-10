@@ -115,11 +115,35 @@
     <string name="proxy_share">Поделиться</string>
     <string name="proxy_delete">Удалить</string>
     <string name="proxy_edit">Редактировать</string>
-    <string name="edit_proxy_title">Добавть/Удалить прокси</string>
-    <string name="edit_config_title">Добавть/Удалить конфигурацию</string>
+    <string name="edit_proxy_title">Изменить прокси</string>
+    <string name="edit_config_title">Изменить конфигурацию</string>
     <string name="proxy">Прокси</string>
     <string name="dialog_delete">Удалить</string>
     <string name="rule">Правило %1$s</string>
+
+    <!-- View proxy -->
+    <string name="main_info">Основная информация</string>
+    <string name="location_info">Информация о месторасположении</string>
+
+    <string name="proxy_view_anonimity">Анонимность</string>
+    <string name="proxy_view_failed">Ошибка</string>
+    <string name="proxy_view_time">Время</string>
+    <string name="proxy_view_port">Порт</string>
+    <string name="proxy_view_ping">Пинг</string>
+    <string name="proxy_view_type">Тип</string>
+    <string name="proxy_view_city">Город</string>
+    <string name="proxy_view_country">Страна</string>
+    <string name="proxy_view_country_code">Код страны</string>
+    <string name="proxy_view_continent">Континент</string>
+    <string name="proxy_view_ip_name">Имя IP</string>
+    <string name="proxy_view_ip_type">Тип IP</string>
+    <string name="proxy_view_region">Регион</string>
+    <string name="proxy_view_status">Статус</string>
+    <string name="proxy_view_query">Запрос</string>
+    <!-- Additional -->
+
+
+
     <plurals name="proxies_number" tools:ignore="UnusedQuantity">
         <item quantity="one">Уже добавлен %1$s прокси</item>
         <item quantity="few">Уже добавлено %1$s прокси</item>

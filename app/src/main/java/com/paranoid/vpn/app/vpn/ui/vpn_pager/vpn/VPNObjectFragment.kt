@@ -301,6 +301,22 @@ class VPNObjectFragment :
                 Utils.convertToStringRepresentation(upByte.toLong()),
                 Utils.convertToStringRepresentation(downByte.toLong())
             )
+
+        when {
+            (upByte.toLong() < 1024) or (downByte.toLong() < 1024) -> {
+                binding.ivWifiIcon.setImageResource(R.drawable.ic_bad_connection)
+                binding.viewWifiIcon.background.setTint(getVpnButtonColor(R.attr.vpnButtonWarning))
+            }
+            (upByte.toLong() < 10) or (downByte.toLong() < 10) -> {
+                binding.ivWifiIcon.setImageResource(R.drawable.ic_no_connection)
+                binding.viewWifiIcon.background.setTint(getVpnButtonColor(R.attr.vpnButtonError))
+            }
+            else -> {
+                binding.viewWifiIcon.background.setTint(getVpnButtonColor(R.attr.iconBackground))
+                binding.ivWifiIcon.setImageResource(R.drawable.ic_stable_connection)
+            }
+        }
+
     }
 
     private fun setListeners() {
