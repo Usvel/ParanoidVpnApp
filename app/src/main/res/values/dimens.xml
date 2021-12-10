@@ -8,6 +8,7 @@
     <dimen name="medium_padding">0dp</dimen>
     <dimen name="real_medium_padding">30dp</dimen>
     <dimen name="extra_padding">40dp</dimen>
+    <dimen name="splash_icon_padding">100dp</dimen>
     <dimen name="max_padding">50dp</dimen>
     <dimen name="minimum_padding">5dp</dimen>
     <dimen name="small_padding">10dp</dimen>

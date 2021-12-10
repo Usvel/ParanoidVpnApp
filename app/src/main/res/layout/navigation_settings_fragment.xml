@@ -17,6 +17,7 @@
         android:layout_marginTop="@dimen/profile_fragment_settings_margin_top"
         android:paddingTop="@dimen/medium_padding"
         android:text="@string/settings"
+        android:fontFamily="@font/readex_regular"
         android:textColor="@color/text_view_dark_text_transparent"
         android:textSize="@dimen/profile_fragment_name_size"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,6 +45,7 @@
         android:textColor="@color/text_color_blue"
         android:textSize="@dimen/settings_fragment_title_size"
         android:textStyle="bold"
+        android:fontFamily="@font/readex_regular"
         app:layout_constraintStart_toStartOf="@+id/tvProfileHello"
         app:layout_constraintTop_toBottomOf="@+id/tvProfileHello" />
 
@@ -52,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/settings_fragment_small_padding"
+        android:fontFamily="@font/readex_regular"
         app:layout_constraintStart_toStartOf="@+id/tvVPNConfigurationGroup"
         app:layout_constraintTop_toBottomOf="@+id/tvVPNConfigurationGroup"
         tools:text="@string/fragment_settings_tools_config_num" />
@@ -114,6 +117,7 @@
         android:textColor="@color/text_color_blue"
         android:textSize="@dimen/settings_fragment_title_size"
         android:textStyle="bold"
+        android:fontFamily="@font/readex_regular"
         app:layout_constraintStart_toStartOf="@+id/viewAddConfigurationButton"
         app:layout_constraintTop_toBottomOf="@+id/viewVpnBackup" />
 
@@ -122,6 +126,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/settings_fragment_small_padding"
+        android:fontFamily="@font/readex_regular"
         app:layout_constraintStart_toStartOf="@+id/tvVPNConfigurationGroup"
         app:layout_constraintTop_toBottomOf="@+id/proxyConfigurationGroup"
         tools:text="@string/fragment_settings_tools_config_num" />
@@ -159,6 +164,7 @@
         android:text="@string/advertisement_blocking"
         android:textColor="@color/text_color_blue"
         android:textSize="@dimen/settings_fragment_title_size"
+        android:fontFamily="@font/readex_regular"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/addProxyConfigurationButton"
         app:layout_constraintTop_toBottomOf="@+id/viewProxyBackup" />
@@ -350,6 +356,7 @@
         android:layout_marginTop="@dimen/base_padding"
         android:text="@string/about_us"
         android:textColor="@color/text_color_blue"
+        android:fontFamily="@font/readex_regular"
         android:textSize="@dimen/settings_fragment_title_size"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -361,6 +368,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/base_padding"
+        android:fontFamily="@font/readex_regular"
         android:text="@string/coming_soon"
         app:layout_constraintStart_toStartOf="@+id/tvAbout"
         app:layout_constraintTop_toBottomOf="@+id/tvAbout" />

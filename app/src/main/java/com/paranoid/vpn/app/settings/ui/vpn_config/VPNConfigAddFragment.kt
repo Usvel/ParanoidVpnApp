@@ -108,7 +108,13 @@ class VPNConfigAddFragment :
         CoroutineScope(Dispatchers.IO).launch {
             viewModel?.deleteConfigFromDataBase(vpnConfig)
         }
-        context?.let { Utils.makeToast(it, "Deleted") }
+        val navBar =
+            activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+        Utils.makeSnackBar(
+            binding.root,
+            Utils.getString(R.string.snackbar_delete),
+            navBar
+        )
         binding.root.findNavController().popBackStack()
     }
 
@@ -133,10 +139,23 @@ class VPNConfigAddFragment :
                     )
                 )
             }
-            context?.let { Utils.makeToast(it, "VPN Config added") }
+            val navBar =
+                activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+            Utils.makeSnackBar(
+                binding.root,
+                Utils.getString(R.string.snackbar_cofig_added),
+                navBar
+            )
             binding.root.findNavController().popBackStack()
-        } else
-            context?.let { ct -> Utils.makeToast(ct, "Validation of ip is failed!") }
+        } else {
+            val navBar =
+                activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+            Utils.makeSnackBar(
+                binding.root,
+                Utils.getString(R.string.validation_failed),
+                navBar
+            )
+        }
     }
 
     private fun editConfig() {
@@ -166,7 +185,13 @@ class VPNConfigAddFragment :
         CoroutineScope(Dispatchers.IO).launch {
             viewModel?.updateConfigInDataBase(vpnConfig)
         }
-        context?.let { Utils.makeToast(it, "VPN Config updated") }
+        val navBar =
+            activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+        Utils.makeSnackBar(
+            binding.root,
+            Utils.getString(R.string.snackbar_delete),
+            navBar
+        )
         binding.root.findNavController().popBackStack()
 
     }
@@ -205,7 +230,13 @@ class VPNConfigAddFragment :
             //rulesAdapter?.notifyDataSetChanged()
             rulesAdapter?.notifyItemInserted(rulesList.size-1)
         } catch (e: IllegalArgumentException) {
-            context?.let { Utils.makeToast(it, "Incorrect value passed!") }
+            val navBar =
+                activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+            Utils.makeSnackBar(
+                binding.root,
+                Utils.getString(R.string.validation_value),
+                navBar
+            )
         }
         dialog.dismiss()
     }

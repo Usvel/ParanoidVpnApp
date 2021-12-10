@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ad_block_configuration.domain.database.IpDatabase
 import com.paranoid.vpn.app.common.ad_block_configuration.domain.model.AdBlockIpItem
@@ -51,7 +52,13 @@ class IPViewFragment :
                 }
                 else
                     withContext(Dispatchers.Main) {
-                        context?.let { it1 -> Utils.makeToast(it1, "Ip is not correct") }
+                        val navBar =
+                            activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+                        Utils.makeSnackBar(
+                            binding.root,
+                            Utils.getString(R.string.snackbar_ip_not_correct),
+                            navBar
+                        )
                     }
             }
         }
@@ -66,7 +73,13 @@ class IPViewFragment :
                 }
                 else
                     withContext(Dispatchers.Main) {
-                        context?.let { it1 -> Utils.makeToast(it1, "Ip is not correct") }
+                        val navBar =
+                            activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+                        Utils.makeSnackBar(
+                            binding.root,
+                            Utils.getString(R.string.snackbar_ip_not_correct),
+                            navBar
+                        )
                     }
             }
         }

@@ -127,7 +127,8 @@ class ProxyViewFragment :
             CoroutineScope(Dispatchers.IO).launch {
                 ProxyRepository().addProxy(proxyItem)
             }
-            context?.let { it1 -> Utils.makeToast(it1, "Proxy added") }
+            val navBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+            Utils.makeSnackBar(binding.root, Utils.getString(R.string.snackbar_proxy_added), navBar)
             it.findNavController().popBackStack()
         }
         binding.ibSetProxy.setOnClickListener {
@@ -137,7 +138,12 @@ class ProxyViewFragment :
             CoroutineScope(Dispatchers.IO).launch {
                 ProxyRepository().deleteProxy(proxyItem)
             }
-            context?.let { it1 -> Utils.makeToast(it1, "Proxy removed") }
+            val navBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+            Utils.makeSnackBar(
+                binding.root,
+                Utils.getString(R.string.snackbar_proxy_removed),
+                navBar
+            )
             it.findNavController().popBackStack()
         }
         binding.ibEditProxy.setOnClickListener {

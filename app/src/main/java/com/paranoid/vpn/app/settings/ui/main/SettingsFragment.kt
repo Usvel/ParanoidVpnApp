@@ -10,6 +10,7 @@ import android.view.animation.RotateAnimation
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ad_block_configuration.domain.model.AdBlockIpItem
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
@@ -175,12 +176,21 @@ class SettingsFragment :
                     viewModel?.exportIpDBToCSVFile(csvFile, ipList)
                 }
             }
-
-            context?.let { Utils.makeToast(it, "Imported") }
+            val navBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+            Utils.makeSnackBar(
+                binding.root,
+                Utils.getString(R.string.snackbar_imported),
+                navBar
+            )
             val intent = context?.let { Utils.goToFileIntent(it, csvFile) }
             startActivity(intent)
         } else {
-            context?.let { Utils.makeToast(it, "Failed") }
+            val navBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+            Utils.makeSnackBar(
+                binding.root,
+                Utils.getString(R.string.snackbar_failed),
+                navBar
+            )
         }
     }
 

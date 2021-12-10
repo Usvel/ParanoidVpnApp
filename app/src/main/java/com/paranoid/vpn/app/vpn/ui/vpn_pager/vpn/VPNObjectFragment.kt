@@ -11,12 +11,14 @@ import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -61,6 +63,7 @@ class VPNObjectFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initViewModel()
         loadMainConfiguration()
         setListeners()
@@ -68,7 +71,6 @@ class VPNObjectFragment :
         setRecyclerViews()
         setObservers()
         analyzeNetworkState()
-
 
         CoroutineScope(Dispatchers.IO).launch {
             oldViewModel.getConfig()?.let {
@@ -88,8 +90,16 @@ class VPNObjectFragment :
         }
         textUpdater = lifecycleScope.launch(Dispatchers.Default) {
             while (true) {
-                if (oldViewModel.vpnStateOn.value == VPNState.CONNECTED)
+                if (oldViewModel.vpnStateOn.value == VPNState.CONNECTED) {
                     updateText()
+                    withContext(Dispatchers.Main) {
+                        binding.llConnectionStatus.visibility = View.VISIBLE
+                    }
+                }
+                else
+                    withContext(Dispatchers.Main) {
+                        binding.llConnectionStatus.visibility = View.GONE
+                    }
                 delay(500)
             }
         }
@@ -233,7 +243,6 @@ class VPNObjectFragment :
         binding.tvMainConfigurationText.text = configName
     }
 
-
     private fun initBottomSheetDialog() {
         bottomSheetDialog =
             context?.let { BottomSheetDialog(it, R.style.AppBottomSheetDialogTheme) }!!
@@ -283,14 +292,16 @@ class VPNObjectFragment :
 
 
     private fun loadMainConfiguration() {
+        binding.llConnectionStatus.visibility = View.GONE
         binding.tvMainConfigurationText.text = Utils.getString(R.string.test_first_configuration)
         binding.cvMainConfigurationCard.setOnClickListener {
-            context?.let { context_ ->
-                Utils.makeToast(
-                    context_,
-                    Utils.getString(R.string.test_first_configuration)
-                )
-            }
+            val navBar =
+                activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+            Utils.makeSnackBar(
+                binding.root,
+                Utils.getString(R.string.test_first_configuration),
+                navBar
+            )
         }
     }
 
@@ -390,7 +401,6 @@ class VPNObjectFragment :
                     stopVpn()
                 }
             }
-
         }
     }
 
@@ -399,6 +409,7 @@ class VPNObjectFragment :
             VPNState.CONNECTED -> vpnButtonConnected()
             VPNState.ERROR -> vpnButtonError()
             VPNState.NOT_CONNECTED -> vpnButtonDisable()
+            else -> vpnButtonDisable()
         }
     }
 

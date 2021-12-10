@@ -67,12 +67,6 @@ class VPNFragment :
         binding.cvHelpButton.setOnClickListener {
             val intent = Intent(context, ParanoidIntroScreen::class.java)
             startActivity(intent)
-            //context?.let { context_ ->
-              //  Utils.makeToast(
-            //        context_,
-            //        Utils.getString(R.string.help_info)
-             //   )
-            //}
         }
     }
 

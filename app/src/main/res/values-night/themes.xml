@@ -42,6 +42,11 @@
         <item name="iconBackground">@color/icon_background_dark</item>
         <!-- Item color -->
         <item name="iconBackgroundRed">@color/icon_background_red_dark</item>
+        <!--this is makes changes to the entire snackbar-->
+        <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
+
+        <!--this item is optional as all the snackbar wont contain the action button-->
+        <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
     </style>
 
 
@@ -68,6 +73,19 @@
     <style name="NegativeButtonStyle" parent="@style/Widget.MaterialComponents.Button.TextButton">
         <!-- text color for the button -->
         <item name="android:textColor">@color/light_nav_icon_selected</item>
+    </style>
+    <style name="Widget.App.Snackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Snackbar</item>
+        <item name="actionTextColorAlpha">1</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="Widget.App.SnackbarButton" parent="Widget.MaterialComponents.Button.TextButton.Snackbar">
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Snackbar" parent="">
+        <item name="colorOnSurface">@color/minor_color_dark_theme</item>
     </style>
 
 </resources>

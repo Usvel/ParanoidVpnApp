@@ -3,10 +3,14 @@ package com.paranoid.vpn.app.common.utils
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.util.Patterns
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.content.FileProvider
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.paranoid.vpn.app.common.ui.base.MessageData
 import retrofit2.HttpException
 import java.io.BufferedReader
@@ -120,6 +124,13 @@ object Utils {
 
     fun makeToast(context: Context, string: String) {
         Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
+    }
+
+    fun makeSnackBar(contextView: View, string: String, navBar: BottomNavigationView?){
+        val snackBar = Snackbar.make(contextView, string, Snackbar.LENGTH_LONG)
+        snackBar.setTextColor(Color.WHITE)
+        snackBar.anchorView = navBar
+        snackBar.show()
     }
 }
 

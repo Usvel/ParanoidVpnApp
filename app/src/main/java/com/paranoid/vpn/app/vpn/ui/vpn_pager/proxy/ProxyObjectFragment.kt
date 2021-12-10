@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -200,7 +201,12 @@ class ProxyObjectFragment:
                             CoroutineScope(Dispatchers.IO).launch {
                                 ProxyRepository().addProxy(proxyItem)
                             }
-                            context?.let { it1 -> Utils.makeToast(it1, "Proxy added") }
+                            val navBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+                            Utils.makeSnackBar(
+                                binding.root,
+                                Utils.getString(R.string.snackbar_proxy_added),
+                                navBar
+                            )
                         }
                         else -> {}
                     }

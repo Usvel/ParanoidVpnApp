@@ -142,10 +142,22 @@
     <string name="proxy_view_region">Регион</string>
     <string name="proxy_view_status">Статус</string>
     <string name="proxy_view_query">Запрос</string>
+    <!-- SnackBar -->
+    <string name="snackbar_proxy_added">Добавлен прокси</string>
+    <string name="snackbar_proxy_removed">Прокси удалён</string>
+    <string name="snackbar_add_ip_port">Пожалуйста, добавьте IP и Port</string>
+    <string name="snackbar_imported">Импортировано</string>
+    <string name="snackbar_failed">Произошла ошибка</string>
+    <string name="snackbar_ip_not_correct">Ip некорректен</string>
+    <string name="snackbar_updated">Успешно обновлено</string>
+    <string name="snackbar_added">Успешно добавлено</string>
+    <string name="snackbar_delete">Удален</string>
+    <string name="snackbar_cofig_added">VPN конфигурация добавлена</string>
+    <string name="validation_failed">Валидация ip провалена!</string>
+    <string name="validation_value">Передано неверное значение!</string>
+    <string name="snackbar_config_updated">VPN конфигурация обновлен</string>
+    <string name="snackbar_email">Введите ваш email</string>
     <!-- Additional -->
-
-
-
     <plurals name="proxies_number" tools:ignore="UnusedQuantity">
         <item quantity="one">Уже добавлен %1$s прокси</item>
         <item quantity="few">Уже добавлено %1$s прокси</item>

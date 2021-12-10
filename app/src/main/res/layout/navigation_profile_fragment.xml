@@ -16,6 +16,7 @@
         android:layout_marginStart="@dimen/profile_fragment_content_margin_horizontal"
         android:layout_marginTop="@dimen/profile_fragment_content_margin_top"
         android:text="@string/profile_fragment_hi"
+        android:fontFamily="@font/readex_regular"
         android:textColor="@color/text_view_dark_text_transparent"
         android:textSize="@dimen/profile_fragment_hello_size"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/text_view_black"
+        android:fontFamily="@font/readex_regular"
         android:textSize="@dimen/profile_fragment_name_size"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/tvProfileHello"
@@ -174,6 +176,7 @@
         android:text="@string/profile_fragment_email"
         android:textColor="@color/text_view_dark_text_transparent"
         android:textSize="@dimen/profile_fragment_title_size"
+        android:fontFamily="@font/readex_regular"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="@id/viewChangeProfile"
         app:layout_constraintTop_toBottomOf="@id/viewChangeProfile" />
@@ -183,6 +186,7 @@
         android:layout_width="wrap_content"
         android:visibility="gone"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/readex_regular"
         android:textColor="@color/text_view_black"
         android:textSize="@dimen/profile_fragment_email_size"
         app:layout_constraintStart_toStartOf="@id/tvProfileEmail"
@@ -222,6 +226,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/profile_fragment_card_view_text_margin"
             android:layout_marginBottom="@dimen/profile_fragment_card_view_text_margin"
+            android:fontFamily="@font/readex_regular"
             android:text="@string/profile_fragment_entry"
             android:textColor="@color/text_view_black"
             android:textSize="@dimen/profile_fragment_card_view_text_size" />
@@ -259,6 +264,7 @@
             android:layout_marginTop="@dimen/profile_fragment_card_view_text_margin"
             android:layout_marginBottom="@dimen/profile_fragment_card_view_text_margin"
             android:text="@string/profile_fragment_registration"
+            android:fontFamily="@font/readex_regular"
             android:textColor="@color/text_view_black"
             android:textSize="@dimen/profile_fragment_card_view_text_size" />
     </androidx.cardview.widget.CardView>

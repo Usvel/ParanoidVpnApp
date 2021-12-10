@@ -127,7 +127,13 @@ class ProxyAddFragment :
             proxyItem.Type = values
             proxyRepository.updateProxy(proxyItem)
         }
-        context?.let { Utils.makeToast(it, "Successfully updated") }
+        val navBar =
+            activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+        Utils.makeSnackBar(
+            binding.root,
+            Utils.getString(R.string.snackbar_updated),
+            navBar
+        )
         binding.root.findNavController().popBackStack()
     }
 
@@ -190,10 +196,23 @@ class ProxyAddFragment :
 
                 proxyRepository.addProxy(proxyItem)
             }
-            context?.let { Utils.makeToast(it, "Successfully added") }
+            val navBar =
+                activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+            Utils.makeSnackBar(
+                binding.root,
+                Utils.getString(R.string.snackbar_added),
+                navBar
+            )
             binding.root.findNavController().popBackStack()
-        } else
-            context?.let { Utils.makeToast(it, "Please add Ip and port") }
+        } else {
+            val navBar =
+                activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+            Utils.makeSnackBar(
+                binding.root,
+                Utils.getString(R.string.snackbar_add_ip_port),
+                navBar
+            )
+        }
     }
 
 

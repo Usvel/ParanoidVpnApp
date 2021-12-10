@@ -41,6 +41,7 @@
         tools:ignore="RtlSymmetry"
         tools:text="First configuration"
         android:layout_width="0dp"
+        android:fontFamily="@font/readex_regular"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"

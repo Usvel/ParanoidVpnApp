@@ -22,31 +22,31 @@
             android:layout_height="wrap_content">
 
 
-        <LinearLayout
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_padding"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/small_padding"
-                    android:orientation="vertical">
+                    android:layout_gravity="start"
+                    android:alpha="0.7"
+                    android:textColor="@color/text_view_black"
+                    tools:text="Ip" />
 
-                    <TextView
-                        android:id="@+id/tvType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:alpha="0.7"
-                        android:textColor="@color/text_view_black"
-                        tools:text="Ip" />
-
-                    <TextView
-                        android:id="@+id/tvIp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:singleLine="true"
-                        android:textColor="@color/text_view_black"
-                        android:textSize="@dimen/logo_text_size"
-                        tools:text="10.10.10.10" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/tvIp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:singleLine="true"
+                    android:textColor="@color/text_view_black"
+                    android:textSize="@dimen/logo_text_size"
+                    tools:text="10.10.10.10" />
+            </LinearLayout>
 
         </HorizontalScrollView>
     </androidx.cardview.widget.CardView>

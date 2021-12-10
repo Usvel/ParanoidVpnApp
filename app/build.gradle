@@ -17,7 +17,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.1.0-beta01"
+        kotlinCompilerExtensionVersion = "1.1.0-beta04"
     }
 
     defaultConfig {
@@ -56,6 +56,9 @@ dependencies {
     // Intro screen
     implementation 'com.github.AppIntro:AppIntro:6.1.0'
 
+    // Splash
+    implementation("androidx.core:core-splashscreen:1.0.0-alpha02")
+
     // Room
     def room_version = "2.3.0" // check latest version from docs
     implementation 'com.google.code.gson:gson:2.8.9'
@@ -75,7 +78,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // View pager
-    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
     // Java language implementation
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.0-beta02")

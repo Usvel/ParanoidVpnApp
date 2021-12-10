@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.Application
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
@@ -106,7 +107,13 @@ class LoginFragment : BaseFragment<NavigationAuthenticationFragmentBinding, Logi
     private fun setListeners() {
         binding.bAuthenticationForgot.setOnClickListener {
             if (binding.etAuthenticationName.text.isNullOrEmpty()) {
-                Utils.makeToast(it.context, "Enter your email")
+                val navBar =
+                    activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+                Utils.makeSnackBar(
+                    binding.root,
+                    Utils.getString(R.string.snackbar_email),
+                    navBar
+                )
             }
 
             if (!binding.etAuthenticationName.text.isValidEmail()) {
