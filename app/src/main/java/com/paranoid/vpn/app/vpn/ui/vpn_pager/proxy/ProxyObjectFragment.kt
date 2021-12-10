@@ -3,6 +3,8 @@ package com.paranoid.vpn.app.vpn.ui.vpn_pager.proxy
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ArrayAdapter
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +12,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
@@ -77,15 +80,32 @@ class ProxyObjectFragment:
         val materialAlertDialogBuilder = MaterialAlertDialogBuilder(context!!)
         materialAlertDialogBuilder.setView(customAlertDialogView)
 
-        if (oldViewModel.getProxyPing() != "")
-            customAlertDialogView.findViewById<TextInputEditText>(
-                R.id.etEditProxyPing
-            ).setText(oldViewModel.getProxyPing())
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+            context!!,
+            android.R.layout.simple_dropdown_item_1line,
+            resources.getStringArray(R.array.countries_array)
+        )
 
+        val countryList = customAlertDialogView.findViewById<AppCompatAutoCompleteTextView>(
+            R.id.etEditCountry
+        )
+        countryList.setAdapter(adapter)
+
+        val pingTextLayout = customAlertDialogView.findViewById<TextInputLayout>(
+            R.id.tilEditProxyPing
+        )
+        if (oldViewModel.getProxyPing() != "")
+            pingTextLayout.hint = oldViewModel.getProxyPing()
+        else
+            pingTextLayout.hint = Utils.getString(R.string.possible_ping)
+
+        val countryTextLayout = customAlertDialogView.findViewById<TextInputLayout>(
+            R.id.tilEditCountryPing
+        )
         if (oldViewModel.getProxyCountry() != "")
-            customAlertDialogView.findViewById<TextInputEditText>(
-                R.id.etEditCountry
-            ).setText(oldViewModel.getProxyCountry())
+            countryTextLayout.hint = oldViewModel.getProxyCountry()
+        else
+            countryTextLayout.hint = Utils.getString(R.string.countries)
 
         val types = oldViewModel.getProxyType()?.split(",")
         if (types != null) {
@@ -109,11 +129,11 @@ class ProxyObjectFragment:
 
         materialAlertDialogBuilder
             .setView(customAlertDialogView)
-            .setTitle("Proxy filter")
-            .setMessage("Current configuration details")
+            .setTitle(Utils.getString(R.string.proxy_filter))
+            .setMessage(Utils.getString(R.string.proxy_filter_details))
             .setPositiveButton("Ok") { dialog, _ ->
                 oldViewModel.setProxyCountry(
-                    customAlertDialogView.findViewById<TextInputEditText>(
+                    customAlertDialogView.findViewById<AppCompatAutoCompleteTextView>(
                         R.id.etEditCountry
                     ).text.toString()
                 )

@@ -14,6 +14,8 @@
     <string name="error">Ошибка соединения</string>
     <string name="stable_connection">Стабильное соединение</string>
     <string name="help_info">Помощь</string>
+    <string name="proxy_filter">Фильтр прокси</string>
+    <string name="proxy_filter_details">Информация о текущей конфигурации</string>
     <string name="can_t_load_online_data">Невозможно загрузить конфигурацию</string>
     <string name="no_local_proxy_saved">Не сохранено локальных прокси</string>
     <string name="preloaded_data_desc">У нас есть большое количество предварительно загруженных IP-адресов, но их полное использование может снизить скорость вашего соединения, поэтому вы можете увеличить количество предварительно загруженных IP-адресов на постоянное значение и проверить результат</string>
@@ -104,7 +106,7 @@
     <string name="ping">Пинг</string>
     <string name="possible_ping">Возможный пинг</string>
     <string name="country">Страна</string>
-    <string name="countries">Страны</string>
+    <string name="countries">Код страны</string>
     <string name="view_proxy">Просмотреть прокси</string>
     <string name="save_proxy">Сохранить прокси</string>
     <string name="local_data">Локальные данные</string>

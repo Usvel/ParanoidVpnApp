@@ -8,8 +8,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/real_medium_padding"
-        android:paddingEnd="@dimen/real_medium_padding"
+        android:paddingStart="@dimen/base_padding"
+        android:paddingEnd="@dimen/base_padding"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -68,30 +68,22 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvPingText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/small_padding"
-                android:text="@string/ping" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilEditProxyPing"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/edit_user_fragment_content_margin_horizontal"
-                android:layout_marginBottom="@dimen/edit_user_fragment_card_view_bottom_margin"
                 app:boxCornerRadiusBottomEnd="@dimen/edit_user_fragment_text_input_layout_radius"
                 app:boxCornerRadiusBottomStart="@dimen/edit_user_fragment_text_input_layout_radius"
                 app:boxCornerRadiusTopEnd="@dimen/edit_user_fragment_text_input_layout_radius"
                 app:boxCornerRadiusTopStart="@dimen/edit_user_fragment_text_input_layout_radius"
                 app:endIconTint="?attr/toolBarColor"
-                app:hintEnabled="false"
+                app:hintEnabled="true"
                 app:startIconTint="?attr/textTransparent">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -99,7 +91,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:hint="@string/possible_ping"
                     android:inputType="number"
                     android:paddingStart="@dimen/edit_user_fragment_edit_text_padding"
                     android:paddingEnd="@dimen/edit_user_fragment_edit_text_padding"
@@ -110,42 +101,29 @@
 
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvCountryText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/small_padding"
-                android:text="@string/country" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilEditCountryPing"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/edit_user_fragment_content_margin_horizontal"
-                android:layout_marginBottom="@dimen/edit_user_fragment_card_view_bottom_margin"
-                app:boxCornerRadiusBottomEnd="@dimen/edit_user_fragment_text_input_layout_radius"
                 app:boxCornerRadiusBottomStart="@dimen/edit_user_fragment_text_input_layout_radius"
                 app:boxCornerRadiusTopEnd="@dimen/edit_user_fragment_text_input_layout_radius"
                 app:boxCornerRadiusTopStart="@dimen/edit_user_fragment_text_input_layout_radius"
                 app:endIconTint="?attr/toolBarColor"
-                app:hintEnabled="false"
+                app:hintEnabled="true"
                 app:startIconTint="?attr/textTransparent">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                     android:id="@+id/etEditCountry"
+                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox.Dense"
                     android:layout_width="match_parent"
+                    android:completionThreshold="1"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:hint="@string/countries"
-                    android:inputType=""
-                    android:paddingStart="@dimen/edit_user_fragment_edit_text_padding"
-                    android:paddingEnd="@dimen/edit_user_fragment_edit_text_padding"
-                    android:singleLine="true"
                     android:textColorHint="?attr/textTransparent"
                     android:textSize="@dimen/edit_user_fragment_card_view_text_size" />
             </com.google.android.material.textfield.TextInputLayout>
