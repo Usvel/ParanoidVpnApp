@@ -84,6 +84,9 @@ class VPNConfigAddFragment :
         if (!editConfig) {
             binding.deleteConfigurationButton.visibility = View.GONE
         }
+        binding.ivBack.setOnClickListener {
+            it.findNavController().popBackStack()
+        }
         binding.addConfigurationButton.setOnClickListener {
             if (editConfig) {
                 editConfig()

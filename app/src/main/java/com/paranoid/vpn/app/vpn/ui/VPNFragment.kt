@@ -1,5 +1,6 @@
 package com.paranoid.vpn.app.vpn.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat.getDrawable
@@ -9,6 +10,8 @@ import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.databinding.NavigationVpnFragmentBinding
+import com.paranoid.vpn.app.intro.ParanoidIntroScreen
+import com.paranoid.vpn.app.qr.QRScanner
 import com.paranoid.vpn.app.vpn.ui.vpn_pager.VPNFragmentPagerAdapter
 
 class VPNFragment :
@@ -62,12 +65,14 @@ class VPNFragment :
     private fun setListeners() {
 
         binding.cvHelpButton.setOnClickListener {
-            context?.let { context_ ->
-                Utils.makeToast(
-                    context_,
-                    Utils.getString(R.string.help_info)
-                )
-            }
+            val intent = Intent(context, ParanoidIntroScreen::class.java)
+            startActivity(intent)
+            //context?.let { context_ ->
+              //  Utils.makeToast(
+            //        context_,
+            //        Utils.getString(R.string.help_info)
+             //   )
+            //}
         }
     }
 

@@ -3,7 +3,9 @@ package com.paranoid.vpn.app.vpn.ui.vpn_pager.proxy.proxy_item
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.GsonBuilder
+import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.Location
 import com.paranoid.vpn.app.common.proxy_configuration.domain.model.ProxyItem
 import com.paranoid.vpn.app.common.proxy_configuration.domain.repository.ProxyRepository
@@ -26,6 +28,10 @@ class ProxyAddFragment :
         val proxyItemGson = arguments?.getString("proxyItem")
         val locationGson = arguments?.getString("location")
         var editProxy = false
+
+        val navBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+        navBar?.visibility = View.GONE
+
         if (proxyItemGson != null) {
             if (locationGson != null) {
                 editProxy = true
@@ -63,10 +69,21 @@ class ProxyAddFragment :
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        val navBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_tab_bar)
+        navBar?.visibility = View.VISIBLE
+    }
+
     override fun initViewModel() {
     }
 
     private fun setListeners(editProxy: Boolean) {
+        binding.ivBack.setOnClickListener {
+            it.findNavController().popBackStack()
+        }
+
         binding.bSave.setOnClickListener {
             if (editProxy) {
                 editProxy()

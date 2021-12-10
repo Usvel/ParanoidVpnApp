@@ -2,8 +2,8 @@
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@null"
     app:layoutDescription="@xml/page_vpn_button_scene">
 
@@ -19,6 +19,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/viewWifiIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/top_bar_elements_start"
@@ -36,11 +37,12 @@
                 android:contentDescription="@string/get_information_about_vpn"
                 android:foregroundGravity="center_vertical"
                 android:padding="5dp"
-                android:src="@drawable/ic_wifi_full"
+                android:src="@drawable/ic_stable_connection"
                 app:tint="?attr/toolBarColor" />
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/tvConnectionQuality"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -94,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cvVpnButtonBackground"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.19999999"
         tools:text="@string/not_connected" />
 
 
@@ -104,13 +106,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/base_padding"
         android:layout_marginEnd="@dimen/base_padding"
+        android:layout_marginBottom="@dimen/base_padding"
         android:backgroundTint="?attr/backgroundVioletLight"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="@dimen/card_elevation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvIsConnected">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/cvMainConfigurationLayout"

@@ -10,7 +10,6 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +26,7 @@ import com.google.gson.GsonBuilder
 import com.paranoid.vpn.app.R
 import com.paranoid.vpn.app.common.ui.base.BaseFragment
 import com.paranoid.vpn.app.common.utils.ConfigurationClickHandlers
+import com.paranoid.vpn.app.common.utils.DebouncedOnClickListener
 import com.paranoid.vpn.app.common.utils.Utils
 import com.paranoid.vpn.app.common.utils.VPNState
 import com.paranoid.vpn.app.common.vpn_configuration.domain.repository.VPNConfigRepository
@@ -301,6 +301,25 @@ class VPNObjectFragment :
                 Utils.convertToStringRepresentation(upByte.toLong()),
                 Utils.convertToStringRepresentation(downByte.toLong())
             )
+
+        when {
+            (upByte.toLong() < 1024) or (downByte.toLong() < 1024) -> {
+                binding.ivWifiIcon.setImageResource(R.drawable.ic_bad_connection)
+                binding.viewWifiIcon.background.setTint(getVpnButtonColor(R.attr.vpnButtonWarning))
+                binding.tvConnectionQuality.text = Utils.getString(R.string.bad_connection)
+            }
+            (upByte.toLong() < 10) or (downByte.toLong() < 10) -> {
+                binding.ivWifiIcon.setImageResource(R.drawable.ic_no_connection)
+                binding.viewWifiIcon.background.setTint(getVpnButtonColor(R.attr.vpnButtonError))
+                binding.tvConnectionQuality.text = Utils.getString(R.string.no_connection)
+            }
+            else -> {
+                binding.viewWifiIcon.background.setTint(getVpnButtonColor(R.attr.iconBackground))
+                binding.ivWifiIcon.setImageResource(R.drawable.ic_stable_connection)
+                binding.tvConnectionQuality.text = Utils.getString(R.string.stable_connection)
+            }
+        }
+
     }
 
     private fun setListeners() {
@@ -313,9 +332,11 @@ class VPNObjectFragment :
             return@setOnLongClickListener false
         }
 
-        binding.cvMainConfigurationCard.setOnClickListener {
+        val debouncedOnClickListener = DebouncedOnClickListener {
             showBottomSheetDialog()
         }
+
+        binding.cvMainConfigurationCard.setOnClickListener(debouncedOnClickListener)
 
         binding.ivEditIcon.setOnClickListener {
             openConfigEditingFragment(oldViewModel.getConfigId())
