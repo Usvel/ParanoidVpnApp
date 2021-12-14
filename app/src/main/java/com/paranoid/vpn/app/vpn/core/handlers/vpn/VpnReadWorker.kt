@@ -61,80 +61,88 @@ class VpnReadWorker(
             while (coroutineContext.isActive) {
                 bufferToNetwork = ByteBufferPool.acquire()
                 val readBytes = runInterruptible { vpnInput.read(bufferToNetwork) }
-                VPNObjectFragment.upByte.addAndGet(readBytes.toLong())
+                upByte.addAndGet(readBytes.toLong())
                 if (readBytes > 0) {
                     bufferToNetwork.flip()
                     val packet = runInterruptible { Packet(bufferToNetwork) }
-                    val ip4 = IP4(
-                        version = packet.ip4Header.version,
-                        IHL = packet.ip4Header.IHL,
-                        headerLength = packet.ip4Header.headerLength,
-                        typeOfService = packet.ip4Header.typeOfService,
-                        totalLength = packet.ip4Header.totalLength,
-                        identificationAndFlagsAndFragmentOffset = packet.ip4Header.identificationAndFlagsAndFragmentOffset,
-                        TTL = packet.ip4Header.TTL,
-                        protocolNum = packet.ip4Header.protocolNum,
-                        headerChecksum = packet.ip4Header.headerChecksum,
-                        sourceAddress = packet.ip4Header.sourceAddress,
-                        destinationAddress = packet.ip4Header.destinationAddress
-                    )
-                    when (true) {
-                        packet.isUDP() -> {
-                            if (Config.logRW) {
-                                Log.i(LocalVPNService2.TAG, "read udp$readBytes")
+                    if (advBlockList?.filter {
+                                Inet4Address.getByName(it.Ip) == packet.ip4Header.destinationAddress ||
+                                        Inet4Address.getByName(it.Ip) == packet.ip4Header.sourceAddress
                             }
-                            deviceToNetworkUDPQueue.offer(packet)
-                            Log.d("Packet - UDP", packet.toString())
-                            val udp = UDP(
-                                sourcePort = packet.udpHeader.sourcePort,
-                                destinationPort = packet.udpHeader.destinationPort,
-                                length = packet.udpHeader.length,
-                                checksum = packet.udpHeader.checksum
-                            )
-                            addPacketUseCase.execute(
-                                EntityPacket(
-                                    ip4 = ip4,
-                                    udp = udp,
-                                    tcp = null
+                            .isNullOrEmpty()
+                    ) {
+                        val ip4 = IP4(
+                            version = packet.ip4Header.version,
+                            IHL = packet.ip4Header.IHL,
+                            headerLength = packet.ip4Header.headerLength,
+                            typeOfService = packet.ip4Header.typeOfService,
+                            totalLength = packet.ip4Header.totalLength,
+                            identificationAndFlagsAndFragmentOffset = packet.ip4Header.identificationAndFlagsAndFragmentOffset,
+                            TTL = packet.ip4Header.TTL,
+                            protocolNum = packet.ip4Header.protocolNum,
+                            headerChecksum = packet.ip4Header.headerChecksum,
+                            sourceAddress = packet.ip4Header.sourceAddress,
+                            destinationAddress = packet.ip4Header.destinationAddress
+                        )
+                        when (true) {
+                            packet.isUDP() -> {
+                                if (Config.logRW) {
+                                    Log.i(LocalVPNService2.TAG, "read udp$readBytes")
+                                }
+                                deviceToNetworkUDPQueue.offer(packet)
+                                Log.d("Packet - UDP", packet.toString())
+                                val udp = UDP(
+                                    sourcePort = packet.udpHeader.sourcePort,
+                                    destinationPort = packet.udpHeader.destinationPort,
+                                    length = packet.udpHeader.length,
+                                    checksum = packet.udpHeader.checksum
                                 )
-                            )
-                        }
-                        packet.isTCP() -> {
-                            if (Config.logRW) {
-                                Log.i(LocalVPNService2.TAG, "read tcp $readBytes")
+                                addPacketUseCase.execute(
+                                    EntityPacket(
+                                        ip4 = ip4,
+                                        udp = udp,
+                                        tcp = null
+                                    )
+                                )
                             }
-                            deviceToNetworkTCPQueue.offer(packet)
-                            Log.d("Packet - TCP", packet.toString())
-                            val tcp = TCP(
-                                sourcePort = packet.tcpHeader.sourcePort,
-                                destinationPort = packet.tcpHeader.destinationPort,
-                                sequenceNumber = packet.tcpHeader.sequenceNumber,
-                                acknowledgementNumber = packet.tcpHeader.acknowledgementNumber,
-                                dataOffsetAndReserved = packet.tcpHeader.dataOffsetAndReserved,
-                                headerLength = packet.tcpHeader.headerLength,
-                                flags = packet.tcpHeader.flags,
-                                window = packet.tcpHeader.window,
-                                checksum = packet.tcpHeader.checksum,
-                                urgentPointer = packet.tcpHeader.urgentPointer
-                            )
-                            addPacketUseCase.execute(
-                                EntityPacket(
-                                    ip4 = ip4,
-                                    udp = null,
-                                    tcp = tcp
+                            packet.isTCP() -> {
+                                if (Config.logRW) {
+                                    Log.i(LocalVPNService2.TAG, "read tcp $readBytes")
+                                }
+                                deviceToNetworkTCPQueue.offer(packet)
+                                Log.d("Packet - TCP", packet.toString())
+                                val tcp = TCP(
+                                    sourcePort = packet.tcpHeader.sourcePort,
+                                    destinationPort = packet.tcpHeader.destinationPort,
+                                    sequenceNumber = packet.tcpHeader.sequenceNumber,
+                                    acknowledgementNumber = packet.tcpHeader.acknowledgementNumber,
+                                    dataOffsetAndReserved = packet.tcpHeader.dataOffsetAndReserved,
+                                    headerLength = packet.tcpHeader.headerLength,
+                                    flags = packet.tcpHeader.flags,
+                                    window = packet.tcpHeader.window,
+                                    checksum = packet.tcpHeader.checksum,
+                                    urgentPointer = packet.tcpHeader.urgentPointer
                                 )
-                            )
-                        }
-                        else -> {
-                            Log.w(
-                                LocalVPNService2.TAG,
-                                String.format(
-                                    "Unknown packet protocol type %d",
-                                    packet.ip4Header.protocolNum
+                                addPacketUseCase.execute(
+                                    EntityPacket(
+                                        ip4 = ip4,
+                                        udp = null,
+                                        tcp = tcp
+                                    )
                                 )
-                            )
+                            }
+                            else -> {
+                                Log.w(
+                                    LocalVPNService2.TAG,
+                                    String.format(
+                                        "Unknown packet protocol type %d",
+                                        packet.ip4Header.protocolNum
+                                    )
+                                )
+                            }
                         }
                     }
+
                 }
             }
         } catch (e: IOException) {
