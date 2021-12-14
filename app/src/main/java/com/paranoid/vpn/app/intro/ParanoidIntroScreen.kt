@@ -21,6 +21,7 @@ class ParanoidIntroScreen : AppIntro() {
             AppIntroFragment.newInstance(
                 title = "Paranoid VPN",
                 description = "Welcome to the best VPN Client ever",
+                backgroundColor = getColor(R.color.minor_color_dark_theme),
                 imageDrawable = R.drawable.intro_logo
             )
         )
@@ -28,6 +29,7 @@ class ParanoidIntroScreen : AppIntro() {
             AppIntroFragment.newInstance(
                 title = "Proxy!",
                 description = "Use wide list of online proxy or create your own!",
+                backgroundColor = getColor(R.color.minor_color_dark_theme),
                 imageDrawable = R.drawable.intro_router
             )
         )
@@ -35,6 +37,7 @@ class ParanoidIntroScreen : AppIntro() {
             AppIntroFragment.newInstance(
                 title = "AdBlock!",
                 description = "Block annoying advertisement with wide list of IPs or add your own!",
+                backgroundColor = getColor(R.color.minor_color_dark_theme),
                 imageDrawable = R.drawable.intro_adblock
             )
         )
@@ -48,10 +51,10 @@ class ParanoidIntroScreen : AppIntro() {
         )
 
         // Show/hide status bar
-        showStatusBar(true);
+        showStatusBar(true)
 
         //Speed up or down scrolling
-        setScrollDurationFactor(2);
+        setScrollDurationFactor(2)
 
     }
 
