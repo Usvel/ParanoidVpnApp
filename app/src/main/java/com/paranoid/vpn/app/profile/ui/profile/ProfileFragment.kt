@@ -130,6 +130,7 @@ class ProfileFragment :
                         binding.viewChangeProfile.visibility = View.GONE
                         binding.cvProfileBasket.visibility = View.GONE
                         binding.cvProfileOut.visibility = View.GONE
+                        binding.tvProfileStatistics.visibility = View.GONE
 
                         binding.tvProfileEmail.visibility = View.GONE
                         binding.tvProfileEmailProfile.visibility = View.GONE
@@ -203,6 +204,7 @@ class ProfileFragment :
                 binding.viewChangeProfile.visibility = View.GONE
                 binding.cvProfileBasket.visibility = View.GONE
                 binding.cvProfileOut.visibility = View.GONE
+                binding.tvProfileStatistics.visibility = View.GONE
 
                 binding.tvProfileEmail.visibility = View.VISIBLE
                 binding.tvProfileEmailProfile.visibility = View.VISIBLE
