@@ -72,6 +72,13 @@ class VPNObjectFragment :
         setObservers()
         analyzeNetworkState()
 
+        if (arguments?.isEmpty != true) {
+            arguments?.getBoolean("turnOnVPN")?.let {
+                if(it)
+                    oldViewModel.changeVpnState()
+            }
+        }
+
         CoroutineScope(Dispatchers.IO).launch {
             oldViewModel.getConfig()?.let {
                 updateConfigText(configName = it.name)
@@ -375,14 +382,6 @@ class VPNObjectFragment :
         binding.cvVpnButtonBackground.setOnClickListener {
             oldViewModel.changeVpnState()
         }
-
-        if (arguments?.isEmpty != true) {
-            arguments?.getBoolean("turnOnVPN")?.let {
-                if(it)
-                    oldViewModel.changeVpnState()
-            }
-        }
-
     }
 
     private fun setObservers() {

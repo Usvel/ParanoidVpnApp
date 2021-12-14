@@ -69,6 +69,7 @@
     <!-- TAG -->
     <string name="config_sp" translatable="false">PARANOID_VPN_SP</string>
     <string name="config_sp_tag_ID" translatable="false">CURRENT_CONFIG_ID</string>
+    <string name="vpn_state" translatable="false">VPN_STATE</string>
     <string name="proxy_type_sp_tag_ID" translatable="false">CURRENT_PROXY_TYPE_ID</string>
     <string name="proxy_ping_sp_tag_ID" translatable="false">CURRENT_PROXY_PING_ID</string>
     <string name="proxy_country_sp_tag_ID" translatable="false">CURRENT_PROXY_COUNTRY_ID</string>

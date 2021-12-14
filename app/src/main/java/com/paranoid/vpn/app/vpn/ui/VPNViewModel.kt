@@ -160,7 +160,7 @@ class VPNViewModel(
     }
     /////////////////////////////////
 
-    private val _vpnStateOn = MutableLiveData(VPNState.NOT_CONNECTED)
+    private val _vpnStateOn = MutableLiveData(getVpnStateFromPrefs())
     val vpnStateOn: LiveData<VPNState> = _vpnStateOn
 
     fun changeVpnState() {
@@ -172,6 +172,29 @@ class VPNViewModel(
             VPNState.ERROR -> {
                 //TODO: Error state handling
             }
+            else -> {}
+        }
+        setVpnStateInPrefs()
+    }
+
+    private fun getVpnStateFromPrefs(): VPNState  {
+        if (sharedPref.getBoolean(getString(R.string.vpn_state), false))
+            return VPNState.CONNECTED
+        return VPNState.NOT_CONNECTED
+    }
+
+    private fun setVpnStateInPrefs() {
+        with(sharedPref.edit()) {
+            when (vpnStateOn.value) {
+                VPNState.CONNECTED ->
+                    putBoolean(getString(R.string.vpn_state), true)
+                VPNState.NOT_CONNECTED ->
+                    putBoolean(getString(R.string.vpn_state), false)
+                VPNState.ERROR ->
+                    putBoolean(getString(R.string.vpn_state), false)
+                else -> {}
+            }
+            apply()
         }
     }
 }
