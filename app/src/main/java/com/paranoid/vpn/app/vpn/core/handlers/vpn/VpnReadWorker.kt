@@ -8,11 +8,10 @@ import com.paranoid.vpn.app.vpn.core.config.Config
 import com.paranoid.vpn.app.vpn.core.handlers.SuspendableRunnable
 import com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet
 import com.paranoid.vpn.app.vpn.core.util.ByteBufferPool
-import com.paranoid.vpn.app.vpn.domain.EntityPacket
-import com.paranoid.vpn.app.vpn.domain.IP4
-import com.paranoid.vpn.app.vpn.domain.TCP
-import com.paranoid.vpn.app.vpn.domain.UDP
-import com.paranoid.vpn.app.vpn.ui.vpn_pager.vpn.VPNObjectFragment
+import com.paranoid.vpn.app.vpn.domain.entity.EntityPacket
+import com.paranoid.vpn.app.vpn.domain.entity.IP4
+import com.paranoid.vpn.app.vpn.domain.entity.TCP
+import com.paranoid.vpn.app.vpn.domain.entity.UDP
 import com.paranoid.vpn.app.vpn.domain.usecase.AddPacketUseCase
 import com.paranoid.vpn.app.vpn.ui.vpn_pager.vpn.VPNObjectFragment.Companion.upByte
 import kotlinx.coroutines.*
