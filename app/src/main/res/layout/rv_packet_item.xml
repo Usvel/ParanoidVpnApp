@@ -5,32 +5,57 @@
     android:id="@+id/cv_ip"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="25dp"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
-    android:layout_marginHorizontal="25dp"
     app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingVertical="20dp">
+
+        <TextView
+            android:id="@+id/ipDestinationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/trafic_fragment_ip_address"
+            android:textColor="?attr/textDedicated"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ipSourceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/trafic_fragment_my_ip"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ipSource"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ipSource" />
 
         <TextView
             android:id="@+id/ipDestination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="10dp"
+            android:textColor="?attr/textDedicated"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ipDestinationText"
+            app:layout_constraintStart_toEndOf="@+id/ipDestinationText"
+            app:layout_constraintTop_toTopOf="@+id/ipDestinationText"
             tools:text="Server" />
 
         <TextView
             android:id="@+id/ipSource"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/ipDestination"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toEndOf="@+id/ipSourceText"
             app:layout_constraintTop_toBottomOf="@+id/ipDestination"
             tools:text="ipAdress" />
 
@@ -39,6 +64,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
+            android:textColor="?attr/textDedicated"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/ipDestination"
             app:layout_constraintStart_toEndOf="@+id/ipDestination"
             app:layout_constraintTop_toTopOf="@+id/ipDestination"
@@ -50,8 +77,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/ipSource"
-            app:layout_constraintStart_toEndOf="@+id/ipDestination"
-            app:layout_constraintTop_toBottomOf="@+id/ipDestination"
+            app:layout_constraintStart_toEndOf="@+id/ipSource"
+            app:layout_constraintTop_toTopOf="@+id/ipSource"
             tools:text="protocol" />
 
         <TextView
@@ -59,11 +86,55 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
+            android:textColor="?attr/textDedicated"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/ipDestination"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ipDestination"
             tools:text="UDP" />
+
+        <TextView
+            android:id="@+id/ipSizePacket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            tools:text="Packets"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ipProtocol" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ipSavePcap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="3dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/cardViewBackground"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/ipSizePacket"
+            app:layout_constraintStart_toStartOf="@+id/ipSourceText"
+            app:layout_constraintTop_toBottomOf="@+id/ipSource">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/settings_fragment_icon_padding"
+                android:text="@string/trafic_fragment_save"
+                android:textColor="?attr/textDedicated" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/gIpPacket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="ipSourceText, ipSource, ipSourcePort, ipSizePacket, ipSavePcap" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

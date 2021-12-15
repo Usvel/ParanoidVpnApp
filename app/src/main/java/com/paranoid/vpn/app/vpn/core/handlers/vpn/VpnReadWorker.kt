@@ -9,18 +9,16 @@ import com.paranoid.vpn.app.vpn.core.handlers.SuspendableRunnable
 import com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet
 import com.paranoid.vpn.app.vpn.core.util.ByteBufferPool
 import com.paranoid.vpn.app.vpn.ui.vpn_pager.vpn.VPNObjectFragment
-import com.paranoid.vpn.app.vpn.domain.EntityPacket
-import com.paranoid.vpn.app.vpn.domain.IP4
-import com.paranoid.vpn.app.vpn.domain.TCP
-import com.paranoid.vpn.app.vpn.domain.UDP
+import com.paranoid.vpn.app.vpn.domain.entity.EntityPacket
+import com.paranoid.vpn.app.vpn.domain.entity.IP4
+import com.paranoid.vpn.app.vpn.domain.entity.TCP
+import com.paranoid.vpn.app.vpn.domain.entity.UDP
 import com.paranoid.vpn.app.vpn.domain.usecase.AddPacketUseCase
-import com.paranoid.vpn.app.vpn.ui.vpn_pager.vpn.VPNObjectFragment.Companion.upByte
 import kotlinx.coroutines.*
 import java.io.FileDescriptor
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
-import java.net.Inet4Address
 import java.nio.ByteBuffer
 import java.util.concurrent.BlockingQueue
 import kotlin.coroutines.coroutineContext
@@ -95,7 +93,8 @@ class VpnReadWorker(
                                 EntityPacket(
                                     ip4 = ip4,
                                     udp = udp,
-                                    tcp = null
+                                    tcp = null,
+                                    byteBuffer = packet.backingBuffer
                                 )
                             )
                         }
@@ -121,7 +120,8 @@ class VpnReadWorker(
                                 EntityPacket(
                                     ip4 = ip4,
                                     udp = null,
-                                    tcp = tcp
+                                    tcp = tcp,
+                                    packet.backingBuffer
                                 )
                             )
                         }

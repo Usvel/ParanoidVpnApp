@@ -1,12 +1,13 @@
-package com.paranoid.vpn.app.vpn.domain
+package com.paranoid.vpn.app.vpn.domain.entity
 
-import com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet.IP4Header.TransportProtocol
 import java.net.InetAddress
+import java.nio.ByteBuffer
 
 data class EntityPacket(
     val ip4: IP4,
     val udp: UDP?,
-    val tcp: TCP?
+    val tcp: TCP?,
+    val byteBuffer : ByteBuffer
 )
 
 data class IP4(
