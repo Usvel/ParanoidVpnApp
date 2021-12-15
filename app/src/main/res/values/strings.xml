@@ -103,6 +103,10 @@
     <string name="target_ip" translatable="false">Target IP</string>
     <string name="target_port">Target port</string>
     <string name="firebase_error_loading_user">Error loading User</string>
+    <!-- Trafic Item -->
+    <string name="trafic_fragment_ip_address" translatable="false">Ip address:</string>
+    <string name="trafic_fragment_my_ip">My ip:</string>
+    <string name="trafic_fragment_save">Save</string>
     <!-- EditUser -->
     <string name="edit_user_fragment_hint_login">User Name</string>
     <string name="edit_user_fragment_hint_password">Password</string>

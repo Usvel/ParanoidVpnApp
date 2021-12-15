@@ -8,11 +8,11 @@ import com.paranoid.vpn.app.vpn.core.config.Config
 import com.paranoid.vpn.app.vpn.core.handlers.SuspendableRunnable
 import com.paranoid.vpn.app.vpn.core.protocol.tcpip.Packet
 import com.paranoid.vpn.app.vpn.core.util.ByteBufferPool
-import com.paranoid.vpn.app.vpn.ui.vpn_pager.vpn.VPNObjectFragment
 import com.paranoid.vpn.app.vpn.domain.EntityPacket
 import com.paranoid.vpn.app.vpn.domain.IP4
 import com.paranoid.vpn.app.vpn.domain.TCP
 import com.paranoid.vpn.app.vpn.domain.UDP
+import com.paranoid.vpn.app.vpn.ui.vpn_pager.vpn.VPNObjectFragment
 import com.paranoid.vpn.app.vpn.domain.usecase.AddPacketUseCase
 import com.paranoid.vpn.app.vpn.ui.vpn_pager.vpn.VPNObjectFragment.Companion.upByte
 import kotlinx.coroutines.*
@@ -101,8 +101,8 @@ class VpnReadWorker(
                                     EntityPacket(
                                         ip4 = ip4,
                                         udp = udp,
-                                        tcp = null
-                                    )
+                                        tcp = null,
+                                        byteBuffer = packet.backingBuffer)
                                 )
                             }
                             packet.isTCP() -> {
@@ -127,7 +127,8 @@ class VpnReadWorker(
                                     EntityPacket(
                                         ip4 = ip4,
                                         udp = null,
-                                        tcp = tcp
+                                        tcp = tcp,
+                                        packet.backingBuffer
                                     )
                                 )
                             }
@@ -142,7 +143,6 @@ class VpnReadWorker(
                             }
                         }
                     }
-
                 }
             }
         } catch (e: IOException) {

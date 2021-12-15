@@ -8,7 +8,6 @@
     app:layoutDescription="@xml/navigation_settings_fragment_scene"
     tools:context=".settings.ui.main.SettingsFragment">
 
-
     <TextView
         android:id="@+id/tvProfileHello"
         android:layout_width="wrap_content"

@@ -209,9 +209,9 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical"
                 tools:listitem="@android:layout/two_line_list_item" />
+
         </LinearLayout>
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.core.widget.NestedScrollView>

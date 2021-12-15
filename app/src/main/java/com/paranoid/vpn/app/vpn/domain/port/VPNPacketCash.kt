@@ -1,8 +1,6 @@
 package com.paranoid.vpn.app.vpn.domain.port
 
-import com.paranoid.vpn.app.vpn.domain.EntityPacket
-import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
+import com.paranoid.vpn.app.vpn.domain.entity.EntityPacket
 
 interface VPNPacketCash {
     fun addPacket(packet: EntityPacket)

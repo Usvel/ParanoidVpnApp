@@ -93,6 +93,8 @@
     <string name="add_proxy">Добавить прокси</string>
     <string name="source_port">Порт источника</string>
     <string name="edit_user_fragment_hint_password">Пароль</string>
+    <string name="trafic_fragment_save">Сохранить</string>
+    <string name="trafic_fragment_my_ip">Свой ip:</string>
     <string name="edit_user_fragment_hint_login">Имя пользователя</string>
     <string name="firebase_error_loading_user">Ошибка загрузки пользователя</string>
     <string name="target_port">Целевой порт</string>
